@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.pde.ui.pluginContent">
+      <wizard
+            category="JXSE 2.7x"
+            class="org.chaupal.jp2p.ui.template.wizards.JxsePluginWizard"
+            icon="images/saight_16.png"
+            id="org.eclipselabs.template.pluginwizard"
+            java="true"
+            name="JXSE Bundle with a Network Manager"
+            pureOSGi="true"
+            requiresActivator="true"
+            ui-content="false">
+            <description>
+              %pluginContent.templates.jxse.description
+            </description>
+     </wizard>
+      <wizard
+            category="JXSE 2.7x"
+            class="org.chaupal.jp2p.ui.template.config.JxseBundleWizard"
+            icon="images/saight_16.png"
+            id="org.eclipselabs.template.pluginwizard"
+            java="true"
+            name="JXSE Bundle Project"
+            pureOSGi="true"
+            rcp="false"
+            requiresActivator="false"
+            ui-content="false">
+            <description>
+              %pluginContent.templates.jxse.description
+            </description>
+     </wizard>
+      <wizard
+            category="JXSE 2.7x"
+            class="org.chaupal.jp2p.ui.template.fragment.JxseFragmentWizard"
+            icon="images/saight_16.png"
+            id="org.eclipselabs.template.fragment.wizard"
+            java="true"
+            name="JXSE Fragment Bundle"
+            pureOSGi="true"
+            rcp="false"
+            requiresActivator="false"
+            ui-content="false">
+         <description>
+            %pluginContent.templates.jxse.description
+         </description>
+      </wizard>
+      <wizard
+            category="JXSE 2.7x"
+            class="org.chaupal.jp2p.ui.template.rdv.JxseRdvBundleWizard"
+            icon="images/saight_16.png"
+            id="org.eclipselabs.jxse.rdv.template"
+            java="true"
+            name="JXSE Bundle RDV Project"
+            pureOSGi="true"
+            rcp="false"
+            requiresActivator="false"
+            ui-content="false">
+         <description>
+            %pluginContent.templates.jxse.description
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.pde.ui.templates">
+      <template
+            class="org.chaupal.jp2p.ui.template.config.JxseConfigurationBundleSection"
+            contributingId="org.eclipselabs.jxse.bundle.template"
+            id="org.eclipselabs.jxse.template.config.template"
+            name="JXSE 2.7x Config Bundle Project Wizard">
+      </template>
+      <template
+            class="org.chaupal.jp2p.ui.template.project.AbstractJxseBundleSection"
+            contributingId="org.eclipselabs.jxse.bundle.template"
+            id="org.eclipselabs.jxse.template.bundle.template"
+            name="JXSE 2.7x Bundle Project Wizard">
+      </template>
+      <template
+            class="org.chaupal.jp2p.ui.template.rdv.RdvTemplateSection"
+            contributingId="org.eclipselabs.jxse.bundle.template"
+            id="org.eclipselabs.jxse.rdv.template"
+            name="JXSE Rendezvous Template">
+      </template>
+   </extension>
+
+</plugin>
