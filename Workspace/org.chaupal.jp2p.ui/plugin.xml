@@ -66,4 +66,62 @@
          </possibleChildren>
       </navigatorContent>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.chaupal.jp2p.ui.perspective.Perspective"
+            icon="resources/chaupal.png"
+            id="org.chaupal.jp2p.ui.perspective"
+            name="Chaupal  JP2P Container Perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.chaupal.jp2p.ui.perspective">
+        <view
+               closeable="true"
+               id="org.chaupal.jp2p.ui.context.view"
+               minimized="false"
+               moveable="true"
+               relationship="left"
+               relative="org.eclipse.ui.editorss"
+               showTitle="true"
+               standalone="true"
+               visible="true">
+         </view>
+         <view
+               closeable="true"
+               id="org.eclipse.ui.views.PropertySheet"
+               minimized="false"
+               relationship="bottom"
+               relative="org.chaupal.jp2p.ui.context.view"
+               visible="true">
+         </view>
+         <view
+               closeable="true"
+               id="org.chaupal.jp2p.ui.peergroup.view"
+               minimized="false"
+               relationship="left"
+               relative="org.eclipse.ui.editorss"
+               showTitle="true"
+               standalone="true"
+               visible="true">
+         </view>
+         <view
+               closeable="true"
+               id="org.eclipse.ui.console.ConsoleView"
+               minimized="false"
+               relationship="right"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               id="org.eclipse.ui.views.ProblemView"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.console.ConsoleView">
+         </view>
+      </perspectiveExtension>
+   </extension>
 </plugin>
