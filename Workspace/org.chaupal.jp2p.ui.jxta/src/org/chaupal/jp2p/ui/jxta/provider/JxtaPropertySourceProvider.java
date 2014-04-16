@@ -48,9 +48,12 @@ public class JxtaPropertySourceProvider implements
 				break;
 			case PEERGROUP_SERVICE:
 				return new PeerGroupPropertySource( (IJp2pComponent<PeerGroup> )component );
+			case NET_PEERGROUP_SERVICE:
+				return new PeerGroupPropertySource( (IJp2pComponent<PeerGroup>) component );
 			default:
 				break;
 			}
+			return null;
 		}
 		JxtaNetworkComponents jxtaccomps = JxtaNetworkComponents.valueOf( StringStyler.styleToEnum( this.getComponentName() ));
 		if( jxtaccomps != null ){

@@ -38,12 +38,12 @@ import org.eclipselabs.osgi.ds.broker.service.AbstractPalaver;
 import org.eclipselabs.osgi.ds.broker.service.AbstractPetitioner;
 import org.eclipselabs.osgi.ds.broker.service.ParlezEvent;
 
-public class Jp2pServiceContainerPetitioner extends AbstractPetitioner<String, String, IJp2pContainer>
+public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, IJp2pContainer>
 	implements IJp2pComponentNode<Collection<IJp2pContainer>>
 {
 	public static final String S_WRN_THREAD_INTERRUPTED = "The thread is interrupted. Probably stopping service";
 	
-	private static Jp2pServiceContainerPetitioner attendee = new Jp2pServiceContainerPetitioner();
+	private static Jp2pContainerPetitioner attendee = new Jp2pContainerPetitioner();
 	
 	private List<IJp2pComponent<?>> children;
 
@@ -52,7 +52,7 @@ public class Jp2pServiceContainerPetitioner extends AbstractPetitioner<String, S
 	private RefreshRunnable refresher;
 	private PetitionPropertySource source;
 	
-	private Jp2pServiceContainerPetitioner() {
+	private Jp2pContainerPetitioner() {
 		super( new ResourcePalaver());
 		children = new ArrayList<IJp2pComponent<?>>();
 		source = new PetitionPropertySource();
@@ -67,7 +67,7 @@ public class Jp2pServiceContainerPetitioner extends AbstractPetitioner<String, S
 		};
 	}
 	
-	public static Jp2pServiceContainerPetitioner getInstance(){
+	public static Jp2pContainerPetitioner getInstance(){
 		return attendee;
 	}
 
@@ -251,7 +251,7 @@ public class Jp2pServiceContainerPetitioner extends AbstractPetitioner<String, S
 				Thread.sleep((long) this.source.getProperty( PetitionerProperties.REFRESH_TIME ));
 			}
 			catch( InterruptedException ex ){
-				Jp2pLog.logWarning( Jp2pServiceContainerPetitioner.S_WRN_THREAD_INTERRUPTED );
+				Jp2pLog.logWarning( Jp2pContainerPetitioner.S_WRN_THREAD_INTERRUPTED );
 			}
 			service = null;
 		}

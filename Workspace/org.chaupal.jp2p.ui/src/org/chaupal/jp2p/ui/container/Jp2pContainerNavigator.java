@@ -13,13 +13,12 @@ import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.chaupal.utils.Utils;
 import net.jp2p.container.component.IJp2pComponent;
 
-import org.chaupal.jp2p.ui.osgi.Jp2pServiceContainerPetitioner;
+import org.chaupal.jp2p.ui.osgi.Jp2pContainerPetitioner;
 import org.eclipselabs.osgi.ds.broker.service.IParlezListener;
 import org.eclipselabs.osgi.ds.broker.service.ParlezEvent;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.ISelectionListener;
@@ -35,7 +34,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	
 	private CommonViewer viewer;
 	
-	private Jp2pServiceContainerPetitioner petitioner;
+	private Jp2pContainerPetitioner petitioner;
 	private ServiceEventDispatcher dispatcher;
 	private Jp2pContainerNavigator navigator;
 	
@@ -73,7 +72,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	 */
 	@Override
 	protected Object getInitialInput() {
-        petitioner = Jp2pServiceContainerPetitioner.getInstance();
+        petitioner = Jp2pContainerPetitioner.getInstance();
 		petitioner.addParlezListener( new IParlezListener(){
 
 			@Override

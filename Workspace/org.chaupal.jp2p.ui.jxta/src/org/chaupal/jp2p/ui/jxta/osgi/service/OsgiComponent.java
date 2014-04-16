@@ -13,8 +13,8 @@ public class OsgiComponent extends AbstractAttendeeProviderComponent {
 
 	@Override
 	protected void initialise() {
-		super.addAttendee( PropertySourceProvider.getInstance() );
 		super.addAttendee( PeerGroupPetitioner.getInstance() );
+		super.addAttendee( PropertySourceProvider.getInstance() );
 	}
 
 	@Override

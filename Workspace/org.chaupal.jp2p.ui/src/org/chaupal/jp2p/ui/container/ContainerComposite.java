@@ -14,6 +14,7 @@ import net.jp2p.container.IJp2pContainer.ContainerProperties;
 import net.jp2p.container.properties.AbstractJp2pPropertySource;
 import net.jp2p.container.properties.IJp2pDirectives;
 import net.jp2p.container.properties.IJp2pDirectives.Directives;
+import net.jp2p.container.properties.IJp2pProperties.Jp2pProperties;
 import net.jp2p.container.utils.Utils;
 import net.jp2p.container.validator.StringValidator;
 
@@ -208,17 +209,17 @@ public class ContainerComposite extends Composite {
 		if( obj != null )
 			this.text_home_folder.setText( obj.toString() );
 		
-		obj = properties.getProperty( ContainerProperties.BUNDLE_ID );
+		obj = properties.getProperty( Jp2pProperties.BUNDLE_ID );
 		if( obj != null ){
 			this.lbl_plugin_id.setText( " " + obj.toString() );
 			this.text_id.setText( obj.toString() + S_JP2P_CONTAINER);
 		}
-		StringDataBinding sdb = new StringDataBinding<ContainerProperties>( ContainerProperties.BUNDLE_ID, properties, this.text_id );  
-		sdb.setValidator( new StringValidator<ContainerProperties>( ContainerProperties.BUNDLE_ID, StringValidator.S_BUNDLE_ID_REGEX ));
+		StringDataBinding sdb = new StringDataBinding<Jp2pProperties>( Jp2pProperties.BUNDLE_ID, properties, this.text_id );  
+		sdb.setValidator( new StringValidator<Jp2pProperties>( Jp2pProperties.BUNDLE_ID, StringValidator.S_BUNDLE_ID_REGEX ));
 
 		obj = AbstractJp2pPropertySource.getIdentifier( source);
 		sdb = new StringDataBinding<Directives>( Directives.NAME, properties, this.text_identifier );  
-		sdb.setValidator( new StringValidator<ContainerProperties>( ContainerProperties.BUNDLE_ID, StringValidator.S_NAME_REGEX ));
+		sdb.setValidator( new StringValidator<Jp2pProperties>( Jp2pProperties.BUNDLE_ID, StringValidator.S_NAME_REGEX ));
 
 		//TODO CP: this.btnAutoStart.setSelection((boolean) properties.getDefaultDirectives( IJxseDirectives.Directives.AUTO_START ));
 		//TODO CP: this.btnPersist.setSelection((boolean) properties.getDefaultDirectives( IJxseDirectives.Directives.PEER_ID_PERSIST ));
@@ -237,7 +238,7 @@ public class ContainerComposite extends Composite {
 		source.setDirective( Directives.ID, text_id.getText() );
 		if( !source.setProperty( ContainerProperties.HOME_FOLDER, URI.create( this.text_home_folder.getText() )))
 			return false;
-		if( !source.setProperty( ContainerProperties.BUNDLE_ID, this.lbl_plugin_id.getText() ))
+		if( !source.setProperty( Jp2pProperties.BUNDLE_ID, this.lbl_plugin_id.getText() ))
 			return false;
 		if( !source.setProperty( ContainerProperties.PASS_1, this.text_pass1.getText() ))
 			return false;
