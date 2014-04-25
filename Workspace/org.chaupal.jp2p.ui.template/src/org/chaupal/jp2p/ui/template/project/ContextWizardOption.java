@@ -34,7 +34,7 @@ public class ContextWizardOption extends TemplateOption{
 	}
 	private ContextView view;
 
-	public ContextWizardOption( AbstractJxseBundleSection section, String name, String label) {
+	public ContextWizardOption( AbstractJp2pTemplateSection section, String name, String label) {
 		super( section, name, label);
 	}
 

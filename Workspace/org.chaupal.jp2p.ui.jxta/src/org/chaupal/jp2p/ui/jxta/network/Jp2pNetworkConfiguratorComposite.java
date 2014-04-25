@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network;
 
-import net.jp2p.chaupal.jxta.root.network.NetworkManagerPropertySource;
-import net.jp2p.chaupal.jxta.root.network.configurator.NetworkConfigurationPropertySource;
 import net.jp2p.container.Jp2pContainerPropertySource;
+import net.jp2p.jxta.network.NetworkManagerPropertySource;
+import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.custom.SashForm;

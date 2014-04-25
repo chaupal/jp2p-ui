@@ -9,7 +9,7 @@ package org.chaupal.jp2p.ui.jxta.rendezvous;
 
 import net.jxta.peer.PeerID;
 import net.jxta.peergroup.PeerGroup;
-import net.jxta.refplatform.platform.NetworkManager.ConfigMode;
+import net.jxta.platform.NetworkManager.ConfigMode;
 import net.jxta.rendezvous.RendezVousService;
 import net.jxta.rendezvous.RendezvousEvent;
 import net.jxta.rendezvous.RendezvousListener;

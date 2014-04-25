@@ -7,17 +7,18 @@
  *******************************************************************************/
 package $packageName$.service;
 
-import net.jp2p.container.component.ComponentChangedEvent;
-import net.jp2p.container.component.IComponentChangedListener;
+import net.jp2p.jxse.compatibility.service.Jp2pDSComponent;
 
-public class ContextObserver implements IComponentChangedListener {
+import $packageName$.Activator;
 
-	public ContainerObserver() {
-		System.out.println( this.getClass().getName() + ": " + "Starting to Observe.");
-	}
+/**
+ * Makes the service container accessible for the IDE
+ * @author keesp
+ *
+ */
+public class OsgiComponent extends Jp2pDSComponent {
 
-	@Override
-	public void notifyServiceChanged(ComponentChangedEvent event) {
-		System.out.println( "Observing: " + this.getClass().getName() + ": " + event.toString());
+	public OsgiComponent() {
+		super( Activator.getDefault() );
 	}
 }

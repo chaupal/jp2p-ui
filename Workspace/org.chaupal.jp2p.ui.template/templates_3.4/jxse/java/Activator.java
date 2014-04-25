@@ -7,15 +7,16 @@
  *******************************************************************************/
 package $packageName$;
 
-import net.osgi.jxse.service.activator.JxseBundleActivator;
-import org.osgi.framework.*;
-import $packageName$.service.ContextObserver;
+import net.jp2p.chaupal.jxta.activator.Jp2pJxseBundleActivator;
 
-public class Activator extends JxseBundleActivator {
+import org.osgi.framework.*;
+import $packageName$.service.ContainerObserver;
+
+public class Activator extends Jp2pJxseBundleActivator {
 
 	public static final String S_PLUGIN_ID = "$packageName$";
 	
-	private static JxseBundleActivator activator;
+	private static Jp2pJxseBundleActivator activator;
 
 	public Activator() {
 		super( S_PLUGIN_ID);
@@ -27,7 +28,7 @@ public class Activator extends JxseBundleActivator {
 	 */
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
-		super.setObserver( new ContextObserver() );
+		super.setObserver( new ContainerObserver() );
 		super.start(bundleContext);
 		activator = this;
 	}
@@ -42,7 +43,7 @@ public class Activator extends JxseBundleActivator {
 		activator = null;
 	}
 	
-	public static JxseBundleActivator getDefault(){
+	public static Jp2pJxseBundleActivator getDefault(){
 		return activator;
 	}
 }

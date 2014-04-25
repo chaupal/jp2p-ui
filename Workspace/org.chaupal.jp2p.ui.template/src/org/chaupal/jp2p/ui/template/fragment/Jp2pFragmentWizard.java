@@ -37,7 +37,7 @@ import org.eclipse.pde.ui.templates.ITemplateSection;
  *
  */
 @SuppressWarnings("restriction")
-public class JxseFragmentWizard extends AbstractNewPluginTemplateWizard  implements IPluginContentWizard{
+public class Jp2pFragmentWizard extends AbstractNewPluginTemplateWizard  implements IPluginContentWizard{
 
 	public static final String S_MSG_SETUP_FRAGMENT = "Set up JXSE Fragment Project";
 	public static final String S_MSG_BUNDLE_FRAGMENT_PAGE = "Jxse Fragment";

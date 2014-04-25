@@ -8,48 +8,34 @@
 /**
  * 
  */
-package org.chaupal.jp2p.ui.template.project;
+package org.chaupal.jp2p.ui.template.pj2;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import net.jp2p.container.Jp2pContainerPropertySource;
-import net.jp2p.container.utils.io.IOUtils;
-import net.jp2p.chaupal.xml.XMLContainerBuilder;
-
 import org.chaupal.jp2p.ui.template.Activator;
 import org.chaupal.jp2p.ui.template.TemplateUtil;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.pde.core.plugin.IPluginReference;
 import org.eclipse.pde.internal.core.ibundle.IBundle;
 import org.eclipse.pde.internal.core.ibundle.IBundlePluginModelBase;
 import org.eclipse.pde.ui.IFieldData;
 import org.eclipse.pde.ui.templates.OptionTemplateSection;
 import org.eclipse.pde.ui.templates.PluginReference;
-import org.eclipse.swt.widgets.Button;
 
 /**
  * @author Marine
  *
  */
 @SuppressWarnings("restriction")//Needed to use the IBundle interface
-public abstract class AbstractJxseBundleSection extends OptionTemplateSection {
+public class PJ2ExamplesTemplateSection extends OptionTemplateSection {
 
-	public static final String TEMPLATE_ROOT = "jxse";
+	public static final String TEMPLATE_ROOT = "practical-jxta";
 
-	// key for input field
-	public static final String KEY_JXSE_CLASS_NAME = "jxseClassName";
 	// key for hidden field
 	public static final String KEY_DOLLAR_MARK            = "dollarMark";
 	public static final String KEY_PACKAGE_PATH           = "packagePath";
@@ -59,19 +45,43 @@ public abstract class AbstractJxseBundleSection extends OptionTemplateSection {
 	public static final String KEY_WEBSITE = "website";
 	public static final String KEY_DOMAIN = "domain";
 	
-	public static final String KEY_JXSE_CONTEXT = "JxseContext";
-	public static final String FILE_JXSE_XML = "JXSE-INF/jxse-1.0.0.xml";
 	public static final String FILE_OSGI_XML = "OSGI-INF/attendees.xml";
 	public static final String FOLDER_OSGI = "OSGI-INF/";
 
-	public static final String JXSE_NET_OSGI_JXSE = "net.osgi.jxse";
-	public static final String JXSE_NET_OSGI_JXSE_SERVICE = JXSE_NET_OSGI_JXSE + ".service";
-	public static final String ORG_ECLIPSELABS_OSGI_BROKER = "org.eclipselabs.osgi.ds.broker";
+	
+	static final String JP2P_NET_JP2P_CONTAINER = "net.jp2p.container";
+	static final String JP2P_NET_OSGI_JP2P_SERVICE = JP2P_NET_JP2P_CONTAINER + ".service";
+	static final String JP2P_NET_OSGI_JP2P_COMPONENT = JP2P_NET_JP2P_CONTAINER +".component";
+	static final String JP2P_NET_OSGI_JP2P_CONTEXT = JP2P_NET_JP2P_CONTAINER + ".context";
+	static final String JP2P_NET_OSGI_JP2P_PROPERTIES = JP2P_NET_JP2P_CONTAINER + ".properties";
+	static final String JP2P_NET_OSGI_JP2P_UTILS = JP2P_NET_JP2P_CONTAINER + ".utils";
+
+	static final String JP2P_NET_JP2P_COMPATIBILITY = "net.jp2p.jxse.compatibility";
+	static final String JP2P_NET_JP2P_COMPATIBILITY_ACTIVATOR = JP2P_NET_JP2P_COMPATIBILITY + ".activator";
+	static final String JP2P_NET_JP2P_COMPATIBILITY_CONTAINER = JP2P_NET_JP2P_COMPATIBILITY + ".container";
+	static final String JP2P_NET_JP2P_COMPATIBILITY_SERVICE = JP2P_NET_JP2P_COMPATIBILITY + ".service";
+	static final String JP2P_NET_JP2P_COMPATIBILITY_UTILS = JP2P_NET_JP2P_COMPATIBILITY + ".utils";
+
+	static final String NET_JXSE = "net.jxse";
+	static final String NET_JXSE_CONFIGURATION = NET_JXSE + ".configuration";
+	
+	static final String NET_JXTA = "net.jxta";
+	static final String NET_JXTA_DOCUMENT = NET_JXTA + ".document";
+	static final String NET_JXTA_EXCEPTION = NET_JXTA + ".exception";
+	static final String NET_JXTA_PSE = NET_JXTA + ".impl.membership.pse";
+	static final String NET_JXTA_IMPL_PEERGROUP = NET_JXTA + ".impl.peergroup";
+	static final String NET_JXTA_PEERGROUP = NET_JXTA + ".peergroup";
+	static final String NET_JXTA_PLATFORM = NET_JXTA + ".platform";
+	static final String NET_JXTA_PROTOCOL = NET_JXTA + ".protocol";
+	static final String NET_JXTA_REDEZVOUS = NET_JXTA + ".rendezvous";
+	static final String NET_JXTA_SERVICE = NET_JXTA + ".service";
+	static final String ORG_ECLIPSELABS_OSGI_BROKER = "org.eclipselabs.osgi.ds.broker";
+	static final String ORG_ECLIPSELABS_OSGI_BROKER_SERVICE = ORG_ECLIPSELABS_OSGI_BROKER + ".service";
+	
+	static final String ORG_OSGI_FRAMEWORK = "org.osgi.framework;version=\"1.3.0\"";
 
 	public static final String S_META_INF = "META-INF/";
 	public static final String S_MANIFEST_MF = "MANIFEST.MF";
-	public static final String S_JXSE_INF = "JXSE-INF/";
-	public static final String S_JXSE_FILE = "jxse-1.0.0.xml";
 
 	public static final String S_OSGI_INF = "OSGI-INF/";
 	public static final String S_ATTENDESS_XML = "attendees.xml";
@@ -89,27 +99,12 @@ public abstract class AbstractJxseBundleSection extends OptionTemplateSection {
 	
 	private String pluginName;
 	
-	private Button nextButton;
-	
-	private Jp2pContainerPropertySource properties;
-	
-	private Logger logger = Logger.getLogger( AbstractJxseBundleSection.class.getName() );
+	private Logger logger = Logger.getLogger( PJ2ExamplesTemplateSection.class.getName() );
 
-	public AbstractJxseBundleSection() {
-		super();
+	public PJ2ExamplesTemplateSection() {
+		this.setPageCount(0);
 	}
 
-	
-	public Jp2pContainerPropertySource getPropertySource() {
-		return this.properties;
-	}
-	
-	/**
-	 * allow subclasses to fill the properties after initialisation
-	 * @param properties
-	 */
-	protected abstract void onFillProperties( Jp2pContainerPropertySource properties );
-	
 	@Override
 	protected void initializeFields(IFieldData data) {
 		String id = data.getId();
@@ -122,20 +117,12 @@ public abstract class AbstractJxseBundleSection extends OptionTemplateSection {
 		initializeOption(KEY_PACKAGE_PATH, packagePath);
 		initializeOption(KEY_DOLLAR_MARK, this.dollarMark);
 		initializeOption(KEY_SOURCE_PATH, this.sourcePath);
-		this.properties = new Jp2pContainerPropertySource( data.getId());
-		this.onFillProperties(properties);
 	}
 
 	public String getPluginName() {
 		return pluginName;
 	}
 
-	@Override
-	public void addPages(Wizard wizard) {
-		this.markPagesAdded();
-	}
-
-	
 	@Override
 	public String getStringOption(String name) {
 		if (name.equals(KEY_PACKAGE_NAME)) {
@@ -154,11 +141,6 @@ public abstract class AbstractJxseBundleSection extends OptionTemplateSection {
 			return this.website;
 		}
 		return super.getStringOption(name);
-	}
-
-	@Override
-	public int getNumberOfWorkUnits() {
-		return super.getNumberOfWorkUnits() + 1;
 	}
 
 	/* (non-Javadoc)
@@ -190,19 +172,9 @@ public abstract class AbstractJxseBundleSection extends OptionTemplateSection {
 	 */
 	@Override
 	public String[] getNewFiles() {
-		return new String[]{FOLDER_OSGI, FILE_OSGI_XML, FILE_JXSE_XML};
+		return new String[]{FOLDER_OSGI, FILE_OSGI_XML};
 	}
 
-	protected String getAttenddeesXML(){
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		buffer.append("\t<scr:component xmlns:scr=\"http://www.osgi.org/xmlns/scr/v1.1.0\" name=\"" + this.packageName + ".service\">\n");
-		buffer.append("\t<implementation class=\"" + this.packageName + ".service.OsgiComponent\"/>\n");
-		buffer.append("\t<reference bind=\"setAttendeeService\" cardinality=\"1..1\" interface=\"org.eclipselabs.osgi.ds.broker.IAttendeeService\"" +
-		" name=\"IAttendeeService\" policy=\"static\" unbind=\"unsetAttendeeService\"/>\n");
-		buffer.append("</scr:component>");
-		return buffer.toString();
-	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.pde.ui.templates.ITemplateSection#getUsedExtensionPoint()
@@ -227,16 +199,9 @@ public abstract class AbstractJxseBundleSection extends OptionTemplateSection {
 	@Override
 	public IPluginReference[] getDependencies(String schemaVersion) {
 		ArrayList<PluginReference> result = new ArrayList<PluginReference>();
-
-		result.add(new PluginReference( JXSE_NET_OSGI_JXSE, null, 0)); 
-		result.add(new PluginReference( JXSE_NET_OSGI_JXSE_SERVICE, null, 0)); 
-		result.add(new PluginReference( ORG_ECLIPSELABS_OSGI_BROKER, null, 0)); 
 		return result.toArray(
 				new IPluginReference[result.size()]);
 	}
-
-	
-	public void update() throws Exception{}
 	
 	@Override
 	protected void updateModel(IProgressMonitor monitor) throws CoreException {
@@ -244,56 +209,6 @@ public abstract class AbstractJxseBundleSection extends OptionTemplateSection {
 		IBundlePluginModelBase mb = (IBundlePluginModelBase) model;
 		IBundle bundle = mb.getBundleModel().getBundle();
 		bundle.setHeader( DS_MANIFEST_KEY, FILE_OSGI_XML );
-		createComponent(monitor);
+		//AbstractJp2pTemplateSection.createOSGIInf( this.packageName, this.project, 0, monitor);
 	}
-	
-	
-	private void createComponent( IProgressMonitor monitor ){
-		XMLContainerBuilder builder = 	new XMLContainerBuilder(DS_MANIFEST_KEY, null, null);
-		InputStream source = null;
-		try{
-			source = null;//new ByteArrayInputStream( builder.build( ).getBytes()); 
-			this.createFile(project, S_JXSE_INF + "/", S_JXSE_FILE, source, monitor);
-			IOUtils.closeInputStream(source);
-			monitor.worked(3);
-			source = new ByteArrayInputStream( this.getAttenddeesXML().getBytes()); 
-			this.createFile(project, S_OSGI_INF + "/", S_ATTENDESS_XML, source, monitor);
-			monitor.worked(4);
-		}
-		finally{
-			IOUtils.closeInputStream(source);
-		}
-		
-		try {
-			project.refreshLocal(IResource.DEPTH_INFINITE,  monitor );
-		} catch (CoreException e) {
-			logger.severe( e.getMessage() );
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * Create the given file from the inputstream
-	 * @param project
-	 * @param directory
-	 * @param name
-	 * @param source
-	 * @param monitor
-	 */
-	protected void createFile( IProject project, String directory, String name, InputStream source, IProgressMonitor monitor ){
-		IFolder folder = project.getFolder( directory );
-		if( !folder.exists() ){
-			try {
-				folder.create(true, true, monitor);
-				IFile file = project.getFile(directory + name );
-				file.create(source, true, monitor);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}finally{
-				IOUtils.closeInputStream( source);
-			}
-		}
-	}
-
 }

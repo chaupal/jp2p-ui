@@ -5,9 +5,9 @@
          point="org.eclipse.pde.ui.pluginContent">
       <wizard
             category="JXSE 2.7x"
-            class="org.chaupal.jp2p.ui.template.wizards.JxsePluginWizard"
-            icon="images/saight_16.png"
-            id="org.eclipselabs.template.pluginwizard"
+            class="org.chaupal.jp2p.ui.template.wizards.Jp2pPluginWizard"
+            icon="images/sun_jxta_16.gif"
+            id="net.jp2p.chaupal.content.pluginwizard"
             java="true"
             name="JXSE Bundle with a Network Manager"
             pureOSGi="true"
@@ -20,8 +20,8 @@
       <wizard
             category="JXSE 2.7x"
             class="org.chaupal.jp2p.ui.template.config.JxseBundleWizard"
-            icon="images/saight_16.png"
-            id="org.eclipselabs.template.pluginwizard"
+            icon="images/sun_jxta_16.gif"
+            id="net.jp2p.chaupal.project.content"
             java="true"
             name="JXSE Bundle Project"
             pureOSGi="true"
@@ -34,11 +34,11 @@
      </wizard>
       <wizard
             category="JXSE 2.7x"
-            class="org.chaupal.jp2p.ui.template.fragment.JxseFragmentWizard"
-            icon="images/saight_16.png"
-            id="org.eclipselabs.template.fragment.wizard"
+            class="org.chaupal.jp2p.ui.template.rdv.Jp2pRdvBundleWizard"
+            icon="images/sun_jxta_16.gif"
+            id="net.jp2p.chaupal.rdv.content"
             java="true"
-            name="JXSE Fragment Bundle"
+            name="JXSE Bundle RDV Project"
             pureOSGi="true"
             rcp="false"
             requiresActivator="false"
@@ -48,12 +48,12 @@
          </description>
       </wizard>
       <wizard
-            category="JXSE 2.7x"
-            class="org.chaupal.jp2p.ui.template.rdv.JxseRdvBundleWizard"
-            icon="images/saight_16.png"
-            id="org.eclipselabs.jxse.rdv.template"
+            category="Practical JXTA 2"
+            class="org.chaupal.jp2p.ui.template.pj2.Jp2pPJ2BundleWizard"
+            icon="images/pj2-16.png"
+            id="net.jp2p.chaupal.practical.jxta.template"
             java="true"
-            name="JXSE Bundle RDV Project"
+            name="Practical JXTA II Examples Project"
             pureOSGi="true"
             rcp="false"
             requiresActivator="false"
@@ -66,22 +66,32 @@
    <extension
          point="org.eclipse.pde.ui.templates">
       <template
-            class="org.chaupal.jp2p.ui.template.config.JxseConfigurationBundleSection"
-            contributingId="org.eclipselabs.jxse.bundle.template"
-            id="org.eclipselabs.jxse.template.config.template"
+            class="org.chaupal.jp2p.ui.template.config.JxseConfigurationTemplateSection"
+            contributingId="net.jp2p.chaupal.content.pluginwizard"
+            icon="images/sun_jxta_16.gif"
+            id="net.jp2p.chaupal.config.template"
             name="JXSE 2.7x Config Bundle Project Wizard">
       </template>
       <template
-            class="org.chaupal.jp2p.ui.template.project.AbstractJxseBundleSection"
-            contributingId="org.eclipselabs.jxse.bundle.template"
-            id="org.eclipselabs.jxse.template.bundle.template"
+            class="org.chaupal.jp2p.ui.template.project.AbstractJp2pTemplateSection"
+            contributingId="net.jp2p.chaupal.project.content"
+            icon="images/sun_jxta_16.gif"
+            id="net.jp2p.chaupal.project.template"
             name="JXSE 2.7x Bundle Project Wizard">
       </template>
       <template
             class="org.chaupal.jp2p.ui.template.rdv.RdvTemplateSection"
-            contributingId="org.eclipselabs.jxse.bundle.template"
-            id="org.eclipselabs.jxse.rdv.template"
+            contributingId="net.jp2p.chaupal.rdv.content"
+            icon="images/sun_jxta_16.gif"
+            id="net.jp2p.chaupal.rdv.template"
             name="JXSE Rendezvous Template">
+      </template>
+      <template
+            class="org.chaupal.jp2p.ui.template.pj2.PJ2ExamplesTemplateSection"
+            contributingId="net.jp2p.chaupal.project.content"
+            icon="images/pj2-16.png"
+            id="net.jp2p.chaupal.project.template"
+            name="Practical JXTA II Example Project Wizard">
       </template>
    </extension>
 

@@ -9,17 +9,17 @@ package org.chaupal.jp2p.ui.template.rdv;
 
 import net.jp2p.container.Jp2pContainerPropertySource;
 import net.jp2p.container.properties.IJp2pDirectives.Directives;
-import net.jxta.refplatform.platform.NetworkManager.ConfigMode;
-import net.jp2p.chaupal.jxta.root.network.NetworkManagerPropertySource;
-import net.jp2p.chaupal.jxta.root.network.NetworkManagerPropertySource.NetworkManagerProperties;
-import net.jp2p.chaupal.jxta.root.network.configurator.NetworkConfigurationPropertySource;
-import net.jp2p.chaupal.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
+import net.jxta.platform.NetworkManager.ConfigMode;
+import net.jp2p.jxta.network.NetworkManagerPropertySource;
+import net.jp2p.jxta.network.NetworkManagerPropertySource.NetworkManagerProperties;
+import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource;
+import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 
-import org.chaupal.jp2p.ui.template.config.JxseConfigurationBundleSection;
+import org.chaupal.jp2p.ui.template.config.JxseConfigurationTemplateSection;
 import org.chaupal.jp2p.ui.template.project.ContextWizardOption.TemplateOptions;
 import org.eclipse.pde.ui.templates.ITemplateSection;
 
-public class RdvTemplateSection extends JxseConfigurationBundleSection implements
+public class RdvTemplateSection extends JxseConfigurationTemplateSection implements
 		ITemplateSection {
 
 	public RdvTemplateSection() {

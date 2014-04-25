@@ -15,11 +15,11 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import net.jp2p.chaupal.activator.IJp2pDSComponent;
 import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.chaupal.dispatcher.IServiceChangedListener.ServiceChange;
 import net.jp2p.container.AbstractJp2pContainer;
+import net.jp2p.container.IJp2pDSComponent;
 import net.jp2p.container.Jp2pContainer;
 import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;

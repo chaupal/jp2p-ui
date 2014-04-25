@@ -218,8 +218,8 @@ public class ContainerComposite extends Composite {
 		sdb.setValidator( new StringValidator<Jp2pProperties>( Jp2pProperties.BUNDLE_ID, StringValidator.S_BUNDLE_ID_REGEX ));
 
 		obj = AbstractJp2pPropertySource.getIdentifier( source);
-		sdb = new StringDataBinding<Directives>( Directives.NAME, properties, this.text_identifier );  
-		sdb.setValidator( new StringValidator<Jp2pProperties>( Jp2pProperties.BUNDLE_ID, StringValidator.S_NAME_REGEX ));
+		//sdb = new StringDataBinding<Directives>( Directives.NAME, properties, this.text_identifier );  
+		//sdb.setValidator( new StringValidator<Jp2pProperties>( Jp2pProperties.BUNDLE_ID, StringValidator.S_NAME_REGEX ));
 
 		//TODO CP: this.btnAutoStart.setSelection((boolean) properties.getDefaultDirectives( IJxseDirectives.Directives.AUTO_START ));
 		//TODO CP: this.btnPersist.setSelection((boolean) properties.getDefaultDirectives( IJxseDirectives.Directives.PEER_ID_PERSIST ));

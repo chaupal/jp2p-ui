@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network;
 
-import net.jp2p.chaupal.jxta.root.network.configurator.NetworkConfigurationPropertySource;
+import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;

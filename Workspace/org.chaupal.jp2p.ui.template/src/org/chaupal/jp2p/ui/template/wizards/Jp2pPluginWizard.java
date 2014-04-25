@@ -19,10 +19,10 @@ import org.eclipse.ui.IWorkbenchWizard;
  * @author Marine
  *
  */
-public class JxsePluginWizard extends Wizard implements IWorkbenchWizard{
+public class Jp2pPluginWizard extends Wizard implements IWorkbenchWizard{
 
-	public static final String S_MSG_SETUP_CONTEXT = "Set up JXSE Bundle Project";
-	public static final String S_MSG_BUNDLE_CONTEXT_PAGE = "Jxse Bundle context";
+	public static final String S_MSG_SETUP_CONTEXT = "Set up JP2P Bundle Project";
+	public static final String S_MSG_BUNDLE_CONTEXT_PAGE = "JP2P Bundle context";
 	
 	//private SelectStringsWizardPage selectStringsPage;
 

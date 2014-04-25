@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import net.jp2p.chaupal.jxta.root.network.NetworkManagerPropertySource.NetworkManagerProperties;
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.utils.EnumUtils;
+import net.jp2p.jxta.network.NetworkManagerPropertySource.NetworkManagerProperties;
 import net.jxta.peer.PeerID;
 import net.jxta.peergroup.PeerGroupID;
-import net.jxta.refplatform.platform.NetworkManager;
-import net.jxta.refplatform.platform.NetworkManager.ConfigMode;
+import net.jxta.platform.NetworkManager;
+import net.jxta.platform.NetworkManager.ConfigMode;
 
 import org.chaupal.jp2p.ui.jxta.property.descriptors.CheckBoxPropertyDescriptor;
 import org.chaupal.jp2p.ui.jxta.property.descriptors.TextBoxPropertyDescriptor;

@@ -17,7 +17,7 @@ import org.eclipse.pde.ui.templates.ITemplateSection;
  * @author Marine
  *
  */
-public class JxseRdvBundleWizard extends JxseBundleWizard{
+public class Jp2pRdvBundleWizard extends JxseBundleWizard{
 
 	@Override
 	public ITemplateSection[] createTemplateSections() {

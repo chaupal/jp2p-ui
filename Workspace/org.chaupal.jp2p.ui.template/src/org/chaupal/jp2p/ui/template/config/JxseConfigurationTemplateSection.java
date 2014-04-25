@@ -14,20 +14,21 @@ import java.util.logging.Logger;
 
 import net.jp2p.container.Jp2pContainerPropertySource;
 
-import org.chaupal.jp2p.ui.template.project.AbstractJxseBundleSection;
+import org.chaupal.jp2p.ui.template.project.AbstractJp2pTemplateSection;
 import org.chaupal.jp2p.ui.template.project.ContextWizardOption;
 import org.chaupal.jp2p.ui.template.project.ContextWizardOption.TemplateOptions;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.pde.ui.templates.OptionTemplateWizardPage;
 
 /**
  * @author Marine
  *
  */
-public class JxseConfigurationBundleSection extends AbstractJxseBundleSection {
+public class JxseConfigurationTemplateSection extends AbstractJp2pTemplateSection {
+
+	public static final String TEMPLATE_ROOT = "jxse";
 
 	private static final String S_MSG_JXSE_CONTEXT_PROPS = "JXSE Context Properties";
 	private static final String S_MSG_SET_JXSE_CONTEXT_PROPS = "Set JXSE Context Properties";
@@ -38,8 +39,8 @@ public class JxseConfigurationBundleSection extends AbstractJxseBundleSection {
 	
 	private ContextWizardOption view;
 	
-	public JxseConfigurationBundleSection() {
-		super();
+	public JxseConfigurationTemplateSection() {
+		super( TEMPLATE_ROOT );
 		this.setPageCount(2);
 		this.createOptions();
 	}

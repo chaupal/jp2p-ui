@@ -25,14 +25,14 @@ import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
-import net.jp2p.chaupal.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.EnumUtils;
+import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 import net.jxta.id.ID;
 import net.jxta.peer.PeerID;
-import net.jxta.refplatform.platform.NetworkConfigurator;
-import net.jxta.refplatform.platform.NetworkManager.ConfigMode;
+import net.jxta.platform.NetworkConfigurator;
+import net.jxta.platform.NetworkManager.ConfigMode;
 
 public class NetworkConfiguratorPropertySource extends AbstractJp2pUIPropertySource<NetworkConfigurator> {
 

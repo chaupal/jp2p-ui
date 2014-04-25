@@ -17,7 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: net.jp2p.chaupal.jxta.root.network,
- net.jp2p.chaupal.jxta.root.network.configurator,
  net.jp2p.chaupal.xml,
  net.jp2p.container,
  net.jp2p.container.component,
@@ -25,7 +24,8 @@ Import-Package: net.jp2p.chaupal.jxta.root.network,
  net.jp2p.container.utils,
  net.jp2p.container.utils.io,
  net.jp2p.container.xml,
+ net.jp2p.jxta.network,
+ net.jp2p.jxta.root.network.configurator,
  net.jxta.platform,
- net.jxta.refplatform.platform,
  org.chaupal.jp2p.ui.container,
  org.chaupal.jp2p.ui.jxta.network

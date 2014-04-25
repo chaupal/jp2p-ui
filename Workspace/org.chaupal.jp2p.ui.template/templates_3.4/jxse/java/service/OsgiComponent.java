@@ -7,7 +7,7 @@
  *******************************************************************************/
 package $packageName$.service;
 
-import net.osgi.jxse.service.core.JxseDSComponent;
+import net.jp2p.chaupal.service.Jp2pDSComponent;
 
 import $packageName$.Activator;
 
@@ -16,7 +16,7 @@ import $packageName$.Activator;
  * @author keesp
  *
  */
-public class OsgiComponent extends JxseDSComponent {
+public class OsgiComponent extends Jp2pDSComponent {
 
 	public OsgiComponent() {
 		super( Activator.getDefault() );

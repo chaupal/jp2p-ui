@@ -10,7 +10,7 @@ package $packageName$.service;
 import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;
 
-public class ContextObserver implements IComponentChangedListener {
+public class ContainerObserver implements IComponentChangedListener {
 
 	public ContainerObserver() {
 		System.out.println( this.getClass().getName() + ": " + "Starting to Observe.");

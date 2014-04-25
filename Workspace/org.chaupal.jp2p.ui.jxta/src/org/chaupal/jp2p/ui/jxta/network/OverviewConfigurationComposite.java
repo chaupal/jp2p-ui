@@ -9,12 +9,12 @@ package org.chaupal.jp2p.ui.jxta.network;
 
 import java.net.URI;
 
-import net.jp2p.chaupal.jxta.root.network.configurator.NetworkConfigurationPropertySource;
-import net.jp2p.chaupal.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.validator.StringValidator;
+import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource;
+import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 import net.jxta.peer.PeerID;
-import net.jxta.refplatform.platform.NetworkManager.ConfigMode;
+import net.jxta.platform.NetworkManager.ConfigMode;
 
 import org.chaupal.jp2p.ui.jxta.property.databinding.ComboDataBinding;
 import org.chaupal.jp2p.ui.jxta.property.databinding.IJp2pDatabinding;
