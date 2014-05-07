@@ -39,6 +39,7 @@ import org.eclipselabs.osgi.ds.broker.service.ParlezEvent;
 public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2pContainer>
 {
 	public static final String S_WRN_THREAD_INTERRUPTED = "The thread is interrupted. Probably stopping service";
+	public static final String S_PEERGROUP_PETITIONER = "PeerGroupPetitioner";
 	
 	private static PeerGroupPetitioner attendee = new PeerGroupPetitioner();
 	
@@ -111,7 +112,7 @@ public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2p
 
 		private static final String[] getProvidedInfo(){
 			Class<?> clss = ResourcePalaver.class;
-			String[] info = { IJp2pDSComponent.S_IJP2P_CONTAINER_PACKAGE_ID, IJp2pDSComponent.S_IP2P_TOKEN} ;
+			String[] info = { S_PEERGROUP_PETITIONER, IJp2pDSComponent.S_IP2P_TOKEN} ;
 			URL url = clss.getResource(S_JP2P_INF );
 			if( url == null )
 				return info;
