@@ -19,21 +19,6 @@
      </wizard>
       <wizard
             category="JXSE 2.7x"
-            class="org.chaupal.jp2p.ui.template.config.JxseBundleWizard"
-            icon="images/sun_jxta_16.gif"
-            id="net.jp2p.chaupal.project.content"
-            java="true"
-            name="JXSE Bundle Project"
-            pureOSGi="true"
-            rcp="false"
-            requiresActivator="false"
-            ui-content="false">
-            <description>
-              %pluginContent.templates.jxse.description
-            </description>
-     </wizard>
-      <wizard
-            category="JXSE 2.7x"
             class="org.chaupal.jp2p.ui.template.rdv.Jp2pRdvBundleWizard"
             icon="images/sun_jxta_16.gif"
             id="net.jp2p.chaupal.rdv.content"
@@ -51,7 +36,7 @@
             category="Practical JXTA 2"
             class="org.chaupal.jp2p.ui.template.pj2.Jp2pPJ2BundleWizard"
             icon="images/pj2-16.png"
-            id="net.jp2p.chaupal.practical.jxta.template"
+            id="net.jp2p.chaupal.practical.jxta.content"
             java="true"
             name="Practical JXTA II Examples Project"
             pureOSGi="true"
@@ -61,6 +46,18 @@
          <description>
             %pluginContent.templates.jxse.description
          </description>
+      </wizard>
+      <wizard
+            category="Chaupal"
+            class="org.chaupal.jp2p.ui.template.rcp.RcpBundleWizard"
+            icon="images/chaupal.png"
+            id="org.chaupal.jp2p.ui.rcp.content"
+            java="true"
+            name="RCP Reference for JP2P "
+            pureOSGi="false"
+            rcp="true"
+            requiresActivator="false"
+            ui-content="true">
       </wizard>
    </extension>
    <extension
@@ -88,10 +85,17 @@
       </template>
       <template
             class="org.chaupal.jp2p.ui.template.pj2.PJ2ExamplesTemplateSection"
-            contributingId="net.jp2p.chaupal.project.content"
+            contributingId="net.jp2p.chaupal.practical.jxta.content"
             icon="images/pj2-16.png"
             id="net.jp2p.chaupal.project.template"
             name="Practical JXTA II Example Project Wizard">
+      </template>
+      <template
+            class="org.chaupal.jp2p.ui.template.rcp.RcpTemplateSection"
+            contributingId="org.chaupal.jp2p.ui.rcp.content"
+            icon="images/chaupal.png"
+            id="org.chaupal.jp2p.ui.rcp.template"
+            name="Chaupal RCP Tooling Template">
       </template>
    </extension>
 

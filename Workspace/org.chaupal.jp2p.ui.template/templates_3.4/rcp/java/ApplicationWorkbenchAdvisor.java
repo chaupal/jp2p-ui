@@ -14,19 +14,25 @@
  * limitations under the License.
  *
  *******************************************************************************/
-package $packageName$.service;
+package  $packageName$;
 
-import net.jp2p.container.component.ComponentChangedEvent;
-import net.jp2p.container.component.IComponentChangedListener;
+import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
+import org.eclipse.ui.application.WorkbenchAdvisor;
+import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
-public class ContainerObserver implements IComponentChangedListener {
+public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
-	public ContainerObserver() {
-		System.out.println( this.getClass().getName() + ": " + "Starting to Observe.");
+	private static final String PERSPECTIVE_ID = "org.chaupal.jp2p.ui.perspective";
+
+	@Override
+	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
+			IWorkbenchWindowConfigurer configurer) {
+		return new ApplicationWorkbenchWindowAdvisor(configurer);
 	}
 
 	@Override
-	public void notifyServiceChanged(ComponentChangedEvent event) {
-		System.out.println( "Observing: " + this.getClass().getName() + ": " + event.toString());
+	public String getInitialWindowPerspectiveId() {
+		return PERSPECTIVE_ID;
 	}
+
 }

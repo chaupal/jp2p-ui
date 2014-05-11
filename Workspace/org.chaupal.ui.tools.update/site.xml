@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="JXSE 2.8x Core Bundles" url="http://89.31.96.252/download.condast.org/updatesite/jp2p/release/1.0.0/20140423/org.jxse.update/site.xml">
+      Chaupal UI tools provide wizards and other useful tools to assist in JP2P development
+   </description>
+   <feature url="features/org.chaupal.ui.tools.feature_1.0.2.v20140424.jar" id="org.chaupal.ui.tools.feature" version="1.0.2.v20140424">
+      <category name="org.chaupal.ui.tools"/>
+   </feature>
+   <category-def name="org.chaupal.ui.tools" label="Chaupal Tools">
+      <description>
+         The category lists the supportt ools for Chaupal
+      </description>
+   </category-def>
+</site>

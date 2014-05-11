@@ -37,7 +37,6 @@
  *  States and other countries.
  *  
  */
-
 package $packageName$.examples;
 
 import java.io.File;
