@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.chaupal.jp2p.ui.template.config.JxseBundleWizard;
 import org.eclipse.pde.ui.templates.ITemplateSection;
+import org.eclipse.pde.ui.templates.NewPluginTemplateWizard;
 
 /**
  * @author Marine
  *
  */
-public class RcpBundleWizard extends JxseBundleWizard{
+public class RcpBundleWizard extends NewPluginTemplateWizard{
 
 	private static final String S_IMPORT_ORG_CHAUPAL_JP2P_UI_P2 = "org.chaupal.jp2p.ui.p2";
 	private static final String S_IMPORT_ORG_CHAUPAL_JP2P_UI_TRAY = "org.chaupal.jp2p.ui.tray";

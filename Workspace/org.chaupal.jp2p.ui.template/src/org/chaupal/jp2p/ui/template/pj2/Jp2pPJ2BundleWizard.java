@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.chaupal.jp2p.ui.template.IJP2PBundleDefinitions;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
@@ -27,7 +28,7 @@ import org.eclipse.pde.ui.templates.NewPluginTemplateWizard;
  *
  */
 @SuppressWarnings("restriction")
-public class Jp2pPJ2BundleWizard extends NewPluginTemplateWizard{
+public class Jp2pPJ2BundleWizard extends NewPluginTemplateWizard implements IJP2PBundleDefinitions{
 		
 	@Override
 	public void init(IFieldData data) {
@@ -52,35 +53,33 @@ public class Jp2pPJ2BundleWizard extends NewPluginTemplateWizard{
 		List<String> results = new ArrayList<String>();
 		if( super.getImportPackages() != null )
 			results = new ArrayList<String>( Arrays.asList( super.getImportPackages()));
-        results.add( PJ2ExamplesTemplateSection.JP2P_NET_JP2P_CONTAINER );
-		results.add( PJ2ExamplesTemplateSection.JP2P_NET_JP2P_COMPATIBILITY_ACTIVATOR );
-		results.add( PJ2ExamplesTemplateSection.JP2P_NET_JP2P_COMPATIBILITY_CONTAINER );
-		results.add( PJ2ExamplesTemplateSection.JP2P_NET_JP2P_COMPATIBILITY_SERVICE );
-		results.add( PJ2ExamplesTemplateSection.JP2P_NET_JP2P_COMPATIBILITY_UTILS );
+        results.add( JP2P_NET_JP2P_CONTAINER );
+		results.add( JP2P_NET_JP2P_COMPATIBILITY_ACTIVATOR );
+		results.add( JP2P_NET_JP2P_COMPATIBILITY_CONTAINER );
+		results.add( JP2P_NET_JP2P_COMPATIBILITY_SERVICE );
+		results.add( JP2P_NET_JP2P_COMPATIBILITY_UTILS );
 
-		results.add( PJ2ExamplesTemplateSection.JP2P_NET_OSGI_JP2P_SERVICE );
-		results.add( PJ2ExamplesTemplateSection.JP2P_NET_OSGI_JP2P_COMPONENT );
-		results.add( PJ2ExamplesTemplateSection.JP2P_NET_OSGI_JP2P_CONTEXT );
-		results.add( PJ2ExamplesTemplateSection.JP2P_NET_OSGI_JP2P_PROPERTIES );
-		results.add( PJ2ExamplesTemplateSection.JP2P_NET_OSGI_JP2P_UTILS );
+		results.add( JP2P_NET_JP2P_CONTAINER_SERVICE );
+		results.add( JP2P_NET_JP2P_CONTAINER_COMPONENT );
+		results.add( JP2P_NET_JP2P_CONTAINER_CONTEXT );
+		results.add( JP2P_NET_JP2P_CONTAINER_PROPERTIES );
+		results.add( JP2P_NET_JP2P_CONTAINER_UTILS );
 
-		//results.add( PJ2ExamplesTemplateSection.JP2P_NET_JP2P_COMPATIBILITY );
-
-		results.add( PJ2ExamplesTemplateSection.NET_JXSE_CONFIGURATION );
+		results.add( NET_JXSE_CONFIGURATION );
 		
-		results.add( PJ2ExamplesTemplateSection.NET_JXTA_DOCUMENT );
-		results.add( PJ2ExamplesTemplateSection.NET_JXTA_EXCEPTION );
-		results.add( PJ2ExamplesTemplateSection.NET_JXTA_PSE );
-		results.add( PJ2ExamplesTemplateSection.NET_JXTA_IMPL_PEERGROUP );
-		results.add( PJ2ExamplesTemplateSection.NET_JXTA_PEERGROUP );
-		results.add( PJ2ExamplesTemplateSection.NET_JXTA_PLATFORM );
-		results.add( PJ2ExamplesTemplateSection.NET_JXTA_PROTOCOL );
-		results.add( PJ2ExamplesTemplateSection.NET_JXTA_REDEZVOUS );
-		results.add( PJ2ExamplesTemplateSection.NET_JXTA_SERVICE );
-		results.add( PJ2ExamplesTemplateSection.ORG_ECLIPSELABS_OSGI_BROKER_SERVICE );
+		results.add( NET_JXTA_DOCUMENT );
+		results.add( NET_JXTA_EXCEPTION );
+		results.add( NET_JXTA_PSE );
+		results.add( NET_JXTA_IMPL_PEERGROUP );
+		results.add( NET_JXTA_PEERGROUP );
+		results.add( NET_JXTA_PLATFORM );
+		results.add( NET_JXTA_PROTOCOL );
+		results.add( NET_JXTA_REDEZVOUS );
+		results.add( NET_JXTA_SERVICE );
+		results.add( ORG_ECLIPSELABS_OSGI_BROKER_SERVICE );
 
-        results.add( PJ2ExamplesTemplateSection.ORG_ECLIPSELABS_OSGI_BROKER_SERVICE);
-        results.add( PJ2ExamplesTemplateSection.ORG_OSGI_FRAMEWORK);
+        results.add( ORG_ECLIPSELABS_OSGI_BROKER_SERVICE);
+        results.add( ORG_OSGI_FRAMEWORK);
 		return results.toArray( new String[ results.size()]);
 	}	
 	

@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  *******************************************************************************/
-package  $packageName$;
+package $packageName$;
 
 import org.eclipse.jface.action.GroupMarker;
 import org.eclipse.jface.action.IMenuManager;

@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  *******************************************************************************/
-package  $packageName$;
+package $packageName$;
 
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;

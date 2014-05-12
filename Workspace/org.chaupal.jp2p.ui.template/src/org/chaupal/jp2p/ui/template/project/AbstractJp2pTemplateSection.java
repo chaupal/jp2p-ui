@@ -13,7 +13,6 @@ package org.chaupal.jp2p.ui.template.project;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -21,6 +20,7 @@ import net.jp2p.container.Jp2pContainerPropertySource;
 import net.jp2p.container.utils.io.IOUtils;
 
 import org.chaupal.jp2p.ui.template.Activator;
+import org.chaupal.jp2p.ui.template.IJP2PBundleDefinitions;
 import org.chaupal.jp2p.ui.template.TemplateUtil;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -30,22 +30,20 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.pde.core.plugin.IPluginReference;
 import org.eclipse.pde.internal.core.ibundle.IBundle;
 import org.eclipse.pde.internal.core.ibundle.IBundlePluginModelBase;
 import org.eclipse.pde.ui.IFieldData;
 import org.eclipse.pde.ui.templates.OptionTemplateSection;
-import org.eclipse.pde.ui.templates.PluginReference;
 
 /**
  * @author Marine
  *
  */
 @SuppressWarnings("restriction")//Needed to use the IBundle interface
-public abstract class AbstractJp2pTemplateSection extends OptionTemplateSection {
+public abstract class AbstractJp2pTemplateSection extends OptionTemplateSection implements IJP2PBundleDefinitions{
 
 	// key for input field
-	public static final String KEY_JP2P_CLASS_NAME = "jxseClassName";
+	public static final String KEY_JP2P_CLASS_NAME = "jp2pClassName";
 	// key for hidden field
 	public static final String KEY_DOLLAR_MARK            = "dollarMark";
 	public static final String KEY_PACKAGE_PATH           = "packagePath";
@@ -55,8 +53,6 @@ public abstract class AbstractJp2pTemplateSection extends OptionTemplateSection 
 	public static final String KEY_WEBSITE = "website";
 	public static final String KEY_DOMAIN = "domain";
 	
-	public static final String KEY_JP2P_CONTEXT = "JxseContext";
-	public static final String FILE_JP2P_XML = "JP2P-INF/jxse-1.0.0.xml";
 	public static final String FILE_OSGI_XML = "OSGI-INF/attendees.xml";
 	public static final String FOLDER_OSGI = "OSGI-INF/";
 
@@ -66,11 +62,9 @@ public abstract class AbstractJp2pTemplateSection extends OptionTemplateSection 
 
 	public static final String S_META_INF = "META-INF/";
 	public static final String S_MANIFEST_MF = "MANIFEST.MF";
-	public static final String S_JP2P_INF = "JP2P-INF/";
-	public static final String S_JP2P_FILE = "jxse-1.0.0.xml";
 
 	public static final String S_OSGI_INF = "OSGI-INF/";
-	public static final String S_ATTENDESS_XML = "attendees.xml";
+	public static final String S_ATTENDEES_XML = "attendees.xml";
 
 	private final static String DS_MANIFEST_KEY = "Service-Component"; //$NON-NLS-1$
 
@@ -210,18 +204,6 @@ public abstract class AbstractJp2pTemplateSection extends OptionTemplateSection 
 		this.sourcePath = sourcePath;
 	}
 
-	@Override
-	public IPluginReference[] getDependencies(String schemaVersion) {
-		ArrayList<PluginReference> result = new ArrayList<PluginReference>();
-
-		result.add(new PluginReference( JP2P_NET_OSGI_JP2P, null, 0)); 
-		result.add(new PluginReference( JP2P_NET_OSGI_JP2P_SERVICE, null, 0)); 
-		result.add(new PluginReference( ORG_ECLIPSELABS_OSGI_BROKER, null, 0)); 
-		return result.toArray(
-				new IPluginReference[result.size()]);
-	}
-
-	
 	public void update() throws Exception{}
 	
 	@Override
@@ -244,13 +226,51 @@ public abstract class AbstractJp2pTemplateSection extends OptionTemplateSection 
 		buffer.append("</scr:component>");
 		return buffer.toString();
 	}
-	
+
+	public static String getJP2PXML( String packageName, String name ){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("<?xml version='1.0' encoding='UTF-8'?>\n");
+		buffer.append("  <jp2p-container id=\""+ packageName + "\" name=\""+ name + "\" auto-start=\"true\">\n");
+		buffer.append("    <properties>\n");
+		buffer.append("      <bundle-id>org.condast.rdv</bundle-id>\n");
+		buffer.append("      <home-folder>file:/C:/Users/HP/.jxse/"+ packageName + "</home-folder>\n");
+		buffer.append("    </properties>\n");
+		buffer.append("    <persistence-service context=\"chaupal\"/>\n");
+		buffer.append("    <network-manager id=\""+ packageName + "\".context\" name=\"Rdv\" clear-config=\"true\">\n");
+		buffer.append("      <properties>\n");
+		buffer.append("        <config-mode>RENDEZVOUS</config-mode>\n");
+		buffer.append("          <peer-id create=\"true\" persist=\"true\"/>\n");
+		buffer.append("        </properties>\n");
+		buffer.append("      <network-configurator id=\""+ packageName + ".networkmanager\" name=\"Rdv Peer\">\n");
+		buffer.append("        <properties>\n");
+		buffer.append("          <tcp>\n");
+		buffer.append("            <enabled>true</enabled>\n");
+		buffer.append("            <port>9715</port>\n");
+		buffer.append("            <incoming-status>true</incoming-status>\n");
+		buffer.append("            <outgoing-status>true</outgoing-status>\n");
+		buffer.append("          </tcp>\n");
+		buffer.append("          <http>\n");
+		buffer.append("            <enabled>true</enabled>\n");
+		buffer.append("            <port>8081</port>\n");
+		buffer.append("            <incoming-status>true</incoming-status>\n");
+		buffer.append("            <outgoing-status>true</outgoing-status>\n");
+		buffer.append("          </http>\n");
+		buffer.append("          <multicast>\n");
+		buffer.append("            <enabled>false</enabled>\n");
+		buffer.append("          </multicast>\n");
+		buffer.append("        </properties>\n");
+		buffer.append("      </network-configurator>\n");
+		buffer.append("    </network-manager>\n");
+		buffer.append("</jp2p-container>\n");
+		return buffer.toString();
+	}
+
 	public static int createJP2PFolder( String packageName, IProject project, int worked, IProgressMonitor monitor ){
 		Logger logger = Logger.getLogger( AbstractJp2pTemplateSection.class.getName() );
 		//XMLContainerBuilder builder = 	new XMLContainerBuilder(DS_MANIFEST_KEY, null, null);
 		InputStream source = null;
 		try{
-			source = null;//new ByteArrayInputStream( builder.build( ).getBytes()); 
+			source = new ByteArrayInputStream( getJP2PXML( packageName, "RDV").getBytes()); 
 			createFile(project, S_JP2P_INF + "/", S_JP2P_FILE, source, monitor);
 			IOUtils.closeInputStream(source);
 			monitor.worked( worked++);
@@ -272,7 +292,7 @@ public abstract class AbstractJp2pTemplateSection extends OptionTemplateSection 
 		InputStream source = null;
 		try{
 			source = new ByteArrayInputStream( getAttenddeesXML( packageName).getBytes()); 
-			createFile(project, S_OSGI_INF + "/", S_ATTENDESS_XML, source, monitor);
+			createFile(project, S_OSGI_INF + "/", S_ATTENDEES_XML, source, monitor);
 			monitor.worked(worked++);
 		}
 		finally{
