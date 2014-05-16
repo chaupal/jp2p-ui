@@ -5,20 +5,6 @@
          point="org.eclipse.pde.ui.pluginContent">
       <wizard
             category="JXSE 2.7x"
-            class="org.chaupal.jp2p.ui.template.wizards.Jp2pPluginWizard"
-            icon="images/sun_jxta_16.gif"
-            id="net.jp2p.chaupal.content.pluginwizard"
-            java="true"
-            name="JXSE Bundle with a Network Manager"
-            pureOSGi="true"
-            requiresActivator="true"
-            ui-content="false">
-            <description>
-              %pluginContent.templates.jxse.description
-            </description>
-     </wizard>
-      <wizard
-            category="JXSE 2.7x"
             class="org.chaupal.jp2p.ui.template.rdv.Jp2pRdvBundleWizard"
             icon="images/sun_jxta_16.gif"
             id="net.jp2p.chaupal.rdv.content"

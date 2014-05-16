@@ -12,18 +12,20 @@ import net.jp2p.container.properties.IJp2pDirectives.Directives;
 import net.jxta.platform.NetworkManager.ConfigMode;
 import net.jp2p.jxta.network.NetworkManagerPropertySource;
 import net.jp2p.jxta.network.NetworkManagerPropertySource.NetworkManagerProperties;
-import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource;
-import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
+import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
+import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 
-import org.chaupal.jp2p.ui.template.config.JxseConfigurationTemplateSection;
-import org.chaupal.jp2p.ui.template.project.ContextWizardOption.TemplateOptions;
+import org.chaupal.jp2p.ui.template.project.AbstractJp2pTemplateSection;
 import org.eclipse.pde.ui.templates.ITemplateSection;
 
-public class RdvTemplateSection extends JxseConfigurationTemplateSection implements
+public class RdvTemplateSection extends AbstractJp2pTemplateSection implements
 		ITemplateSection {
 
+	public static final String TEMPLATE_ROOT = "jxse";
+	
 	public RdvTemplateSection() {
-		super();
+		super( TEMPLATE_ROOT );
+		this.setPageCount(0);
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public class RdvTemplateSection extends JxseConfigurationTemplateSection impleme
 		ncps.setProperty(NetworkConfiguratorProperties.TCP_8OUTGOING_STATUS, true );
 		ncps.setProperty(NetworkConfiguratorProperties.MULTICAST_8ENABLED, false );
 		nmps.addChild(ncps);
-		super.onFillProperties(properties);
-		super.setTemplateOption( TemplateOptions.SIMPLE_RDV);
+		//super.onFillProperties(properties);
+		//super.setTemplateOption( TemplateOptions.SIMPLE_RDV);
 	}
 }

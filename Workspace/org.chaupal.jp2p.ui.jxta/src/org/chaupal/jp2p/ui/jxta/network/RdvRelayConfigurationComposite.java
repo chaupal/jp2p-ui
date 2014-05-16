@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network;
 
-import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource;
-import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
+import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
+import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.FillLayout;

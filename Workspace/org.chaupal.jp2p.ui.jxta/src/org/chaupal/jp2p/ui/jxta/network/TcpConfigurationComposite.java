@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network;
 
-import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource;
-import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
+import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
+import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 
 import org.chaupal.jp2p.ui.jxta.property.databinding.BooleanDataBinding;
 import org.chaupal.jp2p.ui.jxta.property.databinding.SpinnerDataBinding;

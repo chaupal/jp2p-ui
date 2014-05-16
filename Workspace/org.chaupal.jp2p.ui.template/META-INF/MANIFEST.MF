@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: JXSE Tooling
+Bundle-Name: Chaupal Tooling for Eclipse
 Bundle-SymbolicName: org.chaupal.jp2p.ui.template;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.v20140516
 Bundle-Activator: org.chaupal.jp2p.ui.template.Activator
 Bundle-Vendor: Condast
 Require-Bundle: org.eclipse.core.runtime,
@@ -21,7 +21,7 @@ Import-Package: net.jp2p.container,
  net.jp2p.container.utils,
  net.jp2p.container.utils.io,
  net.jp2p.jxta.network,
- net.jp2p.jxta.root.network.configurator,
+ net.jp2p.jxta.network.configurator,
  net.jxta.platform,
  org.chaupal.jp2p.ui.container,
  org.chaupal.jp2p.ui.jxta.network

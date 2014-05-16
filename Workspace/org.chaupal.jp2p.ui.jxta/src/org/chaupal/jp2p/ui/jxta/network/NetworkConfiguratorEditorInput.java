@@ -12,7 +12,7 @@ package org.chaupal.jp2p.ui.jxta.network;
 
 import net.jp2p.container.Jp2pContainerPropertySource;
 import net.jp2p.container.properties.AbstractJp2pPropertySource;
-import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource;
+import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;

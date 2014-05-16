@@ -28,7 +28,7 @@ import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.EnumUtils;
-import net.jp2p.jxta.root.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
+import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 import net.jxta.id.ID;
 import net.jxta.peer.PeerID;
 import net.jxta.platform.NetworkConfigurator;
