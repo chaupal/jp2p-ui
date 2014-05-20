@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.utils.EnumUtils;
 import net.jp2p.jxta.network.NetworkManagerPropertySource.NetworkManagerProperties;
 import net.jxta.peer.PeerID;
@@ -30,7 +29,7 @@ import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
 public class NetworkManagerPropertySource extends AbstractJp2pUIPropertySource<NetworkManager> {
 
-	public NetworkManagerPropertySource( IJp2pComponent<NetworkManager> component ) {
+	public NetworkManagerPropertySource( NetworkManager component ) {
 		super( component );
 	}
 

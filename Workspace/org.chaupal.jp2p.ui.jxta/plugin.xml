@@ -5,28 +5,28 @@
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="net.jxta.platform.Module"
-            class="org.chaupal.jp2p.ui.jxta.property.Jp2pAdapterFactory">
+            class="org.chaupal.jp2p.ui.jxta.property.Jp2pJxseAdapterFactory">
          <adapter
                type="org.eclipse.ui.views.properties.IPropertySource">
          </adapter>
       </factory>
       <factory
             adaptableType="net.jxta.platform.NetworkManager"
-            class="org.chaupal.jp2p.ui.jxta.property.Jp2pAdapterFactory">
+            class="org.chaupal.jp2p.ui.jxta.property.Jp2pJxseAdapterFactory">
          <adapter
                type="org.eclipse.ui.views.properties.IPropertySource">
          </adapter>
       </factory>
       <factory
             adaptableType="net.jxta.document.Advertisement"
-            class="org.chaupal.jp2p.ui.jxta.property.Jp2pAdapterFactory">
+            class="org.chaupal.jp2p.ui.jxta.property.Jp2pJxseAdapterFactory">
          <adapter
                type="org.eclipse.ui.views.properties.IPropertySource">
          </adapter>
       </factory>
       <factory
             adaptableType="net.jxta.platform.NetworkConfigurator"
-            class="org.chaupal.jp2p.ui.jxta.property.Jp2pAdapterFactory">
+            class="org.chaupal.jp2p.ui.jxta.property.Jp2pJxseAdapterFactory">
          <adapter
                type="org.eclipse.ui.views.properties.IPropertySource">
          </adapter>
@@ -272,8 +272,8 @@
          <view
                id="org.chaupal.jp2p.ui.jxse.module.view"
                minimized="false"
-               relationship="left"
-               relative="org.eclipse.ui.views.PropertySheet">
+               relationship="bottom"
+               relative="org.chaupal.jp2p.ui.container.view">
          </view>
       </perspectiveExtension>
    </extension>

@@ -22,13 +22,15 @@ public class Jp2pJxseLabelProvider extends Jp2pLabelProvider{
 		if( element instanceof IJp2pComponent<?> )
 			return super.getImage(element);
 		ModuleImages images = new ModuleImages();
-		return images.getImage( Images.COMPONENT );
+		return images.getImage( Images.MODULE );
 	}
 
 	@Override
 	public String getText(Object element) {
+		if( element == null )
+			return "no module";
 		if(!( element instanceof IJp2pComponent<?>))
-			return super.getText(element);
+			return element.getClass().getSimpleName();
 		IJp2pComponent<?> component = (IJp2pComponent<?> )element;
 		return Utils.getLabel(component); 
 	}	

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import net.jp2p.container.component.IJp2pComponent;
 import net.jxta.document.Advertisement;
 import net.jxta.protocol.ModuleImplAdvertisement;
 import net.jxta.protocol.ModuleSpecAdvertisement;
@@ -28,10 +27,6 @@ public class AdvertisementPropertySource extends AbstractJp2pUIPropertySource<Ad
 
 	public AdvertisementPropertySource( Advertisement source ) {
 		super( source );
-	}
-
-	public AdvertisementPropertySource( IJp2pComponent<Advertisement> component ) {
-		super( component.getModule(), component.getPropertySource() );
 	}
 
 	/**

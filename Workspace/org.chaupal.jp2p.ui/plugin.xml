@@ -94,7 +94,7 @@
                closeable="true"
                id="org.eclipse.ui.views.PropertySheet"
                minimized="false"
-               relationship="bottom"
+               relationship="right"
                relative="org.chaupal.jp2p.ui.container.view"
                visible="true">
          </view>

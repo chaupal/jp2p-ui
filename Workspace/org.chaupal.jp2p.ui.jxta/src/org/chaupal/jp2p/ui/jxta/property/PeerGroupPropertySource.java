@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import net.jp2p.container.component.IJp2pComponent;
 import net.jxta.peergroup.PeerGroup;
 import net.jp2p.jxta.peergroup.PeerGroupPropertySource.PeerGroupProperties;
 
@@ -21,8 +20,8 @@ import org.eclipse.ui.views.properties.PropertyDescriptor;
 
 public class PeerGroupPropertySource extends AbstractJp2pUIPropertySource<PeerGroup> {
 
-	public PeerGroupPropertySource( IJp2pComponent<PeerGroup> component) {
-		super( component.getModule(), component.getPropertySource() );
+	public PeerGroupPropertySource( PeerGroup module ) {
+		super( module );
 	}
 
 	@Override

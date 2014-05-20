@@ -8,10 +8,17 @@
 package org.chaupal.jp2p.ui.jxta.property;
 
 import net.jp2p.container.IJp2pContainer;
+import net.jxta.document.Advertisement;
+import net.jxta.peergroup.PeerGroup;
+import net.jxta.platform.NetworkConfigurator;
+import net.jxta.platform.NetworkManager;
+
+import org.chaupal.jp2p.ui.adapter.Jp2pAdapterFactory;
+import org.chaupal.jp2p.ui.jxta.property.advertisement.AdvertisementPropertySource;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.ui.views.properties.IPropertySource;
 
-public class Jp2pAdapterFactory implements IAdapterFactory {
+public class Jp2pJxseAdapterFactory extends Jp2pAdapterFactory implements IAdapterFactory {
 
 	@SuppressWarnings({ "rawtypes" })
 	@Override
@@ -20,7 +27,10 @@ public class Jp2pAdapterFactory implements IAdapterFactory {
 			  return null;
 		  if( adaptableObject instanceof IJp2pContainer )
 			  return this.getPropertySource(( IJp2pContainer )adaptableObject );
-		  return this.getPropertySource(adaptableObject);
+		  IPropertySource source = this.getPropertySource(adaptableObject);
+		  if( source != null )
+			  return source;
+		  return super.getAdapter(adaptableObject, adapterType);
 	}
 
 	/**
@@ -29,16 +39,16 @@ public class Jp2pAdapterFactory implements IAdapterFactory {
 	 * @return
 	 */
 	protected IPropertySource getPropertySource( Object adaptableObject ){
-		  //if( adaptableObject instanceof NetworkManager )
-		//	  return new NetworkManagerPropertySource(( NetworkManager )adaptableObject );
-		 // if( adaptableObject instanceof NetworkConfigurator )
-		//	  return new NetworkConfiguratorPropertySource(( NetworkConfigurator )adaptableObject);
-		 // if( adaptableObject instanceof Advertisement )
-		//	  return new AdvertisementPropertySource(( Advertisement )adaptableObject);
-		 // if( adaptableObject instanceof PeerGroup )
-	//		  return new PeerGroupPropertySource(( PeerGroup )adaptableObject);
-//		  if( adaptableObject instanceof JxtaConfiguration )
-//			  return new JxtaConfigurationPropertySource(( JxtaConfiguration )adaptableObject);
+		  if( adaptableObject instanceof NetworkManager )
+			  return new NetworkManagerPropertySource(( NetworkManager )adaptableObject );
+		  if( adaptableObject instanceof NetworkConfigurator )
+			  return new NetworkConfiguratorPropertySource(( NetworkConfigurator )adaptableObject);
+		  if( adaptableObject instanceof Advertisement )
+			  return new AdvertisementPropertySource(( Advertisement )adaptableObject);
+		  if( adaptableObject instanceof PeerGroup )
+			  return new PeerGroupPropertySource(( PeerGroup )adaptableObject);
+		  //if( adaptableObject instanceof JxtaConfiguration )
+		//	  return new JxtaConfigurationPropertySource(( JxtaConfiguration )adaptableObject);
 		  return null;			
 	}
 

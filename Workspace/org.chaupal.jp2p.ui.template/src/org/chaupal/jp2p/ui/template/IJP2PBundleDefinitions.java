@@ -59,6 +59,24 @@ public interface IJP2PBundleDefinitions {
 	static final String ORG_ECLIPSELABS_OSGI_BROKER = "org.eclipselabs.osgi.ds.broker";
 	static final String ORG_ECLIPSELABS_OSGI_BROKER_SERVICE = ORG_ECLIPSELABS_OSGI_BROKER + ".service";
 	
+	static final String ORG_CHAUPAL_JP2P_UI_P2 = "org.chaupal.jp2p.ui.p2";
+	static final String ORG_CHAUPAL_JP2P_UI_TRAY = "org.chaupal.jp2p.ui.tray";
+
+	static final String ORG_CHAUPAL_JP2P_UI_JXTA = "org.chaupal.jp2p.ui.jxta";
+	static final String ORG_CHAUPAL_JP2P_UI_JXTA_PROPERTY = ORG_CHAUPAL_JP2P_UI_JXTA + ".property";
+	
+	static final String ORG_ECLIPSE_CORE_RESOURCES = "org.eclipse.core.resources";
+	static final String ORG_ECLIPSE_EQUINOX_APP = "org.eclipse.equinox.app;version=\"1.1.0\"";
+	static final String ORG_ECLIPSE_EQUINOX_P2_CORE = "org.eclipse.equinox.p2.core;version=\"2.0.0\"";
+	static final String ORG_ECLIPSE_EQUINOX_P2_UI = "org.eclipse.equinox.p2.ui;version=\"2.0.0\"";
+	static final String ORG_ECLIPSE_JFACE_ACTION = "org.eclipse.jface.action";
+	static final String ORG_ECLIPSE_JFACE_RESOURCE = "org.eclipse.jface.resource";
+	static final String ORG_ECLIPSE_SWT = "org.eclipse.swt";
+	static final String ORG_ECLIPSE_SWT_GRAPHICS = "org.eclipse.swt.graphics";
+	static final String ORG_ECLIPSE_SWT_WIDGETS = "org.eclipse.swt.widgets";
+	static final String ORG_ECLIPSE_UI = "org.eclipse.ui";
+	static final String ORG_ECLIPSE_UI_APPLICATION = "org.eclipse.ui.application";
+
 	static final String ORG_OSGI_FRAMEWORK = "org.osgi.framework;version=\"1.3.0\"";
 
 	public static final String KEY_JP2P_CONTEXT = "Jp2pContext";

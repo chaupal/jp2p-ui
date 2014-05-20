@@ -24,6 +24,7 @@ import org.eclipse.ui.navigator.CommonViewer;
 public class JxseContainerNavigator extends CommonNavigator{
 
 	public static final String PATH_ID = "org.chaupal.jp2p.ui.jxta.container";
+	public static final String S_NAVIGATOR_TEXT = "JXTA Module: ";
 	
 	private CommonViewer viewer;
 	
@@ -76,10 +77,10 @@ public class JxseContainerNavigator extends CommonNavigator{
 	void showSelection(IWorkbenchPart sourcepart, ISelection selection) {
 		IStructuredSelection ss = (IStructuredSelection) selection;
 		Object element = ss.getFirstElement();
-		if(!( element instanceof IJp2pComponent<?>))
+		if(( element == null ) || !( element instanceof IJp2pComponent<?>))
 			return;
-		IJp2pComponent<?> component = (net.jp2p.container.component.IJp2pComponent<Object>)element;
-		setContentDescription( Utils.getLabel(component));
+		IJp2pComponent<?> component = (IJp2pComponent<Object>)element;
+		setContentDescription( S_NAVIGATOR_TEXT + Utils.getLabel(component));
 		this.viewer.setInput(component);
 	}
 	

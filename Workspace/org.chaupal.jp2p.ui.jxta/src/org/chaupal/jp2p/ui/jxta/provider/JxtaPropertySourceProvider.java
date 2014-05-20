@@ -36,7 +36,6 @@ public class JxtaPropertySourceProvider implements
 		return component.getPropertySource().getComponentName();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public IPropertySource getPropertySource() {
 		if(!JxtaComponents.isComponent( this.getComponentName()))
@@ -47,9 +46,9 @@ public class JxtaPropertySourceProvider implements
 			case ADVERTISEMENT:
 				break;
 			case PEERGROUP_SERVICE:
-				return new PeerGroupPropertySource( (IJp2pComponent<PeerGroup> )component );
+				return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
 			case NET_PEERGROUP_SERVICE:
-				return new PeerGroupPropertySource( (IJp2pComponent<PeerGroup>) component );
+				return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
 			default:
 				break;
 			}
@@ -59,9 +58,9 @@ public class JxtaPropertySourceProvider implements
 		if( jxtaccomps != null ){
 			switch( jxtaccomps ){
 			case NETWORK_MANAGER:
-				return new NetworkManagerPropertySource( (IJp2pComponent<NetworkManager>) component );
+				return new NetworkManagerPropertySource( (NetworkManager) component.getModule() );
 			case NETWORK_CONFIGURATOR:
-				return new NetworkConfiguratorPropertySource((IJp2pComponent<NetworkConfigurator>) component );
+				return new NetworkConfiguratorPropertySource( (NetworkConfigurator) component.getModule() );
 			default:
 				break;
 			}

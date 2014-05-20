@@ -8,41 +8,52 @@
 package org.chaupal.jp2p.ui.jxta.provider;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Collection;
 
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.component.IJp2pComponentNode;
-import net.jp2p.container.component.Jp2pComponent;
-import net.jp2p.container.properties.DefaultPropertySource;
-import net.jxta.platform.NetworkConfigurator;
 
-import org.chaupal.jp2p.ui.comparator.Jp2pServiceComparator;
-import org.chaupal.jp2p.ui.jxta.Activator;
+import org.chaupal.jp2p.ui.provider.Jp2pServiceContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.Viewer;
 
-public class Jp2pJxseModuleProvider implements ITreeContentProvider {
+public class Jp2pJxseModuleProvider extends Jp2pServiceContentProvider implements ITreeContentProvider {
 
-	@Override
-	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-	}
-
+	private IJp2pComponent<?> root;
+	
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		if(( parentElement == null ) || !( parentElement instanceof IJp2pComponent<?> ))
+		if( parentElement == null )
 			return null;
-		IJp2pComponent<?> decorator = (IJp2pComponent<?>)parentElement;
-		return getDecoratedChildren( decorator );
+		IJp2pComponent<?> decorator = null;
+		if( parentElement instanceof IJp2pComponent<?> )
+			decorator = (IJp2pComponent<?>)parentElement;
+		else
+			decorator = getComponent( root, parentElement );
+		Collection<Object> results = new ArrayList<Object>();
+		for( Object child: super.getChildren( decorator)){
+			Object result;
+			if( child instanceof IJp2pComponent<?>){
+				IJp2pComponent<?> comp = (IJp2pComponent<?>) child;
+				result = comp.getModule();
+			}else{
+				result = child;
+			}
+			if( result != null )
+				results.add( result);
+		}
+		return results.toArray( new Object[ results.size() ]);
 	}
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if(( element == null ) || !( element instanceof IJp2pComponent<?> ))
+		if( element == null )
 			return false;
-		IJp2pComponent<?> decorator = (IJp2pComponent<?>)element;
-		Object[] children = getChildren( decorator );
-		return ( children == null )? false: ( children.length > 0 );
+		IJp2pComponent<?> decorator = null;
+		if( element instanceof IJp2pComponent<?> )
+			decorator = (IJp2pComponent<?>)element;
+		else
+			decorator = getComponent( root, element );
+		return super.hasChildren( decorator );
 	}
 
 	@Override
@@ -51,83 +62,73 @@ public class Jp2pJxseModuleProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getElements(Object inputElement) {
-		if(( inputElement == null ) || !( inputElement instanceof IJp2pComponent<?> ))
+		if( inputElement == null ) 
 			return null;
-		IJp2pComponent<?> decorator = (IJp2pComponent<?>)inputElement;
-		List<Object> results = new ArrayList<Object>();
-		if( decorator.getModule() == null )
-			results.add( decorator );
-		else
-			results.add( decorator.getModule() );
-		return results.toArray( new Object[ results.size() ]);
+		Collection<Object> results = new ArrayList<Object>();
+		if( inputElement instanceof IJp2pComponent<?> ){
+			root = (IJp2pComponent<?>)inputElement;
+			if( root.getModule() != null )
+				results.add( root.getModule());
+		}
+		return results.toArray( new Object[ results.size()]);
 	}
 
 	@Override
 	public Object getParent(Object element) {
-		if(!( element instanceof IJp2pComponentNode ))
+		if( element == null )
 			return null;
-		IJp2pComponentNode<?> decorator = (IJp2pComponentNode<?>)element;
-		if( decorator.getModule() instanceof NetworkConfigurator ){
-			ITreeContentProvider provider = new NetworkConfiguratorContentProvider( decorator.getPropertySource().getParent() );
-			return provider.getParent(element);
-		}
-		if( decorator.getPropertySource() == null )
-			return null;
-		return decorator.getPropertySource().getParent();
+		IJp2pComponent<?> decorator = null;
+		if( element instanceof IJp2pComponent<?> )
+			decorator = (IJp2pComponent<?>)element;
+		else
+			decorator = getComponent( root, element );
+		return super.getParent( decorator );
 	}
-	
+		
 	/**
-	 * Get the correct provider
-	 * @param component
+	 * Parse through a tree recursively to find the component of an element
+	 * @param root
+	 * @param element
 	 * @return
 	 */
-	public static NetworkConfiguratorContentProvider getNetworkConfiguratorContentProvider( IJp2pComponent<?> component ){
-		if(!( component.getModule() instanceof NetworkConfigurator ))
+	public static IJp2pComponent<?> getComponent( IJp2pComponent<?> root, Object element ){
+		if(( element == null ) || ( root == null ))
 			return null;
-		Object parent = null;
-		if( component instanceof IJp2pComponentNode ){
-			IJp2pComponentNode<?> node = (IJp2pComponentNode<?> )component;
-			parent = node.getPropertySource().getParent();	
+		if( element.equals( root.getModule()))
+			return root;
+		if( !( root instanceof IJp2pComponentNode<?>))
+			return null;
+		IJp2pComponentNode<?> node = (IJp2pComponentNode<?>) root;
+		IJp2pComponent<?> found = null;
+		for( IJp2pComponent<?> child: node.getChildren()){
+			found = getComponent( child, element );
+			if( found != null )
+				return found;
 		}
-		return new NetworkConfiguratorContentProvider( parent );
+		return null;
 	}
 
 	/**
-	 * Get the correct provider
-	 * @param component
+	 * Parse through a tree recursively to find the component of an element
+	 * @param root
+	 * @param element
 	 * @return
 	 */
-	public static Object[] getChildren( IJp2pComponent<?> component ){
-		NetworkConfiguratorContentProvider provider = getNetworkConfiguratorContentProvider(component);
-		if( provider != null ){
-			return provider.getChildren( component );
-		}
-		if(!( component instanceof IJp2pComponentNode ))
+	public static IJp2pComponent<?> getParentComponent( IJp2pComponent<?> root, Object element ){
+		if( element == null )
 			return null;
-		IJp2pComponentNode<?> node = (IJp2pComponentNode<?> )component;
-		return node.getChildren();
+		if( element.equals( root.getModule()))
+			return root;
+		if( !( root instanceof IJp2pComponentNode<?>))
+			return null;
+		IJp2pComponentNode<?> node = (IJp2pComponentNode<?>) root;
+		IJp2pComponent<?> found = null;
+		for( IJp2pComponent<?> child: node.getChildren()){
+			found = getComponent( child, element );
+			if( found != null )
+				return node;
+		}
+		return null;
 	}
 
-	/**
-	 * Returns the most adequate component for the given 
-	 * @param module
-	 * @return
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static IJp2pComponent<?> getComponent( Object module ){
-		if( module instanceof IJp2pComponent )
-			return (IJp2pComponent<?>) module;
-		return new Jp2pComponent( new DefaultPropertySource( Activator.BUNDLE_ID, module.toString() ), module );
-	}
-
-	public static Object[] getDecoratedChildren( IJp2pComponent<?> component ) {
-		List<Object> results = new ArrayList<Object>();
-		Object[] children = getChildren( component );
-		if(( children == null ) || ( children.length == 0 ))
-			return children;
-		for( Object child: children )
-			results.add( child );
-		Collections.sort( results, new Jp2pServiceComparator<Object>());
-		return results.toArray();
-	}
 }

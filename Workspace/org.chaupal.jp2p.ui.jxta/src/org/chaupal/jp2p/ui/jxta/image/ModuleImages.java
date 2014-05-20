@@ -18,24 +18,12 @@ public class ModuleImages extends AbstractImages{
 
 	public static final String S_ICON_PATH = "/resources/";
 
-	public static final String S_DISABLED_ICON  = "component-disabled.png";
-	public static final String S_IDLE_ICON  = "idle.png";
-	public static final String S_AVAILABLE_ICON  = "available.png";
-	public static final String S_INITIALISING_ICON  = "initialising.png";
-	public static final String S_INITIALISED_ICON  = "initialised.png";
-	public static final String S_ACTIVATING_ICON = "activating.png";
-	public static final String S_ACTIVE_ICON = "active.png";
-	public static final String S_PAUSED_ICON = "player_pause.png";
-	public static final String S_STOPPING_ICON = "stop.png";
-	public static final String S_CHECK_ICON = "check.png";
-	public static final String S_NOT_FOUND_ICON = "not_found.png";
-	public static final String S_FINALISING_ICON = "shuttingdown.png";
-	public static final String S_FINALISED_ICON = "shutdown.png";
-
+	public static final String S_MODULE_ICON  = "module.png";
 	public static final String S_COMPONENT_ICON = "component.png";
 	public static final String S_WORLD_ICON = "world.png";
 
 	public enum Images{
+		MODULE,
 		COMPONENT,
 		WORLD;
 
@@ -61,19 +49,7 @@ public class ModuleImages extends AbstractImages{
 	
 	@Override
 	public void initialise(){
-		setImage( S_DISABLED_ICON );
-		setImage( S_IDLE_ICON );
-		setImage( S_AVAILABLE_ICON );
-		setImage( S_INITIALISING_ICON );
-		setImage( S_INITIALISED_ICON );
-		setImage( S_ACTIVATING_ICON );
-		setImage( S_ACTIVE_ICON );
-		setImage( S_PAUSED_ICON );
-		setImage( S_STOPPING_ICON );
-		setImage( S_CHECK_ICON );
-		setImage( S_NOT_FOUND_ICON );
-		setImage( S_FINALISING_ICON );
-		setImage( S_FINALISED_ICON );
+		setImage( S_MODULE_ICON );
 		setImage( S_COMPONENT_ICON );
 		setImage( S_WORLD_ICON );
 	}
@@ -86,7 +62,7 @@ public class ModuleImages extends AbstractImages{
 	public Image getImage( Status desc ){
 		switch( desc ){
 		default:
-			return getImageFromName( S_COMPONENT_ICON );				
+			return getImageFromName( S_MODULE_ICON );				
 		}
 	}
 
@@ -102,7 +78,7 @@ public class ModuleImages extends AbstractImages{
 		case WORLD:
 			return getImageFromName( S_WORLD_ICON );
 		default:
-			return getImageFromName( S_COMPONENT_ICON );				
+			return getImageFromName( S_MODULE_ICON );				
 		}
 	}
 
