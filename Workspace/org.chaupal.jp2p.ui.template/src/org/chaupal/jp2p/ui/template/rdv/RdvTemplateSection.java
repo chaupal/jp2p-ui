@@ -41,7 +41,5 @@ public class RdvTemplateSection extends AbstractJp2pTemplateSection implements
 		ncps.setProperty(NetworkConfiguratorProperties.TCP_8OUTGOING_STATUS, true );
 		ncps.setProperty(NetworkConfiguratorProperties.MULTICAST_8ENABLED, false );
 		nmps.addChild(ncps);
-		//super.onFillProperties(properties);
-		//super.setTemplateOption( TemplateOptions.SIMPLE_RDV);
 	}
 }

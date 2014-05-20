@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.jp2p.container.activator.IJp2pService;
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.component.IJp2pComponentNode;
 import net.jp2p.container.component.Jp2pComponent;
@@ -23,7 +22,7 @@ import org.chaupal.jp2p.ui.jxta.Activator;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-public class Jp2pServiceContentProvider implements ITreeContentProvider {
+public class Jp2pJxseModuleProvider implements ITreeContentProvider {
 
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
@@ -55,11 +54,12 @@ public class Jp2pServiceContentProvider implements ITreeContentProvider {
 		if(( inputElement == null ) || !( inputElement instanceof IJp2pComponent<?> ))
 			return null;
 		IJp2pComponent<?> decorator = (IJp2pComponent<?>)inputElement;
-		if( decorator.getModule() instanceof NetworkConfigurator ){
-			ITreeContentProvider provider = new NetworkConfiguratorContentProvider();
-			return provider.getElements(inputElement);
-		}
-		return getChildren( inputElement );
+		List<Object> results = new ArrayList<Object>();
+		if( decorator.getModule() == null )
+			results.add( decorator );
+		else
+			results.add( decorator.getModule() );
+		return results.toArray( new Object[ results.size() ]);
 	}
 
 	@Override
@@ -109,25 +109,6 @@ public class Jp2pServiceContentProvider implements ITreeContentProvider {
 	}
 
 	/**
-	 * This helper method decorates a compoent;
-	 * 1: If the component is node, then nothing changes.
-	 * 2: If the component is not a node, then the module determines
-	 *    whether additional children are added
-	 * @param element
-	 * @return
-	 */
-	public static Object decorateComponent( Object element ){
-		if( element instanceof IJp2pService<?> )
-			return element;
-		if( element instanceof IJp2pComponentNode )
-			return element;
-		if( element instanceof IJp2pComponent<?> )
-			return getComponent( element );
-		IJp2pComponent<?> component = (IJp2pComponent<?> )element;
-		return getComponent( component.getModule() );
-	}
-
-	/**
 	 * Returns the most adequate component for the given 
 	 * @param module
 	 * @return
@@ -145,7 +126,7 @@ public class Jp2pServiceContentProvider implements ITreeContentProvider {
 		if(( children == null ) || ( children.length == 0 ))
 			return children;
 		for( Object child: children )
-			results.add( decorateComponent( child ));
+			results.add( child );
 		Collections.sort( results, new Jp2pServiceComparator<Object>());
 		return results.toArray();
 	}

@@ -99,16 +99,47 @@
             name="PeerGroup Viewer"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            category="org.chaupal.jp2p.ui.container"
+            class="org.chaupal.jp2p.ui.jxta.container.JxseContainerNavigator"
+            icon="resources/ContainerRed.png"
+            id="org.chaupal.jp2p.ui.jxse.module.view"
+            name="JXSE Modules View"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         id="org.condast.jxta.ide.view.jxta.container.viewer"
+         point="org.eclipse.ui.navigator.viewer">
+      <viewerContentBinding
+            viewerId="org.eclipselabs.jxse.ui.context.peergroups">
+         <includes>
+            <contentExtension
+                  isRoot="true"
+                  pattern="org.eclipse.jxse.content.peergroup">
+            </contentExtension>
+         </includes>
+      </viewerContentBinding>
+      <viewerContentBinding
+            viewerId="org.chaupal.jp2p.ui.jxse.module.view">
+         <includes>
+            <contentExtension
+                  isRoot="true"
+                  pattern="org.chaupal.jp2p.jxse.modules">
+            </contentExtension>
+         </includes>
+      </viewerContentBinding>
    </extension>
    <extension
          id="org.eclipse.jxse.content"
          name="JXSE Content"
          point="org.eclipse.ui.navigator.navigatorContent">
-       <navigatorContent
+      <navigatorContent
             activeByDefault="true"
             contentProvider="org.chaupal.jp2p.ui.jxta.provider.NetworkConfiguratorContentProvider"
             id="org.eclipse.jxse.content.network.configurator"
-            labelProvider="org.chaupal.jp2p.ui.jxta.provider.Jp2pLabelProvider"
+            labelProvider="org.chaupal.jp2p.ui.jxta.provider.Jp2pJxseLabelProvider"
             name="JP2P Network Configurator Content"
             priority="normal">
          <triggerPoints>
@@ -168,19 +199,26 @@
             </instanceof>
          </possibleChildren>
       </navigatorContent>
-  </extension>
-   <extension
-         id="org.condast.jxta.ide.view.jxta.container.viewer"
-         point="org.eclipse.ui.navigator.viewer">
-      <viewerContentBinding
-            viewerId="org.eclipselabs.jxse.ui.context.peergroups">
-         <includes>
-            <contentExtension
-                  isRoot="true"
-                  pattern="org.eclipse.jxse.content.peergroup">
-            </contentExtension>
-         </includes>
-      </viewerContentBinding>
+      <navigatorContent
+            activeByDefault="true"
+            contentProvider="org.chaupal.jp2p.ui.jxta.provider.Jp2pJxseModuleProvider"
+            id="org.chaupal.jp2p.jxse.modules"
+            labelProvider="org.chaupal.jp2p.ui.jxta.provider.Jp2pJxseLabelProvider"
+            name="JXSE Modules"
+            priority="normal">
+         <triggerPoints>
+            <or>
+               <instanceof
+                     value="net.jp2p.container.component.IJp2pComponent">
+               </instanceof>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof
+                  value="java.lang.Object">
+            </instanceof>
+         </possibleChildren>
+      </navigatorContent>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -230,6 +268,12 @@
                relative="org.chaupal.jp2p.ui.rendezvous.RendezvousServiceViewPart"
                showTitle="true"
                visible="true">
+         </view>
+         <view
+               id="org.chaupal.jp2p.ui.jxse.module.view"
+               minimized="false"
+               relationship="left"
+               relative="org.eclipse.ui.views.PropertySheet">
          </view>
       </perspectiveExtension>
    </extension>

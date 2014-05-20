@@ -2,18 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Chaupal Tooling for Eclipse
 Bundle-SymbolicName: org.chaupal.jp2p.ui.template;singleton:=true
-Bundle-Version: 1.0.0.v20140516
+Bundle-Version: 1.0.0.v20140522
 Bundle-Activator: org.chaupal.jp2p.ui.template.Activator
 Bundle-Vendor: Condast
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.ui,
- org.eclipse.pde.ui,
- org.apache.ant,
- org.eclipse.core.resources,
- org.eclipse.ui.ide,
- org.eclipse.pde,
- org.eclipse.jface,
- org.eclipse.pde.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: net.jp2p.container,
@@ -24,4 +15,23 @@ Import-Package: net.jp2p.container,
  net.jp2p.jxta.network.configurator,
  net.jxta.platform,
  org.chaupal.jp2p.ui.container,
- org.chaupal.jp2p.ui.jxta.network
+ org.chaupal.jp2p.ui.jxta.network,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime;version="3.4.0",
+ org.eclipse.jface.dialogs,
+ org.eclipse.jface.resource,
+ org.eclipse.jface.viewers,
+ org.eclipse.jface.wizard,
+ org.eclipse.osgi.util;version="1.1.0",
+ org.eclipse.pde.core.plugin,
+ org.eclipse.pde.internal.core.ibundle,
+ org.eclipse.pde.internal.ui.wizards.plugin,
+ org.eclipse.pde.ui,
+ org.eclipse.pde.ui.templates,
+ org.eclipse.swt,
+ org.eclipse.swt.events,
+ org.eclipse.swt.layout,
+ org.eclipse.swt.widgets,
+ org.eclipse.ui,
+ org.eclipse.ui.plugin,
+ org.osgi.framework;version="1.7.0"

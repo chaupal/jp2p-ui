@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.chaupal.jp2p.ui.template.IJP2PBundleDefinitions;
+import org.eclipse.pde.ui.IFieldData;
 import org.eclipse.pde.ui.templates.ITemplateSection;
 import org.eclipse.pde.ui.templates.NewPluginTemplateWizard;
 
@@ -24,7 +25,14 @@ import org.eclipse.pde.ui.templates.NewPluginTemplateWizard;
  */
 public class Jp2pRdvBundleWizard extends NewPluginTemplateWizard implements IJP2PBundleDefinitions{
 
-	
+	@Override
+	public void init(IFieldData data) {
+		super.init(data);
+		RdvTemplateSection acs1 = (RdvTemplateSection) super.getTemplateSections()[0];
+		if( acs1 != null )
+			acs1.initializeFields( data );
+	}
+
 	@Override
 	public String[] getImportPackages() {
 		List<String> results = new ArrayList<String>();
@@ -34,6 +42,7 @@ public class Jp2pRdvBundleWizard extends NewPluginTemplateWizard implements IJP2
         results.add( JP2P_NET_JP2P_CHAUPAL_JXTA_ACTIVATOR );
         results.add( JP2P_NET_JP2P_CHAUPAL_SERVICE );
 		results.add( JP2P_NET_JP2P_CONTAINER );
+		results.add( JP2P_NET_JP2P_CONTAINER_ACTIVATOR );
 		results.add( JP2P_NET_JP2P_CONTAINER_COMPONENT );
 
         results.add( ORG_ECLIPSELABS_OSGI_BROKER_SERVICE);

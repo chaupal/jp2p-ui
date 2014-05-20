@@ -20,9 +20,8 @@ import net.jp2p.container.properties.IJp2pWritePropertySource;
 import org.chaupal.jp2p.ui.property.descriptors.AbstractControlPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.descriptors.TextBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
-import org.eclipse.ui.views.properties.IPropertySource;
 
-public abstract class AbstractJp2pUIPropertySource<T extends Object> implements IPropertySource {
+public abstract class AbstractJp2pUIPropertySource<T extends Object> implements IJp2pUIPropertySource {
 
 	public static final String S_PROPERTY_JP2P_TEXT = "JP2P";
 

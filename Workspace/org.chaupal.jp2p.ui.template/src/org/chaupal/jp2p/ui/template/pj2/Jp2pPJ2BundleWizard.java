@@ -33,6 +33,9 @@ public class Jp2pPJ2BundleWizard extends NewPluginTemplateWizard implements IJP2
 	@Override
 	public void init(IFieldData data) {
 		super.init(data);
+		PJ2ExamplesTemplateSection acs1 = (PJ2ExamplesTemplateSection) super.getTemplateSections()[0];
+		acs1.initializeFields(data );
+
 		//Override creation of an activator by making the plugin simple
 		if( data instanceof PluginFieldData ){
 			PluginFieldData fData = (PluginFieldData) data;
@@ -53,12 +56,13 @@ public class Jp2pPJ2BundleWizard extends NewPluginTemplateWizard implements IJP2
 		List<String> results = new ArrayList<String>();
 		if( super.getImportPackages() != null )
 			results = new ArrayList<String>( Arrays.asList( super.getImportPackages()));
-        results.add( JP2P_NET_JP2P_CONTAINER );
 		results.add( JP2P_NET_JP2P_COMPATIBILITY_ACTIVATOR );
 		results.add( JP2P_NET_JP2P_COMPATIBILITY_CONTAINER );
 		results.add( JP2P_NET_JP2P_COMPATIBILITY_SERVICE );
 		results.add( JP2P_NET_JP2P_COMPATIBILITY_UTILS );
 
+        results.add( JP2P_NET_JP2P_CONTAINER );
+		results.add( JP2P_NET_JP2P_CONTAINER_ACTIVATOR );
 		results.add( JP2P_NET_JP2P_CONTAINER_SERVICE );
 		results.add( JP2P_NET_JP2P_CONTAINER_COMPONENT );
 		results.add( JP2P_NET_JP2P_CONTAINER_CONTEXT );

@@ -10,10 +10,11 @@ package org.chaupal.jp2p.ui.jxta.image;
 import net.jp2p.container.activator.IActivator.Status;
 import net.jp2p.container.utils.StringStyler;
 
+import org.chaupal.jp2p.ui.image.AbstractImages;
 import org.chaupal.jp2p.ui.jxta.Activator;
 import org.eclipse.swt.graphics.Image;
 
-public class StatusImages extends AbstractImages{
+public class ModuleImages extends AbstractImages{
 
 	public static final String S_ICON_PATH = "/resources/";
 
@@ -44,9 +45,9 @@ public class StatusImages extends AbstractImages{
 		}
 	}
 	
-	private static StatusImages images = new StatusImages();
+	private static ModuleImages images = new ModuleImages();
 	
-	public StatusImages() {
+	public ModuleImages() {
 		super( S_ICON_PATH, Activator.BUNDLE_ID );
 	}
 
@@ -54,7 +55,7 @@ public class StatusImages extends AbstractImages{
 	 * Get an instance of this map
 	 * @return
 	 */
-	public static StatusImages getInstance(){
+	public static ModuleImages getInstance(){
 		return images;
 	}
 	
@@ -84,34 +85,8 @@ public class StatusImages extends AbstractImages{
 	 */
 	public Image getImage( Status desc ){
 		switch( desc ){
-		case DISABLED:
-			return getImageFromName( S_DISABLED_ICON );			
-		case IDLE:
-			return getImageFromName( S_IDLE_ICON );
-		case INITIALISING:
-			return getImageFromName( S_INITIALISING_ICON );
-		case INITIALISED:
-			return getImageFromName( S_INITIALISED_ICON );
-		case ACTIVATING:
-			return getImageFromName( S_ACTIVATING_ICON );
-		case ACTIVE:
-			return getImageFromName( S_ACTIVE_ICON );
-		case PAUSED:
-			return getImageFromName( S_PAUSED_ICON );
-		case AVAILABLE:
-			return getImageFromName( S_AVAILABLE_ICON );
-		case SHUTTING_DOWN:
-			return getImageFromName( S_STOPPING_ICON );
-		case COMPLETED:
-			return getImageFromName( S_CHECK_ICON );
-		case FAILED:
-			return getImageFromName( S_NOT_FOUND_ICON );
-		case FINALISING:
-			return getImageFromName( S_FINALISING_ICON );
-		case FINALISED:
-			return getImageFromName( S_FINALISED_ICON );
 		default:
-			return getImageFromName( S_IDLE_ICON );				
+			return getImageFromName( S_COMPONENT_ICON );				
 		}
 	}
 

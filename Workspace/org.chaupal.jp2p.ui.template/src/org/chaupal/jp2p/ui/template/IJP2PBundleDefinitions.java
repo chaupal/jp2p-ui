@@ -21,6 +21,7 @@ package org.chaupal.jp2p.ui.template;
 public interface IJP2PBundleDefinitions {
 
 	static final String JP2P_NET_JP2P_CONTAINER = "net.jp2p.container";
+	static final String JP2P_NET_JP2P_CONTAINER_ACTIVATOR = JP2P_NET_JP2P_CONTAINER + ".activator";
 	static final String JP2P_NET_JP2P_CONTAINER_SERVICE = JP2P_NET_JP2P_CONTAINER + ".service";
 	static final String JP2P_NET_JP2P_CONTAINER_COMPONENT = JP2P_NET_JP2P_CONTAINER +".component";
 	static final String JP2P_NET_JP2P_CONTAINER_CONTEXT = JP2P_NET_JP2P_CONTAINER + ".context";

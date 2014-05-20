@@ -23,8 +23,8 @@
             category="org.chaupal.jp2p.ui.container"
             class="org.chaupal.jp2p.ui.container.Jp2pContainerNavigator"
             icon="resources/ContainerRed.png"
-            id="org.chaupal.jp2p.ui.context.view"
-            name="JP2P Service Container View"
+            id="org.chaupal.jp2p.ui.container.view"
+            name="JP2P Container View"
             restorable="true">
       </view>
   </extension>
@@ -32,11 +32,11 @@
          id="org.chaupal.jp2p.container.viewer"
          point="org.eclipse.ui.navigator.viewer">
       <viewerContentBinding
-            viewerId="org.chaupal.jp2p.ui.context.view">
+            viewerId="org.chaupal.jp2p.ui.container.view">
          <includes>
             <contentExtension
                   isRoot="true"
-                  pattern="org.chaupal.jp2p.content">
+                  pattern="org.chaupal.jp2p.container">
             </contentExtension>
          </includes>
       </viewerContentBinding>
@@ -48,7 +48,7 @@
       <navigatorContent
             activeByDefault="true"
             contentProvider="org.chaupal.jp2p.ui.provider.Jp2pServiceContentProvider"
-            id="org.chaupal.jp2p.content"
+            id="org.chaupal.jp2p.container"
             labelProvider="org.chaupal.jp2p.ui.provider.Jp2pLabelProvider"
             name="JP2P Context"
             priority="normal">
@@ -81,7 +81,7 @@
             targetID="org.chaupal.jp2p.ui.perspective">
         <view
                closeable="true"
-               id="org.chaupal.jp2p.ui.context.view"
+               id="org.chaupal.jp2p.ui.container.view"
                minimized="false"
                moveable="true"
                relationship="left"
@@ -95,7 +95,7 @@
                id="org.eclipse.ui.views.PropertySheet"
                minimized="false"
                relationship="bottom"
-               relative="org.chaupal.jp2p.ui.context.view"
+               relative="org.chaupal.jp2p.ui.container.view"
                visible="true">
          </view>
          <view

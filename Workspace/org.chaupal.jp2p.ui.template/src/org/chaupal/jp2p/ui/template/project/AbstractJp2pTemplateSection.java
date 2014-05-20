@@ -89,7 +89,6 @@ public abstract class AbstractJp2pTemplateSection extends OptionTemplateSection 
 	protected AbstractJp2pTemplateSection( String templateRoot) {
 		this.templateRoot = templateRoot;
 	}
-
 	
 	public Jp2pContainerPropertySource getPropertySource() {
 		return this.properties;
@@ -102,7 +101,8 @@ public abstract class AbstractJp2pTemplateSection extends OptionTemplateSection 
 	protected abstract void onFillProperties( Jp2pContainerPropertySource properties );
 	
 	@Override
-	protected void initializeFields(IFieldData data) {
+	public void initializeFields(IFieldData data) {
+		super.initializeFields(data);
 		String id = data.getId();
 		this.packageName = TemplateUtil.getFormattedPackageName(id);
 		this.packagePath = packageName.replace('.', '\\');

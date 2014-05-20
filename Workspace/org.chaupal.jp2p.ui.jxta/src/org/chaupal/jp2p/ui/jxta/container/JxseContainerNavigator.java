@@ -5,17 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.container;
+package org.chaupal.jp2p.ui.jxta.container;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
-import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.chaupal.utils.Utils;
 import net.jp2p.container.component.IJp2pComponent;
 
-import org.chaupal.jp2p.ui.osgi.Jp2pContainerPetitioner;
-import org.eclipselabs.osgi.ds.broker.service.IParlezListener;
-import org.eclipselabs.osgi.ds.broker.service.ParlezEvent;
+import org.chaupal.jp2p.ui.container.Jp2pContainerNavigator;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -25,22 +20,15 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.navigator.CommonNavigator;
 import org.eclipse.ui.navigator.CommonViewer;
-import org.eclipse.ui.views.properties.IPropertySheetPage;
-import org.eclipse.ui.views.properties.PropertySheetPage;
 
-public class Jp2pContainerNavigator extends CommonNavigator{
+public class JxseContainerNavigator extends CommonNavigator{
 
-	public static final String PATH_ID = "org.chaupal.jp2p.ui.container.view";
+	public static final String PATH_ID = "org.chaupal.jp2p.ui.jxta.container";
 	
 	private CommonViewer viewer;
 	
-	private Jp2pContainerPetitioner petitioner;
-	private ServiceEventDispatcher dispatcher;
-	private Jp2pContainerNavigator navigator;
+	//private JxseContainerNavigator navigator;
 	
-	//IPropertySheetPage doesn't implement refresh()
-	private PropertySheetPage propertyPage;
-
 	private ISelectionListener listener = new ISelectionListener() {
 		@Override
 		public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
@@ -51,19 +39,9 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 		}
 	};
 
-	public Jp2pContainerNavigator() {
+	public JxseContainerNavigator() {
 		super();
-		navigator = this;
-		dispatcher = ServiceEventDispatcher.getInstance();
-		dispatcher.addServiceChangeListener( new IServiceChangedListener(){
-
-			@Override
-			public void notifyServiceChanged(ServiceChangedEvent event) {
-				if( ServiceChange.REFRESH.equals( event.getChange()))
-					navigator.refresh();
-			}
-			
-		});
+		//navigator = this;
 	}
 
 	/**
@@ -72,30 +50,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	 */
 	@Override
 	protected Object getInitialInput() {
-        petitioner = Jp2pContainerPetitioner.getInstance();
-		petitioner.addParlezListener( new IParlezListener(){
-
-			@Override
-			public void notifyChange(ParlezEvent<?> event) {
-				navigator.refresh();
-			}
-			
-		});
-		petitioner.petition("containers");
-		return petitioner;
-	}
-
-	
-	@SuppressWarnings("rawtypes")
-	@Override
-	public Object getAdapter(Class adapter) {
-		if (adapter == IPropertySheetPage.class) {
-	        if (propertyPage == null) {
-	            propertyPage = new PropertySheetPage();
-	        }
-	        return propertyPage;
-	    }
-	    return super.getAdapter(adapter);
+		return null;
 	}
 
 	@Override
@@ -109,7 +64,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	@Override
 	protected CommonViewer createCommonViewer(Composite aParent) {
 		this.viewer = super.createCommonViewer(aParent);
-		this.viewer.setSorter( new Jp2pServiceViewerSorter() );
+//		this.viewer.setSorter( new Jp2pServiceViewerSorter() );
 		this.viewer.setAutoExpandLevel( AbstractTreeViewer.ALL_LEVELS );
 		return viewer;
 	}
@@ -125,6 +80,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 			return;
 		IJp2pComponent<?> component = (net.jp2p.container.component.IJp2pComponent<Object>)element;
 		setContentDescription( Utils.getLabel(component));
+		this.viewer.setInput(component);
 	}
 	
 	/**
@@ -137,11 +93,6 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				if(( propertyPage == null ) || ( propertyPage.getSite().getShell().isDisposed() ))
-					return;
-				
-				if( propertyPage != null )
-					propertyPage.refresh();
 				viewer.refresh();
 			}
 		});			

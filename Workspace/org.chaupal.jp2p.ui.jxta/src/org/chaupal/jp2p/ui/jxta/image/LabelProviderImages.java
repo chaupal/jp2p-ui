@@ -9,6 +9,7 @@ package org.chaupal.jp2p.ui.jxta.image;
 
 import net.jp2p.container.utils.StringStyler;
 
+import org.chaupal.jp2p.ui.image.AbstractImages;
 import org.chaupal.jp2p.ui.jxta.Activator;
 import org.eclipse.swt.graphics.Image;
 

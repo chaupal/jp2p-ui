@@ -11,8 +11,8 @@ import net.jp2p.container.utils.SimpleNode;
 import net.jp2p.jxta.peergroup.PeerGroupPropertySource;
 import net.jxta.peergroup.PeerGroup;
 
-import org.chaupal.jp2p.ui.jxta.image.StatusImages;
-import org.chaupal.jp2p.ui.jxta.image.StatusImages.Images;
+import org.chaupal.jp2p.ui.jxta.image.ModuleImages;
+import org.chaupal.jp2p.ui.jxta.image.ModuleImages.Images;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
@@ -21,7 +21,7 @@ public class PeerGroupLabelProvider extends LabelProvider{
 	@SuppressWarnings("unchecked")
 	@Override
 	public Image getImage(Object element) {
-		StatusImages images = new StatusImages();
+		ModuleImages images = new ModuleImages();
 		if(!( element instanceof SimpleNode ))
 			return super.getImage(element);
 		SimpleNode<PeerGroup, PeerGroup> node = (SimpleNode<PeerGroup, PeerGroup>) element;
