@@ -10,9 +10,8 @@
  */
 package org.chaupal.jp2p.ui.template.config;
 
+import java.util.Map;
 import java.util.logging.Logger;
-
-import net.jp2p.container.Jp2pContainerPropertySource;
 
 import org.chaupal.jp2p.ui.template.project.AbstractJp2pTemplateSection;
 import org.chaupal.jp2p.ui.template.project.ContextWizardOption;
@@ -59,15 +58,6 @@ public class JxseConfigurationTemplateSection extends AbstractJp2pTemplateSectio
 	}
 
 	
-	@Override
-	protected void onFillProperties(Jp2pContainerPropertySource properties) {
-		try {
-			view.init(properties);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * Set the template option
 	 * @param option
@@ -106,5 +96,17 @@ public class JxseConfigurationTemplateSection extends AbstractJp2pTemplateSectio
 		page.setDescription( S_JXSE_CONFIGURATION_DESC_2);
 		wizard.addPage(page);
 		super.addPages(wizard);
+	}
+
+	@Override
+	protected void onFillProperties(Map<String, String> attributes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected String getResourceLocation() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

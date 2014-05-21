@@ -44,7 +44,8 @@ Export-Package: org.chaupal.jp2p.ui.adapter,
  org.chaupal.jp2p.ui.p2,
  org.chaupal.jp2p.ui.property,
  org.chaupal.jp2p.ui.provider,
- org.chaupal.jp2p.ui.tray
+ org.chaupal.jp2p.ui.tray,
+ org.chaupal.jp2p.ui.util
 Require-Bundle: org.eclipse.ui;bundle-version="3.105.0"
 Service-Component: OSGI-INF/attendees.xml
 Bundle-Activator: org.chaupal.jp2p.ui.Activator

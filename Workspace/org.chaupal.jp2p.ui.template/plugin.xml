@@ -4,12 +4,39 @@
    <extension
          point="org.eclipse.pde.ui.pluginContent">
       <wizard
+            category="Chaupal"
+            class="org.chaupal.jp2p.ui.template.rcp.RcpBundleWizard"
+            icon="images/chaupal.png"
+            id="org.chaupal.jp2p.ui.rcp.content"
+            java="true"
+            name="RCP Reference for JP2P "
+            pureOSGi="false"
+            rcp="true"
+            requiresActivator="false"
+            ui-content="true">
+      </wizard>
+      <wizard
             category="JXSE 2.7x"
             class="org.chaupal.jp2p.ui.template.rdv.Jp2pRdvBundleWizard"
             icon="images/sun_jxta_16.gif"
             id="net.jp2p.chaupal.rdv.content"
             java="true"
             name="JXSE Bundle RDV Project"
+            pureOSGi="true"
+            rcp="false"
+            requiresActivator="false"
+            ui-content="false">
+         <description>
+            %pluginContent.templates.jxse.description
+         </description>
+      </wizard>
+      <wizard
+            category="JXSE 2.7x"
+            class="org.chaupal.jp2p.ui.template.edge.Jp2pEdgeBundleWizard"
+            icon="images/sun_jxta_16.gif"
+            id="net.jp2p.chaupal.rdv.content"
+            java="true"
+            name="JXSE Bundle Edge Project"
             pureOSGi="true"
             rcp="false"
             requiresActivator="false"
@@ -32,18 +59,6 @@
          <description>
             %pluginContent.templates.jxse.description
          </description>
-      </wizard>
-      <wizard
-            category="Chaupal"
-            class="org.chaupal.jp2p.ui.template.rcp.RcpBundleWizard"
-            icon="images/chaupal.png"
-            id="org.chaupal.jp2p.ui.rcp.content"
-            java="true"
-            name="RCP Reference for JP2P "
-            pureOSGi="false"
-            rcp="true"
-            requiresActivator="false"
-            ui-content="true">
       </wizard>
    </extension>
    <extension

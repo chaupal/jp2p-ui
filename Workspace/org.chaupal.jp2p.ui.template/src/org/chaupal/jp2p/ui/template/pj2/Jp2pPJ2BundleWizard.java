@@ -36,10 +36,10 @@ public class Jp2pPJ2BundleWizard extends NewPluginTemplateWizard implements IJP2
 		PJ2ExamplesTemplateSection acs1 = (PJ2ExamplesTemplateSection) super.getTemplateSections()[0];
 		acs1.initializeFields(data );
 
-		//Override creation of an activator by making the plugin simple
 		if( data instanceof PluginFieldData ){
 			PluginFieldData fData = (PluginFieldData) data;
 			fData.setSimple(true);
+			fData.setProvider( S_PROVIDER );
 		}
 	}
 

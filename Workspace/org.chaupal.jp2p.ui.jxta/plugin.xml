@@ -2,6 +2,23 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
+         id="org.chaupal.jp2p.ui.jxta.product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.chaupal.application"
+            description="Reference Chaupal Application"
+            name="Reference Chaupal Product">
+         <property
+               name="Reference Chaupal Product"
+               value="Reference Chaupal Product">
+         </property>
+         <property
+               name="appName"
+               value="Reference Chaupal Product">
+         </property>
+      </product>
+   </extension>
+   <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="net.jxta.platform.Module"

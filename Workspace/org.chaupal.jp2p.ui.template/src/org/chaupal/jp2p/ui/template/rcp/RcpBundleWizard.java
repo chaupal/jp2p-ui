@@ -11,16 +11,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.chaupal.jp2p.ui.template.IJP2PBundleDefinitions;
+import org.chaupal.jp2p.ui.template.AbstractJp2pBundleWizard;
+import org.eclipse.pde.internal.ui.wizards.plugin.PluginFieldData;
+import org.eclipse.pde.ui.IFieldData;
 import org.eclipse.pde.ui.templates.ITemplateSection;
-import org.eclipse.pde.ui.templates.NewPluginTemplateWizard;
 
 /**
  * @author Marine
  *
  */
-public class RcpBundleWizard extends NewPluginTemplateWizard implements IJP2PBundleDefinitions{
+@SuppressWarnings("restriction")
+public class RcpBundleWizard extends AbstractJp2pBundleWizard{
 
+	@Override
+	public void init(IFieldData data) {
+		super.init(data);
+		if( data instanceof PluginFieldData ){
+			PluginFieldData fData = (PluginFieldData) data;
+			fData.setSimple(true);
+			fData.setUIPlugin(true);
+			fData.setProvider( S_PROVIDER );
+		}
+	}
 	
 	@Override
 	public String[] getImportPackages() {

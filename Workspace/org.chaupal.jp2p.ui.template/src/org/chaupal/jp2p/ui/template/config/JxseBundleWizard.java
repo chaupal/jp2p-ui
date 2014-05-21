@@ -53,8 +53,8 @@ public class JxseBundleWizard extends NewPluginTemplateWizard  implements IPlugi
 				e.printStackTrace();
 				return null;
 			}
-			NetworkConfiguratorWizardPage ncwp = ( NetworkConfiguratorWizardPage )page;
-			ncwp.init(acs1.getPropertySource());
+			//NetworkConfiguratorWizardPage ncwp = ( NetworkConfiguratorWizardPage )page;
+			//ncwp.init(acs1.getPropertySource());
 		}
 		return super.getNextPage(page);
 	}

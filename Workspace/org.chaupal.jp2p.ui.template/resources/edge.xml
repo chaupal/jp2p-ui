@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jp2p-container xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+             schemaLocation="urn:jxse-namespace-schema-1.00"
+             id="$bundle-id$.edge"
+             name="$name$">
+  <properties>
+    <bundle-id>$bundle-id$</bundle-id>
+    <home-folder>${user.home}/.jxta/${bundle-id}</home-folder>
+  </properties>
+  <startup-service auto-start="true"></startup-service>
+  <persistence-service context="chaupal"/>
+  <network-manager clear-config="true">
+    <properties>
+        <config-mode>EDGE</config-mode>
+        <peer-id create="true" persist="true"/>
+    </properties>
+    <network-configurator id="$bundle-id$.networkmanager" name="$name$">
+      <properties>
+         <peer-id create="true" persist="true"/>
+         <tcp>
+           <enabled>true</enabled>
+           <port>9712</port>
+           <incoming-status>true</incoming-status>
+           <outgoing-status>true</outgoing-status>
+        </tcp>
+        <http2>
+          <enabled>true</enabled>
+          <start-port>7999</start-port>
+          <port>8005</port>
+          <end-port>8010</end-port>
+          <incoming-status>true</incoming-status>
+          <outgoing-status>true</outgoing-status>
+        </http2>
+        <multicast>
+          <enabled>true</enabled>
+        </multicast>
+        <use-only_relay_seeds>false</use-only_relay_seeds>
+        <use-only_rendezvous_seeds>false</use-only_rendezvous_seeds>
+      </properties>
+      <seed-list>
+         <properties>
+           <condast1>RDV, http://localhost:8081</condast1>
+           <condast2>RDV, tcp://localhost:9715</condast2>
+         </properties>
+       </seed-list>
+    </network-configurator>
+  </network-manager>
+  <pipe-service name="pipeName" peergroup="NetPeerGroup" context="chaupal" auto-start="true">
+     <advertisement>
+       <properties>
+         <description>Een Pijpje</description>
+         <pipe-id create="true" persist="true"/>
+         <pipe-type>unicast</pipe-type>
+       </properties>
+     </advertisement>
+     <discovery-service clear="true">
+       <properties>
+         <count>3</count>
+       </properties>
+     </discovery-service>
+  </pipe-service>  
+  <peergroup-service name="My peerGroup" peergroup="NetPeerGroup" context="chaupal" auto-start="true" publish="true">
+     <properties>
+       <description>This is a neat description</description>
+       <group-id>urn:jxta:cbid-4d6172676572696e204272756e6f202002</group-id>
+       <peergroup-id create="true"/>
+     </properties>
+     <advertisement type="peergroup">
+       <properties>
+          <name>"My Service"</name>
+         <uri>http://www.condast.com/p2pService.jar</uri>
+         <provider>Condast</provider>
+         <description>My condast Service</description>
+         <advertisement type="module-spec">
+           <properties>
+             <name>mypeergroup</name>
+             <creator>Condast</creator>
+             <module-spec-id>urn:jxta:cbid-59616261646162614A7874615032503311FF2F77F80AAA6CC1FE3DC1B5050D8A03</module-spec-id>
+             <version>Version 1.0</version>
+             <spec-uri>http://www.condast.com</spec-uri>
+           </properties>
+         </advertisement>
+         <advertisement type="pipe">
+           <properties>
+             <pipe-id>urn:jxta:cbid-59616261646162614E50472050325033F078673BFEEC42949856BDD37C5DDA1804</pipe-id>
+             <pipe-type>unicast</pipe-type>
+         </properties>
+       </advertisement>
+       </properties>
+     </advertisement>
+     <discovery-service clear="true">
+       <properties>
+          <count>10</count>
+       </properties>
+     </discovery-service>
+  </peergroup-service>  
+</jp2p-container>

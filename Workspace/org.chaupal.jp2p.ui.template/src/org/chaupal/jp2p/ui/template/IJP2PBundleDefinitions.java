@@ -20,6 +20,8 @@ package org.chaupal.jp2p.ui.template;
 
 public interface IJP2PBundleDefinitions {
 
+	static final String S_PROVIDER = "Project Chaupal (http://www.chaupal.org)";
+	
 	static final String JP2P_NET_JP2P_CONTAINER = "net.jp2p.container";
 	static final String JP2P_NET_JP2P_CONTAINER_ACTIVATOR = JP2P_NET_JP2P_CONTAINER + ".activator";
 	static final String JP2P_NET_JP2P_CONTAINER_SERVICE = JP2P_NET_JP2P_CONTAINER + ".service";
@@ -79,8 +81,16 @@ public interface IJP2PBundleDefinitions {
 
 	static final String ORG_OSGI_FRAMEWORK = "org.osgi.framework;version=\"1.3.0\"";
 
+	public static final String S_BUNDLE_SYMBOLIC_NAME = "Bundle-SymbolicName";
+	public static final String S_BUNDLE_SINGLETON = ";singleton:=true";
+
 	public static final String KEY_JP2P_CONTEXT = "Jp2pContext";
 	public static final String FILE_JP2P_XML = "JP2P-INF/jp2p-1.0.0.xml";
 	public static final String S_JP2P_INF = "JP2P-INF/";
 	public static final String S_JP2P_FILE = "jp2p-1.0.0.xml";
+	
+	public static final String S_META_INF = "META-INF/";
+	public static final String S_MANIFEST_MF = "MANIFEST.MF";
+
+	
 }
