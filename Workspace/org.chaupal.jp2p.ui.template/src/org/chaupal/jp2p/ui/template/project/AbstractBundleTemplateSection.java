@@ -14,15 +14,20 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.logging.Logger;
 
+import net.jp2p.container.utils.Utils;
 import net.jp2p.container.utils.io.IOUtils;
 
 import org.chaupal.jp2p.ui.template.Activator;
 import org.chaupal.jp2p.ui.template.IJP2PBundleDefinitions;
 import org.chaupal.jp2p.ui.template.TemplateUtil;
+import org.chaupal.jp2p.ui.util.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -40,7 +45,7 @@ import org.eclipse.pde.ui.templates.OptionTemplateSection;
  * @author Marine
  *
  */
-@SuppressWarnings("restriction")//Needed to use the IBundle interface
+@SuppressWarnings("restriction")
 public abstract class AbstractBundleTemplateSection extends OptionTemplateSection implements IJP2PBundleDefinitions{
 
 	// key for hidden field
@@ -62,8 +67,6 @@ public abstract class AbstractBundleTemplateSection extends OptionTemplateSectio
 	public static final String S_OSGI_INF = "OSGI-INF/";
 	public static final String S_ATTENDEES_XML = "attendees.xml";
 
-	private final static String DS_MANIFEST_KEY = "Service-Component"; //$NON-NLS-1$
-
 	private String packagePath             = null;
 	private String dollarMark              = null;
 	private String sourcePath              = null;
@@ -77,8 +80,8 @@ public abstract class AbstractBundleTemplateSection extends OptionTemplateSectio
 	//private Button nextButton;
 	
 	private String templateRoot;
-	
-	private Logger logger = Logger.getLogger( AbstractBundleTemplateSection.class.getName() );
+
+	private Logger logger = Logger.getLogger( AbstractJp2pTemplateSection.class.getName() );
 
 	protected AbstractBundleTemplateSection( String templateRoot ) {
 		this.templateRoot = templateRoot;
@@ -165,14 +168,6 @@ public abstract class AbstractBundleTemplateSection extends OptionTemplateSectio
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.pde.ui.templates.ITemplateSection#getNewFiles()
-	 */
-	@Override
-	public String[] getNewFiles() {
-		return new String[]{FOLDER_OSGI, FILE_OSGI_XML};
-	}
-
-	/* (non-Javadoc)
 	 * @see org.eclipse.pde.ui.templates.ITemplateSection#getUsedExtensionPoint()
 	 */
 	@Override
@@ -193,16 +188,7 @@ public abstract class AbstractBundleTemplateSection extends OptionTemplateSectio
 	}
 
 	public void update() throws Exception{}
-	
-	@Override
-	protected void updateModel(IProgressMonitor monitor) throws CoreException {
-		logger.info("Updating model");
-		IBundlePluginModelBase mb = (IBundlePluginModelBase) model;
-		IBundle bundle = mb.getBundleModel().getBundle();
-		bundle.setHeader( DS_MANIFEST_KEY, FILE_OSGI_XML );
-		createOSGIInf( this.project, 0, monitor);
-	}
-	
+		
 	public static String getAttenddeesXML( String packageName ){
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -212,6 +198,52 @@ public abstract class AbstractBundleTemplateSection extends OptionTemplateSectio
 		" name=\"IAttendeeService\" policy=\"static\" unbind=\"unsetAttendeeService\"/>\n");
 		buffer.append("</scr:component>");
 		return buffer.toString();
+	}
+
+	/**
+	 * Parse the given stream, and replace package names and bundle ids with the correct types
+	 * @param urlStream
+	 * @return
+	 */
+	public String parse( InputStream urlStream ){
+		Scanner scanner = new Scanner( urlStream );
+		StringBuffer buffer = new StringBuffer();
+		try{
+			String line = null;
+			while( scanner.hasNextLine() ){
+				line = scanner.nextLine();
+				if( Utils.isNull( line ))
+					continue;
+
+				//First check for comments
+				boolean comment = StringUtils.isComment( StringUtils.S_HASH, line ) | 
+						StringUtils.isComment( StringUtils.S_DOUBLE_SLASH, line );
+				if (comment )
+					continue;
+				try {
+					Set<Map.Entry<String, String>> set = attributes.entrySet();
+					Iterator<Map.Entry<String, String>> iterator = set.iterator();
+					while( iterator.hasNext() ){
+						Map.Entry<String, String> entry = iterator.next();
+						if( line.contains( entry.getKey() ))
+						line = line.replace( entry.getKey(), entry.getValue());
+					}
+					buffer.append( line + "\n");
+				} catch (Exception allElse) {
+					logger.severe( "Failed to register:" + line );
+				}
+			}
+		}
+		catch( Exception ex ){
+			ex.printStackTrace();
+		}
+		finally{
+			scanner.close();
+		}
+		String str = buffer.toString();
+		if( Utils.isNull(str))
+			return null;
+		return str.substring(0, str.length() - 1 );
 	}
 
 	/**
@@ -244,6 +276,28 @@ public abstract class AbstractBundleTemplateSection extends OptionTemplateSectio
 	}
 
 	/**
+	 * Create the configuration file for the JP2P-INF folder 
+	 * @param packageName
+	 * @param name
+	 * @return
+	 */
+	protected String parsePluginXML( String location ){
+		InputStream in = null;
+		try{
+			in = this.getClass().getResourceAsStream( location );
+			return parse( in );
+		}
+		catch( Exception ex ){
+			ex.printStackTrace();
+		}
+		finally{
+			IOUtils.closeInputStream( in );
+		}
+		return null;
+	}
+
+
+	/**
 	 * Create the given file from the inputstream
 	 * @param project
 	 * @param directory
@@ -252,17 +306,54 @@ public abstract class AbstractBundleTemplateSection extends OptionTemplateSectio
 	 * @param monitor
 	 */
 	public static void createFile( IProject project, String directory, String name, InputStream source, IProgressMonitor monitor ){
+		createFolder(project, directory, monitor);
+		try {
+			String path = name;
+			if(!Utils.isNull( directory ))
+				path = directory + path;
+			IFile file = project.getFile( path );
+			file.create(source, true, monitor);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}finally{
+			IOUtils.closeInputStream( source);
+		}
+	}
+
+	protected static boolean createFolder( IProject project, String directory, IProgressMonitor monitor ){
+		if( Utils.isNull( directory ))
+			return false;
 		IFolder folder = project.getFolder( directory );
-		if( !folder.exists() ){
-			try {
-				folder.create(true, true, monitor);
-				IFile file = project.getFile(directory + name );
-				file.create(source, true, monitor);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}finally{
-				IOUtils.closeInputStream( source);
-			}
+		if( folder.exists() )
+			return false;
+		try {
+			folder.create(true, true, monitor);
+			return true;
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/**
+	 * Create the plugin.xml file from the template stored at the given location
+	 * @param location
+	 * @param monitor
+	 * @throws CoreException
+	 */
+	protected void createPluginXML( String location, IProgressMonitor monitor) throws CoreException {
+		IBundlePluginModelBase mb = (IBundlePluginModelBase) model;
+		IBundle bundle = mb.getBundleModel().getBundle();
+		String str = bundle.getHeader( S_BUNDLE_SYMBOLIC_NAME ) + S_BUNDLE_SINGLETON;
+		bundle.setHeader( S_BUNDLE_SYMBOLIC_NAME, str );
+		
+		str = this.parsePluginXML( location );
+		ByteArrayInputStream source = new ByteArrayInputStream( str.getBytes());
+		try{
+			createFile( this.project, "", S_PLUGIN_XML, source, monitor);
+		}
+		finally{
+			IOUtils.closeInputStream(source);
 		}
 	}
 

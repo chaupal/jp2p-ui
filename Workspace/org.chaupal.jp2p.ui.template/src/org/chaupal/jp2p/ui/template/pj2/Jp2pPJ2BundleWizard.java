@@ -15,9 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.chaupal.jp2p.ui.template.IJP2PBundleDefinitions;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.internal.ui.wizards.plugin.PluginFieldData;
 import org.eclipse.pde.ui.IFieldData;
 import org.eclipse.pde.ui.templates.ITemplateSection;
@@ -86,11 +83,4 @@ public class Jp2pPJ2BundleWizard extends NewPluginTemplateWizard implements IJP2
         results.add( ORG_OSGI_FRAMEWORK);
 		return results.toArray( new String[ results.size()]);
 	}	
-	
-	@Override
-	public boolean performFinish(final IProject project, IPluginModelBase model, IProgressMonitor monitor) {
-		if( !super.performFinish(project, model, monitor))
-			return false;
-		return true;
-	}
 }

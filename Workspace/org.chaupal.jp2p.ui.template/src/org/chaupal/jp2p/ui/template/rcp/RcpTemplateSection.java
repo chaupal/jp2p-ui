@@ -13,30 +13,32 @@ package org.chaupal.jp2p.ui.template.rcp;
 import org.chaupal.jp2p.ui.template.project.AbstractBundleTemplateSection;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.pde.internal.core.ibundle.IBundle;
-import org.eclipse.pde.internal.core.ibundle.IBundlePluginModelBase;
 
 /**
  * @author Marine
  *
  */
-@SuppressWarnings("restriction")
 public class RcpTemplateSection extends AbstractBundleTemplateSection {
 
 	public static final String TEMPLATE_ROOT = "rcp";
+	public static final String S_RESOURCE_LOCATION = "/resources/plugin.xml";
 	
 	public RcpTemplateSection() {
 		super( TEMPLATE_ROOT );
 		this.setPageCount(0);
 	}
-	
+
 	@Override
 	protected void updateModel(IProgressMonitor monitor) throws CoreException {
-		IBundlePluginModelBase mb = (IBundlePluginModelBase) model;
-		IBundle bundle = mb.getBundleModel().getBundle();
-		String value = bundle.getHeader(S_BUNDLE_SYMBOLIC_NAME ) + S_BUNDLE_SINGLETON;
-		bundle.setHeader( S_BUNDLE_SYMBOLIC_NAME, value );
-		super.updateModel(monitor);
+		this.createPluginXML(S_RESOURCE_LOCATION, monitor  );
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.pde.ui.templates.ITemplateSection#getNewFiles()
+	 */
+	@Override
+	public String[] getNewFiles() {
+		return new String[]{};
 	}
 
 }

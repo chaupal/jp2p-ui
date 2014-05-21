@@ -43,6 +43,7 @@ public class RcpBundleWizard extends AbstractJp2pBundleWizard{
 		results.add( ORG_CHAUPAL_JP2P_UI_TRAY);
 		results.add( ORG_CHAUPAL_JP2P_UI_JXTA_PROPERTY );
 		results.add( ORG_ECLIPSE_CORE_RESOURCES);
+		results.add( ORG_ECLIPSE_CORE_RUNTIME);
 		results.add( ORG_ECLIPSE_EQUINOX_APP);
         results.add( ORG_ECLIPSE_EQUINOX_P2_CORE);
         results.add( ORG_ECLIPSE_EQUINOX_P2_UI);
@@ -53,6 +54,8 @@ public class RcpBundleWizard extends AbstractJp2pBundleWizard{
         results.add( ORG_ECLIPSE_SWT_GRAPHICS );
         results.add( ORG_ECLIPSE_UI );
         results.add( ORG_ECLIPSE_UI_APPLICATION );
+        results.add( ORG_ECLIPSE_UI_PLUGIN );
+        results.add( ORG_OSGI_FRAMEWORK );       
 		return results.toArray( new String[ results.size()]);
 	}	
 

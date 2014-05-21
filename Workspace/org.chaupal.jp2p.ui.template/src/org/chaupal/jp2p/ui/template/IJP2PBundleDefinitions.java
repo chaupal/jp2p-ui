@@ -68,6 +68,7 @@ public interface IJP2PBundleDefinitions {
 	static final String ORG_CHAUPAL_JP2P_UI_JXTA_PROPERTY = ORG_CHAUPAL_JP2P_UI_JXTA + ".property";
 	
 	static final String ORG_ECLIPSE_CORE_RESOURCES = "org.eclipse.core.resources";
+	static final String ORG_ECLIPSE_CORE_RUNTIME = "org.eclipse.core.runtime";
 	static final String ORG_ECLIPSE_EQUINOX_APP = "org.eclipse.equinox.app;version=\"1.1.0\"";
 	static final String ORG_ECLIPSE_EQUINOX_P2_CORE = "org.eclipse.equinox.p2.core;version=\"2.0.0\"";
 	static final String ORG_ECLIPSE_EQUINOX_P2_UI = "org.eclipse.equinox.p2.ui;version=\"2.0.0\"";
@@ -78,6 +79,7 @@ public interface IJP2PBundleDefinitions {
 	static final String ORG_ECLIPSE_SWT_WIDGETS = "org.eclipse.swt.widgets";
 	static final String ORG_ECLIPSE_UI = "org.eclipse.ui";
 	static final String ORG_ECLIPSE_UI_APPLICATION = "org.eclipse.ui.application";
+	static final String ORG_ECLIPSE_UI_PLUGIN = "org.eclipse.ui.plugin";
 
 	static final String ORG_OSGI_FRAMEWORK = "org.osgi.framework;version=\"1.3.0\"";
 
@@ -91,6 +93,7 @@ public interface IJP2PBundleDefinitions {
 	
 	public static final String S_META_INF = "META-INF/";
 	public static final String S_MANIFEST_MF = "MANIFEST.MF";
-
+	public static final String DS_MANIFEST_KEY = "Service-Component";
+	public static final String S_PLUGIN_XML = "plugin.xml";
 	
 }

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Chaupal Tooling for Eclipse
 Bundle-SymbolicName: org.chaupal.jp2p.ui.template;singleton:=true
-Bundle-Version: 1.0.0.v20140522
+Bundle-Version: 1.0.2.v20140521
 Bundle-Activator: org.chaupal.jp2p.ui.template.Activator
 Bundle-Vendor: Condast
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

@@ -11,11 +11,16 @@
 package org.chaupal.jp2p.ui.template.pj2;
 
 import org.chaupal.jp2p.ui.template.project.AbstractBundleTemplateSection;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.pde.internal.core.ibundle.IBundle;
+import org.eclipse.pde.internal.core.ibundle.IBundlePluginModelBase;
 
 /**
  * @author Marine
  *
  */
+@SuppressWarnings("restriction")
 public class PJ2ExamplesTemplateSection extends AbstractBundleTemplateSection {
 
 	public static final String TEMPLATE_ROOT = "practical-jxta";
@@ -39,4 +44,19 @@ public class PJ2ExamplesTemplateSection extends AbstractBundleTemplateSection {
 		return null;//buffer.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.pde.ui.templates.ITemplateSection#getNewFiles()
+	 */
+	@Override
+	public String[] getNewFiles() {
+		return new String[]{FOLDER_OSGI, FILE_OSGI_XML};
+	}
+
+	@Override
+	protected void updateModel(IProgressMonitor monitor) throws CoreException {
+		IBundlePluginModelBase mb = (IBundlePluginModelBase) model;
+		IBundle bundle = mb.getBundleModel().getBundle();
+		bundle.setHeader( DS_MANIFEST_KEY, FILE_OSGI_XML );
+		createOSGIInf( this.project, 0, monitor);
+	}
 }

@@ -12,10 +12,7 @@ package org.chaupal.jp2p.ui.template.project;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import net.jp2p.container.utils.Utils;
@@ -23,23 +20,23 @@ import net.jp2p.container.utils.io.IOUtils;
 
 import org.chaupal.jp2p.ui.template.IJP2PBundleDefinitions;
 import org.chaupal.jp2p.ui.template.TemplateUtil;
-import org.chaupal.jp2p.ui.util.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.pde.internal.core.ibundle.IBundle;
+import org.eclipse.pde.internal.core.ibundle.IBundlePluginModelBase;
 import org.eclipse.pde.ui.IFieldData;
 
 /**
  * @author Marine
  *
  */
+@SuppressWarnings("restriction")
 public abstract class AbstractJp2pTemplateSection extends AbstractBundleTemplateSection implements IJP2PBundleDefinitions{
 	
-	private Logger logger = Logger.getLogger( AbstractJp2pTemplateSection.class.getName() );
-
 	protected AbstractJp2pTemplateSection( String templateRoot ) {
 		super( templateRoot );
 		this.onFillProperties( super.getAttributes());
@@ -72,9 +69,11 @@ public abstract class AbstractJp2pTemplateSection extends AbstractBundleTemplate
 	
 	@Override
 	protected void updateModel(IProgressMonitor monitor) throws CoreException {
-		logger.info("Updating model");
-		super.updateModel(monitor);
-		createJP2PFolder( this.project, 0, monitor);
+		IBundlePluginModelBase mb = (IBundlePluginModelBase) model;
+		IBundle bundle = mb.getBundleModel().getBundle();
+		bundle.setHeader( DS_MANIFEST_KEY, FILE_OSGI_XML );
+		createOSGIInf( this.project, 0, monitor);
+		createJP2PFolder(project, 1, monitor);
 	}
 	
 	protected abstract String getResourceLocation( );
@@ -84,9 +83,6 @@ public abstract class AbstractJp2pTemplateSection extends AbstractBundleTemplate
 	 * @param packageName
 	 * @param name
 	 * @return
-	 */
-	/**
-	 * Get the XML info from the given location
 	 */
 	protected String getJP2PXML(){
 		InputStream in = null;
@@ -128,53 +124,7 @@ public abstract class AbstractJp2pTemplateSection extends AbstractBundleTemplate
 			e.printStackTrace();
 		}
 		return worked;
-	}
-	
-	/**
-	 * Parse the given stream, and replace package names and bundle ids with the correct types
-	 * @param urlStream
-	 * @return
-	 */
-	public String parse( InputStream urlStream ){
-		Scanner scanner = new Scanner( urlStream );
-		StringBuffer buffer = new StringBuffer();
-		try{
-			String line = null;
-			while( scanner.hasNextLine() ){
-				line = scanner.nextLine();
-				if( Utils.isNull( line ))
-					continue;
-
-				//First check for comments
-				boolean comment = StringUtils.isComment( StringUtils.S_HASH, line ) | 
-						StringUtils.isComment( StringUtils.S_DOUBLE_SLASH, line );
-				if (comment )
-					continue;
-				try {
-					Set<Map.Entry<String, String>> set = super.getAttributes().entrySet();
-					Iterator<Map.Entry<String, String>> iterator = set.iterator();
-					while( iterator.hasNext() ){
-						Map.Entry<String, String> entry = iterator.next();
-						if( line.contains( entry.getKey() ))
-						line = line.replace( entry.getKey(), entry.getValue());
-					}
-					buffer.append( line + "\n");
-				} catch (Exception allElse) {
-					logger.severe( "Failed to register:" + line );
-				}
-			}
-		}
-		catch( Exception ex ){
-			ex.printStackTrace();
-		}
-		finally{
-			scanner.close();
-		}
-		String str = buffer.toString();
-		if( Utils.isNull(str))
-			return null;
-		return str.substring(0, str.length() - 1 );
-	}
+	}	
 
 	/**
 	 * Create the OSGI-INF directory

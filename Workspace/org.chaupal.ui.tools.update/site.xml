@@ -3,7 +3,7 @@
    <description name="Chaupal UI Tools for Eclipse" url="http://89.31.96.252/download.condast.org/jp2p-releases/org.chaupal.ui.tools/site.xml">
       Chaupal UI tools provide wizards and other useful tools to assist in JP2P development
    </description>
-   <feature url="features/org.chaupal.ui.tools.feature_1.0.2.v20140523.jar" id="org.chaupal.ui.tools.feature" version="1.0.2.v20140523">
+   <feature url="features/org.chaupal.ui.tools.feature_1.0.5.v20140521.jar" id="org.chaupal.ui.tools.feature" version="1.0.5.v20140521">
       <category name="org.chaupal.ui.tools"/>
    </feature>
    <category-def name="org.chaupal.ui.tools" label="Chaupal Tools">
