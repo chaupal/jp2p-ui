@@ -38,31 +38,34 @@ public class JxtaPropertySourceProvider implements
 
 	@Override
 	public IPropertySource getPropertySource() {
-		if(!JxtaComponents.isComponent( this.getComponentName()))
-			return null;
-		JxtaComponents jxtacomps = JxtaComponents.valueOf( StringStyler.styleToEnum( this.getComponentName() ));
-		if( jxtacomps != null ){
-			switch( jxtacomps ){
-			case ADVERTISEMENT:
-				break;
-			case PEERGROUP_SERVICE:
-				return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
-			case NET_PEERGROUP_SERVICE:
-				return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
-			default:
-				break;
+		if(JxtaComponents.isComponent( this.getComponentName())){
+			JxtaComponents jxtacomps = JxtaComponents.valueOf( StringStyler.styleToEnum( this.getComponentName() ));
+			if( jxtacomps != null ){
+				switch( jxtacomps ){
+				case ADVERTISEMENT:
+					break;
+				case PEERGROUP_SERVICE:
+					return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
+				case NET_PEERGROUP_SERVICE:
+					return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
+				default:
+					break;
+				}
+				return null;
 			}
-			return null;
 		}
-		JxtaNetworkComponents jxtaccomps = JxtaNetworkComponents.valueOf( StringStyler.styleToEnum( this.getComponentName() ));
-		if( jxtaccomps != null ){
-			switch( jxtaccomps ){
-			case NETWORK_MANAGER:
-				return new NetworkManagerPropertySource( (NetworkManager) component.getModule() );
-			case NETWORK_CONFIGURATOR:
-				return new NetworkConfiguratorPropertySource( (NetworkConfigurator) component.getModule() );
-			default:
-				break;
+
+		if(JxtaNetworkComponents.isComponent( this.getComponentName())){
+			JxtaNetworkComponents jxtaccomps = JxtaNetworkComponents.valueOf( StringStyler.styleToEnum( this.getComponentName() ));
+			if( jxtaccomps != null ){
+				switch( jxtaccomps ){
+				case NETWORK_MANAGER:
+					return new NetworkManagerPropertySource( (NetworkManager) component.getModule() );
+				case NETWORK_CONFIGURATOR:
+					return new NetworkConfiguratorPropertySource( (NetworkConfigurator) component.getModule() );
+				default:
+					break;
+				}
 			}
 		}
 		return null;

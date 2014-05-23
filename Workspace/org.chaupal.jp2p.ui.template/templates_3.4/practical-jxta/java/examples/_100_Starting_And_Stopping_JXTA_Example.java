@@ -44,7 +44,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import $packageName$.Activator;
-
 import net.jp2p.container.Jp2pContainerPropertySource;
 import net.jp2p.container.context.Jp2pContainerPreferences;
 import net.jp2p.container.properties.AbstractJp2pPropertySource;
@@ -89,10 +88,6 @@ public class _100_Starting_And_Stopping_JXTA_Example extends AbstractJxseContain
             // Displaying peer group information
             Tools.PopInformationMessage(Name, "Connected via Peer Group: " + ConnectedVia.getPeerGroupName());
             
-            // Stopping JXTA
-            Tools.PopInformationMessage(Name, "Stopping JXTA network");
-            MyNetworkManager.stopNetwork();
-            
         } catch (IOException Ex) {            
             // Raised when access to local file and directories caused an error
             Tools.PopErrorMessage(Name, Ex.toString());           
@@ -103,6 +98,14 @@ public class _100_Starting_And_Stopping_JXTA_Example extends AbstractJxseContain
             Tools.PopErrorMessage(Name, e.toString());            
 		}
     }
+
+    // Stopping JXTA
+	@Override
+	public void stop() {
+        Tools.PopInformationMessage(Name, "Stopping JXTA network");
+        MyNetworkManager.stopNetwork();
+		super.stop();
+	}
 
 	@Override
 	public NetworkManager getModule() {

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JXSE GUI Tools
 Bundle-SymbolicName: org.chaupal.jp2p.ui.jxta;singleton:=true
-Bundle-Version: 1.0.0.v20140522
+Bundle-Version: 1.0.0.v20140523
 Bundle-Activator: org.chaupal.jp2p.ui.jxta.Activator
 Bundle-Vendor: Condast
 Require-Bundle: org.eclipse.ui;bundle-version="3.103.0"
