@@ -44,7 +44,6 @@ import java.io.File;
 import java.io.IOException;
 
 import $packageName$.Activator;
-
 import net.jp2p.jxse.compatibility.container.AbstractJxseContainer;
 import net.jp2p.jxse.compatibility.utils.Tools;
 import net.jxta.platform.NetworkConfigurator;
@@ -99,7 +98,7 @@ public class _120_Retrieving_Modifying_And_Saving_An_Existing_Configuration_Exam
             Tools.PopInformationMessage(Name, "Saving configuration at:\n\n"
                     + ConfigurationFile.getCanonicalPath());
             MyNetworkConfigurator.save();        
-        } catch (IOException Ex) {           
+        } catch (IOException | ConfiguratorException Ex) {           
             // Raised when access to local file and directories caused an error
             Tools.PopErrorMessage(Name, Ex.toString());                      
         }

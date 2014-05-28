@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.chaupal.jp2p.ui.jxta;singleton:=true
 Bundle-Version: 1.0.0.v20140523
 Bundle-Activator: org.chaupal.jp2p.ui.jxta.Activator
 Bundle-Vendor: Condast
-Require-Bundle: org.eclipse.ui;bundle-version="3.103.0"
+Require-Bundle: org.eclipse.ui;bundle-version="3.103.0",
+ org.eclipse.osgi;bundle-version="3.9.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: net.jp2p.chaupal.dispatcher,
  net.jp2p.chaupal.utils,

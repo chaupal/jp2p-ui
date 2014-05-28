@@ -2,7 +2,7 @@
 <feature
       id="org.chaupal.ui.tools.feature"
       label="Core JP2P UI Tools Feature"
-      version="1.0.5.v20140521"
+      version="1.0.5.v20140526"
       provider-name="Chaupal">
 
    <description url="https://github.com/chaupal">

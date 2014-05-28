@@ -88,7 +88,7 @@ public class _100_Starting_And_Stopping_JXTA_Example extends AbstractJxseContain
             // Displaying peer group information
             Tools.PopInformationMessage(Name, "Connected via Peer Group: " + ConnectedVia.getPeerGroupName());
             
-        } catch (IOException Ex) {            
+        } catch (IOException | ConfiguratorException Ex) {            
             // Raised when access to local file and directories caused an error
             Tools.PopErrorMessage(Name, Ex.toString());           
         } catch (PeerGroupException Ex) {           

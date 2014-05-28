@@ -45,7 +45,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import $packageName$.Activator;
-
 import net.jp2p.jxse.compatibility.container.AbstractJxseContainer;
 import net.jp2p.jxse.compatibility.utils.Tools;
 import net.jxse.configuration.JxseHttpTransportConfiguration;
@@ -75,7 +74,7 @@ public class _150_Configuration_Objects extends AbstractJxseContainer{
             addModule( this, MyTcpConfig );
 
             // Setting some configuration information
-            MyConfig.setPeerInstanceName("Config Object Test");
+            | ConfiguratorException.setPeerInstanceName("Config Object Test");
             MyHttpConfig.setHttpIncoming(true);
             MyTcpConfig.setTcpIncoming(true);
 
@@ -107,7 +106,7 @@ public class _150_Configuration_Objects extends AbstractJxseContainer{
             Tools.PopInformationMessage(Name, "TCP Incoming is: "
                 + Boolean.valueOf(MyReadTcpConfig.getTcpIncoming()));
 
-        } catch (IOException ex) {
+        } catch (IOException | ConfiguratorException ex) {
 
             // Unexpected error
             Tools.PopErrorMessage(Name, ex.toString());

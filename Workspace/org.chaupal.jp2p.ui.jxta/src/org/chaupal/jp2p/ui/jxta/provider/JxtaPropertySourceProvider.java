@@ -38,6 +38,8 @@ public class JxtaPropertySourceProvider implements
 
 	@Override
 	public IPropertySource getPropertySource() {
+		if( component.getModule() == null )
+			return null;
 		if(JxtaComponents.isComponent( this.getComponentName())){
 			JxtaComponents jxtacomps = JxtaComponents.valueOf( StringStyler.styleToEnum( this.getComponentName() ));
 			if( jxtacomps != null ){

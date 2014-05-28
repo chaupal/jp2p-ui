@@ -44,7 +44,6 @@ import java.io.File;
 import java.io.IOException;
 
 import $packageName$.Activator;
-
 import net.jp2p.jxse.compatibility.container.AbstractJxseContainer;
 import net.jp2p.jxse.compatibility.utils.Tools;
 import net.jxta.platform.NetworkConfigurator;
@@ -87,7 +86,7 @@ public class _110_Creating_A_Local_Configuration_Example extends AbstractJxseCon
                     + ConfigurationFile.getCanonicalPath());
 
             MyNetworkConfigurator.save();         
-        } catch (IOException Ex) {       
+        } catch (IOException | ConfiguratorException Ex) {       
             // Raised when access to local file and directories caused an error
             Tools.PopErrorMessage(Name, Ex.toString());                 
         }
