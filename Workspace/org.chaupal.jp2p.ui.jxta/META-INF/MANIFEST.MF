@@ -32,6 +32,7 @@ Import-Package: net.jp2p.chaupal.dispatcher,
  net.jxta.protocol,
  net.jxta.rendezvous,
  net.jxta.service,
+ net.jxta.socket,
  org.chaupal.jp2p.ui.adapter,
  org.chaupal.jp2p.ui.celleditors,
  org.chaupal.jp2p.ui.comparator,
@@ -52,5 +53,5 @@ Import-Package: net.jp2p.chaupal.dispatcher,
  org.osgi.framework;version="1.7.0"
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/attendees.xml
-Export-Package: org.chaupal.jp2p.ui.jxta.network,
+Export-Package: org.chaupal.jp2p.ui.jxta.network.configurator,
  org.chaupal.jp2p.ui.jxta.property

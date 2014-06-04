@@ -25,7 +25,7 @@ public class MessageBoxProvider extends AbstractProvider<String, String[], Strin
 	public static final String S_MESSAGE_BOX_TITLE = "Message";
 
 	public static final String S_WARNING_INTERRUPTED = "The thread was interrupted";
-	public static final String S_ERR_TIME_OUT = "The bunlde takes too long to get a display";
+	public static final String S_ERR_TIME_OUT = "The bundle takes too long to get a display";
 
 	public static int TIME_OUT = 100;
 	public static int MAX_TIME_OUT = 50;

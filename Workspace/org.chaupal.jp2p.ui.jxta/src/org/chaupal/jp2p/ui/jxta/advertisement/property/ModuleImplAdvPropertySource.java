@@ -5,33 +5,34 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.property.advertisement;
+package org.chaupal.jp2p.ui.jxta.advertisement.property;
+
+import java.util.Collection;
 
 import net.jp2p.container.utils.StringStyler;
 import net.jxta.document.Element;
 import net.jxta.platform.ModuleSpecID;
-import net.jxta.protocol.ModuleSpecAdvertisement;
+import net.jxta.protocol.JxtaSocket;
 
-import org.chaupal.jp2p.ui.jxta.property.AbstractJp2pUIPropertySource;
+import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
-public class ModuleSpecAdvPropertySource extends AbstractJp2pUIPropertySource<ModuleSpecAdvertisement> {
+public class ModuleImplAdvPropertySource extends AbstractUIPropertySource<JxtaSocket> {
 
-	public enum ModuleSpecAdvProperties{
-		AUTHENTICATION_SPECIFICATION_ID,
+	public enum ModuleImplAdvProperties{
 		BASE_ADVERTISEMENT_TYPE,
-		CREATOR,
+		CODE,
+		COMPAT,
 		DOCUMENT,
 		DESCRIPTION,
 		INDEX_FIELDS,
 		MODULE_SPEC_ID,
-		NAME,
 		PARAM,
-		PROXY_SPEC_ID,
+		PRIVILIGED_DOCUMENT,
+		PROVIDER,
 		SIGNATURE,
 		SIGNED_DOCUMENT,
-		SPEC_URI,
-		VERSION;
+		SPEC_URI;
 
 		@Override
 		public String toString() {
@@ -39,7 +40,7 @@ public class ModuleSpecAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 		}
 	}
 
-	public ModuleSpecAdvPropertySource( ModuleSpecAdvertisement source ) {
+	public ModuleImplAdvPropertySource( JxtaSocket source ) {
 		super( source );
 	}
 
@@ -48,20 +49,21 @@ public class ModuleSpecAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 	 */
 	@Override
 	public IPropertyDescriptor[] getPropertyDescriptors() {
-		return super.getPropertyDescriptors( ModuleSpecAdvProperties.values());
+		Collection<IPropertyDescriptor> results = super.getPropertyDescriptors( ModuleImplAdvProperties.values());
+		return results.toArray( new IPropertyDescriptor[ results.size()]);
 	}
 
 	@Override
 	public Object getPropertyValue(Object id) {
-		ModuleSpecAdvProperties property = ( ModuleSpecAdvProperties )id;
-		ModuleSpecAdvertisement adv = super.getModule();
+		ModuleImplAdvProperties property = ( ModuleImplAdvProperties )id;
+		JxtaSocket adv = super.getModule();
 		switch( property ){
-		case AUTHENTICATION_SPECIFICATION_ID:
-			return adv.getAuthSpecID();
 		case BASE_ADVERTISEMENT_TYPE:
 			return adv.getBaseAdvType();
-		case CREATOR:
-			return adv.getCreator();
+		case CODE:
+			return adv.getCode();
+		case COMPAT:
+			return adv.getCompat();
 		case DESCRIPTION:
 			return adv.getDescription();
 		case DOCUMENT:
@@ -70,20 +72,18 @@ public class ModuleSpecAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 			return adv.getIndexFields();
 		case MODULE_SPEC_ID:
 			return adv.getModuleSpecID();
-		case NAME:
-			return adv.getName();
 		case PARAM:
 			return adv.getParam();
-		case PROXY_SPEC_ID:
-			return adv.getProxySpecID();
+		case PRIVILIGED_DOCUMENT:
+			return adv.getDescPriv();
+		case PROVIDER:
+			return adv.getProvider();
 		case SIGNATURE:
 			return adv.getSignature();
 		case SIGNED_DOCUMENT:
 			return adv.getSignedDocument();
 		case SPEC_URI:
-			return adv.getSpecURI();
-		case VERSION:
-			return adv.getVersion();
+			return adv.getUri();
 		}
 		return null;
 	}
@@ -95,10 +95,11 @@ public class ModuleSpecAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 	 */
 	@Override
 	public boolean isEditable( Object id ){
-		ModuleSpecAdvProperties property = ( ModuleSpecAdvProperties )id;
+		ModuleImplAdvProperties property = ( ModuleImplAdvProperties )id;
 		switch( property ){
 		case BASE_ADVERTISEMENT_TYPE:
 		case INDEX_FIELDS:
+		case PRIVILIGED_DOCUMENT:
 		case SIGNATURE:
 		case SIGNED_DOCUMENT:
 			return false;	
@@ -115,16 +116,16 @@ public class ModuleSpecAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void setPropertyValue(Object id, Object value) {
-		ModuleSpecAdvProperties property = ( ModuleSpecAdvProperties )id;
-		ModuleSpecAdvertisement adv = super.getModule();
+		ModuleImplAdvProperties property = ( ModuleImplAdvProperties )id;
+		JxtaSocket adv = super.getModule();
 		switch( property ){
-		case AUTHENTICATION_SPECIFICATION_ID:
-			adv.setAuthSpecID((ModuleSpecID) value);
-			break;
 		case BASE_ADVERTISEMENT_TYPE:
 			break;
-		case CREATOR:
-			adv.setCreator((String) value);
+		case CODE:
+			adv.setCode((String) value);
+			break;
+		case COMPAT:
+			adv.setCompat( (Element) value);
 			break;
 		case DESCRIPTION:
 			adv.setDescription((String) value);
@@ -137,27 +138,21 @@ public class ModuleSpecAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 		case MODULE_SPEC_ID:
 			adv.setModuleSpecID((ModuleSpecID) value);
 			break;
-		case NAME:
-			adv.setName((String) value);
-			break;
 		case PARAM:
 			adv.setParam((Element) value);
 			break;
-		case PROXY_SPEC_ID:
-			adv.setProxySpecID((ModuleSpecID) value);
+		case PRIVILIGED_DOCUMENT:
+			break;
+		case PROVIDER:
+			adv.setProvider((String) value);
 			break;
 		case SIGNATURE:
 			break;
 		case SIGNED_DOCUMENT:
 			break;
 		case SPEC_URI:
-			adv.setSpecURI((String) value);
+			adv.setUri((String) value);
 			break;
-		case VERSION:
-			adv.setVersion((String) value);
-			break;
-		}
-		
+		}		
 	}
-
 }

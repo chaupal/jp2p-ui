@@ -59,7 +59,7 @@ public class CheckBoxCellEditor extends AbstractControlCellEditor {
 	}
 
 	@Override
-	protected Control createControl(final Composite parent)
+	public Control createControl(final Composite parent)
 	{
 		Canvas canvas = new Canvas(parent, SWT.NO_BACKGROUND); // transparent
 		canvas.addMouseListener(new MouseAdapter()

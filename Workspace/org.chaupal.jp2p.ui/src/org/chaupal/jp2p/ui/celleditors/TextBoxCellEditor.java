@@ -70,7 +70,7 @@ public class TextBoxCellEditor extends AbstractControlCellEditor {
 	}
 
 	@Override
-	protected Control createControl(final Composite parent)
+	public Control createControl(final Composite parent)
 	{
 		this.textBox = new Text( parent, SWT.NONE );
 		this.textBox.setEnabled( super.isEnabled());
@@ -106,7 +106,7 @@ public class TextBoxCellEditor extends AbstractControlCellEditor {
 	 * @return the Boolean checkbox value
 	 */
 	@Override
-	protected Object doGetValue()
+	public Object doGetValue()
 	{
 		if( this.textBox == null )
 			return "";
@@ -117,9 +117,9 @@ public class TextBoxCellEditor extends AbstractControlCellEditor {
 	 * (non-Javadoc) Method declared on CellEditor.
 	 */
 	@Override
-	protected void doSetFocus()
+	public void doSetFocus()
 	{
-		// Ignore
+		this.textBox.setFocus();
 	}
 
 	/**
@@ -129,11 +129,11 @@ public class TextBoxCellEditor extends AbstractControlCellEditor {
 	 * @param val a Boolean value
 	 */
 	@Override
-	protected void doSetValue(Object val)
+	public void doSetValue(Object val)
 	{
 		//Assert.isTrue(( val != null ) && ( val instanceof Integer ));
-		if( this.textBox == null )
+		if(( this.textBox == null ) || ( val == null ))
 			return;
-		this.textBox.setText((String)val );
+		this.textBox.setText( val.toString() );
 	}
 }

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.property;
+package org.chaupal.jp2p.ui.jxta.network;
 
 import java.io.IOException;
 import java.net.URI;
@@ -20,6 +20,7 @@ import net.jxta.peergroup.PeerGroupID;
 import net.jxta.platform.NetworkManager;
 import net.jxta.platform.NetworkManager.ConfigMode;
 
+import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
 import org.chaupal.jp2p.ui.jxta.property.descriptors.CheckBoxPropertyDescriptor;
 import org.chaupal.jp2p.ui.jxta.property.descriptors.TextBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.ComboBoxPropertyDescriptor;
@@ -27,7 +28,7 @@ import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
-public class NetworkManagerPropertySource extends AbstractJp2pUIPropertySource<NetworkManager> {
+public class NetworkManagerPropertySource extends AbstractUIPropertySource<NetworkManager> {
 
 	public NetworkManagerPropertySource( NetworkManager component ) {
 		super( component );

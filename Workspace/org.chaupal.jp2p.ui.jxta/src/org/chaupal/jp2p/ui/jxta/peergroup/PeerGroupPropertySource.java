@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.property;
+package org.chaupal.jp2p.ui.jxta.peergroup;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,11 +14,12 @@ import java.util.Collection;
 import net.jxta.peergroup.PeerGroup;
 import net.jp2p.jxta.peergroup.PeerGroupPropertySource.PeerGroupProperties;
 
+import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
 import org.chaupal.jp2p.ui.jxta.provider.DecoratorLabelProvider;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 
-public class PeerGroupPropertySource extends AbstractJp2pUIPropertySource<PeerGroup> {
+public class PeerGroupPropertySource extends AbstractUIPropertySource<PeerGroup> {
 
 	public PeerGroupPropertySource( PeerGroup module ) {
 		super( module );
@@ -27,7 +28,7 @@ public class PeerGroupPropertySource extends AbstractJp2pUIPropertySource<PeerGr
 	@Override
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
-		descriptors.addAll( Arrays.asList( super.getPropertyDescriptors( PeerGroupProperties.values() )));
+		descriptors.addAll( super.getPropertyDescriptors( PeerGroupProperties.values() ));
 		if( super.getPropertyDescriptors() != null )
 			descriptors.addAll( Arrays.asList( super.getPropertyDescriptors()));
 		for( IPropertyDescriptor descriptor: descriptors ){

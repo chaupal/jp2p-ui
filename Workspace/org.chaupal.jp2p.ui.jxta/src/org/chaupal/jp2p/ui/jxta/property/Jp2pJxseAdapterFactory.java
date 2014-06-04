@@ -14,7 +14,11 @@ import net.jxta.platform.NetworkConfigurator;
 import net.jxta.platform.NetworkManager;
 
 import org.chaupal.jp2p.ui.adapter.Jp2pAdapterFactory;
-import org.chaupal.jp2p.ui.jxta.property.advertisement.AdvertisementPropertySource;
+import org.chaupal.jp2p.ui.jxta.advertisement.property.AdvertisementPropertySource;
+import org.chaupal.jp2p.ui.jxta.network.NetworkManagerPropertySource;
+import org.chaupal.jp2p.ui.jxta.network.configurator.NetworkConfiguratorPropertySource;
+import org.chaupal.jp2p.ui.jxta.peergroup.PeerGroupPropertySource;
+import org.chaupal.jp2p.ui.property.SimpleUIPropertySource;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.ui.views.properties.IPropertySource;
 
@@ -47,9 +51,7 @@ public class Jp2pJxseAdapterFactory extends Jp2pAdapterFactory implements IAdapt
 			  return new AdvertisementPropertySource(( Advertisement )adaptableObject);
 		  if( adaptableObject instanceof PeerGroup )
 			  return new PeerGroupPropertySource(( PeerGroup )adaptableObject);
-		  //if( adaptableObject instanceof JxtaConfiguration )
-		//	  return new JxtaConfigurationPropertySource(( JxtaConfiguration )adaptableObject);
-		  return null;			
+		  return new SimpleUIPropertySource( adaptableObject );			
 	}
 
 	/**

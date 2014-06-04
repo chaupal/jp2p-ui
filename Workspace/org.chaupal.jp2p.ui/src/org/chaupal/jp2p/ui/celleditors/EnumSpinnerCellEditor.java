@@ -13,6 +13,23 @@ import org.eclipse.swt.widgets.Composite;
 public class EnumSpinnerCellEditor extends SpinnerCellEditor {
 
 	private Enum<?>[] values;
+
+	/**
+	 * Creates a new checkbox cell editor with no control
+	 */
+	public EnumSpinnerCellEditor()
+	{
+		super();
+	}
+
+	/**
+	 * Creates a new checkbox cell editor with no control
+	 */
+	public EnumSpinnerCellEditor( Composite parent, int style )
+	{
+		super( parent, style );
+	}
+
 	/**
 	 * Creates a new checkbox cell editor with no control
 	 */
@@ -22,6 +39,12 @@ public class EnumSpinnerCellEditor extends SpinnerCellEditor {
 		this.values = values;
 	}
 
+	public void setValues( Enum<?>[] values){
+		this.values = values;
+		super.setMinValue(0);
+		super.setMaxValue( values.length);
+	}
+	
 	/**
 	 * The <code>CheckboxCellEditor</code> implementation of this <code>CellEditor</code> framework method returns the checkbox setting wrapped as a
 	 * <code>Boolean</code>.

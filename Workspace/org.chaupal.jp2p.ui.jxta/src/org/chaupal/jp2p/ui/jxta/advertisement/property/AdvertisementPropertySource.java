@@ -5,23 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.property.advertisement;
+package org.chaupal.jp2p.ui.jxta.advertisement.property;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 import net.jxta.document.Advertisement;
-import net.jxta.protocol.ModuleImplAdvertisement;
+import net.jxta.protocol.JxtaSocket;
 import net.jxta.protocol.ModuleSpecAdvertisement;
 import net.jp2p.jxta.advertisement.AdvertisementPropertySource.AdvertisementProperties;
 
-import org.chaupal.jp2p.ui.jxta.property.AbstractJp2pUIPropertySource;
-import org.chaupal.jp2p.ui.jxta.property.advertisement.ModuleImplAdvPropertySource.ModuleImplAdvProperties;
-import org.chaupal.jp2p.ui.jxta.property.advertisement.ModuleSpecAdvPropertySource.ModuleSpecAdvProperties;
+import org.chaupal.jp2p.ui.jxta.advertisement.property.ModuleImplAdvPropertySource.ModuleImplAdvProperties;
+import org.chaupal.jp2p.ui.jxta.advertisement.property.ModuleSpecAdvPropertySource.ModuleSpecAdvProperties;
+import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
-public class AdvertisementPropertySource extends AbstractJp2pUIPropertySource<Advertisement> {
+public class AdvertisementPropertySource extends AbstractUIPropertySource<Advertisement> {
 
 	public static final String S_DEFAULT_NAME = "Default JP2P Advertisement";
 
@@ -40,11 +40,11 @@ public class AdvertisementPropertySource extends AbstractJp2pUIPropertySource<Ad
 			ModuleSpecAdvPropertySource msaps = new ModuleSpecAdvPropertySource((ModuleSpecAdvertisement) advertisement );
 			descriptors.addAll( Arrays.asList( msaps.getPropertyDescriptors()));
 		}
-		if( advertisement instanceof ModuleImplAdvertisement ){
-			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((ModuleImplAdvertisement) advertisement );
+		if( advertisement instanceof JxtaSocket ){
+			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((JxtaSocket) advertisement );
 			descriptors.addAll( Arrays.asList( miaps.getPropertyDescriptors()));
 		}
-		descriptors.addAll( Arrays.asList(super.getPropertyDescriptors( AdvertisementProperties.values())));
+		descriptors.addAll( super.getPropertyDescriptors( AdvertisementProperties.values()));
 		descriptors.addAll( Arrays.asList(super.getPropertyDescriptors()));
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size() ]);
 	}
@@ -57,7 +57,7 @@ public class AdvertisementPropertySource extends AbstractJp2pUIPropertySource<Ad
 			return msaps.getPropertyValue(id);
 		}
 		if( id instanceof ModuleImplAdvProperties ){
-			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((ModuleImplAdvertisement) advertisement );
+			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((JxtaSocket) advertisement );
 			return miaps.getPropertyValue(id);
 		}
 		if(!( id instanceof AdvertisementProperties ))
@@ -91,7 +91,7 @@ public class AdvertisementPropertySource extends AbstractJp2pUIPropertySource<Ad
 			return msaps.isEditable(id);
 		}
 		if( id instanceof ModuleImplAdvProperties ){
-			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((ModuleImplAdvertisement) advertisement );
+			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((JxtaSocket) advertisement );
 			return miaps.isEditable(id);
 		}
 		return false;
@@ -111,7 +111,7 @@ public class AdvertisementPropertySource extends AbstractJp2pUIPropertySource<Ad
 			return;
 		}
 		if( id instanceof ModuleImplAdvProperties ){
-			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((ModuleImplAdvertisement) advertisement );
+			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((JxtaSocket) advertisement );
 			miaps.setPropertyValue(id, value);
 			return;
 		}

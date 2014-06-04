@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.network;
+package org.chaupal.jp2p.ui.jxta.network.configurator;
 
 import java.net.URI;
 

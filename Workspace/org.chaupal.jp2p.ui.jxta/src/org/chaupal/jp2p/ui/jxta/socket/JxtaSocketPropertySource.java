@@ -5,22 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.property.advertisement;
+package org.chaupal.jp2p.ui.jxta.socket;
 
 import net.jp2p.container.utils.StringStyler;
-import net.jxta.document.Element;
-import net.jxta.platform.ModuleSpecID;
-import net.jxta.protocol.ModuleImplAdvertisement;
+import net.jxta.socket.JxtaSocket;
 
 import org.chaupal.jp2p.ui.jxta.property.AbstractJp2pUIPropertySource;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
-public class ModuleImplAdvPropertySource extends AbstractJp2pUIPropertySource<ModuleImplAdvertisement> {
+public class JxtaSocketPropertySource extends AbstractJp2pUIPropertySource<JxtaSocket> {
 
-	public enum ModuleImplAdvProperties{
-		BASE_ADVERTISEMENT_TYPE,
-		CODE,
-		COMPAT,
+	public enum JxtaSocketProperties{
+		CHANNEL,
+		CREDENTIAL_DOC,
+		INET_ADDRESS,
 		DOCUMENT,
 		DESCRIPTION,
 		INDEX_FIELDS,
@@ -38,7 +36,7 @@ public class ModuleImplAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 		}
 	}
 
-	public ModuleImplAdvPropertySource( ModuleImplAdvertisement source ) {
+	public JxtaSocketPropertySource( JxtaSocket source ) {
 		super( source );
 	}
 
@@ -47,40 +45,40 @@ public class ModuleImplAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 	 */
 	@Override
 	public IPropertyDescriptor[] getPropertyDescriptors() {
-		return super.getPropertyDescriptors( ModuleImplAdvProperties.values());
+		return super.getPropertyDescriptors( JxtaSocketProperties.values());
 	}
 
 	@Override
 	public Object getPropertyValue(Object id) {
-		ModuleImplAdvProperties property = ( ModuleImplAdvProperties )id;
-		ModuleImplAdvertisement adv = super.getModule();
+		JxtaSocketProperties property = ( JxtaSocketProperties )id;
+		JxtaSocket socket = super.getModule();
 		switch( property ){
-		case BASE_ADVERTISEMENT_TYPE:
-			return adv.getBaseAdvType();
-		case CODE:
-			return adv.getCode();
-		case COMPAT:
-			return adv.getCompat();
+		case CHANNEL:
+			return socket.getChannel();
+		case CREDENTIAL_DOC:
+			return socket.getCredentialDoc();
+		case INET_ADDRESS:
+			return socket.getCompat();
 		case DESCRIPTION:
-			return adv.getDescription();
+			return socket.getDescription();
 		case DOCUMENT:
-			return adv.getDesc();
+			return socket.getDesc();
 		case INDEX_FIELDS:
-			return adv.getIndexFields();
+			return socket.getIndexFields();
 		case MODULE_SPEC_ID:
-			return adv.getModuleSpecID();
+			return socket.getModuleSpecID();
 		case PARAM:
-			return adv.getParam();
+			return socket.getParam();
 		case PRIVILIGED_DOCUMENT:
-			return adv.getDescPriv();
+			return socket.getDescPriv();
 		case PROVIDER:
-			return adv.getProvider();
+			return socket.getProvider();
 		case SIGNATURE:
-			return adv.getSignature();
+			return socket.getSignature();
 		case SIGNED_DOCUMENT:
-			return adv.getSignedDocument();
+			return socket.getSignedDocument();
 		case SPEC_URI:
-			return adv.getUri();
+			return socket.getUri();
 		}
 		return null;
 	}
@@ -92,9 +90,9 @@ public class ModuleImplAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 	 */
 	@Override
 	public boolean isEditable( Object id ){
-		ModuleImplAdvProperties property = ( ModuleImplAdvProperties )id;
+		JxtaSocketProperties property = ( JxtaSocketProperties )id;
 		switch( property ){
-		case BASE_ADVERTISEMENT_TYPE:
+		case CHANNEL:
 		case INDEX_FIELDS:
 		case PRIVILIGED_DOCUMENT:
 		case SIGNATURE:
@@ -113,15 +111,15 @@ public class ModuleImplAdvPropertySource extends AbstractJp2pUIPropertySource<Mo
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void setPropertyValue(Object id, Object value) {
-		ModuleImplAdvProperties property = ( ModuleImplAdvProperties )id;
-		ModuleImplAdvertisement adv = super.getModule();
+		JxtaSocketProperties property = ( JxtaSocketProperties )id;
+		JxtaSocket adv = super.getModule();
 		switch( property ){
-		case BASE_ADVERTISEMENT_TYPE:
+		case CHANNEL:
 			break;
-		case CODE:
+		case CREDENTIAL_DOC:
 			adv.setCode((String) value);
 			break;
-		case COMPAT:
+		case INET_ADDRESS:
 			adv.setCompat( (Element) value);
 			break;
 		case DESCRIPTION:

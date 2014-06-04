@@ -5,6 +5,7 @@ import net.jp2p.container.component.IJp2pComponent;
 import org.chaupal.jp2p.ui.osgi.PropertySourcePetitioner;
 import org.chaupal.jp2p.ui.property.IJp2pPropertySourceProvider;
 import org.chaupal.jp2p.ui.property.Jp2pComponentUIPropertySource;
+import org.chaupal.jp2p.ui.property.SimpleUIPropertySource;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.ui.views.properties.IPropertySource;
 
@@ -17,7 +18,7 @@ public class Jp2pAdapterFactory implements IAdapterFactory {
 			  return null;
 		  if( adaptableObject instanceof IJp2pComponent )
 			  return this.getPropertySource(((IJp2pComponent) adaptableObject) );
-		  return null;
+		  return new SimpleUIPropertySource( adaptableObject );
 	}
 
 	/**

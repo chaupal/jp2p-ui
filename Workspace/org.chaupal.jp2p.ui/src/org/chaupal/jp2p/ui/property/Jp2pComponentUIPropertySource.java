@@ -29,6 +29,8 @@ public class Jp2pComponentUIPropertySource implements IPropertySource {
 	public static final String S_PROPERTY_JTTA_SERVICE_COMPONENT_TEXT = "ServiceComponent";
 	public static final String S_PROPERTY_TEXT = "Properties";
 
+	public static final String S_MODULE_CATEGORY = "Module";
+
 	private String defaultText;
 	private IJp2pComponent<?> component;
 
@@ -69,6 +71,7 @@ public class Jp2pComponentUIPropertySource implements IPropertySource {
 			textDescriptor.setCategory( category);
 			descriptors.add( textDescriptor);
 		}
+		SimpleUIPropertySource.addPropertyDescriptorsForModule( this.component.getModule(), descriptors);
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}
 
@@ -76,7 +79,11 @@ public class Jp2pComponentUIPropertySource implements IPropertySource {
 	public Object getPropertyValue(Object id) {
 		if (id.equals( S_PROPERTY_JXTA_COMPONENT_ID))
 			return Utils.getLabel( this.component );
-		return this.component.getPropertySource().getProperty( (IJp2pProperties) id );
+		Object value = this.component.getPropertySource().getProperty( (IJp2pProperties) id );
+		if(!( id instanceof ObjectProperty ))
+			return value;
+		ObjectProperty prop = (ObjectProperty)id;
+		return prop.getValue();
 	}
 
 	@Override
@@ -105,5 +112,4 @@ public class Jp2pComponentUIPropertySource implements IPropertySource {
 	@Override
 	public void setPropertyValue(Object id, Object value) {
 	}
-
 }

@@ -17,9 +17,9 @@ import net.jxta.platform.NetworkConfigurator;
 import net.jxta.platform.NetworkManager;
 
 import org.chaupal.jp2p.ui.property.IJp2pPropertySourceProvider;
-import org.chaupal.jp2p.ui.jxta.property.NetworkConfiguratorPropertySource;
-import org.chaupal.jp2p.ui.jxta.property.NetworkManagerPropertySource;
-import org.chaupal.jp2p.ui.jxta.property.PeerGroupPropertySource;
+import org.chaupal.jp2p.ui.jxta.network.NetworkManagerPropertySource;
+import org.chaupal.jp2p.ui.jxta.network.configurator.NetworkConfiguratorPropertySource;
+import org.chaupal.jp2p.ui.jxta.peergroup.PeerGroupPropertySource;
 import org.eclipse.ui.views.properties.IPropertySource;
 
 public class JxtaPropertySourceProvider implements

@@ -85,7 +85,7 @@ public class SpinnerCellEditor extends AbstractControlCellEditor {
 	}
 
 	@Override
-	protected Control createControl(final Composite parent)
+	public Control createControl(final Composite parent)
 	{
 		this.spinner = new Spinner( parent, SWT.NONE );
 		this.spinner.setEnabled( super.isEnabled());
@@ -99,6 +99,14 @@ public class SpinnerCellEditor extends AbstractControlCellEditor {
 			}
 		});
 		return spinner;
+	}
+
+	protected void setMinValue( int value ){
+		this.spinner.setMinimum(value);
+	}
+
+	protected void setMaxValue( int value ){
+		this.spinner.setMaximum(value);
 	}
 
 	/**
@@ -132,7 +140,7 @@ public class SpinnerCellEditor extends AbstractControlCellEditor {
 	@Override
 	protected void doSetFocus()
 	{
-		// Ignore
+		this.spinner.setFocus();
 	}
 
 	/**

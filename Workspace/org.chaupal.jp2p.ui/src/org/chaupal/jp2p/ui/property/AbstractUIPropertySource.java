@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.property;
+package org.chaupal.jp2p.ui.property;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,29 +17,38 @@ import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.properties.IJp2pPropertySource;
 import net.jp2p.container.properties.IJp2pWritePropertySource;
 
-import org.chaupal.jp2p.ui.jxta.property.descriptors.AbstractControlPropertyDescriptor;
-import org.chaupal.jp2p.ui.jxta.property.descriptors.TextBoxPropertyDescriptor;
+import org.chaupal.jp2p.ui.property.descriptors.TextBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
-import org.eclipse.ui.views.properties.IPropertySource;
 
-public abstract class AbstractJp2pUIPropertySource<T extends Object> implements IPropertySource {
+public abstract class AbstractUIPropertySource<T extends Object> implements IJp2pUIPropertySource {
 
 	public static final String S_PROPERTY_JP2P_TEXT = "JP2P";
+	public static final String S_MODULE_CATEGORY = "Module";
 
 	private T module;
 	private IJp2pPropertySource<IJp2pProperties> defaults ;
+	private boolean addModuleData;
 
-	protected AbstractJp2pUIPropertySource( T module ) {
-		this( module, new DefaultPropertySource( S_PROPERTY_JP2P_TEXT, module.getClass().getName() ));
+	protected AbstractUIPropertySource( T module ) {
+		this( module, new DefaultPropertySource( S_PROPERTY_JP2P_TEXT, module.getClass().getName() ), true );
 	}
 
-	protected AbstractJp2pUIPropertySource( IJp2pComponent<T> component ) {
-		this( component.getModule(), component.getPropertySource() );
+	protected AbstractUIPropertySource( IJp2pComponent<T> component ) {
+		this( component.getModule(), component.getPropertySource(), false );
 	}
 
-	protected AbstractJp2pUIPropertySource( T module, IJp2pPropertySource<IJp2pProperties> defaults ) {
+	protected AbstractUIPropertySource( T module, IJp2pPropertySource<IJp2pProperties> defaults, boolean addModuleData ) {
 		this.module = module;
 		this.defaults = defaults;
+		this.addModuleData = addModuleData;
+	}
+
+	final boolean addModuleData() {
+		return addModuleData;
+	}
+
+	final void setAddModuleData(boolean addModuleData) {
+		this.addModuleData = addModuleData;
 	}
 
 	protected T getModule() {
@@ -65,7 +74,10 @@ public abstract class AbstractJp2pUIPropertySource<T extends Object> implements 
 			if( defaults.getProperty( property ) != null )
 				properties.add(property);
 		}
-		return getPropertyDescriptors( properties.toArray( new ModuleProperties[ properties.size()]));
+		Collection<IPropertyDescriptor> descriptors = getPropertyDescriptors( properties.toArray( new ModuleProperties[ properties.size()]));
+		if( this.addModuleData )
+			SimpleUIPropertySource.addPropertyDescriptorsForModule( this.module, descriptors);
+		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}
 
 	@Override
@@ -128,18 +140,17 @@ public abstract class AbstractJp2pUIPropertySource<T extends Object> implements 
 	 * @param properties
 	 * @return
 	 */
-	protected static AbstractControlPropertyDescriptor<?>[] getPropertyDescriptors( Object[] properties ) {
+	protected static Collection<IPropertyDescriptor> getPropertyDescriptors( Object[] properties ) {
 		if( properties == null )
 			return null;
-		Collection<AbstractControlPropertyDescriptor<?>> descriptors = 
-				new ArrayList<AbstractControlPropertyDescriptor<?>>();
+		Collection<IPropertyDescriptor> descriptors = 
+				new ArrayList<IPropertyDescriptor>();
 		for( int i=0; i<properties.length; i++ ){
 			String[] parsed = parseProperty(properties[i]);
 			TextBoxPropertyDescriptor textDescriptor = new TextBoxPropertyDescriptor( properties[i], parsed[1]);
 			textDescriptor.setCategory(parsed[2]);
 			descriptors.add( textDescriptor );
 		}
-		return descriptors.toArray( new AbstractControlPropertyDescriptor[descriptors.size()]);
+		return descriptors;
 	}
-
 }

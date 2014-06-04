@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.property;
+package org.chaupal.jp2p.ui.jxta.network.configurator;
 
 import java.io.File;
 import java.net.URI;
@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
 import org.chaupal.jp2p.ui.jxta.property.descriptors.CheckBoxPropertyDescriptor;
 import org.chaupal.jp2p.ui.jxta.property.descriptors.SpinnerPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.CollectionPropertySource;
@@ -33,7 +34,7 @@ import net.jxta.peer.PeerID;
 import net.jxta.platform.NetworkConfigurator;
 import net.jxta.platform.NetworkManager.ConfigMode;
 
-public class NetworkConfiguratorPropertySource extends AbstractJp2pUIPropertySource<NetworkConfigurator> {
+public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<NetworkConfigurator> {
 
 	public static final String S_NO_READ_VALUE = "<Not a readable property>";
 	

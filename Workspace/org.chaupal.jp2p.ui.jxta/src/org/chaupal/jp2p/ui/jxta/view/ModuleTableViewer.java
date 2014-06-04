@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.navigator.CommonNavigator;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -30,7 +30,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 
-public class ModuleTableViewer extends ViewPart {
+public class ModuleTableViewer extends CommonNavigator {
 
 	public static final String ID = "org.chaupal.jp2p.ui.jxta.view.ModuleTableViewer"; //$NON-NLS-1$
 	
