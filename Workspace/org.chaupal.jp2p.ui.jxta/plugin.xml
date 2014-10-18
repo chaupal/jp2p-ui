@@ -76,7 +76,7 @@
             allowMultiple="true"
             category="org.eclipse.jxse.ui.connectivity"
             class="org.chaupal.jp2p.ui.jxta.view.ModuleTableViewer"
-            icon="resources/component.png"
+            icon="resources/component-32.png"
             id="org.eclipse.jxse.ui.view.ModuleTableViewer"
             name="JP2P Module Viewer ">
       </view>

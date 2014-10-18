@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
-import org.chaupal.jp2p.ui.jxta.property.descriptors.CheckBoxPropertyDescriptor;
-import org.chaupal.jp2p.ui.jxta.property.descriptors.SpinnerPropertyDescriptor;
+import org.chaupal.jp2p.ui.property.descriptors.CheckBoxPropertyDescriptor;
+import org.chaupal.jp2p.ui.property.descriptors.SpinnerPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.CollectionPropertySource;
 import org.eclipse.ui.views.properties.ComboBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
@@ -162,10 +162,10 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 
 	@Override
 	public Object getPropertyValue(Object id) {
-		NetworkConfigurator configurator = super.getModule();
 		if( !NetworkConfiguratorProperties.isValidProperty( (IJp2pProperties) id ))
-			return null;
+			return super.getPropertyValue(id);
 		NetworkConfiguratorProperties property = ( NetworkConfiguratorProperties )id;
+		NetworkConfigurator configurator = super.getModule();
 		switch( property ){
 		case DESCRIPTION:
 			return S_NO_READ_VALUE;

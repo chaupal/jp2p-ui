@@ -84,6 +84,10 @@ public abstract class AbstractUIPropertySource<T extends Object> implements IJp2
 	public Object getPropertyValue(Object id) {
 		if(!( id instanceof IJp2pProperties ))
 			return null;
+		if( id instanceof ObjectProperty ){
+			SimpleUIPropertySource ss = new SimpleUIPropertySource( this.module, this.addModuleData );
+			return ss.getPropertyValue(id);
+		}
 		return defaults.getProperty(( IJp2pProperties)id );
 	}
 

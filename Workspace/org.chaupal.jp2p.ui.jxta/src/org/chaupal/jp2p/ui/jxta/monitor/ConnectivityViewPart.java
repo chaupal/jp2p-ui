@@ -17,8 +17,8 @@ import net.jxta.rendezvous.RendezVousService;
 import net.jxta.rendezvous.RendezvousEvent;
 import net.jxta.rendezvous.RendezvousListener;
 
-import org.chaupal.jp2p.ui.jxta.util.ColorUtils;
-import org.chaupal.jp2p.ui.jxta.util.ColorUtils.SupportedColors;
+import org.chaupal.jp2p.ui.util.ColorUtils;
+import org.chaupal.jp2p.ui.util.ColorUtils.SupportedColors;
 import org.chaupal.jp2p.ui.log.Jp2pLog;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;

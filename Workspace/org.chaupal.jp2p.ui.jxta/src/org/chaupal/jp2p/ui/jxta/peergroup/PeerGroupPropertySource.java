@@ -15,7 +15,7 @@ import net.jxta.peergroup.PeerGroup;
 import net.jp2p.jxta.peergroup.PeerGroupPropertySource.PeerGroupProperties;
 
 import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
-import org.chaupal.jp2p.ui.jxta.provider.DecoratorLabelProvider;
+import org.chaupal.jp2p.ui.provider.DecoratorLabelProvider;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 

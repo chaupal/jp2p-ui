@@ -30,7 +30,7 @@ public class Jp2pJxseAdapterFactory extends Jp2pAdapterFactory implements IAdapt
 		  if(adapterType != IPropertySource.class )
 			  return null;
 		  if( adaptableObject instanceof IJp2pContainer )
-			  return this.getPropertySource(( IJp2pContainer )adaptableObject );
+			  return this.getContainerPropertySource(( IJp2pContainer )adaptableObject );
 		  IPropertySource source = this.getPropertySource(adaptableObject);
 		  if( source != null )
 			  return source;
@@ -59,7 +59,7 @@ public class Jp2pJxseAdapterFactory extends Jp2pAdapterFactory implements IAdapt
 	 * @param adaptableObject
 	 * @return
 	 */
-	protected IPropertySource getPropertySource( IJp2pContainer component ){
+	protected IPropertySource getContainerPropertySource( IJp2pContainer<?> component ){
 		Object module = component.getModule();  
 		return this.getPropertySource( module );			
 	}

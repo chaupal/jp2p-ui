@@ -8,18 +8,24 @@
 package org.chaupal.jp2p.ui.jxta.provider;
 
 import net.jp2p.container.component.IJp2pComponent;
+import net.jp2p.container.properties.AbstractJp2pPropertySource;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.StringStyler;
 import net.jp2p.jxta.factory.IJxtaComponents.JxtaNetworkComponents;
 import net.jp2p.jxta.factory.IJxtaComponents.JxtaComponents;
+import net.jp2p.jxta.socket.SocketPropertySource.SocketTypes;
 import net.jxta.peergroup.PeerGroup;
 import net.jxta.platform.NetworkConfigurator;
 import net.jxta.platform.NetworkManager;
+import net.jxta.socket.JxtaServerSocket;
+import net.jxta.socket.JxtaSocket;
 
 import org.chaupal.jp2p.ui.property.IJp2pPropertySourceProvider;
 import org.chaupal.jp2p.ui.jxta.network.NetworkManagerPropertySource;
 import org.chaupal.jp2p.ui.jxta.network.configurator.NetworkConfiguratorPropertySource;
 import org.chaupal.jp2p.ui.jxta.peergroup.PeerGroupPropertySource;
+import org.chaupal.jp2p.ui.jxta.socket.JxtaSocketPropertySource;
+import org.chaupal.jp2p.ui.jxta.socket.JxtaSocketServerPropertySource;
 import org.eclipse.ui.views.properties.IPropertySource;
 
 public class JxtaPropertySourceProvider implements
@@ -50,6 +56,15 @@ public class JxtaPropertySourceProvider implements
 					return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
 				case NET_PEERGROUP_SERVICE:
 					return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
+				case JXSE_SOCKET_SERVICE:
+					String typeStr = AbstractJp2pPropertySource.getType( component.getPropertySource());
+					SocketTypes type = SocketTypes.getType(typeStr);
+					switch( type ){
+					case SERVER:
+						return new JxtaSocketServerPropertySource((JxtaServerSocket) component.getModule());
+					default:
+						return new JxtaSocketPropertySource( (JxtaSocket) component.getModule() );
+					}
 				default:
 					break;
 				}

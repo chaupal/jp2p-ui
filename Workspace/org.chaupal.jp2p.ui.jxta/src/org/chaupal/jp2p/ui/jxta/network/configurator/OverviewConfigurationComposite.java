@@ -16,9 +16,9 @@ import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource.Net
 import net.jxta.peer.PeerID;
 import net.jxta.platform.NetworkManager.ConfigMode;
 
-import org.chaupal.jp2p.ui.jxta.property.databinding.ComboDataBinding;
-import org.chaupal.jp2p.ui.jxta.property.databinding.IJp2pDatabinding;
-import org.chaupal.jp2p.ui.jxta.property.databinding.StringDataBinding;
+import org.chaupal.jp2p.ui.property.databinding.ComboDataBinding;
+import org.chaupal.jp2p.ui.property.databinding.IJp2pDatabinding;
+import org.chaupal.jp2p.ui.property.databinding.StringDataBinding;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;

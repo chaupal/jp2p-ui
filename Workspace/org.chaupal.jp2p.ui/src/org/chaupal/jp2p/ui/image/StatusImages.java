@@ -31,11 +31,16 @@ public class StatusImages extends AbstractImages{
 	public static final String S_FINALISING_ICON = "shuttingdown.png";
 	public static final String S_FINALISED_ICON = "shutdown.png";
 
-	public static final String S_COMPONENT_ICON = "component.png";
+	public static final String S_CONTAINER_ICON = "container.png";
+	public static final String S_CONTAINER_BLUE_ICON = "container-blue-16.png";
+	public static final String S_CONTAINER32_ICON = "container32.png";
+	public static final String S_CONTAINER64_ICON = "container64.png";
+	public static final String S_COMPONENT_ICON = "component-16.png";
 	public static final String S_WORLD_ICON = "world.png";
 
 	public enum Images{
 		COMPONENT,
+		CONTAINER,
 		WORLD;
 
 		@Override
@@ -74,6 +79,8 @@ public class StatusImages extends AbstractImages{
 		setImage( S_FINALISING_ICON );
 		setImage( S_FINALISED_ICON );
 		setImage( S_COMPONENT_ICON );
+		setImage( S_CONTAINER64_ICON );
+		setImage( S_CONTAINER_BLUE_ICON );
 		setImage( S_WORLD_ICON );
 	}
 
@@ -124,6 +131,8 @@ public class StatusImages extends AbstractImages{
 		switch( desc ){
 		case COMPONENT:
 			return getImageFromName( S_COMPONENT_ICON );
+		case CONTAINER:
+			return getImageFromName( S_CONTAINER_BLUE_ICON );
 		case WORLD:
 			return getImageFromName( S_WORLD_ICON );
 		default:

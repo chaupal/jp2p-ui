@@ -16,8 +16,6 @@ import org.eclipse.swt.widgets.Composite;
 
 public class TextBoxPropertyDescriptor extends AbstractControlPropertyDescriptor<String> {
 
-	private String value;
-	
 	private TextBoxCellEditor editor;
 	
 	public TextBoxPropertyDescriptor(Object id, String displayName )
@@ -28,7 +26,7 @@ public class TextBoxPropertyDescriptor extends AbstractControlPropertyDescriptor
 	
 	@Override
 	protected AbstractControlCellEditor onCreatePropertyEditor(Composite parent) {
-		this.editor = new TextBoxCellEditor(parent, value, SWT.NONE );
+		this.editor = new TextBoxCellEditor(parent, super.getValue(), SWT.NONE );
 		editor.setEnabled( super.isEnabled());
 		return editor;
 	}

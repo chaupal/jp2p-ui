@@ -3,6 +3,7 @@ bin/
 # Ignore all files ending with ~
 *~
 *.class
+*.jar
 # Ignore the target directory
 # Matches "target" in any subfolder
 target/ 

@@ -10,8 +10,8 @@ package org.chaupal.jp2p.ui.jxta.network.configurator;
 import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
 import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 
-import org.chaupal.jp2p.ui.jxta.property.databinding.BooleanDataBinding;
-import org.chaupal.jp2p.ui.jxta.property.databinding.SpinnerDataBinding;
+import org.chaupal.jp2p.ui.property.databinding.BooleanDataBinding;
+import org.chaupal.jp2p.ui.property.databinding.SpinnerDataBinding;
 import org.eclipse.swt.widgets.Composite;
 
 public class TcpConfigurationComposite extends AbstractProtocolConfigurationComposite {

@@ -20,12 +20,11 @@ import net.jxta.platform.NetworkManager;
 import net.jxta.platform.NetworkManager.ConfigMode;
 
 import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
-import org.chaupal.jp2p.ui.jxta.property.descriptors.CheckBoxPropertyDescriptor;
-import org.chaupal.jp2p.ui.jxta.property.descriptors.TextBoxPropertyDescriptor;
+import org.chaupal.jp2p.ui.property.descriptors.CheckBoxPropertyDescriptor;
+import org.chaupal.jp2p.ui.property.descriptors.TextBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.ComboBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
-import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
 public class NetworkManagerPropertySource extends AbstractUIPropertySource<NetworkManager> {
 
@@ -39,6 +38,7 @@ public class NetworkManagerPropertySource extends AbstractUIPropertySource<Netwo
 		for( NetworkManagerProperties property: NetworkManagerProperties.values() ){
 			String[] parsed = super.parseProperty(property);
 			PropertyDescriptor descriptor;
+			TextBoxPropertyDescriptor tpd = null;
 			switch( property ){
 			case CONFIG_PERSISTENT:
 				descriptor = new CheckBoxPropertyDescriptor( property, parsed[1] );
@@ -48,11 +48,13 @@ public class NetworkManagerPropertySource extends AbstractUIPropertySource<Netwo
 				break;
 			case INSTANCE_NAME:
 				descriptor = new TextBoxPropertyDescriptor( property, parsed[1] );
-				TextBoxPropertyDescriptor tpd = ( TextBoxPropertyDescriptor )descriptor;
+				tpd = ( TextBoxPropertyDescriptor )descriptor;
 				tpd.setEnabled(false );
 				break;
 			default:
-				descriptor = new TextPropertyDescriptor( property, parsed[1]);
+				descriptor = new TextBoxPropertyDescriptor( property, parsed[1]);
+				tpd = ( TextBoxPropertyDescriptor )descriptor;
+				tpd.setEnabled(false );
 				break;
 			}	
 			descriptor.setCategory(parsed[2]);
@@ -65,9 +67,9 @@ public class NetworkManagerPropertySource extends AbstractUIPropertySource<Netwo
 
 	@Override
 	public Object getPropertyValue(Object id) {
-		NetworkManager manager = super.getModule();
 		if(!( id instanceof NetworkManagerProperties ))
 			return super.getPropertyValue(id);
+		NetworkManager manager = super.getModule();
 		NetworkManagerProperties property  = ( NetworkManagerProperties )id;
 		switch( property ){
 		case CONFIG_PERSISTENT:
@@ -98,6 +100,8 @@ public class NetworkManagerPropertySource extends AbstractUIPropertySource<Netwo
 
 	@Override
 	public void setPropertyValue(Object id, Object value) {
+		if( !( id instanceof NetworkManagerProperties ))
+			return;
 		NetworkManager manager = super.getModule();
 		NetworkManagerProperties property  = ( NetworkManagerProperties )id;
 		switch( property ){

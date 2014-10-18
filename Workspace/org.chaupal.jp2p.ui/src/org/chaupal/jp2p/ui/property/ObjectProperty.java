@@ -22,9 +22,9 @@ import java.lang.reflect.Type;
 
 import org.eclipselabs.osgi.ds.broker.util.StringStyler;
 
-import net.jp2p.container.utils.StringProperty;
+import net.jp2p.container.properties.IJp2pProperties;
 
-public class ObjectProperty extends StringProperty {
+public class ObjectProperty implements IJp2pProperties  {
 
 	public enum SupportedTypes{
 		BOOLEAN,
@@ -40,9 +40,10 @@ public class ObjectProperty extends StringProperty {
 	
 	private Object value;
 	private SupportedTypes type;
+	private String key;
 
 	public ObjectProperty(String key, Type type, Object value ) {
-		super(key);
+		this.key = key;
 		this.value = value;
 		this.type = getSupportedTypes( type );
 	}
@@ -56,6 +57,17 @@ public class ObjectProperty extends StringProperty {
 		return value;
 	}
 	
+	
+	@Override
+	public String name() {
+		return key.toUpperCase();
+	}
+
+	@Override
+	public String toString() {
+		return this.key;
+	}
+
 	/**
 	 * Convert the reflection type to a supported type
 	 * @param type

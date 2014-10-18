@@ -7,16 +7,17 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.property.descriptors;
 
+import org.chaupal.jp2p.ui.celleditors.AbstractControlCellEditor;
 import org.chaupal.jp2p.ui.celleditors.CheckBoxCellEditor;
 import org.chaupal.jp2p.ui.provider.CheckBoxLabelProvider;
-import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.views.properties.PropertyDescriptor;
 
-public class CheckBoxPropertyDescriptor extends PropertyDescriptor {
+public class CheckBoxPropertyDescriptor extends AbstractControlPropertyDescriptor<Boolean> {
 
-	static final CheckBoxLabelProvider LABEL_PROVIDER = new CheckBoxLabelProvider();
+	private static final CheckBoxLabelProvider LABEL_PROVIDER = new CheckBoxLabelProvider();
+	
+	private CheckBoxCellEditor editor;
 
 	public CheckBoxPropertyDescriptor(Object id, String displayName)
 	{
@@ -24,14 +25,15 @@ public class CheckBoxPropertyDescriptor extends PropertyDescriptor {
 	}
 
 	@Override
-	public CellEditor createPropertyEditor(Composite parent)
-	{
-		return new CheckBoxCellEditor(parent);
-	}
-
-	@Override
 	public ILabelProvider getLabelProvider()
 	{
 		return LABEL_PROVIDER;
+	}
+
+	@Override
+	protected AbstractControlCellEditor onCreatePropertyEditor(Composite parent) {
+		this.editor = new CheckBoxCellEditor(parent );
+		editor.setEnabled( super.isEnabled());
+		return editor;
 	}
 }

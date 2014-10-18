@@ -59,7 +59,7 @@ public class CompositePropertyDescriptor extends AbstractControlPropertyDescript
 			provider = new CheckBoxLabelProvider();
 			break;
 		default:
-			provider = new ControlLabelProvider( (AbstractControlPropertyDescriptor<?>) descriptor );
+			provider = new ControlLabelProvider( (IControlPropertyDescriptor<?>) descriptor );
 			break;
 		}
 		return provider;

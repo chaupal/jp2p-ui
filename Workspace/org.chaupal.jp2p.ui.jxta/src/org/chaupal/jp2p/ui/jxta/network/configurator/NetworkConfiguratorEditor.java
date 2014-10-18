@@ -10,7 +10,6 @@
  */
 package org.chaupal.jp2p.ui.jxta.network.configurator;
 
-import net.jp2p.container.Jp2pContainerPropertySource;
 import net.jp2p.container.properties.AbstractJp2pPropertySource;
 
 import org.eclipse.core.runtime.IProgressMonitor;

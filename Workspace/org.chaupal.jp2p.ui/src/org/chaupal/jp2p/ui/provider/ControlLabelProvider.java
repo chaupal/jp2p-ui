@@ -10,15 +10,15 @@ package org.chaupal.jp2p.ui.provider;
 
 import org.chaupal.jp2p.ui.image.LabelProviderImages;
 import org.chaupal.jp2p.ui.image.LabelProviderImages.Images;
-import org.chaupal.jp2p.ui.property.descriptors.AbstractControlPropertyDescriptor;
+import org.chaupal.jp2p.ui.property.descriptors.IControlPropertyDescriptor;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 public class ControlLabelProvider extends LabelProvider {
 
-	private AbstractControlPropertyDescriptor<?> descriptor;
+	private IControlPropertyDescriptor<?> descriptor;
 	
-	public ControlLabelProvider( AbstractControlPropertyDescriptor<?> descriptor) {
+	public ControlLabelProvider( IControlPropertyDescriptor<?> descriptor) {
 		super();
 		this.descriptor = descriptor;
 	}
@@ -26,12 +26,14 @@ public class ControlLabelProvider extends LabelProvider {
 	@Override
 	public Image getImage(Object element)
 	{
+		if( element == null )
+			return super.getImage(element);
 		LabelProviderImages images = LabelProviderImages.getInstance();
 		if( this.descriptor == null )
-			return null;
+			return super.getImage(element);
 		if ( !this.descriptor.isEnabled() )
-			return images.getImage( Images.NON_WRITABLE );
-		return super.getImage(element);//Boolean.TRUE.equals(element) ? images.getImage( Images.CHECKED) : images.getImage( Images.UNCHECKED);
+			return images.getImage( Images.NON_EDITABLE );
+		return super.getImage(element);
 	}
 
 	@Override

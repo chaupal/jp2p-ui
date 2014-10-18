@@ -15,9 +15,9 @@ import net.jp2p.chaupal.utils.Utils;
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.properties.IJp2pProperties;
 
+import org.chaupal.jp2p.ui.property.descriptors.TextBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
-import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
 public class Jp2pComponentUIPropertySource<T extends Object> implements IJp2pUIPropertySource<T> {
 
@@ -53,7 +53,7 @@ public class Jp2pComponentUIPropertySource<T extends Object> implements IJp2pUIP
 		descriptors.add( descriptor);
 		IJp2pProperties key;
 		String attribute;
-		TextPropertyDescriptor textDescriptor; 
+		TextBoxPropertyDescriptor textDescriptor; 
 		while( iterator.hasNext() ){
 			key = iterator.next();
 			String category = component.getPropertySource().getCategory( key );
@@ -64,7 +64,8 @@ public class Jp2pComponentUIPropertySource<T extends Object> implements IJp2pUIP
 				if( net.jp2p.container.utils.Utils.isNull( category) )
 					category = key.toString().replace( "." + attribute, "");
 			}
-			textDescriptor = new TextPropertyDescriptor( key, attribute);
+			textDescriptor = new TextBoxPropertyDescriptor( key, attribute);
+			textDescriptor.setEnabled(false);
 			if( net.jp2p.container.utils.Utils.isNull( category ))
 				category = S_PROPERTY_JP2P_TEXT;
 			textDescriptor.setCategory( category);
@@ -114,7 +115,6 @@ public class Jp2pComponentUIPropertySource<T extends Object> implements IJp2pUIP
 
 	@Override
 	public boolean isEditable(Object id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

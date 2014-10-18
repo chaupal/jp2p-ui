@@ -8,6 +8,7 @@
 package org.chaupal.jp2p.ui.provider;
 
 import net.jp2p.chaupal.utils.Utils;
+import net.jp2p.container.IJp2pContainer;
 import net.jp2p.container.activator.IActivator.Status;
 import net.jp2p.container.component.AbstractJp2pService;
 import net.jp2p.container.component.IJp2pComponent;
@@ -32,6 +33,8 @@ public class Jp2pLabelProvider extends LabelProvider{
 				return images.getImage( Status.DISABLED );
 			return images.getImage( service.getStatus() );
 		}
+		if( component instanceof IJp2pContainer )
+			return images.getImage( Images.CONTAINER );	
 		return images.getImage( Images.COMPONENT );
 	}
 

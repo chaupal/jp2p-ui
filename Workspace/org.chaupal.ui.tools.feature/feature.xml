@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.chaupal.ui.tools.feature"
-      label="Core JP2P UI Tools Feature"
-      version="1.0.5.v20140602"
+      label="Chaupal JP2P Feature"
+      version="1.0.5.v20141023"
       provider-name="Chaupal">
 
    <description url="https://github.com/chaupal">
@@ -71,20 +71,16 @@ END OF TERMS AND CONDITIONS
    </license>
 
    <url>
-      <update label="Chaupal Tools for Eclipse IDE" url="http://89.31.96.252/download.condast.org/jp2p-releases/org.chaupal.ui.tools/site.xml"/>
+      <update label="Chaupal JP2P" url="https://github.com/chaupal/chaupal.github.io/tree/master/releases/2.8.0/milestone/20141015/chaupal/site.xml"/>
    </url>
-
-   <includes
-         id="net.jp2p.feature"
-         version="0.0.0"
-         name="JP2P Core Functions"/>
 
    <requires>
       <import plugin="org.eclipse.equinox.ds" version="1.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi" version="3.9.1" match="greaterOrEqual"/>
       <import plugin="net.jp2p.chaupal"/>
       <import plugin="net.jp2p.container"/>
       <import plugin="net.jp2p.jxta"/>
-      <import plugin="net.jxse"/>
+      <import plugin="jxse"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.jobs"/>
       <import plugin="org.eclipse.equinox.p2.core"/>
@@ -101,7 +97,8 @@ END OF TERMS AND CONDITIONS
       <import plugin="org.eclipse.pde.core"/>
       <import plugin="org.eclipse.pde.ui"/>
       <import plugin="org.eclipse.ui.workbench"/>
-      <import plugin="org.eclipse.osgi" version="3.8.0" match="greaterOrEqual"/>
+      <import feature="net.jp2p.feature" version="1.0.1.v20141021"/>
+      <import plugin="org.eclipse.ui" version="3.105.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

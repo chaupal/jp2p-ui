@@ -22,6 +22,7 @@ public class LabelProviderImages extends AbstractImages{
 	public static final String S_ERROR_ICON  = "error.png";
 	public static final String S_WRITABLE_ICON  = "writable.png";
 	public static final String S_NON_WRITABLE_ICON  = "non-writable.png";
+	public static final String S_NON_EDITABLE_ICON  = "non-editable-16.png";
 	
 	public enum Images{
 		CHECKED,
@@ -29,6 +30,7 @@ public class LabelProviderImages extends AbstractImages{
 		QUESTION_MARK,
 		WRITABLE,
 		NON_WRITABLE,
+		NON_EDITABLE,
 		ERROR;
 
 		@Override
@@ -59,6 +61,7 @@ public class LabelProviderImages extends AbstractImages{
 		setImage( S_ERROR_ICON );
 		setImage( S_WRITABLE_ICON );
 		setImage( S_NON_WRITABLE_ICON );
+		setImage( S_NON_EDITABLE_ICON );
 	}
 
 	/**
@@ -78,6 +81,8 @@ public class LabelProviderImages extends AbstractImages{
 			return this.getImageFromName( S_WRITABLE_ICON );
 		case NON_WRITABLE:
 			return this.getImageFromName( S_NON_WRITABLE_ICON );
+		case NON_EDITABLE:
+			return this.getImageFromName( S_NON_EDITABLE_ICON );
 		default:
 			return getImageFromName( S_QUESTION_MARK_ICON );				
 		}

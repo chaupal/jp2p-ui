@@ -12,7 +12,8 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 
-public abstract class AbstractControlPropertyDescriptor<T extends Object> extends PropertyDescriptor {
+public abstract class AbstractControlPropertyDescriptor<T extends Object> extends PropertyDescriptor 
+implements IControlPropertyDescriptor<T> {
 
 	private boolean enabled;
 	private AbstractControlCellEditor editor;
@@ -37,6 +38,9 @@ public abstract class AbstractControlPropertyDescriptor<T extends Object> extend
 	 */
 	protected abstract AbstractControlCellEditor onCreatePropertyEditor( Composite parent );
 	
+	/* (non-Javadoc)
+	 * @see org.chaupal.jp2p.ui.property.descriptors.IControlPropertyDescriptor#createPropertyEditor(org.eclipse.swt.widgets.Composite)
+	 */
 	@Override
 	public CellEditor createPropertyEditor(Composite parent)
 	{
@@ -54,12 +58,20 @@ public abstract class AbstractControlPropertyDescriptor<T extends Object> extend
 		this.value = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.chaupal.jp2p.ui.property.descriptors.IControlPropertyDescriptor#isEnabled()
+	 */
+	@Override
 	public boolean isEnabled() {
 		if( this.editor != null )
 			return this.editor.isEnabled();
 		return enabled;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.chaupal.jp2p.ui.property.descriptors.IControlPropertyDescriptor#setEnabled(boolean)
+	 */
+	@Override
 	public void setEnabled(boolean enabled) {
 		if( this.editor != null )
 			this.editor.setEnabled(enabled);
