@@ -20,7 +20,7 @@ import net.jp2p.container.properties.IJp2pWritePropertySource;
 import org.chaupal.jp2p.ui.property.descriptors.TextBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
-public abstract class AbstractUIPropertySource<T extends Object> implements IJp2pUIPropertySource {
+public abstract class AbstractUIPropertySource<T extends Object> implements IJp2pUIPropertySource<T> {
 
 	public static final String S_PROPERTY_JP2P_TEXT = "JP2P";
 	public static final String S_MODULE_CATEGORY = "Module";
@@ -51,7 +51,7 @@ public abstract class AbstractUIPropertySource<T extends Object> implements IJp2
 		this.addModuleData = addModuleData;
 	}
 
-	protected T getModule() {
+	public T getModule() {
 		return module;
 	}
 
@@ -76,7 +76,7 @@ public abstract class AbstractUIPropertySource<T extends Object> implements IJp2
 		}
 		Collection<IPropertyDescriptor> descriptors = getPropertyDescriptors( properties.toArray( new ModuleProperties[ properties.size()]));
 		if( this.addModuleData )
-			SimpleUIPropertySource.addPropertyDescriptorsForModule( this.module, descriptors);
+			SimpleUIPropertySource.addPropertyDescriptorsForModule( this, descriptors);
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}
 

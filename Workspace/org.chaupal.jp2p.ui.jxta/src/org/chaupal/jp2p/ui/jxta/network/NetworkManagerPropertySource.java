@@ -8,7 +8,6 @@
 package org.chaupal.jp2p.ui.jxta.network;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -111,14 +110,14 @@ public class NetworkManagerPropertySource extends AbstractUIPropertySource<Netwo
 			  manager.setInfrastructureID( (PeerGroupID) value );
 			return;
 		case INSTANCE_HOME:
-			if(!( manager.getInstanceHome().equals( value )))
-			  manager.setInstanceHome( (URI) value );
+			//if(!( manager.getInstanceHome().equals( value )))
+			 // manager.setInstanceHome( (URI) value );
 			return;
 		case INSTANCE_NAME:
 			if(!( value instanceof String ))
 				return;
-			if(!( manager.getInstanceName().equals( value )))
-			  manager.setInstanceName( (String) value );
+			//if(!( manager.getInstanceName().equals( value )))
+			//  manager.setInstanceName( (String) value );
 			return;
 		case CONFIG_MODE:
 			if(!( manager.getMode().equals( value )))

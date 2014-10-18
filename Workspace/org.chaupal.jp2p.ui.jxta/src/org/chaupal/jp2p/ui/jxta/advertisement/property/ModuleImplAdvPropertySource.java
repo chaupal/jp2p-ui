@@ -12,12 +12,12 @@ import java.util.Collection;
 import net.jp2p.container.utils.StringStyler;
 import net.jxta.document.Element;
 import net.jxta.platform.ModuleSpecID;
-import net.jxta.protocol.JxtaSocket;
+import net.jxta.protocol.ModuleImplAdvertisement;
 
 import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
-public class ModuleImplAdvPropertySource extends AbstractUIPropertySource<JxtaSocket> {
+public class ModuleImplAdvPropertySource extends AbstractUIPropertySource<ModuleImplAdvertisement> {
 
 	public enum ModuleImplAdvProperties{
 		BASE_ADVERTISEMENT_TYPE,
@@ -40,7 +40,7 @@ public class ModuleImplAdvPropertySource extends AbstractUIPropertySource<JxtaSo
 		}
 	}
 
-	public ModuleImplAdvPropertySource( JxtaSocket source ) {
+	public ModuleImplAdvPropertySource( ModuleImplAdvertisement source ) {
 		super( source );
 	}
 
@@ -56,7 +56,7 @@ public class ModuleImplAdvPropertySource extends AbstractUIPropertySource<JxtaSo
 	@Override
 	public Object getPropertyValue(Object id) {
 		ModuleImplAdvProperties property = ( ModuleImplAdvProperties )id;
-		JxtaSocket adv = super.getModule();
+		ModuleImplAdvertisement adv = super.getModule();
 		switch( property ){
 		case BASE_ADVERTISEMENT_TYPE:
 			return adv.getBaseAdvType();
@@ -117,7 +117,7 @@ public class ModuleImplAdvPropertySource extends AbstractUIPropertySource<JxtaSo
 	@Override
 	public void setPropertyValue(Object id, Object value) {
 		ModuleImplAdvProperties property = ( ModuleImplAdvProperties )id;
-		JxtaSocket adv = super.getModule();
+		ModuleImplAdvertisement adv = super.getModule();
 		switch( property ){
 		case BASE_ADVERTISEMENT_TYPE:
 			break;

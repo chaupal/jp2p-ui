@@ -11,13 +11,13 @@ import org.eclipse.ui.views.properties.IPropertySource;
 
 public class Jp2pAdapterFactory implements IAdapterFactory {
 
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		  if(adapterType != IPropertySource.class )
 			  return null;
 		  if( adaptableObject instanceof IJp2pComponent )
-			  return this.getPropertySource(((IJp2pComponent) adaptableObject) );
+			  return this.getPropertySource(((IJp2pComponent<Object>) adaptableObject) );
 		  return new SimpleUIPropertySource( adaptableObject );
 	}
 
@@ -26,7 +26,7 @@ public class Jp2pAdapterFactory implements IAdapterFactory {
 	 * @param adaptableObject
 	 * @return
 	 */
-	protected IPropertySource getPropertySource( IJp2pComponent<?> adaptableObject ){
+	protected IPropertySource getPropertySource( IJp2pComponent<Object> adaptableObject ){
 		PropertySourcePetitioner petitioner = PropertySourcePetitioner.getInstance();
 		petitioner.petition(adaptableObject );
 		IJp2pPropertySourceProvider<?> psp = petitioner.getPropertyDescriptorProvider(adaptableObject.getPropertySource().getComponentName());
@@ -35,7 +35,7 @@ public class Jp2pAdapterFactory implements IAdapterFactory {
 			if( ps != null )
 				return ps;
 		}
-		return new Jp2pComponentUIPropertySource( adaptableObject, Jp2pComponentUIPropertySource.S_PROPERTY_JP2P_TEXT );			
+		return new Jp2pComponentUIPropertySource<Object>( adaptableObject, Jp2pComponentUIPropertySource.S_PROPERTY_JP2P_TEXT );			
 	}
 
 	@SuppressWarnings("rawtypes")

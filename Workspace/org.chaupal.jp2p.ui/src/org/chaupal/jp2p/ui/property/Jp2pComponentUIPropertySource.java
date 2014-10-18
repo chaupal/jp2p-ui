@@ -16,11 +16,10 @@ import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.properties.IJp2pProperties;
 
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
-import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
-public class Jp2pComponentUIPropertySource implements IPropertySource {
+public class Jp2pComponentUIPropertySource<T extends Object> implements IJp2pUIPropertySource<T> {
 
 	public static final String S_PROPERTY_JXTA_COMPONENT_ID = "org.condast.jxta.service.component";
 	public static final String S_PROPERTY_JXTA_COMPONENT_TEXT_ID = "org.condast.jxta.service.component.text";
@@ -32,9 +31,9 @@ public class Jp2pComponentUIPropertySource implements IPropertySource {
 	public static final String S_MODULE_CATEGORY = "Module";
 
 	private String defaultText;
-	private IJp2pComponent<?> component;
+	private IJp2pComponent<T> component;
 
-	public Jp2pComponentUIPropertySource( IJp2pComponent<?> component, String defaultText ) {
+	public Jp2pComponentUIPropertySource( IJp2pComponent<T> component, String defaultText ) {
 		super();
 		this.defaultText = defaultText;
 		this.component = component;
@@ -71,7 +70,7 @@ public class Jp2pComponentUIPropertySource implements IPropertySource {
 			textDescriptor.setCategory( category);
 			descriptors.add( textDescriptor);
 		}
-		SimpleUIPropertySource.addPropertyDescriptorsForModule( this.component.getModule(), descriptors);
+		SimpleUIPropertySource.addPropertyDescriptorsForModule( this, descriptors);
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}
 
@@ -111,5 +110,16 @@ public class Jp2pComponentUIPropertySource implements IPropertySource {
 	 */
 	@Override
 	public void setPropertyValue(Object id, Object value) {
+	}
+
+	@Override
+	public boolean isEditable(Object id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public T getModule() {
+		return component.getModule();
 	}
 }

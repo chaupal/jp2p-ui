@@ -20,6 +20,9 @@ package org.chaupal.jp2p.ui.property;
 
 import org.eclipse.ui.views.properties.IPropertySource;
 
-public interface IJp2pUIPropertySource extends IPropertySource {
+public interface IJp2pUIPropertySource<T extends Object> extends IPropertySource {
 
+	public boolean isEditable( Object id );
+	
+	public T getModule();
 }

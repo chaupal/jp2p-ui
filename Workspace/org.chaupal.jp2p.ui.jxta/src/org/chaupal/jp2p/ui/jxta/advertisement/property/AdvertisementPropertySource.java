@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import net.jxta.document.Advertisement;
-import net.jxta.protocol.JxtaSocket;
+import net.jxta.protocol.ModuleImplAdvertisement;
 import net.jxta.protocol.ModuleSpecAdvertisement;
 import net.jp2p.jxta.advertisement.AdvertisementPropertySource.AdvertisementProperties;
 
@@ -40,8 +40,8 @@ public class AdvertisementPropertySource extends AbstractUIPropertySource<Advert
 			ModuleSpecAdvPropertySource msaps = new ModuleSpecAdvPropertySource((ModuleSpecAdvertisement) advertisement );
 			descriptors.addAll( Arrays.asList( msaps.getPropertyDescriptors()));
 		}
-		if( advertisement instanceof JxtaSocket ){
-			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((JxtaSocket) advertisement );
+		if( advertisement instanceof ModuleImplAdvertisement ){
+			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((ModuleImplAdvertisement) advertisement );
 			descriptors.addAll( Arrays.asList( miaps.getPropertyDescriptors()));
 		}
 		descriptors.addAll( super.getPropertyDescriptors( AdvertisementProperties.values()));
@@ -57,7 +57,7 @@ public class AdvertisementPropertySource extends AbstractUIPropertySource<Advert
 			return msaps.getPropertyValue(id);
 		}
 		if( id instanceof ModuleImplAdvProperties ){
-			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((JxtaSocket) advertisement );
+			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((ModuleImplAdvertisement) advertisement );
 			return miaps.getPropertyValue(id);
 		}
 		if(!( id instanceof AdvertisementProperties ))
@@ -91,7 +91,7 @@ public class AdvertisementPropertySource extends AbstractUIPropertySource<Advert
 			return msaps.isEditable(id);
 		}
 		if( id instanceof ModuleImplAdvProperties ){
-			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((JxtaSocket) advertisement );
+			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((ModuleImplAdvertisement) advertisement );
 			return miaps.isEditable(id);
 		}
 		return false;
@@ -111,7 +111,7 @@ public class AdvertisementPropertySource extends AbstractUIPropertySource<Advert
 			return;
 		}
 		if( id instanceof ModuleImplAdvProperties ){
-			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((JxtaSocket) advertisement );
+			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((ModuleImplAdvertisement) advertisement );
 			miaps.setPropertyValue(id, value);
 			return;
 		}

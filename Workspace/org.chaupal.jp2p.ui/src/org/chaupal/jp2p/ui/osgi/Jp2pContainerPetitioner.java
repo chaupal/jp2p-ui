@@ -48,7 +48,7 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 	private List<IJp2pComponent<?>> children;
 
 	private ServiceEventDispatcher dispatcher = ServiceEventDispatcher.getInstance();	
-	private IComponentChangedListener listener;
+	private IComponentChangedListener<IJp2pComponent<?>> listener;
 	private RefreshRunnable refresher;
 	private PetitionPropertySource source;
 	
@@ -57,10 +57,10 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 		children = new ArrayList<IJp2pComponent<?>>();
 		source = new PetitionPropertySource();
 		refresher = new RefreshRunnable( source );
-		this.listener = new IComponentChangedListener() {
+		this.listener = new IComponentChangedListener<IJp2pComponent<?>>() {
 			
 			@Override
-			public void notifyServiceChanged(ComponentChangedEvent event) {
+			public void notifyServiceChanged(ComponentChangedEvent<IJp2pComponent<?>> event) {
 				dispatcher.serviceChanged( new ServiceChangedEvent( this, ServiceChange.COMPONENT_EVENT ));
 				refresher.start();
 			}

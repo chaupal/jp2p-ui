@@ -53,16 +53,16 @@ public class CompositePropertyDescriptor extends AbstractControlPropertyDescript
 	 * @return
 	 */
 	static final ILabelProvider getLabelProvider( IPropertyDescriptor descriptor, SupportedTypes type ){
-		ILabelProvider editor;
+		ILabelProvider provider;
 		switch( type ){
 		case BOOLEAN:
-			editor = new CheckBoxLabelProvider();
+			provider = new CheckBoxLabelProvider();
 			break;
 		default:
-			editor = new ControlLabelProvider( (AbstractControlPropertyDescriptor<?>) descriptor );
+			provider = new ControlLabelProvider( (AbstractControlPropertyDescriptor<?>) descriptor );
 			break;
 		}
-		return editor;
+		return provider;
 	}
 
 	/**

@@ -22,7 +22,7 @@ import org.chaupal.jp2p.ui.property.descriptors.CompositePropertyDescriptor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
-public class SimpleUIPropertySource implements IJp2pUIPropertySource {
+public class SimpleUIPropertySource implements IJp2pUIPropertySource<Object> {
 
 	public static final String S_PROPERTY_JP2P_TEXT = "JP2P";
 	public static final String S_MODULE_CATEGORY = "Module";
@@ -53,7 +53,7 @@ public class SimpleUIPropertySource implements IJp2pUIPropertySource {
 		this.addModuleData = addModuleData;
 	}
 
-	protected Object getModule() {
+	public Object getModule() {
 		return module;
 	}
 
@@ -62,6 +62,7 @@ public class SimpleUIPropertySource implements IJp2pUIPropertySource {
 		return this;
 	}
 
+	
 	/**
 	 * Returns true if the given property can be modified
 	 * @param id
@@ -85,7 +86,7 @@ public class SimpleUIPropertySource implements IJp2pUIPropertySource {
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
 		if( this.addModuleData )
-			addPropertyDescriptorsForModule( this.module, descriptors);
+			addPropertyDescriptorsForModule( this, descriptors);
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}
 
@@ -140,14 +141,15 @@ public class SimpleUIPropertySource implements IJp2pUIPropertySource {
 	}
 
 	/**
-	 * try to retrieve the fields for the underlying module through refelection
+	 * try to retrieve the fields for the underlying module through reflection
 	 * @param descriptors
 	 */
-	public static void addPropertyDescriptorsForModule( Object module, Collection<IPropertyDescriptor> descriptors ) {
+	public static void addPropertyDescriptorsForModule( IJp2pUIPropertySource<?> source, Collection<IPropertyDescriptor> descriptors ) {
+		Object module = source.getModule();
 		if( module == null )
 			return;
 		Method[] methods = module.getClass().getMethods();
-		CompositePropertyDescriptor textDescriptor; 
+		CompositePropertyDescriptor descriptor; 
 		String category = S_MODULE_CATEGORY;
 		for( Method method: methods ){
 			if( !filterMethod( method, false ))
@@ -164,9 +166,10 @@ public class SimpleUIPropertySource implements IJp2pUIPropertySource {
 			}
 			String name = method.getName().replace("get", "");
 			IJp2pProperties id = new ObjectProperty( name, type, value );
-			textDescriptor = new CompositePropertyDescriptor( id, name, type );
-			textDescriptor.setCategory( category);
-			descriptors.add( textDescriptor);
+			descriptor = new CompositePropertyDescriptor( id, name, type );
+			descriptor.setCategory( category);
+			descriptor.setEnabled( source.isEditable(name));
+			descriptors.add( descriptor);
 		}
 	}
 
