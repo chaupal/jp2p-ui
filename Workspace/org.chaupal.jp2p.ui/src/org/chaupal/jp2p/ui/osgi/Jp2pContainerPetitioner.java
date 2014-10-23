@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
@@ -38,8 +39,8 @@ import org.eclipselabs.osgi.ds.broker.service.AbstractPalaver;
 import org.eclipselabs.osgi.ds.broker.service.AbstractPetitioner;
 import org.eclipselabs.osgi.ds.broker.service.ParlezEvent;
 
-public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, IJp2pContainer>
-	implements IJp2pComponentNode<Collection<IJp2pContainer>>
+public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, IJp2pContainer<?>>
+	implements IJp2pComponentNode<Collection<IJp2pContainer<?>>>
 {
 	public static final String S_WRN_THREAD_INTERRUPTED = "The thread is interrupted. Probably stopping service";
 	
@@ -51,6 +52,8 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 	private IComponentChangedListener<IJp2pComponent<?>> listener;
 	private RefreshRunnable refresher;
 	private PetitionPropertySource source;
+	
+	private Logger logger = Logger.getLogger( Jp2pContainerPetitioner.class.getName() );
 	
 	private Jp2pContainerPetitioner() {
 		super( new ResourcePalaver());
@@ -76,20 +79,27 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 		return source;
 	}
 
-	public IJp2pContainer getJp2pContainer( String identifier ) {
-		for( IJp2pContainer container: super.getCollection() )
+	public IJp2pContainer<?> getJp2pContainer( String identifier ) {
+		for( IJp2pContainer<?> container: super.getCollection() )
 			if( container.getIdentifier().equals( identifier ))
 				return container;
 		return null;
 	}
 
+	
 	@Override
-	protected void onDataReceived( ParlezEvent<IJp2pContainer> event ) {
+	public void petition(String data) {
+	    logger.info("Petitioning Containers for UI");
+		super.petition(data);
+	}
+
+	@Override
+	protected void onDataReceived( ParlezEvent<IJp2pContainer<?>> event ) {
 		  super.onDataReceived( event );
 		  if(!( event.getData() instanceof IJp2pComponent ))
 			  return;
 		  this.addChild( event.getData());
-		  System.out.println("Container added: " + event.getData().getIdentifier( ));
+		  logger.info("Container added: " + event.getData().getIdentifier( ));
 	}
 
 	@Override
@@ -113,7 +123,7 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 	}
 
 	@Override
-	public Collection<IJp2pContainer> getModule() {
+	public Collection<IJp2pContainer<?>> getModule() {
 		return super.getCollection();
 	}
 
@@ -127,7 +137,7 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 		if( children.contains( child ))
 			return false;
 		children.add( child );
-		IJp2pContainer container = (IJp2pContainer) child;
+		IJp2pContainer<?> container = (IJp2pContainer<?>) child;
 		container.getDispatcher().addServiceChangeListener( listener );
 		Collections.sort( children, new Jp2pServiceComparator<Object>());
 		dispatcher.serviceChanged( new ServiceChangedEvent( this, ServiceChange.CHILD_ADDED ));
@@ -137,7 +147,7 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 	@Override
 	public void removeChild(IJp2pComponent<?> child) {
 		children.remove( child );
-		IJp2pContainer container = (IJp2pContainer) child;
+		IJp2pContainer<?> container = (IJp2pContainer<?>) child;
 		container.getDispatcher().removeServiceChangeListener( listener );
 		dispatcher.serviceChanged( new ServiceChangedEvent( this, ServiceChange.CHILD_REMOVED ));
 	}

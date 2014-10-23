@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
@@ -46,19 +47,21 @@ public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2p
 	private List<IJp2pComponent<?>> children;
 
 	private ServiceEventDispatcher dispatcher = ServiceEventDispatcher.getInstance();	
-	private IComponentChangedListener listener;
+	private IComponentChangedListener<IJp2pComponent<?>> listener;
 	private RefreshRunnable refresher;
 	private PetitionPropertySource source;
+	
+	private Logger logger = Logger.getLogger(PeerGroupPetitioner.class.getName());
 	
 	private PeerGroupPetitioner() {
 		super( new ResourcePalaver());
 		children = new ArrayList<IJp2pComponent<?>>();
 		source = new PetitionPropertySource();
 		refresher = new RefreshRunnable( source );
-		this.listener = new IComponentChangedListener() {
+		this.listener = new IComponentChangedListener<IJp2pComponent<?>>() {
 			
 			@Override
-			public void notifyServiceChanged(ComponentChangedEvent event) {
+			public void notifyServiceChanged(ComponentChangedEvent<IJp2pComponent<?>> event) {
 				dispatcher.serviceChanged( new ServiceChangedEvent( this, ServiceChange.COMPONENT_EVENT ));
 				refresher.start();
 			}
@@ -74,7 +77,7 @@ public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2p
 		if(!( event.getData() instanceof Jp2pContainer ))
 			return;
 		super.onDataReceived( event );
-		System.out.println("Container added: " + event.getData().getIdentifier( ));
+		logger.info("Container added: " + event.getData().getIdentifier( ));
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

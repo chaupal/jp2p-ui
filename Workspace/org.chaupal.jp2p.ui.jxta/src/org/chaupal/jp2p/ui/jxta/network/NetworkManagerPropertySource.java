@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.EnumUtils;
 import net.jp2p.jxta.network.NetworkManagerPropertySource.NetworkManagerProperties;
 import net.jxta.peer.PeerID;
@@ -36,7 +37,7 @@ public class NetworkManagerPropertySource extends AbstractUIPropertySource<Netwo
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
 		for( NetworkManagerProperties property: NetworkManagerProperties.values() ){
-			String[] parsed = super.parseProperty(property);
+			String[] parsed = super.parseProperty( S_JP2P_PROPERTY_TEXT, property);
 			PropertyDescriptor descriptor;
 			TextBoxPropertyDescriptor tpd = null;
 			switch( property ){
@@ -66,9 +67,9 @@ public class NetworkManagerPropertySource extends AbstractUIPropertySource<Netwo
 	}
 
 	@Override
-	public Object getPropertyValue(Object id) {
+	public Object onGetPropertyValue( IJp2pProperties id) {
 		if(!( id instanceof NetworkManagerProperties ))
-			return super.getPropertyValue(id);
+			return null;
 		NetworkManager manager = super.getModule();
 		NetworkManagerProperties property  = ( NetworkManagerProperties )id;
 		switch( property ){

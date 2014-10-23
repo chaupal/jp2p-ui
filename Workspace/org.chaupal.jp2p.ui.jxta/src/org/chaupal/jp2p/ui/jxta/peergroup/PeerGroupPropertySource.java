@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import net.jxta.peergroup.PeerGroup;
+import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.jxta.peergroup.PeerGroupPropertySource.PeerGroupProperties;
 
 import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
@@ -39,10 +40,10 @@ public class PeerGroupPropertySource extends AbstractUIPropertySource<PeerGroup>
 	}
 
 	@Override
-	public Object getPropertyValue(Object id) {
+	public Object onGetPropertyValue( IJp2pProperties id) {
 		PeerGroup peergroup = super.getModule();
 		if(!( id instanceof PeerGroupProperties ))
-			return super.getPropertyValue(id);
+			return null;
 		PeerGroupProperties property  = ( PeerGroupProperties )id;
 		switch( property ){
 		case PEERGROUP_ID:
@@ -56,7 +57,7 @@ public class PeerGroupPropertySource extends AbstractUIPropertySource<PeerGroup>
 		case STORE_HOME:
 			return peergroup.getStoreHome();
 		default:
-			return super.getPropertyValue(id);
+			return null;
 		}
 	}
 

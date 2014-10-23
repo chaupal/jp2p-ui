@@ -9,6 +9,7 @@ package org.chaupal.jp2p.ui.jxta.advertisement.property;
 
 import java.util.Collection;
 
+import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.StringStyler;
 import net.jxta.document.Element;
 import net.jxta.platform.ModuleSpecID;
@@ -19,7 +20,7 @@ import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
 public class ModuleImplAdvPropertySource extends AbstractUIPropertySource<ModuleImplAdvertisement> {
 
-	public enum ModuleImplAdvProperties{
+	public enum ModuleImplAdvProperties implements IJp2pProperties{
 		BASE_ADVERTISEMENT_TYPE,
 		CODE,
 		COMPAT,
@@ -54,7 +55,7 @@ public class ModuleImplAdvPropertySource extends AbstractUIPropertySource<Module
 	}
 
 	@Override
-	public Object getPropertyValue(Object id) {
+	public Object onGetPropertyValue( IJp2pProperties id) {
 		ModuleImplAdvProperties property = ( ModuleImplAdvProperties )id;
 		ModuleImplAdvertisement adv = super.getModule();
 		switch( property ){

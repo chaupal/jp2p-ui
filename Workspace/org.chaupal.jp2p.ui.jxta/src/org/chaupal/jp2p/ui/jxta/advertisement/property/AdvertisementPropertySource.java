@@ -14,6 +14,7 @@ import java.util.Collection;
 import net.jxta.document.Advertisement;
 import net.jxta.protocol.ModuleImplAdvertisement;
 import net.jxta.protocol.ModuleSpecAdvertisement;
+import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.jxta.advertisement.AdvertisementPropertySource.AdvertisementProperties;
 
 import org.chaupal.jp2p.ui.jxta.advertisement.property.ModuleImplAdvPropertySource.ModuleImplAdvProperties;
@@ -50,7 +51,7 @@ public class AdvertisementPropertySource extends AbstractUIPropertySource<Advert
 	}
 
 	@Override
-	public Object getPropertyValue(Object id) {
+	public Object onGetPropertyValue( IJp2pProperties id) {
 		Advertisement advertisement = super.getModule();
 		if( id instanceof ModuleSpecAdvProperties ){
 			ModuleSpecAdvPropertySource msaps = new ModuleSpecAdvPropertySource((ModuleSpecAdvertisement) advertisement );

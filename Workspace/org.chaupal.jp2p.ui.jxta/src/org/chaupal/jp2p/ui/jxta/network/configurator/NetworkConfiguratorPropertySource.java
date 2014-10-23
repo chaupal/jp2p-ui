@@ -46,7 +46,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
 		for( NetworkConfiguratorProperties property: NetworkConfiguratorProperties.values() ){
-			String[] parsed = super.parseProperty(property);
+			String[] parsed = super.parseProperty( S_JP2P_PROPERTY_TEXT, property);
 			PropertyDescriptor descriptor;
 			SpinnerPropertyDescriptor spd;
 			switch( property ){
@@ -161,9 +161,9 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 	}
 
 	@Override
-	public Object getPropertyValue(Object id) {
+	public Object onGetPropertyValue( IJp2pProperties id) {
 		if( !NetworkConfiguratorProperties.isValidProperty( (IJp2pProperties) id ))
-			return super.getPropertyValue(id);
+			return null;
 		NetworkConfiguratorProperties property = ( NetworkConfiguratorProperties )id;
 		NetworkConfigurator configurator = super.getModule();
 		switch( property ){
@@ -287,7 +287,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 		default:
 			break;
 		}
-		return super.getPropertyValue(id);
+		return null;
 	}
 
 	/**

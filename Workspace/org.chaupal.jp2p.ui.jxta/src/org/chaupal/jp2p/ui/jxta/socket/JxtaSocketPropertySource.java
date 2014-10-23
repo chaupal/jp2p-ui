@@ -84,7 +84,7 @@ public class JxtaSocketPropertySource extends AbstractUIPropertySource<JxtaSocke
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
 		for( JxtaSocketProperties property: JxtaSocketProperties.values() ){
-			String[] parsed = super.parseProperty(property);
+			String[] parsed = super.parseProperty( S_JP2P_PROPERTY_TEXT, property);
 			PropertyDescriptor descriptor;
 			SpinnerPropertyDescriptor spd;
 			switch( property ){
@@ -127,7 +127,7 @@ public class JxtaSocketPropertySource extends AbstractUIPropertySource<JxtaSocke
 	}
 
 	@Override
-	public Object getPropertyValue(Object id) {
+	public Object onGetPropertyValue( IJp2pProperties id) {
 		if(!( id instanceof JxtaSocketProperties ))
 			return null;
 		if( !JxtaSocketProperties.isValidProperty( (IJp2pProperties) id ))
