@@ -125,6 +125,13 @@
             name="JXSE Modules View"
             restorable="true">
       </view>
+      <view
+            category="org.chaupal.jp2p.ui.container"
+            class="org.chaupal.jp2p.ui.jxta.view.JxseModulePropertySheet"
+            id="org.chaupal.jp2p.ui.jxse.module.property.sheet"
+            name="Jxse Module Property Sheet"
+            restorable="true">
+      </view>
    </extension>
    <extension
          id="org.condast.jxta.ide.view.jxta.container.viewer"
@@ -291,6 +298,17 @@
                minimized="false"
                relationship="bottom"
                relative="org.chaupal.jp2p.ui.container.view">
+         </view>
+         <view
+               id="org.chaupal.jp2p.ui.jxta.view1"
+               minimized="false"
+               relationship="stack">
+         </view>
+         <view
+               id="org.chaupal.jp2p.ui.jxse.module.property.sheet"
+               minimized="false"
+               relationship="bottom"
+               relative="org.eclipse.ui.views.PropertySheet">
          </view>
       </perspectiveExtension>
    </extension>

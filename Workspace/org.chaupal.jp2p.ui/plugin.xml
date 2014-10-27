@@ -29,7 +29,7 @@
             allowMultiple="false"
             category="org.chaupal.jp2p.ui.container"
             class="org.chaupal.jp2p.ui.container.Jp2pContainerNavigator"
-            icon="resources/ContainerRed.png"
+            icon="resources/container32.png"
             id="org.chaupal.jp2p.ui.container.view"
             name="JP2P Container View"
             restorable="true">

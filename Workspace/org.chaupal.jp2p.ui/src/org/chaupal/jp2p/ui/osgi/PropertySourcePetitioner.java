@@ -34,12 +34,12 @@ public class PropertySourcePetitioner extends AbstractPetitioner<String, IJp2pCo
 	 * @param componentName
 	 * @return
 	 */
-	public IJp2pPropertySourceProvider<IJp2pProperties> getPropertyDescriptorProvider( String componentName ) {
-		if( Utils.isNull( componentName ))
+	public IJp2pPropertySourceProvider<IJp2pProperties> getPropertyDescriptorProvider( String bundle_id, String componentName ) {
+		if( Utils.isNull( componentName ) || Utils.isNull( bundle_id ))
 			return null;
 		for( IJp2pPropertySourceProvider<IJp2pProperties> provider: super.getCollection() ){
-			if( componentName.equals( provider.getComponentName()))
-					return provider;
+			if( bundle_id.equals(provider.getBundleId()) && componentName.equals( provider.getComponentName()))
+				return provider;
 		}
 		return null;
 	}

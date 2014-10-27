@@ -20,7 +20,6 @@ import java.util.Set;
 import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
 import org.chaupal.jp2p.ui.property.descriptors.CheckBoxPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.descriptors.SpinnerPropertyDescriptor;
-import org.chaupal.jp2p.ui.property.CollectionPropertySource;
 import org.eclipse.ui.views.properties.ComboBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
@@ -75,18 +74,6 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			case PRIVATE_KEY:
 				configurator.setPrivateKey( (PrivateKey) value);
 				return;
-			case RELAY_8SEED_URIS:
-				configurator.setRelaySeedURIs( (List<String>) value);
-				return;
-			case RELAY_8SEEDING_URIS:
-				configurator.setRelaySeedingURIs( (Set<String>) value);
-				return;
-			case RENDEZVOUS_8SEED_URIS:
-				configurator.setRendezvousSeeds( (Set<String>) value);
-				return;
-			case RENDEZVOUS_8SEEDING_URIS:
-				configurator.setRendezvousSeedingURIs( (List<String>) value);
-				return;
 			case STORE_HOME:
 				configurator.setStoreHome( (URI) value);
 				return;
@@ -100,6 +87,18 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 				configurator.setTcpInterfaceAddress( (String) value);
 				return;
 				configurator.setTcpOutgoing( (boolean) value);
+				return;
+			case RELAY_8SEED_URIS:
+				configurator.setRelaySeedURIs( (List<String>) value);
+				return;
+			case RELAY_8SEEDING_URIS:
+				configurator.setRelaySeedingURIs( (Set<String>) value);
+				return;
+			case RENDEZVOUS_8SEED_URIS:
+				configurator.setRendezvousSeeds( (Set<String>) value);
+				return;
+			case RENDEZVOUS_8SEEDING_URIS:
+				configurator.setRendezvousSeedingURIs( (List<String>) value);
 				return;
 */				
 			case MULTICAST_8SIZE:
@@ -249,15 +248,15 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 		case RELAY_8MAX_CLIENTS:
 			return configurator.getRelayMaxClients();
 		case RELAY_8SEED_URIS:
-			return  new CollectionPropertySource( property.toString(), configurator.getRelaySeedURIs(), "default");
+			return  configurator.getRelaySeedURIs();
 		case RELAY_8SEEDING_URIS:
-			return new CollectionPropertySource( property.toString(), configurator.getRelaySeedingURIs(), "default");
+			return configurator.getRelaySeedingURIs();
 		case RENDEZVOUS_8MAX_CLIENTS:
 			return configurator.getRendezvousMaxClients();
 		case RENDEZVOUS_8SEED_URIS:
-			return  new CollectionPropertySource( property.toString(), configurator.getRdvSeedURIs(), "default");
+			return  configurator.getRdvSeedURIs();
 		case RENDEZVOUS_8SEEDING_URIS:
-			return new CollectionPropertySource( property.toString(), configurator.getRdvSeedingURIs(), "default" );
+			return configurator.getRdvSeedingURIs();
 		case STORE_HOME:
 			return configurator.getStoreHome();
 		case TCP_8PUBLIC_ADDRESS:

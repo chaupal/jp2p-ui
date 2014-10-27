@@ -37,6 +37,13 @@ public class JxtaPropertySourceProvider implements
 		this.component = component;
 	}
 
+	
+	@Override
+	public String getBundleId() {
+		return 	AbstractJp2pPropertySource.getBundleId( this.component.getPropertySource() );
+	}
+
+
 	@Override
 	public String getComponentName() {
 		return component.getPropertySource().getComponentName();

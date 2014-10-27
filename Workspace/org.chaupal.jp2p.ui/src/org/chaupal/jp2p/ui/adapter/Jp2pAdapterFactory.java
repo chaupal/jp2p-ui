@@ -1,8 +1,12 @@
 package org.chaupal.jp2p.ui.adapter;
 
+import java.util.Collection;
+
 import net.jp2p.container.component.IJp2pComponent;
+import net.jp2p.container.properties.AbstractJp2pPropertySource;
 
 import org.chaupal.jp2p.ui.osgi.PropertySourcePetitioner;
+import org.chaupal.jp2p.ui.property.CollectionPropertySource;
 import org.chaupal.jp2p.ui.property.IJp2pPropertySourceProvider;
 import org.chaupal.jp2p.ui.property.Jp2pComponentUIPropertySource;
 import org.chaupal.jp2p.ui.property.SimpleUIPropertySource;
@@ -18,6 +22,8 @@ public class Jp2pAdapterFactory implements IAdapterFactory {
 			  return null;
 		  if( adaptableObject instanceof IJp2pComponent )
 			  return this.getPropertySource(((IJp2pComponent<Object>) adaptableObject) );
+		  if( adaptableObject instanceof Collection )
+			  return new CollectionPropertySource( "list", (Collection<?>) adaptableObject, "list2" );
 		  return new SimpleUIPropertySource( adaptableObject );
 	}
 
@@ -29,7 +35,9 @@ public class Jp2pAdapterFactory implements IAdapterFactory {
 	protected IPropertySource getPropertySource( IJp2pComponent<Object> adaptableObject ){
 		PropertySourcePetitioner petitioner = PropertySourcePetitioner.getInstance();
 		petitioner.petition(adaptableObject );
-		IJp2pPropertySourceProvider<?> psp = petitioner.getPropertyDescriptorProvider(adaptableObject.getPropertySource().getComponentName());
+		String bundle_id = AbstractJp2pPropertySource.getBundleId( adaptableObject.getPropertySource());
+		String component_name = adaptableObject.getPropertySource().getComponentName();
+		IJp2pPropertySourceProvider<?> psp = petitioner.getPropertyDescriptorProvider(bundle_id, component_name);
 		if( psp != null ){
 			IPropertySource ps = psp.getPropertySource();
 			if( ps != null )

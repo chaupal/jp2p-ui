@@ -12,6 +12,12 @@ import org.eclipse.ui.views.properties.IPropertySource;
 public interface IJp2pPropertySourceProvider<T extends Object> {
 
 	/**
+	 * Get the bundle id for the component
+	 * @return
+	 */
+	public String getBundleId();
+
+	/**
 	 * Get the component name
 	 * @return
 	 */

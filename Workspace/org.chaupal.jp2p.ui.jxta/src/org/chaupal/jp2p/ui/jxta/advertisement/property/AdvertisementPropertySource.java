@@ -76,7 +76,7 @@ public class AdvertisementPropertySource extends AbstractUIPropertySource<Advert
 			return advertisement.getAdvType();
 		}
 	*/
-		return super.getPropertyValue(id);
+		return null;
 	}
 
 	/**

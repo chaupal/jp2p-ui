@@ -102,7 +102,7 @@ public class PeerGroupNavigator extends CommonNavigator{
 		Object element = ss.getFirstElement();
 		if(!( element instanceof IJp2pContainer))
 			return;
-		IJp2pContainer container = (IJp2pContainer)element;
+		IJp2pContainer<?> container = (IJp2pContainer<?>)element;
 		SimpleNode<PeerGroup, PeerGroup> node = PeerGroupFactory.createPeerGroupTree( container );
 		if( node != null ){
 			viewer.setInput( node );
