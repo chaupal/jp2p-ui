@@ -12,7 +12,7 @@ import java.util.Collection;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.StringStyler;
 import net.jxta.document.Element;
-import net.jxta.platform.ModuleSpecID;
+import net.jxta.peergroup.core.ModuleSpecID;
 import net.jxta.protocol.ModuleSpecAdvertisement;
 
 import org.chaupal.jp2p.ui.jxta.advertisement.property.ModuleImplAdvPropertySource.ModuleImplAdvProperties;

@@ -21,7 +21,7 @@
    <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
-            adaptableType="net.jxta.platform.Module"
+            adaptableType="net.jxta.peergroup.core.Module"
             class="org.chaupal.jp2p.ui.jxta.property.Jp2pJxseAdapterFactory">
          <adapter
                type="org.eclipse.ui.views.properties.IPropertySource">
@@ -299,12 +299,7 @@
                relationship="bottom"
                relative="org.chaupal.jp2p.ui.container.view">
          </view>
-         <view
-               id="org.chaupal.jp2p.ui.jxta.view1"
-               minimized="false"
-               relationship="stack">
-         </view>
-         <view
+        <view
                id="org.chaupal.jp2p.ui.jxse.module.property.sheet"
                minimized="false"
                relationship="bottom"

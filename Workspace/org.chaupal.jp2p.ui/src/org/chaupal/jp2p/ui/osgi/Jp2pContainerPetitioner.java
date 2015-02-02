@@ -141,6 +141,7 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 		container.getDispatcher().addServiceChangeListener( listener );
 		Collections.sort( children, new Jp2pServiceComparator<Object>());
 		dispatcher.serviceChanged( new ServiceChangedEvent( this, ServiceChange.CHILD_ADDED ));
+		dispatcher.serviceChanged( new ServiceChangedEvent( this, ServiceChange.REFRESH ));
 		return true;
 	}
 
@@ -150,6 +151,7 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 		IJp2pContainer<?> container = (IJp2pContainer<?>) child;
 		container.getDispatcher().removeServiceChangeListener( listener );
 		dispatcher.serviceChanged( new ServiceChangedEvent( this, ServiceChange.CHILD_REMOVED ));
+		dispatcher.serviceChanged( new ServiceChangedEvent( this, ServiceChange.REFRESH ));
 	}
 
 	@Override

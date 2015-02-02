@@ -14,7 +14,7 @@ public class ExtendedAdapterFactory implements IAdapterFactory {
 			  return null;
 		  if( adaptableObject instanceof IJp2pComponent )
 			  return null;
-		  return new SimpleUIPropertySource( adaptableObject );
+		  return null;//new SimpleUIPropertySource( adaptableObject );
 	}
 
 	@SuppressWarnings("rawtypes")
