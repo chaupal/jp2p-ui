@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.provider;
+package org.chaupal.jp2p.ui.jxta.provider;
 
 import java.util.ArrayList;
 import java.util.Collections;

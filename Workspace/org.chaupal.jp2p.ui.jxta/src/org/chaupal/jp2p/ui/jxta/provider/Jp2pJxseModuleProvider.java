@@ -13,7 +13,6 @@ import java.util.Collection;
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.component.IJp2pComponentNode;
 
-import org.chaupal.jp2p.ui.provider.Jp2pServiceContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 
 public class Jp2pJxseModuleProvider extends Jp2pServiceContentProvider implements ITreeContentProvider {

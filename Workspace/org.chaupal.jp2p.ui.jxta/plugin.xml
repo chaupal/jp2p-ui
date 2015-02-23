@@ -185,6 +185,26 @@
          </possibleChildren>
       </navigatorContent>
       <navigatorContent
+            activeByDefault="true"
+            contentProvider="org.chaupal.jp2p.ui.jxta.provider.Jp2pServiceContentProvider"
+            id="org.chaupal.jp2p.container"
+            labelProvider="org.chaupal.jp2p.ui.provider.Jp2pLabelProvider"
+            name="JP2P Context"
+            priority="normal">
+         <triggerPoints>
+            <or>
+               <instanceof
+                     value="net.jp2p.container.component.IJp2pComponent">
+               </instanceof>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof
+                  value="java.lang.Object">
+            </instanceof>
+         </possibleChildren>
+      </navigatorContent>
+      <navigatorContent
             contentProvider="org.chaupal.jp2p.ui.jxta.view.advertisements.Jp2pAdvertisementContentProvider"
             id="org.chaupal.jp2p.ui.view.advertisements"
             labelProvider="org.chaupal.jp2p.ui.jxta.view.advertisements.JxseAdvertisementLabelProvider"

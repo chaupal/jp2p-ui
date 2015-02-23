@@ -2,11 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JXSE GUI Tools
 Bundle-SymbolicName: org.chaupal.jp2p.ui.jxta;singleton:=true
-Bundle-Version: 1.0.0.v20140602
+Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.chaupal.jp2p.ui.jxta.Activator
-Bundle-Vendor: Condast
-Require-Bundle: org.eclipse.ui;bundle-version="3.103.0",
- org.eclipse.osgi;bundle-version="3.9.1"
+Bundle-Vendor: Chaupal.org
+Require-Bundle: org.eclipse.ui;bundle-version="[3.0.0,4.0.0)",
+ org.eclipse.ui.views;bundle-version="[3.0.0,4.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.0.0,4.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: net.jp2p.chaupal.dispatcher,
  net.jp2p.chaupal.utils,
@@ -23,24 +24,23 @@ Import-Package: net.jp2p.chaupal.dispatcher,
  net.jp2p.jxta.network.configurator,
  net.jp2p.jxta.peergroup,
  net.jp2p.jxta.socket,
- net.jxta.configuration,
+ net.jxse.osgi.message,
  net.jxta.document,
  net.jxta.endpoint,
  net.jxta.id,
  net.jxta.peer,
  net.jxta.peergroup,
  net.jxta.peergroup.core,
- net.jxta.pipe,
  net.jxta.platform,
  net.jxta.protocol,
  net.jxta.rendezvous,
  net.jxta.service,
  net.jxta.socket,
  org.chaupal.jp2p.ui.adapter,
- org.chaupal.jp2p.ui.celleditors,
  org.chaupal.jp2p.ui.comparator,
  org.chaupal.jp2p.ui.container,
  org.chaupal.jp2p.ui.image,
+ org.chaupal.jp2p.ui.jxta.message,
  org.chaupal.jp2p.ui.log,
  org.chaupal.jp2p.ui.osgi,
  org.chaupal.jp2p.ui.property,
@@ -48,16 +48,14 @@ Import-Package: net.jp2p.chaupal.dispatcher,
  org.chaupal.jp2p.ui.property.descriptors,
  org.chaupal.jp2p.ui.provider,
  org.chaupal.jp2p.ui.util,
- org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.ui.forms.editor,
  org.eclipse.ui.forms.widgets,
  org.eclipse.ui.navigator,
- org.eclipse.ui.part,
- org.eclipse.ui.views.properties,
  org.eclipselabs.osgi.ds.broker.service,
  org.eclipselabs.osgi.ds.broker.util,
  org.osgi.framework;version="1.7.0"
 Bundle-ActivationPolicy: lazy
-Service-Component: OSGI-INF/attendees.xml
-Export-Package: org.chaupal.jp2p.ui.jxta.network.configurator,
+Service-Component: OSGI-INF/attendees.xml, OSGI-INF/message.xml
+Export-Package: org.chaupal.jp2p.ui.jxta.message,
+ org.chaupal.jp2p.ui.jxta.network.configurator,
  org.chaupal.jp2p.ui.jxta.property

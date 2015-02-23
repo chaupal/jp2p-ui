@@ -11,19 +11,15 @@ import org.eclipselabs.osgi.ds.broker.service.AbstractAttendeeProviderComponent;
 
 public class OsgiComponent extends AbstractAttendeeProviderComponent{
 
-	MessageBoxProvider mp = MessageBoxProvider.getInstance();
-	
 	@Override
 	protected void initialise() {
 		super.addAttendee( Jp2pContainerPetitioner.getInstance() );
 		super.addAttendee( PropertySourcePetitioner.getInstance() );
-		super.addAttendee( mp );
 	}
 
 	@Override
 	protected void finalise() {
 		Jp2pContainerPetitioner.getInstance().finalise();
-		mp.finalise();	
 		super.finalise();
 	}
 }

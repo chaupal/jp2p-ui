@@ -49,31 +49,6 @@
       </viewerContentBinding>
      </extension>
    <extension
-         id="org.chaupal.jp2p.content"
-         name="Chaupal JP2P Container Content"
-         point="org.eclipse.ui.navigator.navigatorContent">
-      <navigatorContent
-            activeByDefault="true"
-            contentProvider="org.chaupal.jp2p.ui.provider.Jp2pServiceContentProvider"
-            id="org.chaupal.jp2p.container"
-            labelProvider="org.chaupal.jp2p.ui.provider.Jp2pLabelProvider"
-            name="JP2P Context"
-            priority="normal">
-         <triggerPoints>
-            <or>
-               <instanceof
-                     value="net.jp2p.container.component.IJp2pComponent">
-               </instanceof>
-            </or>
-         </triggerPoints>
-         <possibleChildren>
-            <instanceof
-                  value="java.lang.Object">
-            </instanceof>
-         </possibleChildren>
-      </navigatorContent>
-   </extension>
-   <extension
          point="org.eclipse.ui.perspectives">
       <perspective
             class="org.chaupal.jp2p.ui.perspective.Perspective"

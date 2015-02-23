@@ -7,19 +7,24 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.osgi.service;
 
+import org.chaupal.jp2p.ui.jxta.message.MessageBoxProvider;
 import org.eclipselabs.osgi.ds.broker.service.AbstractAttendeeProviderComponent;
 
 public class OsgiComponent extends AbstractAttendeeProviderComponent {
 
+	MessageBoxProvider mp = MessageBoxProvider.getInstance();
+	
 	@Override
 	protected void initialise() {
 		super.addAttendee( PeerGroupPetitioner.getInstance() );
 		super.addAttendee( PropertySourceProvider.getInstance() );
+		super.addAttendee( mp );
 	}
 
 	@Override
 	protected void finalise() {
 		PeerGroupPetitioner.getInstance().finalise();
+		mp.finalise();	
 		super.finalise();
 	}
 }
