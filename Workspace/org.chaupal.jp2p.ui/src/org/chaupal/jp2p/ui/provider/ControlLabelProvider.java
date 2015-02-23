@@ -8,6 +8,8 @@
 package org.chaupal.jp2p.ui.provider;
 
 
+import java.net.URL;
+
 import org.chaupal.jp2p.ui.image.LabelProviderImages;
 import org.chaupal.jp2p.ui.image.LabelProviderImages.Images;
 import org.chaupal.jp2p.ui.property.descriptors.IControlPropertyDescriptor;
@@ -39,6 +41,10 @@ public class ControlLabelProvider extends LabelProvider {
 	@Override
 	public String getText(Object element)
 	{
+		if( element instanceof URL ){
+			URL url = (URL) element;
+			return url.toString();
+		}
 		return super.getText(element);
 	}
 

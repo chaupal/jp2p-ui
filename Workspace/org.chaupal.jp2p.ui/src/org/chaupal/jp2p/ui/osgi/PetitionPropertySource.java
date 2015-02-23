@@ -46,9 +46,4 @@ public class PetitionPropertySource extends AbstractJp2pWritePropertySource
 		super( Activator.BUNDLE_ID, S_PETITIONER );
 		super.setProperty( PetitionerProperties.REFRESH_TIME, DEFAULT_TIME_OUT);
 	}
-
-	@Override
-	public PetitionerProperties getIdFromString(String key) {
-		return PetitionerProperties.valueOf( key );
-	}
 }

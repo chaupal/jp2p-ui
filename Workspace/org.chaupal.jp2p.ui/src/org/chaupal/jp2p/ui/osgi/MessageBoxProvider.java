@@ -5,8 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.message;
+package org.chaupal.jp2p.ui.osgi;
 
+import org.chaupal.jp2p.ui.message.Jp2pMessageBox;
 import org.eclipselabs.osgi.ds.broker.service.AbstractPalaver;
 import org.eclipselabs.osgi.ds.broker.service.AbstractProvider;
 

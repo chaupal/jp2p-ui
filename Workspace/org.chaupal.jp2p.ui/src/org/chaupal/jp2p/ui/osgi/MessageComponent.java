@@ -5,18 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.osgi.service;
+package org.chaupal.jp2p.ui.osgi;
 
-import org.chaupal.jp2p.ui.jxta.Activator;
-import org.chaupal.jp2p.ui.jxta.message.Jp2pMessageBox;
+import org.chaupal.jp2p.ui.message.Jp2pMessageBox;
 
-import net.jxse.osgi.message.AbstractMessagePrinter;
+import net.jxse.osgi.message.IJxseMessagePrinter;
 
-public class MessageComponent extends AbstractMessagePrinter{
-
-	public MessageComponent() {
-		super( Activator.BUNDLE_ID, 10);
-	}
+public class MessageComponent implements IJxseMessagePrinter{
 
 	private Jp2pMessageBox mp = null;
 	

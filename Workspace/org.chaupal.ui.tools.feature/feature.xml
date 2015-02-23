@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.chaupal.jp2p.ui.feature"
-      label="Chaupal JP2P UI Feature"
-      version="1.0.0.qualifier"
-      provider-name="Chaupal.org">
+      id="org.chaupal.ui.tools.feature"
+      label="Chaupal JP2P Feature"
+      version="1.0.5.v20141023"
+      provider-name="Chaupal">
 
    <description url="https://github.com/chaupal">
       This feauture contains UI tools that can be used to make development of JP2P bundles easier
@@ -71,31 +71,42 @@ END OF TERMS AND CONDITIONS
    </license>
 
    <url>
-      <update label="Chaupal JP2P" url="https://chaupal.github.io/releases/2.8.0/milestone/20150303/jp2p-ui/site.xml"/>
+      <update label="Chaupal JP2P" url="https://github.com/chaupal/chaupal.github.io/tree/master/releases/2.8.0/milestone/20141015/chaupal/site.xml"/>
    </url>
 
    <requires>
-      <import plugin="org.eclipse.ui" version="3.0.0" match="compatible"/>
-      <import plugin="org.eclipse.core.runtime" version="3.0.0" match="compatible"/>
-      <import plugin="org.eclipse.ui.views" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.ds" version="1.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi" version="3.9.1" match="greaterOrEqual"/>
       <import plugin="net.jp2p.chaupal"/>
       <import plugin="net.jp2p.container"/>
       <import plugin="net.jp2p.jxta"/>
+      <import plugin="jxse"/>
+      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.jobs"/>
       <import plugin="org.eclipse.equinox.p2.core"/>
       <import plugin="org.eclipse.equinox.p2.engine"/>
       <import plugin="org.eclipse.equinox.p2.operations"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.ui.navigator"/>
-      <import plugin="org.eclipselabs.osgi.ds.broker"/>
-      <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.eclipse.ui.views" version="3.0.0" match="compatible"/>
-      <import plugin="net.jxse.osgi"/>
-      <import plugin="net.jxse.osgi.platform"/>
+      <import plugin="org.eclipse.ui" version="3.103.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.pde.core"/>
+      <import plugin="org.eclipse.pde.ui"/>
+      <import plugin="org.eclipse.ui.workbench"/>
+      <import feature="net.jp2p.feature" version="1.0.1.v20141021"/>
+      <import plugin="org.eclipse.ui" version="3.105.0" match="greaterOrEqual"/>
    </requires>
+
+   <plugin
+         id="org.eclipselabs.osgi.ds.broker"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.chaupal.jp2p.ui"
@@ -106,6 +117,13 @@ END OF TERMS AND CONDITIONS
 
    <plugin
          id="org.chaupal.jp2p.ui.jxta"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.chaupal.jp2p.ui.template"
          download-size="0"
          install-size="0"
          version="0.0.0"
