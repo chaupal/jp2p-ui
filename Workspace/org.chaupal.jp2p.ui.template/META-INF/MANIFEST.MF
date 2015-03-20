@@ -32,3 +32,4 @@ Import-Package: net.jp2p.container,
  org.eclipse.ui,
  org.eclipse.ui.plugin,
  org.osgi.framework;version="1.7.0"
+Require-Bundle: org.chaupal.jp2p.ui.jxta;bundle-version="1.0.0"

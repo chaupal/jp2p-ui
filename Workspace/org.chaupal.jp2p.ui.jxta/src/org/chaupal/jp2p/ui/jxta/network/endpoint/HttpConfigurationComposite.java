@@ -5,14 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.network.configurator;
+package org.chaupal.jp2p.ui.jxta.network.endpoint;
 
-import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
-import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
+import net.jp2p.chaupal.jxta.platform.http.HttpPropertySource;
+import net.jp2p.jxta.transport.TransportPropertySource.TransportProperties;
 
+import org.chaupal.jp2p.ui.jxta.network.configurator.AbstractProtocolConfigurationComposite;
 import org.eclipse.swt.widgets.Composite;
 
-public class HttpConfigurationComposite extends AbstractProtocolConfigurationComposite {
+public class HttpConfigurationComposite extends AbstractProtocolConfigurationComposite<HttpPropertySource> {
 	
 	/**
 	 * Create the composite.
@@ -24,27 +25,25 @@ public class HttpConfigurationComposite extends AbstractProtocolConfigurationCom
 	}
 
 	@Override
-	public void init( NetworkConfigurationPropertySource source ){
+	public void init( HttpPropertySource source ){
 		super.init( source );
-		Object value = source.getDefault( NetworkConfiguratorProperties.HTTP_8ENABLED  );
-		if( value != null)
-			this.btnEnabled.setSelection((boolean)value );
-		value = source.getDefault( NetworkConfiguratorProperties.HTTP_8INCOMING_STATUS  );
+		this.btnEnabled.setSelection( source.isEnabled());
+		Object value = source.getDefault( TransportProperties.INCOMING_STATUS  );
 		if( value != null)
 			this.btnIncomingStatus.setSelection((boolean) value);
-		value = source.getDefault( NetworkConfiguratorProperties.HTTP_8OUTGOING_STATUS  );
+		value = source.getDefault( TransportProperties.OUTGOING_STATUS  );
 		if( value != null)
 			this.btnOutgoingStatus.setSelection((boolean)value );
-		value = source.getDefault( NetworkConfiguratorProperties.HTTP_8PUBLIC_ADDRESS  );
+		value = source.getDefault( TransportProperties.PUBLIC_ADDRESS  );
 		if( value != null)
 			this.btnPublicAddress.setSelection((boolean) value );
-		value = source.getDefault( NetworkConfiguratorProperties.HTTP_8PUBLIC_ADDRESS_EXCLUSIVE  );
+		value = source.getDefault( TransportProperties.PUBLIC_ADDRESS_EXCLUSIVE  );
 		if( value != null)
 			this.btnExclusive.setSelection((boolean) value );
-		value = source.getDefault( NetworkConfiguratorProperties.HTTP_8INTERFACE_ADDRESS  );
+		value = source.getDefault( TransportProperties.INTERFACE_ADDRESS  );
 		if( value != null)
 			this.interfaceAddressText.setText((String)value );
-		value = source.getDefault( NetworkConfiguratorProperties.HTTP_8PORT  );
+		value = source.getDefault( TransportProperties.PORT  );
 		if( value != null)
 			this.portSpinner.setSelection(( int )value );
 	}

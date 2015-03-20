@@ -5,10 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.network.configurator;
+package org.chaupal.jp2p.ui.jxta.network.endpoint;
 
-import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
+import net.jp2p.chaupal.jxta.platform.configurator.NetworkConfigurationPropertySource;
 
+import org.chaupal.jp2p.ui.jxta.network.configurator.AbstractEditor;
+import org.chaupal.jp2p.ui.jxta.network.configurator.NetworkConfiguratorEditorInput;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -52,13 +54,13 @@ public class TcpPropertiesEditor extends AbstractEditor {
 	}
 
 	@Override
-	String createPartname() {
-		// TODO Auto-generated method stub
-		return null;
+	public void createPartControl(Composite parent) {
+		Composite tcpComposite = new TcpConfigurationComposite( parent, SWT.NONE );
 	}
 
 	@Override
-	public void createPartControl(Composite parent) {
-		Composite tcpComposite = new TcpConfigurationComposite( parent, SWT.NONE );
+	protected String createPartname() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

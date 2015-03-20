@@ -25,9 +25,9 @@ import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
+import net.jp2p.chaupal.jxta.platform.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.EnumUtils;
-import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 import net.jxta.id.ID;
 import net.jxta.peer.PeerID;
 import net.jxta.platform.NetworkConfigurator;
@@ -114,24 +114,25 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 				spd.setEnabled( this.isEditable(property));
 				break;				
 			case MULTICAST_8PORT:
-			case HTTP_8PORT:
-			case HTTP2_8PORT:
-			case HTTP2_8START_PORT:
-			case HTTP2_8END_PORT:
-			case TCP_8START_PORT:
-			case TCP_8END_PORT:
-			case TCP_8PORT:
-				descriptor = new SpinnerPropertyDescriptor( property, parsed[1], 8080, 65535 );
-				spd = ( SpinnerPropertyDescriptor )descriptor;
-				spd.setEnabled( this.isEditable(property));
-				break;				
+			//case HTTP_8PORT:
+			//case HTTP2_8PORT:
+			//case HTTP2_8START_PORT:
+			//case HTTP2_8END_PORT:
+			//case TCP_8START_PORT:
+			//case TCP_8END_PORT:
+			//case TCP_8PORT:
+			//	descriptor = new SpinnerPropertyDescriptor( property, parsed[1], 8080, 65535 );
+			//	spd = ( SpinnerPropertyDescriptor )descriptor;
+			//	spd.setEnabled( this.isEditable(property));
+			//	break;				
 			case CONFIG_MODE:
 				descriptor = new ComboBoxPropertyDescriptor( property, parsed[1], EnumUtils.toString( ConfigMode.values() ));				
 				break;
-			case HTTP_8ENABLED:
-			case HTTP_8INCOMING_STATUS:
-			case HTTP_8OUTGOING_STATUS:
-			case HTTP_8TO_PUBLIC_ADDRESS_EXCLUSIVE:
+			//case HTTP_8ENABLED:
+			//case HTTP_8INCOMING_STATUS:
+			//case HTTP_8OUTGOING_STATUS:
+			//case HTTP_8TO_PUBLIC_ADDRESS_EXCLUSIVE:
+			/*
 			case HTTP_8PUBLIC_ADDRESS_EXCLUSIVE:
 			case HTTP2_8ENABLED:
 			case HTTP2_8INCOMING_STATUS:
@@ -142,6 +143,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			case TCP_8INCOMING_STATUS:
 			case TCP_8OUTGOING_STATUS:
 			case TCP_8PUBLIC_ADDRESS_EXCLUSIVE:
+			*/
 			case MULTICAST_8ENABLED:
 			case USE_ONLY_RELAY_SEEDS:
 			case USE_ONLY_RENDEZVOUS_SEEDS:
@@ -172,6 +174,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			return configurator.getHome();
 		case CONFIG_MODE:
 			return configurator.getMode();
+		/*
 		case HTTP_8PUBLIC_ADDRESS:
 			return configurator.getHttpPublicAddress();
 		case HTTP_8ENABLED:
@@ -208,13 +211,32 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			return configurator.getHttp2StartPort();
 		case HTTP2_8TO_PUBLIC_ADDRESS_EXCLUSIVE:
 			return configurator.isHttp2PublicAddressExclusive();
-
+		case TCP_8PUBLIC_ADDRESS:
+			return configurator.getTcpPublicAddress();
+		case TCP_8ENABLED:
+			return configurator.isTcpEnabled();
+		case TCP_8END_PORT:
+			return configurator.getTcpEndport();
+		case TCP_8PUBLIC_ADDRESS_EXCLUSIVE:
+			return configurator.isTcpPublicAddressExclusive();
+		case TCP_8INCOMING_STATUS:
+			return configurator.getTcpIncomingStatus();
+		case TCP_8INTERFACE_ADDRESS:
+			return configurator.getTcpInterfaceAddress();
+		case TCP_8OUTGOING_STATUS:
+			return configurator.getTcpOutgoingStatus();
+		case TCP_8PORT:
+			return configurator.getTcpPort();
+		case TCP_8START_PORT:
+			return configurator.getTcpStartPort();
+		 */
 		case INFRASTRUCTURE_8DESCRIPTION:
 			return configurator.getInfrastructureDescriptionStr();
 		case INFRASTRUCTURE_8ID:
 			return configurator.getInfrastructureID();
 		case INFRASTRUCTURE_8NAME:
 			return configurator.getInfrastructureName();
+		
 		case SECURITY_8AUTHENTICATION_TYPE:
 			return configurator.getAuthenticationType();
 		case SECURITY_8CERTFICATE:
@@ -259,24 +281,6 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			return configurator.getRdvSeedingURIs();
 		case STORE_HOME:
 			return configurator.getStoreHome();
-		case TCP_8PUBLIC_ADDRESS:
-			return configurator.getTcpPublicAddress();
-		case TCP_8ENABLED:
-			return configurator.isTcpEnabled();
-		case TCP_8END_PORT:
-			return configurator.getTcpEndport();
-		case TCP_8PUBLIC_ADDRESS_EXCLUSIVE:
-			return configurator.isTcpPublicAddressExclusive();
-		case TCP_8INCOMING_STATUS:
-			return configurator.getTcpIncomingStatus();
-		case TCP_8INTERFACE_ADDRESS:
-			return configurator.getTcpInterfaceAddress();
-		case TCP_8OUTGOING_STATUS:
-			return configurator.getTcpOutgoingStatus();
-		case TCP_8PORT:
-			return configurator.getTcpPort();
-		case TCP_8START_PORT:
-			return configurator.getTcpStartPort();
 		case MULTICAST_8ENABLED:
 			return configurator.getMulticastStatus();
 		case USE_ONLY_RELAY_SEEDS:
@@ -308,10 +312,10 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 	 */
 	public boolean isEditable( NetworkConfiguratorProperties property ){
 		switch( property ){
-		case HTTP_8PUBLIC_ADDRESS_EXCLUSIVE:
-		case HTTP_8TO_PUBLIC_ADDRESS_EXCLUSIVE:
-		case TCP_8PUBLIC_ADDRESS_EXCLUSIVE:
-			return false;
+		//case HTTP_8PUBLIC_ADDRESS_EXCLUSIVE:
+		//case HTTP_8TO_PUBLIC_ADDRESS_EXCLUSIVE:
+		//case TCP_8PUBLIC_ADDRESS_EXCLUSIVE:
+		//	return false;
 		default:
 			return true;
 		}
@@ -332,6 +336,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 		case HOME:
 			configurator.setHome( (File) value);
 			return;
+/*
 		case HTTP_8PUBLIC_ADDRESS:
 			combined = ( Object[] )value;
 			configurator.setHttpPublicAddress(( String )combined[0], ( boolean)combined[1] );
@@ -388,6 +393,35 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 		case HTTP2_8TO_PUBLIC_ADDRESS_EXCLUSIVE:
 			//configurator.setHttp2PublicAddressExclusive( value);
 			return;
+		case TCP_8PUBLIC_ADDRESS:
+			combined = ( Object[] )value;
+			configurator.setTcpPublicAddress( ( String )combined[0], ( boolean)combined[1]);
+			return;
+		case TCP_8ENABLED:
+			configurator.setTcpEnabled( (boolean) value);
+			return;
+		case TCP_8END_PORT:
+			configurator.setHttp2EndPort( (int) value);
+			return;
+		case TCP_8PUBLIC_ADDRESS_EXCLUSIVE:
+			//configurator.setTcpPublicAddressExclusive( value);
+			return;
+		case TCP_8INCOMING_STATUS:
+			configurator.setTcpIncoming( (boolean) value);
+			return;
+		case TCP_8INTERFACE_ADDRESS:
+			configurator.setTcpInterfaceAddress( (String) value);
+			return;
+		case TCP_8OUTGOING_STATUS:
+			configurator.setTcpOutgoing( (boolean) value);
+			return;
+		case TCP_8PORT:
+			configurator.setTcpPort( (int) value);
+			return;
+		case TCP_8START_PORT:
+			configurator.setTcpStartPort( (int) value);
+			return;
+*/			
 		case INFRASTRUCTURE_8DESCRIPTION:
 			configurator.setInfrastructureDescriptionStr( (String) value);
 			return;
@@ -465,34 +499,6 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			return;
 		case STORE_HOME:
 			configurator.setStoreHome( (URI) value);
-			return;
-		case TCP_8PUBLIC_ADDRESS:
-			combined = ( Object[] )value;
-			configurator.setTcpPublicAddress( ( String )combined[0], ( boolean)combined[1]);
-			return;
-		case TCP_8ENABLED:
-			configurator.setTcpEnabled( (boolean) value);
-			return;
-		case TCP_8END_PORT:
-			configurator.setHttp2EndPort( (int) value);
-			return;
-		case TCP_8PUBLIC_ADDRESS_EXCLUSIVE:
-			//configurator.setTcpPublicAddressExclusive( value);
-			return;
-		case TCP_8INCOMING_STATUS:
-			configurator.setTcpIncoming( (boolean) value);
-			return;
-		case TCP_8INTERFACE_ADDRESS:
-			configurator.setTcpInterfaceAddress( (String) value);
-			return;
-		case TCP_8OUTGOING_STATUS:
-			configurator.setTcpOutgoing( (boolean) value);
-			return;
-		case TCP_8PORT:
-			configurator.setTcpPort( (int) value);
-			return;
-		case TCP_8START_PORT:
-			configurator.setTcpStartPort( (int) value);
 			return;
 		case MULTICAST_8ENABLED:
 			configurator.setUseMulticast( (boolean) value );

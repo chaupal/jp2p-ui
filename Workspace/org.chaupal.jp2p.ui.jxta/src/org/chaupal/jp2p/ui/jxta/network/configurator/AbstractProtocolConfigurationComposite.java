@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network.configurator;
 
-import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
+import net.jp2p.container.properties.IJp2pProperties;
+import net.jp2p.container.properties.IJp2pPropertySource;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.GridLayout;
@@ -18,9 +19,9 @@ import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Text;
 
-public class AbstractProtocolConfigurationComposite extends Composite {
+public class AbstractProtocolConfigurationComposite<T extends IJp2pPropertySource<IJp2pProperties>> extends Composite {
 	
-	private NetworkConfigurationPropertySource source;
+	private T source;
 	
 	protected Button btnEnabled;
 	protected Text interfaceAddressText;
@@ -74,12 +75,12 @@ public class AbstractProtocolConfigurationComposite extends Composite {
 		interfaceAddressText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 	}
 
-	protected NetworkConfigurationPropertySource getSource() {
+	protected T getSource() {
 		return source;
 	}
 
 
-	public void init( NetworkConfigurationPropertySource source ){
+	public void init( T source ){
 		this.source = source;
 	}
 	

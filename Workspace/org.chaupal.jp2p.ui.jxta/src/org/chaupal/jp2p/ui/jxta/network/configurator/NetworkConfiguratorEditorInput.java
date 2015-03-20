@@ -10,8 +10,8 @@
  */
 package org.chaupal.jp2p.ui.jxta.network.configurator;
 
+import net.jp2p.chaupal.jxta.platform.configurator.NetworkConfigurationPropertySource;
 import net.jp2p.container.properties.AbstractJp2pPropertySource;
-import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;

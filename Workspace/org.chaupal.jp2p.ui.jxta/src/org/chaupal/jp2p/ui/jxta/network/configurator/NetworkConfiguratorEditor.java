@@ -12,6 +12,7 @@ package org.chaupal.jp2p.ui.jxta.network.configurator;
 
 import net.jp2p.container.properties.AbstractJp2pPropertySource;
 
+import org.chaupal.jp2p.ui.jxta.network.endpoint.TcpPropertiesEditor;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;

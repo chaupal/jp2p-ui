@@ -7,10 +7,15 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network.configurator;
 
+import net.jp2p.chaupal.jxta.platform.NetworkManagerPropertySource;
+import net.jp2p.chaupal.jxta.platform.configurator.NetworkConfigurationPropertySource;
 import net.jp2p.container.Jp2pContainerPropertySource;
-import net.jp2p.jxta.network.NetworkManagerPropertySource;
-import net.jp2p.jxta.network.configurator.NetworkConfigurationPropertySource;
 
+import org.chaupal.jp2p.ui.jxta.network.endpoint.Http2ConfigurationComposite;
+import org.chaupal.jp2p.ui.jxta.network.endpoint.HttpConfigurationComposite;
+import org.chaupal.jp2p.ui.jxta.network.endpoint.MulticastConfigurationComposite;
+import org.chaupal.jp2p.ui.jxta.network.endpoint.RdvRelayConfigurationComposite;
+import org.chaupal.jp2p.ui.jxta.network.endpoint.TcpConfigurationComposite;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.SWT;
@@ -77,9 +82,9 @@ public class Jp2pNetworkConfiguratorComposite extends Composite {
 		NetworkManagerPropertySource nmps = new NetworkManagerPropertySource( source );
 		NetworkConfigurationPropertySource ncps = new NetworkConfigurationPropertySource( nmps );
 		this.overviewComposite.init(ncps);
-		this.tcpComposite.init(ncps);
-		this.httpComposite.init(ncps);
-		this.http2Composite.init(ncps);
+		//this.tcpComposite.init(ncps);
+		//this.httpComposite.init(ncps);
+		//this.http2Composite.init(ncps);
 	}
 	
 	@Override

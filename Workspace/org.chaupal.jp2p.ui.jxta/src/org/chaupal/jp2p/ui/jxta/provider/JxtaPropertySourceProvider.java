@@ -11,7 +11,7 @@ import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.properties.AbstractJp2pPropertySource;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.StringStyler;
-import net.jp2p.jxta.factory.IJxtaComponents.JxtaNetworkComponents;
+import net.jp2p.jxta.factory.IJxtaComponents.JxtaPlatformComponents;
 import net.jp2p.jxta.factory.IJxtaComponents.JxtaComponents;
 import net.jp2p.jxta.socket.SocketPropertySource.SocketTypes;
 import net.jxta.peergroup.PeerGroup;
@@ -79,8 +79,8 @@ public class JxtaPropertySourceProvider implements
 			}
 		}
 
-		if(JxtaNetworkComponents.isComponent( this.getComponentName())){
-			JxtaNetworkComponents jxtaccomps = JxtaNetworkComponents.valueOf( StringStyler.styleToEnum( this.getComponentName() ));
+		if(JxtaPlatformComponents.isComponent( this.getComponentName())){
+			JxtaPlatformComponents jxtaccomps = JxtaPlatformComponents.valueOf( StringStyler.styleToEnum( this.getComponentName() ));
 			if( jxtaccomps != null ){
 				switch( jxtaccomps ){
 				case NETWORK_MANAGER:

@@ -87,6 +87,6 @@ public abstract class AbstractEditor extends EditorPart {
 	/**
 	 * @return
 	 */
-	abstract String createPartname();
+	protected abstract String createPartname();
 	
 }
