@@ -81,9 +81,10 @@ public class RdvRelayConfigurationComposite extends Composite {
 	}
 
 	public void init( NetworkConfigurationPropertySource source ){
-		this.btnRelayOnly.setSelection((boolean) source.getDefault( NetworkConfiguratorProperties.USE_ONLY_RELAY_SEEDS ));
-		this.btnRdvOnly.setSelection((boolean) source.getDefault( NetworkConfiguratorProperties.USE_ONLY_RENDEZVOUS_SEEDS ));
-		this.rdvMaxAmountSpinner.setSelection((int) source.getDefault( NetworkConfiguratorProperties.RENDEZVOUS_8MAX_CLIENTS ));
-		this.relayMaxAmountSpinner.setSelection(( int) source.getDefault( NetworkConfiguratorProperties.RELAY_8MAX_CLIENTS ));
+		//TODO CP: Change this
+		//this.btnRelayOnly.setSelection((boolean) source.getDefault( NetworkConfiguratorProperties.USE_ONLY_RELAY_SEEDS ));
+		//this.btnRdvOnly.setSelection((boolean) source.getDefault( NetworkConfiguratorProperties.USE_ONLY_RENDEZVOUS_SEEDS ));
+		//this.rdvMaxAmountSpinner.setSelection((int) source.getDefault( NetworkConfiguratorProperties.RENDEZVOUS_8MAX_CLIENTS ));
+		//this.relayMaxAmountSpinner.setSelection(( int) source.getDefault( NetworkConfiguratorProperties.RELAY_8MAX_CLIENTS ));
 	}
 }

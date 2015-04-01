@@ -101,13 +101,14 @@ public class MulticastConfigurationComposite extends Composite {
 
 	public void init( NetworkConfigurationPropertySource source ){
 		this.source = source;
-		this.btnEnabled.setSelection((boolean) source.getDefault( NetworkConfiguratorProperties.MULTICAST_8ENABLED ));
-		this.btnActivated.setSelection((boolean) source.getDefault( NetworkConfiguratorProperties.MULTICAST_8STATUS));
-		this.addressText.setText((String) source.getDefault(NetworkConfiguratorProperties.MULTICAST_8ADDRESS));
-		this.spinner.setSelection((int) source.getDefault(NetworkConfiguratorProperties.MULTICAST_8PORT));
-		this.poolSizeSpinner.setSelection((int) source.getDefault(NetworkConfiguratorProperties.MULTICAST_8POOL_SIZE));
-		this.sizeSpinner.setSelection((int) source.getDefault(NetworkConfiguratorProperties.MULTICAST_8SIZE));
-		this.text.setText((String) source.getDefault( NetworkConfiguratorProperties.MULTICAST_8INTERFACE));
+		//TODO CP: Change this
+		//this.btnEnabled.setSelection((boolean) source.getDefault( NetworkConfiguratorProperties.MULTICAST_8ENABLED ));
+		//this.btnActivated.setSelection((boolean) source.getDefault( NetworkConfiguratorProperties.MULTICAST_8STATUS));
+		//this.addressText.setText((String) source.getDefault(NetworkConfiguratorProperties.MULTICAST_8ADDRESS));
+		//this.spinner.setSelection((int) source.getDefault(NetworkConfiguratorProperties.MULTICAST_8PORT));
+		//this.poolSizeSpinner.setSelection((int) source.getDefault(NetworkConfiguratorProperties.MULTICAST_8POOL_SIZE));
+		//this.sizeSpinner.setSelection((int) source.getDefault(NetworkConfiguratorProperties.MULTICAST_8SIZE));
+		//this.text.setText((String) source.getDefault( NetworkConfiguratorProperties.MULTICAST_8INTERFACE));
 	}
 	
 	@Override

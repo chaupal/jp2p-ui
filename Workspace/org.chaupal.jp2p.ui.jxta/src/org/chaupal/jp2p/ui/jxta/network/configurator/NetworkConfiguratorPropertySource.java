@@ -26,8 +26,16 @@ import org.eclipse.ui.views.properties.PropertyDescriptor;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
 import net.jp2p.chaupal.jxta.platform.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
+import net.jp2p.chaupal.jxta.platform.http.HttpPropertySource.HttpTypes;
+import net.jp2p.chaupal.jxta.platform.infra.InfrastructurePropertySource.InfrastructureProperties;
+import net.jp2p.chaupal.jxta.platform.multicast.MulticastPropertySource.MulticastProperties;
+import net.jp2p.chaupal.jxta.platform.security.SecurityPropertySource.SecurityProperties;
+import net.jp2p.container.properties.IJp2pDirectives.Directives;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.EnumUtils;
+import net.jp2p.container.utils.StringProperty;
+import net.jp2p.jxta.transport.TransportPropertySource.NetworkTypes;
+import net.jp2p.jxta.transport.TransportPropertySource.TransportProperties;
 import net.jxta.id.ID;
 import net.jxta.peer.PeerID;
 import net.jxta.platform.NetworkConfigurator;
@@ -44,12 +52,13 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 	@Override
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
+		PropertyDescriptor descriptor = null;
+		SpinnerPropertyDescriptor spd = null;;
 		for( NetworkConfiguratorProperties property: NetworkConfiguratorProperties.values() ){
 			String[] parsed = super.parseProperty( S_JP2P_PROPERTY_TEXT, property);
-			PropertyDescriptor descriptor;
-			SpinnerPropertyDescriptor spd;
 			switch( property ){
 /*
+			TODO :CP Change this
 			case CERTFICATE:
 				configurator.setCertificate( (X509Certificate) value);
 				return;
@@ -99,8 +108,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 				return;
 			case RENDEZVOUS_8SEEDING_URIS:
 				configurator.setRendezvousSeedingURIs( (List<String>) value);
-				return;
-*/				
+				return;				
 			case MULTICAST_8SIZE:
 			case MULTICAST_8POOL_SIZE:
 				descriptor = new SpinnerPropertyDescriptor( property, parsed[1], 0, Integer.MAX_VALUE );
@@ -143,12 +151,13 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			case TCP_8INCOMING_STATUS:
 			case TCP_8OUTGOING_STATUS:
 			case TCP_8PUBLIC_ADDRESS_EXCLUSIVE:
-			*/
+			
 			case MULTICAST_8ENABLED:
 			case USE_ONLY_RELAY_SEEDS:
 			case USE_ONLY_RENDEZVOUS_SEEDS:
 				descriptor = new CheckBoxPropertyDescriptor( property, parsed[1] );
 				break;
+				*/
 			default:
 				descriptor = new TextPropertyDescriptor( property, parsed[1]);
 				break;
@@ -156,9 +165,147 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			descriptor.setCategory(parsed[2]);
 			descriptors.add(descriptor);
 		}
+		descriptors.addAll( this.getTransportProperties(HttpTypes.HTTP.toString()));
+		descriptors.addAll(this.getTransportProperties(HttpTypes.HTTP2.toString()));
+		descriptors.addAll(this.getTransportProperties( NetworkTypes.TCP.toString()));
+		descriptors.addAll(this.getMulticastProperties());
+		descriptors.addAll(this.getSecurityProperties());
 		if( super.getPropertyDescriptors() != null )
 			descriptors.addAll( Arrays.asList( super.getPropertyDescriptors()));
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
+	}
+
+	/**
+	 * Get the transport properties
+	 * @param category
+	 * @return
+	 */
+	protected Collection<IPropertyDescriptor> getTransportProperties( String category ){
+		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
+		PropertyDescriptor descriptor = null;
+		SpinnerPropertyDescriptor spd = null;
+		StringProperty id = null;
+		for( TransportProperties property: TransportProperties.values() ){
+			id = new StringProperty( category + property.toString());
+			switch( property ){
+			case PUBLIC_ADDRESS:
+				//combined = ( Object[] )value;
+				break;
+			case PORT:
+			case START_PORT:
+			case END_PORT:
+				descriptor = new SpinnerPropertyDescriptor( id, property.toString(), 8080, 65535 );
+				spd = ( SpinnerPropertyDescriptor )descriptor;
+				spd.setEnabled( this.isEditable(property));
+				break;				
+			case INCOMING_STATUS:
+			case OUTGOING_STATUS:
+			case PUBLIC_ADDRESS_EXCLUSIVE:
+				descriptor = new CheckBoxPropertyDescriptor( id, property.toString() );
+				break;
+			default:
+				descriptor = new TextPropertyDescriptor( id, property.toString());
+				break;
+			}	
+			descriptor.setCategory( category );
+			descriptors.add(descriptor);
+		}
+		id = new StringProperty( category + Directives.ENABLED.toString());
+		descriptor = new CheckBoxPropertyDescriptor( id, Directives.ENABLED.toString() );
+		descriptor.setCategory(category);
+		descriptors.add( descriptor );
+		return descriptors;		
+	}
+
+	/**
+	 * Get the transport properties
+	 * @param category
+	 * @return
+	 */
+	protected Collection<IPropertyDescriptor> getMulticastProperties(){
+		String category = "Multicast";
+		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
+		PropertyDescriptor descriptor = null;
+		SpinnerPropertyDescriptor spd = null;;
+		StringProperty id = null;
+		for( MulticastProperties property: MulticastProperties.values() ){
+			id = new StringProperty( category + property.toString());
+			switch( property ){
+			case PORT:
+			case POOL_SIZE:
+			case SIZE:
+				descriptor = new SpinnerPropertyDescriptor( id, property.toString(), 8080, 65535 );
+				spd = ( SpinnerPropertyDescriptor )descriptor;
+				spd.setEnabled( this.isEditable( id));
+				break;				
+			default:
+				descriptor = new TextPropertyDescriptor( id, property.toString());
+				break;
+			}	
+			descriptor.setCategory( category);
+			descriptors.add(descriptor);
+		}
+		id = new StringProperty( category + Directives.ENABLED.toString());
+		descriptor = new CheckBoxPropertyDescriptor( id, Directives.ENABLED.toString() );
+		descriptor.setCategory(category);
+		descriptors.add( descriptor );
+		return descriptors;		
+	}
+
+	/**
+	 * Get the transport properties
+	 * @param category
+	 * @return
+	 */
+	protected Collection<IPropertyDescriptor> getSecurityProperties(){
+		String category = "Security";
+		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
+		PropertyDescriptor descriptor = null;
+		SpinnerPropertyDescriptor spd = null;;
+		StringProperty id = null;
+		for( SecurityProperties property: SecurityProperties.values() ){
+			id = new StringProperty( category + property.toString());
+			switch( property ){
+			default:
+				descriptor = new TextPropertyDescriptor( id, property.toString());
+				break;
+			}	
+			descriptor.setCategory( category);
+			descriptors.add(descriptor);
+		}
+		id = new StringProperty( category + Directives.ENABLED.toString());
+		descriptor = new CheckBoxPropertyDescriptor( id, Directives.ENABLED.toString() );
+		descriptor.setCategory(category);
+		descriptors.add( descriptor );
+		return descriptors;		
+	}
+
+	/**
+	 * Get the transport properties
+	 * @param category
+	 * @return
+	 */
+	protected Collection<IPropertyDescriptor> getInfrastructureProperties(){
+		String category = "Infrastructure";
+		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
+		PropertyDescriptor descriptor = null;
+		SpinnerPropertyDescriptor spd = null;;
+		StringProperty id = null;
+		for( InfrastructureProperties property: InfrastructureProperties.values() ){
+			id = new StringProperty( category + property.toString());
+			switch( property ){
+			default:
+				descriptor = new TextPropertyDescriptor( id, property.toString());
+				break;
+			}	
+			descriptor.setCategory( category);
+			descriptors.add(descriptor);
+		}
+		id = new StringProperty( category + Directives.ENABLED.toString());
+		descriptor = new CheckBoxPropertyDescriptor( id, Directives.ENABLED.toString() );
+		descriptor.setCategory(category);
+		descriptors.add( descriptor );
+		return descriptors;		
 	}
 
 	@Override
@@ -229,7 +376,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			return configurator.getTcpPort();
 		case TCP_8START_PORT:
 			return configurator.getTcpStartPort();
-		 */
+		 
 		case INFRASTRUCTURE_8DESCRIPTION:
 			return configurator.getInfrastructureDescriptionStr();
 		case INFRASTRUCTURE_8ID:
@@ -287,6 +434,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 			return configurator.getUseOnlyRelaySeedsStatus();
 		case USE_ONLY_RENDEZVOUS_SEEDS:
 			return configurator.getUseOnlyRendezvousSeedsStatus();
+			*/
 		default:
 			break;
 		}
@@ -421,7 +569,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 		case TCP_8START_PORT:
 			configurator.setTcpStartPort( (int) value);
 			return;
-*/			
+		
 		case INFRASTRUCTURE_8DESCRIPTION:
 			configurator.setInfrastructureDescriptionStr( (String) value);
 			return;
@@ -509,6 +657,7 @@ public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<
 		case USE_ONLY_RENDEZVOUS_SEEDS:
 			configurator.setUseOnlyRendezvousSeeds( (boolean) value);
 			return;
+			*/
 		default:
 			break;
 		}

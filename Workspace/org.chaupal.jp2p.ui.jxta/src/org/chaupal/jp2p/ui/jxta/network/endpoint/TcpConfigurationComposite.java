@@ -7,14 +7,10 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network.endpoint;
 
-import net.jp2p.chaupal.jxta.platform.configurator.NetworkConfigurationPropertySource;
-import net.jp2p.chaupal.jxta.platform.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 import net.jp2p.chaupal.jxta.platform.tcp.TcpPropertySource;
 import net.jp2p.jxta.transport.TransportPropertySource.TransportProperties;
 
 import org.chaupal.jp2p.ui.jxta.network.configurator.AbstractProtocolConfigurationComposite;
-import org.chaupal.jp2p.ui.property.databinding.BooleanDataBinding;
-import org.chaupal.jp2p.ui.property.databinding.SpinnerDataBinding;
 import org.eclipse.swt.widgets.Composite;
 
 public class TcpConfigurationComposite extends AbstractProtocolConfigurationComposite<TcpPropertySource> {
@@ -29,7 +25,6 @@ public class TcpConfigurationComposite extends AbstractProtocolConfigurationComp
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void init( TcpPropertySource source ){
 		super.init( source );
 		Object value = source.isEnabled();
