@@ -8,7 +8,6 @@
 package org.chaupal.jp2p.ui.jxta.network.endpoint;
 
 import net.jp2p.chaupal.jxta.platform.configurator.NetworkConfigurationPropertySource;
-import net.jp2p.chaupal.jxta.platform.configurator.NetworkConfigurationPropertySource.NetworkConfiguratorProperties;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.FillLayout;

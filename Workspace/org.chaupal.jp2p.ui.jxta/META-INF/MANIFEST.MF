@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JXSE GUI Tools
 Bundle-SymbolicName: org.chaupal.jp2p.ui.jxta;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0.v20140602
 Bundle-Activator: org.chaupal.jp2p.ui.jxta.Activator
 Bundle-Vendor: Chaupal.org
 Require-Bundle: org.eclipse.ui;bundle-version="[3.0.0,4.0.0)",
@@ -33,18 +33,21 @@ Import-Package: net.jp2p.chaupal.dispatcher,
  net.jp2p.jxta.socket,
  net.jp2p.jxta.transport,
  net.jxse.osgi.message,
+ net.jxta.configuration,
  net.jxta.document,
  net.jxta.endpoint,
  net.jxta.id,
  net.jxta.peer,
  net.jxta.peergroup,
  net.jxta.peergroup.core,
+ net.jxta.pipe,
  net.jxta.platform,
  net.jxta.protocol,
  net.jxta.rendezvous,
  net.jxta.service,
  net.jxta.socket,
  org.chaupal.jp2p.ui.adapter,
+ org.chaupal.jp2p.ui.celleditors,
  org.chaupal.jp2p.ui.comparator,
  org.chaupal.jp2p.ui.container,
  org.chaupal.jp2p.ui.image,
@@ -55,9 +58,15 @@ Import-Package: net.jp2p.chaupal.dispatcher,
  org.chaupal.jp2p.ui.property.descriptors,
  org.chaupal.jp2p.ui.provider,
  org.chaupal.jp2p.ui.util,
- org.eclipse.ui.forms,
  org.eclipse.ui.forms.editor,
  org.eclipse.ui.forms.widgets,
  org.eclipse.ui.navigator,
+ org.eclipse.ui.part,
+ org.eclipse.ui.views.properties,
  org.eclipselabs.osgi.ds.broker.service,
- org.eclipselabs.osgi.ds.broker.util
+ org.eclipselabs.osgi.ds.broker.util,
+ org.osgi.framework;version="1.7.0"
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/attendees.xml
+Export-Package: org.chaupal.jp2p.ui.jxta.network.configurator,
+ org.chaupal.jp2p.ui.jxta.property

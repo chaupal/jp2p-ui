@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Chaupal Tooling for Eclipse
 Bundle-SymbolicName: org.chaupal.jp2p.ui.template;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.2.v20140529
 Bundle-Activator: org.chaupal.jp2p.ui.template.Activator
 Bundle-Vendor: Condast
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
@@ -32,4 +32,8 @@ Import-Package: net.jp2p.container,
  org.eclipse.ui,
  org.eclipse.ui.plugin,
  org.osgi.framework;version="1.7.0"
+<<<<<<< HEAD
 Require-Bundle: org.chaupal.jp2p.ui.jxta;bundle-version="1.0.0"
+=======
+Require-Bundle: org.eclipse.osgi;bundle-version="3.9.1"
+>>>>>>> branch 'master' of https://github.com/chaupal/jp2p-ui.git

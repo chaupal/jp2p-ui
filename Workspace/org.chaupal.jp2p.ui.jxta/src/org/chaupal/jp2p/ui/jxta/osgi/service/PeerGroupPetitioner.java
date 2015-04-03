@@ -31,8 +31,8 @@ import net.jp2p.jxta.peergroup.PeerGroupFactory;
 import net.jp2p.jxta.peergroup.PeerGroupNode;
 
 import org.chaupal.jp2p.ui.log.Jp2pLog;
-import org.chaupal.jp2p.ui.osgi.PetitionPropertySource;
-import org.chaupal.jp2p.ui.osgi.PetitionPropertySource.PetitionerProperties;
+import org.chaupal.jp2p.ui.osgi.RootPropertySource;
+import org.chaupal.jp2p.ui.osgi.RootPropertySource.PetitionerProperties;
 import org.eclipselabs.osgi.ds.broker.service.AbstractPalaver;
 import org.eclipselabs.osgi.ds.broker.service.AbstractPetitioner;
 import org.eclipselabs.osgi.ds.broker.service.ParlezEvent;
@@ -49,14 +49,14 @@ public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2p
 	private ServiceEventDispatcher dispatcher = ServiceEventDispatcher.getInstance();	
 	private IComponentChangedListener<IJp2pComponent<?>> listener;
 	private RefreshRunnable refresher;
-	private PetitionPropertySource source;
+	private RootPropertySource source;
 	
 	private Logger logger = Logger.getLogger(PeerGroupPetitioner.class.getName());
 	
 	private PeerGroupPetitioner() {
 		super( new ResourcePalaver());
 		children = new ArrayList<IJp2pComponent<?>>();
-		source = new PetitionPropertySource();
+		source = new RootPropertySource();
 		refresher = new RefreshRunnable( source );
 		this.listener = new IComponentChangedListener<IJp2pComponent<?>>() {
 			
@@ -161,9 +161,9 @@ public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2p
 	private class RefreshRunnable implements Runnable{
 
 		private ExecutorService service;
-		private PetitionPropertySource source;
+		private RootPropertySource source;
 		
-		public RefreshRunnable( PetitionPropertySource source) {
+		public RefreshRunnable( RootPropertySource source) {
 			super();
 			this.source = source;
 		}

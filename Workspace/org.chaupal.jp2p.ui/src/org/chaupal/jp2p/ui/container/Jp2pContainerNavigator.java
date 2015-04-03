@@ -11,11 +11,14 @@ import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
 import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.chaupal.utils.Utils;
+import net.jp2p.container.builder.ContainerBuilderEvent;
+import net.jp2p.container.builder.IContainerBuilderListener;
+import net.jp2p.container.component.ComponentChangedEvent;
+import net.jp2p.container.component.IComponentChangedListener;
 import net.jp2p.container.component.IJp2pComponent;
 
-import org.chaupal.jp2p.ui.osgi.Jp2pContainerPetitioner;
-import org.eclipselabs.osgi.ds.broker.service.IParlezListener;
-import org.eclipselabs.osgi.ds.broker.service.ParlezEvent;
+import org.chaupal.jp2p.ui.Activator;
+import org.chaupal.jp2p.ui.osgi.Jp2pContainerService;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -35,9 +38,26 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	
 	private CommonViewer viewer;
 	
-	private Jp2pContainerPetitioner petitioner;
-	private ServiceEventDispatcher dispatcher;
+	//private Jp2pContainerPetitioner petitioner;
+	//private ServiceEventDispatcher dispatcher;
 	private Jp2pContainerNavigator navigator;
+	
+	private Jp2pContainerService<Object> containerService = Activator.getJp2pContainerService();
+	private IContainerBuilderListener<Object> containerListener = new IContainerBuilderListener<Object>(){
+
+		@Override
+		public void notifyContainerBuilt(ContainerBuilderEvent<Object> event) {
+			navigator.refresh();
+		}
+	};
+	private IComponentChangedListener<Object> componentListener = new IComponentChangedListener<Object>() {
+
+		@Override
+		public void notifyServiceChanged(ComponentChangedEvent<Object> event) {
+			navigator.refresh();
+		}
+	
+	};
 	
 	//IPropertySheetPage doesn't implement refresh()
 	private PropertySheetPage propertyPage;
@@ -55,16 +75,8 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	public Jp2pContainerNavigator() {
 		super();
 		navigator = this;
-		dispatcher = ServiceEventDispatcher.getInstance();
-		dispatcher.addServiceChangeListener( new IServiceChangedListener(){
-
-			@Override
-			public void notifyServiceChanged(ServiceChangedEvent event) {
-				if( ServiceChange.REFRESH.equals( event.getChange()))
-					navigator.refresh();
-			}
-			
-		});
+		containerService.addContainerBuilderListener( containerListener);
+		containerService.addComponentChangedListener( componentListener);
 	}
 
 	/**
@@ -73,19 +85,8 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	 */
 	@Override
 	protected Object getInitialInput() {
-        petitioner = Jp2pContainerPetitioner.getInstance();
-		petitioner.addParlezListener( new IParlezListener(){
-
-			@Override
-			public void notifyChange(ParlezEvent<?> event) {
-				navigator.refresh();
-			}
-			
-		});
-		petitioner.petition("containers");
-		return petitioner;
+		return containerService;
 	}
-
 	
 	@SuppressWarnings("rawtypes")
 	@Override

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui;
 
+import org.chaupal.jp2p.ui.osgi.Jp2pContainerService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.log.LogService;
@@ -20,6 +21,8 @@ public class Activator implements BundleActivator {
 	private static Activator plugin;
 	private ServiceTracker<BundleContext,LogService> logServiceTracker;
 	private static LogService logService;
+	private static Jp2pContainerService<Object> containerService;
+	
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
@@ -34,10 +37,16 @@ public class Activator implements BundleActivator {
 
 		if(logService != null)
 			logService.log(LogService.LOG_INFO, "Logging service started");
+		
+		containerService = new Jp2pContainerService<Object>();
+		containerService.start( context);
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
+		if( containerService != null ){
+			containerService.finalise();
+		}
 		if(logService != null)
 			logService.log(LogService.LOG_INFO, "Logging service Stopped");
 		
@@ -53,5 +62,13 @@ public class Activator implements BundleActivator {
 	
 	public static Activator getDefault(){
 		return plugin;
+	}
+	
+	/**
+	 * Get the container service
+	 * @return
+	 */
+	public static Jp2pContainerService<Object> getJp2pContainerService(){
+		return containerService;
 	}
 }

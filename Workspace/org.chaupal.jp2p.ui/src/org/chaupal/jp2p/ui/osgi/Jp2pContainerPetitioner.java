@@ -34,7 +34,7 @@ import net.jp2p.container.utils.Utils;
 
 import org.chaupal.jp2p.ui.comparator.Jp2pServiceComparator;
 import org.chaupal.jp2p.ui.log.Jp2pLog;
-import org.chaupal.jp2p.ui.osgi.PetitionPropertySource.PetitionerProperties;
+import org.chaupal.jp2p.ui.osgi.RootPropertySource.PetitionerProperties;
 import org.eclipselabs.osgi.ds.broker.service.AbstractPalaver;
 import org.eclipselabs.osgi.ds.broker.service.AbstractPetitioner;
 import org.eclipselabs.osgi.ds.broker.service.ParlezEvent;
@@ -51,14 +51,14 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 	private ServiceEventDispatcher dispatcher = ServiceEventDispatcher.getInstance();	
 	private IComponentChangedListener<IJp2pComponent<?>> listener;
 	private RefreshRunnable refresher;
-	private PetitionPropertySource source;
+	private RootPropertySource source;
 	
 	private Logger logger = Logger.getLogger( Jp2pContainerPetitioner.class.getName() );
 	
 	private Jp2pContainerPetitioner() {
 		super( new ResourcePalaver());
 		children = new ArrayList<IJp2pComponent<?>>();
-		source = new PetitionPropertySource();
+		source = new RootPropertySource();
 		refresher = new RefreshRunnable( source );
 		this.listener = new IComponentChangedListener<IJp2pComponent<?>>() {
 			
@@ -231,9 +231,9 @@ public class Jp2pContainerPetitioner extends AbstractPetitioner<String, String, 
 	private class RefreshRunnable implements Runnable{
 
 		private ExecutorService service;
-		private PetitionPropertySource source;
+		private RootPropertySource source;
 		
-		public RefreshRunnable( PetitionPropertySource source) {
+		public RefreshRunnable( RootPropertySource source) {
 			super();
 			this.source = source;
 		}

@@ -85,7 +85,7 @@ public abstract class AbstractUIPropertySource<T extends Object> implements IJp2
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}
 
-	protected abstract Object onGetPropertyValue( IJp2pProperties id );
+	public abstract Object onGetPropertyValue( IJp2pProperties id );
 	
 	@Override
 	public final Object getPropertyValue(Object id) {

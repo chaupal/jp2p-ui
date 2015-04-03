@@ -62,7 +62,7 @@ public class Jp2pNetworkConfiguratorComposite extends Composite {
 		TabItem tbtmHttp2Item = new TabItem(tabFolder, SWT.NONE);
 		tbtmHttp2Item.setText("Http2");
 		http2Composite = new Http2ConfigurationComposite( tabFolder, SWT.NONE);
-		tbtmHttp2Item.setControl(httpComposite);
+		tbtmHttp2Item.setControl(http2Composite);
 		sashForm.setWeights(new int[] {1, 1});
 
 		TabItem tbtmMulticastItem = new TabItem(tabFolder, SWT.NONE);

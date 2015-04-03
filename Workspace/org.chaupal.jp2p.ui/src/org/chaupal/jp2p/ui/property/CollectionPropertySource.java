@@ -9,34 +9,42 @@ package org.chaupal.jp2p.ui.property;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
-public class CollectionPropertySource implements IPropertySource {
+public class CollectionPropertySource<T extends Object> implements IPropertySource {
 
 	public static final String S_PROPERTY_JP2P_COMPONENT_TEXT_ID = "org.chaupal.jp2p.component.text";
 
 	private String defaultText;
-	private List<Object> source;
+	private List<T> source;
 	private String category;
 
-	public CollectionPropertySource( String category, Collection<?> source, String defaultText ) {
+	public CollectionPropertySource( String category, Collection<T> source, String defaultText ) {
 		super();
 		this.defaultText = defaultText;
-		this.source = new ArrayList<Object>( source );
+		this.source = new ArrayList<T>( source );
 		this.category = category;
 	}
 
-	public CollectionPropertySource( String category, Object[] source, String defaultText ) {
+	public CollectionPropertySource( String category, T[] items, String defaultText ) {
 		super();
 		this.defaultText = defaultText;
-		this.source = new ArrayList<Object>();
+		this.source = new ArrayList<T>();
 		this.category = category;
-		for( Object item: source )
-		  this.source.add( item ); 
+		Collections.addAll( this.source,  items ); 
+	}
+
+	public boolean isEmpty(){
+		return source.isEmpty();
+	}
+	
+	public final String getDefaultText() {
+		return defaultText;
 	}
 
 	@Override
@@ -48,12 +56,10 @@ public class CollectionPropertySource implements IPropertySource {
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
 		TextPropertyDescriptor textDescriptor; 
-		int i=0;
-		for( Object value: source ){
-			textDescriptor = new TextPropertyDescriptor( i, value.toString() );
+		for( int i=0; i<source.size(); i++ ){
+			textDescriptor = new TextPropertyDescriptor( i, String.valueOf( i ));
 			textDescriptor.setCategory( category);
 			descriptors.add( textDescriptor);
-			i++;
 		}
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}

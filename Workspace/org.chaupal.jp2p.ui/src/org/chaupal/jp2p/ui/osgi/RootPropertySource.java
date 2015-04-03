@@ -13,7 +13,7 @@ import net.jp2p.container.properties.AbstractJp2pWritePropertySource;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.utils.StringStyler;
 
-public class PetitionPropertySource extends AbstractJp2pWritePropertySource
+public class RootPropertySource extends AbstractJp2pWritePropertySource
 {
 	public static final String S_PETITIONER = "JP2P Container Petitioner";
 	public static final long DEFAULT_TIME_OUT = 500; //msec
@@ -42,7 +42,7 @@ public class PetitionPropertySource extends AbstractJp2pWritePropertySource
 		}
 	}
 
-	public PetitionPropertySource() {
+	public RootPropertySource() {
 		super( Activator.BUNDLE_ID, S_PETITIONER );
 		super.setProperty( PetitionerProperties.REFRESH_TIME, DEFAULT_TIME_OUT);
 	}
