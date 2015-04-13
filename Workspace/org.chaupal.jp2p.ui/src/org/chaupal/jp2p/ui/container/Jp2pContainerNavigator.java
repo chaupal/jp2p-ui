@@ -7,12 +7,7 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.container;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
-import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.chaupal.utils.Utils;
-import net.jp2p.container.builder.ContainerBuilderEvent;
-import net.jp2p.container.builder.IContainerBuilderListener;
 import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;
 import net.jp2p.container.component.IJp2pComponent;
@@ -38,25 +33,16 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	
 	private CommonViewer viewer;
 	
-	//private Jp2pContainerPetitioner petitioner;
-	//private ServiceEventDispatcher dispatcher;
 	private Jp2pContainerNavigator navigator;
 	
 	private Jp2pContainerService<Object> containerService = Activator.getJp2pContainerService();
-	private IContainerBuilderListener<Object> containerListener = new IContainerBuilderListener<Object>(){
-
-		@Override
-		public void notifyContainerBuilt(ContainerBuilderEvent<Object> event) {
-			navigator.refresh();
-		}
-	};
 	private IComponentChangedListener<Object> componentListener = new IComponentChangedListener<Object>() {
 
 		@Override
 		public void notifyServiceChanged(ComponentChangedEvent<Object> event) {
+			System.out.println( "Refreshing: " + event.getTarget() + ": " + event.getChange());
 			navigator.refresh();
 		}
-	
 	};
 	
 	//IPropertySheetPage doesn't implement refresh()
@@ -75,7 +61,6 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	public Jp2pContainerNavigator() {
 		super();
 		navigator = this;
-		containerService.addContainerBuilderListener( containerListener);
 		containerService.addComponentChangedListener( componentListener);
 	}
 
@@ -128,7 +113,14 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 		IJp2pComponent<?> component = (IJp2pComponent<Object>)element;
 		setContentDescription( S_NAVIGATOR_TEXT + Utils.getLabel(component));
 	}
+
 	
+	@Override
+	public void dispose() {
+		containerService.removeComponentChangedListener( componentListener);
+		super.dispose();
+	}
+
 	/**
 	 * Refresh the property page
 	 */

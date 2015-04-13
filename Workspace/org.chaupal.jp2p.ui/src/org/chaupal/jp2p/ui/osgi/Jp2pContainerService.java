@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
+import net.jp2p.container.AbstractJp2pContainer.ServiceChange;
 import net.jp2p.container.IJp2pContainer;
-import net.jp2p.container.builder.ContainerBuilderEvent;
-import net.jp2p.container.builder.IContainerBuilderListener;
+import net.jp2p.container.component.ComponentChangedEvent;
+import net.jp2p.container.component.IComponentChangedListener;
+import net.jp2p.container.component.IJp2pComponent;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceEvent;
@@ -33,7 +35,21 @@ public class Jp2pContainerService<T extends Object> extends AbstractContainerNod
 	private BundleContext context;
 	
 	private ServiceTracker<?,?> containerTracker;
-	private Collection<IContainerBuilderListener<T>> containerListeners;
+	
+	//Listeners can listen to adding or removing containers
+	private Collection<IComponentChangedListener<IJp2pComponent<?>>> containerListeners;
+	
+	
+	//But the system itself also tracks this
+	private IComponentChangedListener<IJp2pComponent<?>> listener = new IComponentChangedListener<IJp2pComponent<?>>(){
+
+		@Override
+		public void notifyServiceChanged(
+				ComponentChangedEvent<IJp2pComponent<?>> event) {
+			notifyContainerChanged(event);
+		}	
+	};
+
 	
 	private Logger logger = Logger.getLogger( this.getClass().getName() );
 
@@ -48,14 +64,19 @@ public class Jp2pContainerService<T extends Object> extends AbstractContainerNod
 			System.out.println( obj.getClass().getName());
 					
 			IJp2pContainer<T> container = (IJp2pContainer<T>)obj;
+			ComponentChangedEvent<IJp2pComponent<?>> event = null;
 			switch(ev.getType()) {
 			case ServiceEvent.REGISTERED:
 				addChild( container );
-				notifyContainerChanged(container);
+				event = new ComponentChangedEvent<IJp2pComponent<?>>( container, ServiceChange.CHILD_ADDED );
+				notifyContainerChanged( event );
+				container.getDispatcher().addServiceChangeListener(listener);
 				break;
 			case ServiceEvent.UNREGISTERING:
 				removeChild( container );
-				notifyContainerChanged(container);
+				container.getDispatcher().removeServiceChangeListener(listener);
+				event = new ComponentChangedEvent<IJp2pComponent<?>>( container, ServiceChange.CHILD_REMOVED );
+				notifyContainerChanged( event );
 				break;
 			default:
 				break;
@@ -66,22 +87,26 @@ public class Jp2pContainerService<T extends Object> extends AbstractContainerNod
 	//private 
 	public Jp2pContainerService() {
 		super();
-		containerListeners = new ArrayList<IContainerBuilderListener<T>>();
+		containerListeners = new ArrayList<IComponentChangedListener<IJp2pComponent<?>> >();
 	}
 
 	public void addContainerBuilderListener(
-			IContainerBuilderListener<T> listener) {
+			IComponentChangedListener<IJp2pComponent<?>>  listener) {
 		this.containerListeners.add( listener );
 	}
 
 	public void removeContainerBuilderListener(
-			IContainerBuilderListener<T> listener) {
+			IComponentChangedListener<IJp2pComponent<?>>  listener) {
 		this.containerListeners.remove( listener );
 	}
 	
-	protected void notifyContainerChanged( IJp2pContainer<T> container ){
-		for( IContainerBuilderListener<T> listener: containerListeners )
-			listener.notifyContainerBuilt( new ContainerBuilderEvent<T>( this, container ));
+	/**
+	 * Adding or removing a container is translated to a service change event 
+	 * @param component
+	 */
+	protected void notifyContainerChanged( ComponentChangedEvent<IJp2pComponent<?>> event ){
+		for( IComponentChangedListener<IJp2pComponent<?>>  listener: containerListeners )
+			listener.notifyServiceChanged( event );
 
 	}
 
