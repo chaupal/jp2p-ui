@@ -36,10 +36,10 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	private Jp2pContainerNavigator navigator;
 	
 	private Jp2pContainerService<Object> containerService = Activator.getJp2pContainerService();
-	private IComponentChangedListener<Object> componentListener = new IComponentChangedListener<Object>() {
+	private IComponentChangedListener<IJp2pComponent<Object>> componentListener = new IComponentChangedListener<IJp2pComponent<Object>>() {
 
 		@Override
-		public void notifyServiceChanged(ComponentChangedEvent<Object> event) {
+		public void notifyServiceChanged(ComponentChangedEvent<IJp2pComponent<Object>> event) {
 			System.out.println( "Refreshing: " + event.getTarget() + ": " + event.getChange());
 			navigator.refresh();
 		}
@@ -61,7 +61,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	public Jp2pContainerNavigator() {
 		super();
 		navigator = this;
-		containerService.addComponentChangedListener( componentListener);
+		containerService.addServiceChangeListener( componentListener);
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	
 	@Override
 	public void dispose() {
-		containerService.removeComponentChangedListener( componentListener);
+		containerService.removeServiceChangeListener( componentListener);
 		super.dispose();
 	}
 

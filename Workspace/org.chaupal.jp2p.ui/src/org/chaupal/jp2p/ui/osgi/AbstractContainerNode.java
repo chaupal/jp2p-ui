@@ -9,22 +9,21 @@
 package org.chaupal.jp2p.ui.osgi;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import net.jp2p.container.AbstractJp2pContainer;
-import net.jp2p.container.AbstractJp2pContainer.ServiceChange;
+import net.jp2p.container.Jp2pContainer;
+import net.jp2p.container.Jp2pContainer.ServiceChange;
 import net.jp2p.container.IJp2pContainer;
 import net.jp2p.container.component.ComponentChangedEvent;
+import net.jp2p.container.component.ComponentEventDispatcher;
 import net.jp2p.container.component.IComponentChangedListener;
 import net.jp2p.container.component.IJp2pComponent;
-import net.jp2p.container.component.IJp2pComponentNode;
+import net.jp2p.container.component.Jp2pComponentNode;
 import net.jp2p.container.properties.AbstractJp2pWritePropertySource;
 import net.jp2p.container.properties.IJp2pProperties;
-import net.jp2p.container.properties.IJp2pPropertySource;
 import net.jp2p.container.utils.StringStyler;
 
 import org.chaupal.jp2p.ui.Activator;
@@ -32,23 +31,21 @@ import org.chaupal.jp2p.ui.comparator.Jp2pServiceComparator;
 import org.chaupal.jp2p.ui.log.Jp2pLog;
 import org.chaupal.jp2p.ui.osgi.RootPropertySource.PetitionerProperties;
 
-public class AbstractContainerNode<T extends Object> implements IJp2pComponentNode<T>
+public class AbstractContainerNode<T extends Object> extends Jp2pComponentNode<T>
 {
 	public static final String S_WRN_THREAD_INTERRUPTED = "The thread is interrupted. Probably stopping service";
 	
 	private List<IJp2pContainer<T>> containers;
 
 	private IComponentChangedListener<IJp2pComponent<?>> listener;
-	private Collection<IComponentChangedListener<T>> listeners;
 	
 	private RefreshRunnable refresher;
-	private RootPropertySource source;
 	
 	protected AbstractContainerNode() {
+		super( new RootPropertySource(), null );
+		super.setRoot(true);
 		containers = new ArrayList<IJp2pContainer<T>>();
-		listeners = new ArrayList<IComponentChangedListener<T>>();
-		source = new RootPropertySource();
-		refresher = new RefreshRunnable( source );
+		refresher = new RefreshRunnable( (RootPropertySource) super.getPropertySource() );
 		this.listener = new IComponentChangedListener<IJp2pComponent<?>>() {
 			
 			@Override
@@ -58,19 +55,6 @@ public class AbstractContainerNode<T extends Object> implements IJp2pComponentNo
 		};
 	}
 
-	public void addComponentChangedListener( IComponentChangedListener<T> listener ){
-		this.listeners.add( listener );
-	}
-
-	public void removeComponentChangedListener( IComponentChangedListener<T> listener ){
-		this.listeners.remove( listener );
-	}
-
-	@Override
-	public IJp2pPropertySource<IJp2pProperties> getPropertySource() {
-		return source;
-	}
-
 	public IJp2pContainer<?> getJp2pContainer( String identifier ) {
 		for( IJp2pContainer<?> container: this.containers )
 			if( container.getIdentifier().equals( identifier ))
@@ -78,33 +62,7 @@ public class AbstractContainerNode<T extends Object> implements IJp2pComponentNo
 		return null;
 	}
 
-	
-	@Override
-	public String getId() {
-		return this.getClass().getPackage().getName() + ".root";
-	}
-
-	/**
-	 * Get a String label for this component. This can be used for display options and 
-	 * is not meant to identify the component;
-	 * @return
-	 */
-	@Override
-	public String getComponentLabel(){
-		return this.source.getComponentName();
-	}
-
-	@Override
-	public boolean isRoot() {
-		return true;
-	}
-
-	@Override
-	public T getModule() {
-		return null;
-	}
-
-	@Override
+		@Override
 	public IJp2pComponent<?>[] getChildren() {
 		return containers.toArray( new IJp2pComponent<?>[ this.containers.size()]);
 	}
@@ -135,7 +93,7 @@ public class AbstractContainerNode<T extends Object> implements IJp2pComponentNo
 
 	public void finalise(){
 		for( IJp2pComponent<?> container: this.containers ){
-			((AbstractJp2pContainer<?>) container).getDispatcher().removeServiceChangeListener( listener );
+			((Jp2pContainer<?>) container).getDispatcher().removeServiceChangeListener( listener );
 		}
 		this.refresher.stop();
 	}
@@ -172,11 +130,11 @@ public class AbstractContainerNode<T extends Object> implements IJp2pComponentNo
 		
 		@Override
 		public void run() {
-			ComponentChangedEvent<T> event = new ComponentChangedEvent<T>( this, ServiceChange.STATUS_CHANGE );
+			ComponentChangedEvent<IJp2pComponent<T>> event = new ComponentChangedEvent<IJp2pComponent<T>>( this, ServiceChange.STATUS_CHANGE );
+			ComponentEventDispatcher dispatcher = getDispatcher();
 			while( counter > 0 ){
 				counter = 0;
-				for( IComponentChangedListener<T> listener: listeners )
-					listener.notifyServiceChanged(event);
+				dispatcher.serviceChanged(event);
 				try{
 					Thread.sleep((long) this.source.getProperty( PetitionerProperties.REFRESH_TIME ));
 				}

@@ -16,12 +16,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
+import net.jp2p.chaupal.container.ChaupalContainer;
 import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.chaupal.dispatcher.IServiceChangedListener.ServiceChange;
-import net.jp2p.container.AbstractJp2pContainer;
-import net.jp2p.container.IJp2pDSComponent;
 import net.jp2p.container.Jp2pContainer;
+import net.jp2p.container.IJp2pDSComponent;
 import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;
 import net.jp2p.container.component.IJp2pComponent;
@@ -37,7 +37,7 @@ import org.eclipselabs.osgi.ds.broker.service.AbstractPalaver;
 import org.eclipselabs.osgi.ds.broker.service.AbstractPetitioner;
 import org.eclipselabs.osgi.ds.broker.service.ParlezEvent;
 
-public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2pContainer>
+public class PeerGroupPetitioner extends AbstractPetitioner<String, String, ChaupalContainer>
 {
 	public static final String S_WRN_THREAD_INTERRUPTED = "The thread is interrupted. Probably stopping service";
 	public static final String S_PEERGROUP_PETITIONER = "PeerGroupPetitioner";
@@ -73,8 +73,8 @@ public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2p
 	}
 
 	@Override
-	protected void onDataReceived( ParlezEvent<Jp2pContainer> event ) {
-		if(!( event.getData() instanceof Jp2pContainer ))
+	protected void onDataReceived( ParlezEvent<ChaupalContainer> event ) {
+		if(!( event.getData() instanceof ChaupalContainer ))
 			return;
 		super.onDataReceived( event );
 		logger.info("Container added: " + event.getData().getIdentifier( ));
@@ -83,7 +83,7 @@ public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2p
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public PeerGroupNode createPeerGroupTree(){
 		PeerGroupNode root = new PeerGroupNode( null ); 
-		for( Jp2pContainer container: super.getCollection() ){
+		for( ChaupalContainer container: super.getCollection() ){
 			root.addChild(( ILeaf) PeerGroupFactory.createPeerGroupTree( container ));
 		}
 		return root;
@@ -91,7 +91,7 @@ public class PeerGroupPetitioner extends AbstractPetitioner<String, String, Jp2p
 	
 	public void finalise(){
 		for( IJp2pComponent<?> container: this.children ){
-			((AbstractJp2pContainer<?>) container).getDispatcher().removeServiceChangeListener( listener );
+			((Jp2pContainer<?>) container).getDispatcher().removeServiceChangeListener( listener );
 		}
 		this.refresher.stop();
 	}

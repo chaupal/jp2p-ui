@@ -14,11 +14,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
-import net.jp2p.container.AbstractJp2pContainer.ServiceChange;
 import net.jp2p.container.IJp2pContainer;
+import net.jp2p.container.Jp2pContainer;
 import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;
 import net.jp2p.container.component.IJp2pComponent;
+import net.jp2p.container.log.LoggerFactory;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceEvent;
@@ -36,21 +37,21 @@ public class Jp2pContainerService<T extends Object> extends AbstractContainerNod
 	
 	private ServiceTracker<?,?> containerTracker;
 	
-	//Listeners can listen to adding or removing containers
-	private Collection<IComponentChangedListener<IJp2pComponent<?>>> containerListeners;
+	private Collection<IComponentChangedListener<IJp2pComponent<T>>> listeners;
 	
-	
-	//But the system itself also tracks this
-	private IComponentChangedListener<IJp2pComponent<?>> listener = new IComponentChangedListener<IJp2pComponent<?>>(){
+	//This listeners registers itself with all the containers
+	private IComponentChangedListener<IJp2pComponent<T>> listener = new IComponentChangedListener<IJp2pComponent<T>>(){
 
 		@Override
 		public void notifyServiceChanged(
-				ComponentChangedEvent<IJp2pComponent<?>> event) {
-			notifyContainerChanged(event);
+				ComponentChangedEvent<IJp2pComponent<T>> event) {
+			System.out.println( "Notify change in container " + event.getTarget() + ": " + event.getChange().toString() );
+			for( IComponentChangedListener<IJp2pComponent<T>> listener:  listeners ){
+				listener.notifyServiceChanged(event);
+			}
 		}	
 	};
 
-	
 	private Logger logger = Logger.getLogger( this.getClass().getName() );
 
 	private ServiceListener sl = new ServiceListener() {
@@ -64,50 +65,34 @@ public class Jp2pContainerService<T extends Object> extends AbstractContainerNod
 			System.out.println( obj.getClass().getName());
 					
 			IJp2pContainer<T> container = (IJp2pContainer<T>)obj;
-			ComponentChangedEvent<IJp2pComponent<?>> event = null;
 			switch(ev.getType()) {
 			case ServiceEvent.REGISTERED:
+				LoggerFactory.getJp2pLogMessage( container.getPropertySource(), Jp2pContainer.printContainerStructure(container));
 				addChild( container );
-				event = new ComponentChangedEvent<IJp2pComponent<?>>( container, ServiceChange.CHILD_ADDED );
-				notifyContainerChanged( event );
 				container.getDispatcher().addServiceChangeListener(listener);
 				break;
 			case ServiceEvent.UNREGISTERING:
 				removeChild( container );
 				container.getDispatcher().removeServiceChangeListener(listener);
-				event = new ComponentChangedEvent<IJp2pComponent<?>>( container, ServiceChange.CHILD_REMOVED );
-				notifyContainerChanged( event );
 				break;
 			default:
 				break;
 			}
 		}
 	};
-			
+
 	//private 
 	public Jp2pContainerService() {
 		super();
-		containerListeners = new ArrayList<IComponentChangedListener<IJp2pComponent<?>> >();
+		listeners = new ArrayList<IComponentChangedListener<IJp2pComponent<T>>>();
 	}
 
-	public void addContainerBuilderListener(
-			IComponentChangedListener<IJp2pComponent<?>>  listener) {
-		this.containerListeners.add( listener );
+	public void addServiceChangeListener( IComponentChangedListener<IJp2pComponent<T>> listener ){
+		listeners.add( listener );
 	}
 
-	public void removeContainerBuilderListener(
-			IComponentChangedListener<IJp2pComponent<?>>  listener) {
-		this.containerListeners.remove( listener );
-	}
-	
-	/**
-	 * Adding or removing a container is translated to a service change event 
-	 * @param component
-	 */
-	protected void notifyContainerChanged( ComponentChangedEvent<IJp2pComponent<?>> event ){
-		for( IComponentChangedListener<IJp2pComponent<?>>  listener: containerListeners )
-			listener.notifyServiceChanged( event );
-
+	public void removeServiceChangeListener( IComponentChangedListener<IJp2pComponent<T>> listener ){
+		listeners.remove( listener );
 	}
 
 	public void start(final BundleContext bundleContext) throws Exception {
