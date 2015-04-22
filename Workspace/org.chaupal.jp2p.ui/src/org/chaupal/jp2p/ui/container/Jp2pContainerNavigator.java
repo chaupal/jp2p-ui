@@ -28,7 +28,8 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 
 public class Jp2pContainerNavigator extends CommonNavigator{
 
-	public static final String PATH_ID = "org.chaupal.jp2p.ui.container.view";
+	static final String S_JP2P_NAVIGATOR_ID = "org.chaupal.jp2p.ui.container.view";
+
 	public static final String S_NAVIGATOR_TEXT = "User Service: ";
 	
 	private CommonViewer viewer;
@@ -40,7 +41,6 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 
 		@Override
 		public void notifyServiceChanged(ComponentChangedEvent<IJp2pComponent<Object>> event) {
-			System.out.println( "Refreshing: " + event.getTarget() + ": " + event.getChange());
 			navigator.refresh();
 		}
 	};

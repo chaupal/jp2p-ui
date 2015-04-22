@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network.seeds;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Set;
 
@@ -23,8 +24,8 @@ public class RelayUIPropertySource extends AbstractSeedlistUIPropertySource {
 
 	public RelayUIPropertySource( NetworkConfigurator configurator) {
 		super( SeedTypes.RELAY, configurator );
-		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RELAY.toString(), configurator.getRelaySeedURIs(), SeedListProperties.SEED_URI.toString()));
-		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RELAY.toString(), configurator.getRelaySeedingURIs(), SeedListProperties.SEEDING_URI.toString()));
+		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RELAY.toString(), configurator.getRelaySeedURIs(), super.getType().toString()));
+		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RELAY.toString(), configurator.getRelaySeedingURIs(), super.getType().toString()));
 	}
 
 	@Override
@@ -42,9 +43,9 @@ public class RelayUIPropertySource extends AbstractSeedlistUIPropertySource {
 		case USE_ONLY:
 			return configurator.getUseOnlyRelaySeedsStatus();
 		case SEED_URI:
-			return configurator.getRelaySeedURIs();
+			return new CollectionPropertySource<URI>( super.getCategory(), configurator.getRelaySeedURIs(), SeedTypes.RELAY.toString() );
 		case SEEDING_URI:
-			return configurator.getRelaySeedingURIs();
+			return new CollectionPropertySource<URI>( super.getCategory(), configurator.getRelaySeedingURIs(), SeedTypes.RELAY.toString() );
 		default:
 			break;
 		}

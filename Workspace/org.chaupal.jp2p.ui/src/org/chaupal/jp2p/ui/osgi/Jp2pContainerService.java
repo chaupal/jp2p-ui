@@ -12,8 +12,11 @@ package org.chaupal.jp2p.ui.osgi;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
+import net.jp2p.chaupal.container.AbstractContainerRefresh;
 import net.jp2p.container.IJp2pContainer;
 import net.jp2p.container.Jp2pContainer;
 import net.jp2p.container.component.ComponentChangedEvent;
@@ -39,16 +42,25 @@ public class Jp2pContainerService<T extends Object> extends AbstractContainerNod
 	
 	private Collection<IComponentChangedListener<IJp2pComponent<T>>> listeners;
 	
+	private AbstractContainerRefresh<T> refresh = new AbstractContainerRefresh<T>( AbstractContainerRefresh.DEFAULT_TIME ){
+
+		@Override
+		protected void onRefresh(
+				ComponentChangedEvent<IJp2pComponent<T>> event) {
+			for( IComponentChangedListener<IJp2pComponent<T>> listener:  listeners ){
+				listener.notifyServiceChanged(event);
+			}
+			
+		}		
+	};
+	
 	//This listeners registers itself with all the containers
 	private IComponentChangedListener<IJp2pComponent<T>> listener = new IComponentChangedListener<IJp2pComponent<T>>(){
 
 		@Override
 		public void notifyServiceChanged(
 				ComponentChangedEvent<IJp2pComponent<T>> event) {
-			System.out.println( "Notify change in container " + event.getTarget() + ": " + event.getChange().toString() );
-			for( IComponentChangedListener<IJp2pComponent<T>> listener:  listeners ){
-				listener.notifyServiceChanged(event);
-			}
+			refresh.refresh(event);
 		}	
 	};
 

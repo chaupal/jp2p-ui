@@ -34,6 +34,13 @@
             name="JP2P Container View"
             restorable="true">
       </view>
+       <view
+             category="org.chaupal.jp2p.ui.container"
+             class="org.chaupal.jp2p.ui.container.Jp2pPropertySheet"
+             id="org.chaupal.jp2p.ui.property.sheet"
+             name="Jp2p Property Sheet"
+             restorable="true">
+       </view>
   </extension>
    <extension
          id="org.chaupal.jp2p.container.viewer"
@@ -99,7 +106,7 @@
          </view>
          <view
                closeable="true"
-               id="org.eclipse.ui.views.PropertySheet"
+               id="org.chaupal.jp2p.ui.property.sheet"
                minimized="false"
                relationship="right"
                relative="org.chaupal.jp2p.ui.container.view"

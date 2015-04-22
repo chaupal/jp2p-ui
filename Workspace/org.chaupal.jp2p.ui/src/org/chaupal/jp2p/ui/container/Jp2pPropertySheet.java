@@ -1,20 +1,16 @@
-package org.chaupal.jp2p.ui.jxta.view;
+package org.chaupal.jp2p.ui.container;
 
-import org.chaupal.jp2p.ui.jxta.container.JxseContainerNavigator;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.PropertySheet;
 
-public class JxseModulePropertySheet extends PropertySheet{
-
-	private static final String S_MODULE_NAVIGATOR_ID = "org.chaupal.jp2p.ui.jxse.module.view";
+public class Jp2pPropertySheet extends PropertySheet{
 	
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection sel) {
 		ISelection selection = sel;
-		if(!( part instanceof JxseContainerNavigator ))
+		if(!( part instanceof Jp2pContainerNavigator ))
 			selection = null;
-
 		super.selectionChanged(part, selection);
 	}
 
@@ -24,7 +20,7 @@ public class JxseModulePropertySheet extends PropertySheet{
 	@Override
 	protected boolean isImportant(IWorkbenchPart part) {
 		String id = part.getSite().getId();
-		if ( !id.equals( S_MODULE_NAVIGATOR_ID))
+		if ( !id.equals( Jp2pContainerNavigator.S_JP2P_NAVIGATOR_ID))
 			return false;
 		return true;
 	}

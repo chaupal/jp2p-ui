@@ -122,7 +122,7 @@
             class="org.chaupal.jp2p.ui.jxta.container.JxseContainerNavigator"
             icon="resources/ContainerRed.png"
             id="org.chaupal.jp2p.ui.jxse.module.view"
-            name="JXSE Modules View"
+            name="JXSE Module View"
             restorable="true">
       </view>
       <view
@@ -249,6 +249,18 @@
       <perspectiveExtension
             targetID="org.chaupal.jp2p.ui.perspective">
          <view
+               id="org.chaupal.jp2p.ui.jxse.module.view"
+               minimized="false"
+               relationship="bottom"
+               relative="org.chaupal.jp2p.ui.container.view">
+         </view>
+         <view
+               id="org.chaupal.jp2p.ui.jxse.module.property.sheet"
+               minimized="false"
+               relationship="bottom"
+               relative="org.chaupal.jp2p.ui.property.sheet">
+         </view>
+         <view
                id="org.eclipse.jxse.ui.monitor.ConnectivityViewPart"
                minimized="false"
                relationship="bottom"
@@ -292,18 +304,6 @@
                relative="org.chaupal.jp2p.ui.rendezvous.RendezvousServiceViewPart"
                showTitle="true"
                visible="true">
-         </view>
-         <view
-               id="org.chaupal.jp2p.ui.jxse.module.view"
-               minimized="false"
-               relationship="bottom"
-               relative="org.chaupal.jp2p.ui.container.view">
-         </view>
-        <view
-               id="org.chaupal.jp2p.ui.jxse.module.property.sheet"
-               minimized="false"
-               relationship="bottom"
-               relative="org.eclipse.ui.views.PropertySheet">
          </view>
       </perspectiveExtension>
    </extension>

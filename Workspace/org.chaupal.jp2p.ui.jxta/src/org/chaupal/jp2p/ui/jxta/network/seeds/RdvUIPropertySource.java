@@ -23,8 +23,8 @@ public class RdvUIPropertySource extends AbstractSeedlistUIPropertySource {
 
 	public RdvUIPropertySource( NetworkConfigurator configurator) {
 		super( SeedTypes.RDV, configurator );
-		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RDV.toString(), configurator.getRdvSeedURIs(), SeedListProperties.SEED_URI.toString()));
-		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RDV.toString(), configurator.getRdvSeedingURIs(), SeedListProperties.SEEDING_URI.toString()));
+		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RDV.toString(), configurator.getRdvSeedURIs(), super.getType().toString() ));
+		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RDV.toString(), configurator.getRdvSeedingURIs(), super.getType().toString()));
 	}
 
 	@Override

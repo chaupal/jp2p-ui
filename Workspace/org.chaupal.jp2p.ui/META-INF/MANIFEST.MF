@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.chaupal.jp2p.ui;singleton:=true
 Bundle-Version: 1.0.0.v20140602
 Bundle-Vendor: Condast
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: net.jp2p.chaupal.dispatcher,
+Import-Package: net.jp2p.chaupal.container,
+ net.jp2p.chaupal.dispatcher,
  net.jp2p.chaupal.utils,
  net.jp2p.container,
  net.jp2p.container.activator,

@@ -86,6 +86,10 @@ abstract class AbstractSeedlistUIPropertySource extends AbstractUIPropertySource
 		seeds.add( source );
 	}
 	
+	protected final String getCategory() {
+		return category;
+	}
+
 	/**
 	 * Get the property source with the given text
 	 * @param text
