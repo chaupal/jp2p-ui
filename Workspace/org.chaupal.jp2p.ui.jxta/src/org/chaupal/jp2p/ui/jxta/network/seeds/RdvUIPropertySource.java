@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network.seeds;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Set;
 
@@ -23,8 +24,6 @@ public class RdvUIPropertySource extends AbstractSeedlistUIPropertySource {
 
 	public RdvUIPropertySource( NetworkConfigurator configurator) {
 		super( SeedTypes.RDV, configurator );
-		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RDV.toString(), configurator.getRdvSeedURIs(), super.getType().toString() ));
-		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RDV.toString(), configurator.getRdvSeedingURIs(), super.getType().toString()));
 	}
 
 	@Override
@@ -42,9 +41,9 @@ public class RdvUIPropertySource extends AbstractSeedlistUIPropertySource {
 		case USE_ONLY:
 			return configurator.getUseOnlyRendezvousSeedsStatus();
 		case SEED_URI:
-			return configurator.getRdvSeedURIs();
+			return new CollectionPropertySource<URI>( super.getCategory(), configurator.getRdvSeedURIs(), super.getType().toString() );
 		case SEEDING_URI:
-			return configurator.getRdvSeedingURIs();
+			return new CollectionPropertySource<URI>( super.getCategory(), configurator.getRdvSeedingURIs(), super.getType().toString() );
 		default:
 			break;
 		}

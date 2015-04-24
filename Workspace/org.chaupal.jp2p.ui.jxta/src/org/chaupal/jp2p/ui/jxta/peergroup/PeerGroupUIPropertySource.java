@@ -20,9 +20,9 @@ import org.chaupal.jp2p.ui.provider.DecoratorLabelProvider;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 
-public class PeerGroupPropertySource extends AbstractUIPropertySource<PeerGroup> {
+public class PeerGroupUIPropertySource extends AbstractUIPropertySource<PeerGroup> {
 
-	public PeerGroupPropertySource( PeerGroup module ) {
+	public PeerGroupUIPropertySource( PeerGroup module ) {
 		super( module );
 	}
 

@@ -41,9 +41,12 @@ public class AbstractContainerNode<T extends Object> extends Jp2pComponentNode<T
 	
 	private RefreshRunnable refresher;
 	
+	private AbstractContainerNode<T> node;
+	
 	protected AbstractContainerNode() {
 		super( new RootPropertySource(), null );
 		super.setRoot(true);
+		node = this;
 		containers = new ArrayList<IJp2pContainer<T>>();
 		refresher = new RefreshRunnable( (RootPropertySource) super.getPropertySource() );
 		this.listener = new IComponentChangedListener<IJp2pComponent<?>>() {
@@ -130,7 +133,7 @@ public class AbstractContainerNode<T extends Object> extends Jp2pComponentNode<T
 		
 		@Override
 		public void run() {
-			ComponentChangedEvent<IJp2pComponent<T>> event = new ComponentChangedEvent<IJp2pComponent<T>>( this, ServiceChange.STATUS_CHANGE );
+			ComponentChangedEvent<IJp2pComponent<T>> event = new ComponentChangedEvent<IJp2pComponent<T>>( node, ServiceChange.STATUS_CHANGE );
 			ComponentEventDispatcher dispatcher = getDispatcher();
 			while( counter > 0 ){
 				counter = 0;

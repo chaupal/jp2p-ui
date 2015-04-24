@@ -20,6 +20,8 @@ public class CollectionPropertySource<T extends Object> implements IPropertySour
 
 	public static final String S_PROPERTY_JP2P_COMPONENT_TEXT_ID = "org.chaupal.jp2p.component.text";
 
+	public static final String S_EMPTY = "<Empty>";
+
 	private String defaultText;
 	private List<T> source;
 	private String category;
@@ -96,4 +98,10 @@ public class CollectionPropertySource<T extends Object> implements IPropertySour
 	public void setPropertyValue(Object id, Object value) {
 	}
 
+	@Override
+	public String toString() {
+		if( source.isEmpty() )
+			return S_EMPTY;
+		return super.toString();
+	}
 }

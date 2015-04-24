@@ -501,6 +501,8 @@ public class ConnectivityViewPart extends ViewPart{
     			LogRecord record = new LogRecord( Jp2pLevel.getJxtaLevel(), message );
     			record.setSourceClassName( this.getClass().getName() );
     			Object[] parameters = new Object[2];
+    			if( peerGroup == null )
+    				return;
     			parameters[0] = peerGroup.getPeerName();
     			Color color = ColorUtils.getSWTColor( Display.getDefault(), SupportedColors.COLOR_CYAN );//coding.get( peerGroup ));
     			parameters[1] = color;

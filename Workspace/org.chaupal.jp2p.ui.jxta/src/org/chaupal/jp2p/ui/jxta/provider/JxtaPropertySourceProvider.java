@@ -23,7 +23,7 @@ import net.jxta.socket.JxtaSocket;
 import org.chaupal.jp2p.ui.property.IJp2pPropertySourceProvider;
 import org.chaupal.jp2p.ui.jxta.network.NetworkManagerPropertySource;
 import org.chaupal.jp2p.ui.jxta.network.configurator.NetworkConfiguratorPropertySource;
-import org.chaupal.jp2p.ui.jxta.peergroup.PeerGroupPropertySource;
+import org.chaupal.jp2p.ui.jxta.peergroup.PeerGroupUIPropertySource;
 import org.chaupal.jp2p.ui.jxta.socket.JxtaSocketPropertySource;
 import org.chaupal.jp2p.ui.jxta.socket.JxtaSocketServerPropertySource;
 import org.eclipse.ui.views.properties.IPropertySource;
@@ -60,9 +60,9 @@ public class JxtaPropertySourceProvider implements
 				case ADVERTISEMENT:
 					break;
 				case PEERGROUP_SERVICE:
-					return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
+					return new PeerGroupUIPropertySource( (PeerGroup) component.getModule() );
 				case NET_PEERGROUP_SERVICE:
-					return new PeerGroupPropertySource( (PeerGroup) component.getModule() );
+					return new PeerGroupUIPropertySource( (PeerGroup) component.getModule() );
 				case JXSE_SOCKET_SERVICE:
 					String typeStr = AbstractJp2pPropertySource.getType( component.getPropertySource());
 					SocketTypes type = SocketTypes.getType(typeStr);

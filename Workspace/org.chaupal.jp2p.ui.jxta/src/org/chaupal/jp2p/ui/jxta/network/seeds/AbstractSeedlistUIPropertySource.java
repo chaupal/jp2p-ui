@@ -11,14 +11,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
-import org.chaupal.jp2p.ui.property.CollectionPropertySource;
 import org.chaupal.jp2p.ui.property.descriptors.CheckBoxPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.descriptors.SpinnerPropertyDescriptor;
 import org.chaupal.jp2p.ui.util.CategoryStringProperty;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
-import org.eclipse.ui.views.properties.IPropertySource;
 
 import net.jp2p.chaupal.jxta.platform.seeds.ISeedInfo;
 import net.jp2p.chaupal.jxta.platform.seeds.ISeedInfo.SeedTypes;
@@ -33,8 +31,6 @@ abstract class AbstractSeedlistUIPropertySource extends AbstractUIPropertySource
 
 	private String category;
 	
-	private Collection<IPropertySource> seeds;
-
 	public enum SeedListProperties implements IJp2pProperties{
 		MAX_CLIENTS,
 		USE_ONLY,
@@ -75,35 +71,14 @@ abstract class AbstractSeedlistUIPropertySource extends AbstractUIPropertySource
 		super( configurator );
 		this.category = type.toString();
 		this.type = type;
-		seeds = new ArrayList<IPropertySource>();
 	}
 	
 	protected final ISeedInfo.SeedTypes getType() {
 		return type;
 	}
 
-	protected void addPropertySource( IPropertySource source ){
-		seeds.add( source );
-	}
-	
 	protected final String getCategory() {
 		return category;
-	}
-
-	/**
-	 * Get the property source with the given text
-	 * @param text
-	 * @return
-	 */
-	protected CollectionPropertySource<?> getCollectionPropertySource( String text ){
-		for( IPropertySource source: this.seeds ){
-			if(!( source instanceof CollectionPropertySource ))
-				continue;
-			CollectionPropertySource<?> cps = (CollectionPropertySource<?>) source;
-			if( cps.getDefaultText().equals( text ))
-				return cps;
-		}
-		return null;
 	}
 	
 	@Override
@@ -130,10 +105,6 @@ abstract class AbstractSeedlistUIPropertySource extends AbstractUIPropertySource
 			descriptor.setCategory( category );
 			descriptors.add(descriptor);
 		}
-		//id = new CategoryStringProperty( Directives.ENABLED.name(), category );
-		//descriptor = new CheckBoxPropertyDescriptor( id, Directives.ENABLED.toString() );
-		//descriptor.setCategory( category );
-		//descriptors.add( descriptor );
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}
 
@@ -146,16 +117,7 @@ abstract class AbstractSeedlistUIPropertySource extends AbstractUIPropertySource
 		NetworkConfigurator configurator = super.getModule();
 		SeedListProperties property = convert( id );
 		if( property != null ){
-			switch( property ){
-			case SEED_URI:
-			case SEEDING_URI:
-				CollectionPropertySource<?> source = this.getCollectionPropertySource( property.toString() ); 
-				if( source.isEmpty())
-					return null;
-				return source;
-			default:
-				return this.onGetPropertyValue(property, configurator );
-			}
+			return this.onGetPropertyValue(property, configurator );
 		}
 		return null;
 	}

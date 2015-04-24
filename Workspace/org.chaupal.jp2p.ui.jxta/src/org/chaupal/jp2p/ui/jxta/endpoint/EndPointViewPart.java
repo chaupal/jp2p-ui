@@ -65,7 +65,6 @@ public class EndPointViewPart extends AbstractJp2pServiceViewPart<EndpointServic
 		super( S_ENDPOINT_VIEWER );
 	}
 
-
 	@Override
 	protected void onCreatePartControl(Composite parent) {		
 		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);

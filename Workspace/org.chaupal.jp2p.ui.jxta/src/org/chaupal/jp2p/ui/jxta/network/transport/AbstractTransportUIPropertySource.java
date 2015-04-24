@@ -36,7 +36,8 @@ abstract class AbstractTransportUIPropertySource extends AbstractUIPropertySourc
 	}
 
 	/**
-	 * Returns true if the proeprty is valid for the given type
+	 * Returns true if the property is valid for the given type. Is usually overridden
+	 * if the transport type is different than the standard
 	 * @param property
 	 * @return
 	 */
@@ -79,7 +80,7 @@ abstract class AbstractTransportUIPropertySource extends AbstractUIPropertySourc
 				descriptors.add(descriptor);
 			}
 		}
-		id = new CategoryStringProperty( Directives.ENABLED.toString(), category );
+		id = new CategoryStringProperty( Directives.ENABLED.name(), category );
 		descriptor = new CheckBoxPropertyDescriptor( id, Directives.ENABLED.toString() );
 		descriptor.setCategory(category);
 		descriptors.add( descriptor );
@@ -87,15 +88,19 @@ abstract class AbstractTransportUIPropertySource extends AbstractUIPropertySourc
 	}
 
 	protected abstract Object onGetPropertyValue( TransportProperties id );
+	protected abstract boolean onIsEnabledValue( IJp2pProperties id );
 	
 	@Override
 	public Object onGetPropertyValue( IJp2pProperties id) {
-		if( !this.isValidProperty( id ))
+		if( !CategoryStringProperty.hasCategory((IJp2pProperties) id, category ))
 			return null;
-		NetworkConfigurator configurator = super.getModule();
 		if( this.isEnabledProperty( id )){
-			return configurator.isHttpEnabled();
+			return this.onIsEnabledValue(id);
 		}
+		if( !this.isValidProperty( id )){
+			return null;
+		}
+		NetworkConfigurator configurator = super.getModule();
 		IJp2pProperties transport = convert( id );
 		if( transport != null ){
 			TransportProperties property = ( TransportProperties )transport;
@@ -118,6 +123,8 @@ abstract class AbstractTransportUIPropertySource extends AbstractUIPropertySourc
 	public boolean isEditable( Object id ){
 		if(!( id instanceof IJp2pProperties ))
 			return false;
+		if( !CategoryStringProperty.hasCategory((IJp2pProperties) id, category ))
+			return false;
 		if( this.isEnabledProperty((IJp2pProperties) id))
 			return true;
 		IJp2pProperties transport = convert( (IJp2pProperties) id );
@@ -130,14 +137,16 @@ abstract class AbstractTransportUIPropertySource extends AbstractUIPropertySourc
 	 * @param value
 	 */
 	protected abstract boolean onSetPropertyValue( TransportProperties property, Object value);
+	protected abstract boolean onSetEnabledValue( Object value);
 
 	@Override
 	public void setPropertyValue(Object id, Object value) {
+		if( !CategoryStringProperty.hasCategory((IJp2pProperties) id, category ))
+			return;
 		if(!( this.isEditable(id)))
 			return;
-		NetworkConfigurator configurator = super.getModule();
 		if( this.isEnabledProperty( (IJp2pProperties) id )){
-			configurator.setHttpEnabled( (boolean) value);
+			this.onSetEnabledValue( (boolean) value);
 			return;
 		}
 		TransportProperties property = convert( (IJp2pProperties) id );

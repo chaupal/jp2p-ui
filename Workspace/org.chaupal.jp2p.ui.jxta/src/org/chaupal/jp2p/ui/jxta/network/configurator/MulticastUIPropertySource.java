@@ -57,7 +57,7 @@ public class MulticastUIPropertySource extends AbstractUIPropertySource<NetworkC
 			descriptor.setCategory( category );
 			descriptors.add(descriptor);
 		}
-		id = new StringProperty( category + Directives.ENABLED.toString());
+		id = new StringProperty( category + Directives.ENABLED.name() );
 		descriptor = new CheckBoxPropertyDescriptor( id, Directives.ENABLED.toString() );
 		descriptor.setCategory(category);
 		descriptors.add( descriptor );

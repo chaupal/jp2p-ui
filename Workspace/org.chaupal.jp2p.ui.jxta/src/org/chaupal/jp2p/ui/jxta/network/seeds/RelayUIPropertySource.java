@@ -24,8 +24,6 @@ public class RelayUIPropertySource extends AbstractSeedlistUIPropertySource {
 
 	public RelayUIPropertySource( NetworkConfigurator configurator) {
 		super( SeedTypes.RELAY, configurator );
-		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RELAY.toString(), configurator.getRelaySeedURIs(), super.getType().toString()));
-		super.addPropertySource( new CollectionPropertySource<Object>( SeedTypes.RELAY.toString(), configurator.getRelaySeedingURIs(), super.getType().toString()));
 	}
 
 	@Override
@@ -43,9 +41,9 @@ public class RelayUIPropertySource extends AbstractSeedlistUIPropertySource {
 		case USE_ONLY:
 			return configurator.getUseOnlyRelaySeedsStatus();
 		case SEED_URI:
-			return new CollectionPropertySource<URI>( super.getCategory(), configurator.getRelaySeedURIs(), SeedTypes.RELAY.toString() );
+			return new CollectionPropertySource<URI>( super.getCategory(), configurator.getRelaySeedURIs(), super.getType().toString() );
 		case SEEDING_URI:
-			return new CollectionPropertySource<URI>( super.getCategory(), configurator.getRelaySeedingURIs(), SeedTypes.RELAY.toString() );
+			return new CollectionPropertySource<URI>( super.getCategory(), configurator.getRelaySeedingURIs(), super.getType().toString() );
 		default:
 			break;
 		}

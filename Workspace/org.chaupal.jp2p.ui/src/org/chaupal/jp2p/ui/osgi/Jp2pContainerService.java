@@ -12,8 +12,6 @@ package org.chaupal.jp2p.ui.osgi;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 import net.jp2p.chaupal.container.AbstractContainerRefresh;
@@ -60,6 +58,8 @@ public class Jp2pContainerService<T extends Object> extends AbstractContainerNod
 		@Override
 		public void notifyServiceChanged(
 				ComponentChangedEvent<IJp2pComponent<T>> event) {
+			if( event.getSource() instanceof AbstractContainerNode )
+				return;
 			refresh.refresh(event);
 		}	
 	};

@@ -12,12 +12,14 @@ import net.jxta.document.Advertisement;
 import net.jxta.peergroup.PeerGroup;
 import net.jxta.platform.NetworkConfigurator;
 import net.jxta.platform.NetworkManager;
+import net.jxta.rendezvous.RendezVousService;
 
 import org.chaupal.jp2p.ui.adapter.Jp2pAdapterFactory;
 import org.chaupal.jp2p.ui.jxta.advertisement.property.AdvertisementPropertySource;
 import org.chaupal.jp2p.ui.jxta.network.NetworkManagerPropertySource;
 import org.chaupal.jp2p.ui.jxta.network.configurator.NetworkConfiguratorPropertySource;
-import org.chaupal.jp2p.ui.jxta.peergroup.PeerGroupPropertySource;
+import org.chaupal.jp2p.ui.jxta.peergroup.PeerGroupUIPropertySource;
+import org.chaupal.jp2p.ui.jxta.rendezvous.RendezVousUIPropertySource;
 import org.chaupal.jp2p.ui.property.SimpleUIPropertySource;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.ui.views.properties.IPropertySource;
@@ -50,7 +52,9 @@ public class Jp2pJxseAdapterFactory extends Jp2pAdapterFactory implements IAdapt
 		  if( adaptableObject instanceof Advertisement )
 			  return new AdvertisementPropertySource(( Advertisement )adaptableObject);
 		  if( adaptableObject instanceof PeerGroup )
-			  return new PeerGroupPropertySource(( PeerGroup )adaptableObject);
+			  return new PeerGroupUIPropertySource(( PeerGroup )adaptableObject);
+		  if( adaptableObject instanceof RendezVousService )
+			  return new RendezVousUIPropertySource( (RendezVousService) adaptableObject);
 		  return new SimpleUIPropertySource( adaptableObject );			
 	}
 

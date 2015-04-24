@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network.transport;
 
+import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.jxta.transport.TransportPropertySource.TransportProperties;
 import net.jxta.platform.NetworkConfigurator;
 
@@ -16,6 +17,19 @@ public class Http2UIPropertySource extends AbstractTransportUIPropertySource {
 	
 	public Http2UIPropertySource(NetworkConfigurator configurator) {
 		super( configurator, S_CATEGORY );
+	}
+
+	@Override
+	protected boolean onIsEnabledValue(IJp2pProperties id) {
+		NetworkConfigurator configurator = super.getModule();
+		return configurator.isHttp2Enabled();
+	}
+
+	@Override
+	protected boolean onSetEnabledValue(Object value) {
+		NetworkConfigurator configurator = super.getModule();
+		configurator.setHttp2Enabled((boolean) value);
+		return ( boolean ) value;
 	}
 
 	@Override

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network.transport;
 
+import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.jxta.transport.TransportPropertySource.TransportProperties;
 import net.jxta.platform.NetworkConfigurator;
 
@@ -15,6 +16,19 @@ public class TcpUIPropertySource extends AbstractTransportUIPropertySource {
 	public static final String S_CATEGORY = "Tcp";
 	public TcpUIPropertySource(NetworkConfigurator configurator) {
 		super( configurator, S_CATEGORY );
+	}
+
+	@Override
+	protected boolean onIsEnabledValue(IJp2pProperties id) {
+		NetworkConfigurator configurator = super.getModule();
+		return configurator.isTcpEnabled();
+	}
+
+	@Override
+	protected boolean onSetEnabledValue(Object value) {
+		NetworkConfigurator configurator = super.getModule();
+		configurator.setTcpEnabled((boolean) value);
+		return ( boolean ) value;
 	}
 
 	@Override
@@ -42,7 +56,7 @@ public class TcpUIPropertySource extends AbstractTransportUIPropertySource {
 		}
 		return null;
 	}
-
+	
 	@Override
 	public boolean onSetPropertyValue( TransportProperties property, Object value) {
 		NetworkConfigurator configurator = super.getModule();

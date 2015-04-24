@@ -7,18 +7,30 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.network.transport;
 
+import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.jxta.transport.TransportPropertySource.TransportProperties;
 import net.jxta.platform.NetworkConfigurator;
 
 public class HttpUIPropertySource extends AbstractTransportUIPropertySource{
 
 	public static final String S_CATEGORY = "Http";
-	public static final String S_NO_READ_VALUE = "<Not a readable property>";
 	
 	public HttpUIPropertySource(NetworkConfigurator configurator) {
 		super( configurator, S_CATEGORY );
 	}
 
+	@Override
+	protected boolean onIsEnabledValue(IJp2pProperties id) {
+		NetworkConfigurator configurator = super.getModule();
+		return configurator.isHttpEnabled();
+	}
+
+	@Override
+	protected boolean onSetEnabledValue(Object value) {
+		NetworkConfigurator configurator = super.getModule();
+		configurator.setHttpEnabled((boolean) value);
+		return ( boolean ) value;
+	}
 	
 	@Override
 	protected boolean isValidForTransportType(TransportProperties property) {
