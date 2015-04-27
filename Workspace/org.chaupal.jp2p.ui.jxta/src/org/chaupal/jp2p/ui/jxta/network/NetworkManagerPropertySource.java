@@ -14,18 +14,13 @@ import java.util.Collection;
 
 import net.jp2p.chaupal.jxta.platform.NetworkManagerPropertySource.NetworkManagerProperties;
 import net.jp2p.container.properties.IJp2pProperties;
-import net.jp2p.container.utils.EnumUtils;
 import net.jxta.peer.PeerID;
 import net.jxta.peergroup.PeerGroupID;
 import net.jxta.platform.NetworkManager;
 import net.jxta.platform.NetworkManager.ConfigMode;
 
 import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
-import org.chaupal.jp2p.ui.property.descriptors.CheckBoxPropertyDescriptor;
-import org.chaupal.jp2p.ui.property.descriptors.TextBoxPropertyDescriptor;
-import org.eclipse.ui.views.properties.ComboBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
-import org.eclipse.ui.views.properties.PropertyDescriptor;
 
 public class NetworkManagerPropertySource extends AbstractUIPropertySource<NetworkManager> {
 
@@ -36,31 +31,7 @@ public class NetworkManagerPropertySource extends AbstractUIPropertySource<Netwo
 	@Override
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
-		for( NetworkManagerProperties property: NetworkManagerProperties.values() ){
-			String[] parsed = super.parseProperty( S_JP2P_PROPERTY_TEXT, property);
-			PropertyDescriptor descriptor;
-			TextBoxPropertyDescriptor tpd = null;
-			switch( property ){
-			case CONFIG_PERSISTENT:
-				descriptor = new CheckBoxPropertyDescriptor( property, parsed[1] );
-				break;
-			case CONFIG_MODE:
-				descriptor = new ComboBoxPropertyDescriptor( property, parsed[1], EnumUtils.toString( ConfigMode.values() ));
-				break;
-			case INSTANCE_NAME:
-				descriptor = new TextBoxPropertyDescriptor( property, parsed[1] );
-				tpd = ( TextBoxPropertyDescriptor )descriptor;
-				tpd.setEnabled(false );
-				break;
-			default:
-				descriptor = new TextBoxPropertyDescriptor( property, parsed[1]);
-				tpd = ( TextBoxPropertyDescriptor )descriptor;
-				tpd.setEnabled(false );
-				break;
-			}	
-			descriptor.setCategory(parsed[2]);
-			descriptors.add(descriptor);
-		}
+		
 		if( super.getPropertyDescriptors() != null )
 			descriptors.addAll( Arrays.asList( super.getPropertyDescriptors()));
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
@@ -139,4 +110,6 @@ public class NetworkManagerPropertySource extends AbstractUIPropertySource<Netwo
 		}
 		super.setPropertyValue(id, value);
 	}
+
+
 }

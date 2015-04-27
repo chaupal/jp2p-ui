@@ -45,7 +45,7 @@ public class AdvertisementPropertySource extends AbstractUIPropertySource<Advert
 			ModuleImplAdvPropertySource miaps = new ModuleImplAdvPropertySource((ModuleImplAdvertisement) advertisement );
 			descriptors.addAll( Arrays.asList( miaps.getPropertyDescriptors()));
 		}
-		descriptors.addAll( super.getPropertyDescriptors( AdvertisementProperties.values()));
+		//descriptors.addAll( super.getPropertyDescriptors( AdvertisementProperties.values()));
 		descriptors.addAll( Arrays.asList(super.getPropertyDescriptors()));
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size() ]);
 	}

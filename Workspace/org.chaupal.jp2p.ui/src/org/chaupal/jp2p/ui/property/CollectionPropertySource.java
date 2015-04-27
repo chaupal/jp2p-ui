@@ -102,6 +102,6 @@ public class CollectionPropertySource<T extends Object> implements IPropertySour
 	public String toString() {
 		if( source.isEmpty() )
 			return S_EMPTY;
-		return super.toString();
+		return this.category + " URI List:";
 	}
 }

@@ -9,52 +9,36 @@ package org.chaupal.jp2p.ui.property;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.component.IJp2pComponent.ModuleProperties;
-import net.jp2p.container.properties.DefaultPropertySource;
 import net.jp2p.container.properties.IJp2pDirectives;
+import net.jp2p.container.properties.IJp2pDirectives.Directives;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.properties.IJp2pPropertySource;
 import net.jp2p.container.properties.IJp2pWritePropertySource;
 
+import org.chaupal.jp2p.ui.property.descriptors.CheckBoxPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.descriptors.TextBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
+import org.eclipse.ui.views.properties.IPropertySource;
+import org.eclipse.ui.views.properties.PropertyDescriptor;
 
-public abstract class AbstractUIPropertySource<T extends Object> implements IJp2pUIPropertySource<T> {
+public abstract class AbstractUIJp2pPropertySource<T extends Object> implements IPropertySource {
 
 	public static final String S_JP2P_DIRECTIVES_TEXT = "Directives";
 	public static final String S_JP2P_PROPERTY_TEXT = "Properties";
-	public static final String S_MODULE_CATEGORY = "Module";
+	public static final String S_JP2P_MISCELLANEOUS = "Misc";
 
-	private T module;
 	private IJp2pPropertySource<IJp2pProperties> source ;
-	private boolean addModuleData;
 
-	protected AbstractUIPropertySource( T module ) {
-		this( module, new DefaultPropertySource( S_JP2P_PROPERTY_TEXT, module.getClass().getName() ), true );
+	protected AbstractUIJp2pPropertySource( IJp2pComponent<T> component ) {
+		this( component.getPropertySource() );
 	}
 
-	protected AbstractUIPropertySource( IJp2pComponent<T> component ) {
-		this( component.getModule(), component.getPropertySource(), false );
-	}
-
-	protected AbstractUIPropertySource( T module, IJp2pPropertySource<IJp2pProperties> defaults, boolean addModuleData ) {
-		this.module = module;
-		this.source = defaults;
-		this.addModuleData = addModuleData;
-	}
-
-	final boolean addModuleData() {
-		return addModuleData;
-	}
-
-	final void setAddModuleData(boolean addModuleData) {
-		this.addModuleData = addModuleData;
-	}
-
-	public T getModule() {
-		return module;
+	protected AbstractUIJp2pPropertySource( IJp2pPropertySource<IJp2pProperties> source ) {
+		this.source = source;
 	}
 
 	@Override
@@ -67,42 +51,97 @@ public abstract class AbstractUIPropertySource<T extends Object> implements IJp2
 	 * @param id
 	 * @return
 	 */
-	public abstract boolean isEditable( Object id );
+	public boolean isEditable( Object id ){
+		return false;
+	}
 	
+	/**
+	 * Get the property descriptor for the given property
+	 * @param id
+	 * @return
+	 */
+	public abstract IPropertyDescriptor onGetPropertyDescriptor( IJp2pProperties id );
+
+	/**
+	 * Get the property descriptor for the given directive
+	 * @param id
+	 * @return
+	 */
+	public PropertyDescriptor onGetPropertyDescriptor( IJp2pDirectives id ){
+		if( !( id instanceof Directives ))
+			return null;
+		Directives directive = (Directives) id;
+		switch( directive ){
+		case AUTO_START:
+		case CREATE:
+		case ENABLED:
+			return new CheckBoxPropertyDescriptor(id, id.toString());
+		default:
+			return new TextBoxPropertyDescriptor( id, id.toString() );
+		}
+	}
+
 	@Override
 	public IPropertyDescriptor[] getPropertyDescriptors() {
-		Collection<ModuleProperties> properties = new ArrayList<ModuleProperties>();
+		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
+		PropertyDescriptor desc = null;
 		for( ModuleProperties property: ModuleProperties.values()){
-			if( source.getProperty( property ) != null )
-				properties.add(property);
+			if( source.getProperty( property ) != null ){
+				desc = new TextBoxPropertyDescriptor( property, property.toString() );
+				desc.setCategory(S_JP2P_MISCELLANEOUS);
+				descriptors.add(  desc );
+			}
 		}
-		Collection<IPropertyDescriptor> descriptors = getPropertyDescriptors( properties.toArray( new ModuleProperties[ properties.size()]));
-		if( this.addModuleData )
-			SimpleUIPropertySource.addPropertyDescriptorsForModule( this, descriptors);
+
+		Iterator<IJp2pDirectives> diriterator = source.directiveIterator();
+		while( diriterator.hasNext() ){
+			IJp2pDirectives directive = diriterator.next();
+			desc = this.onGetPropertyDescriptor( directive ); 
+			if( desc != null ){
+				desc.setCategory(S_JP2P_DIRECTIVES_TEXT);
+				descriptors.add( desc);
+			}
+		}
+
+		Iterator<IJp2pProperties> iterator = source.propertyIterator();
+		while( iterator.hasNext() ){
+			desc = (PropertyDescriptor) this.onGetPropertyDescriptor(iterator.next() ); 
+			if( desc != null ){
+				desc.setCategory(S_JP2P_PROPERTY_TEXT );
+				descriptors.add( desc);
+			}
+		}
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}
 
-	public abstract Object onGetPropertyValue( IJp2pProperties id );
-	
+	/**
+	 * Get the property descriptor for the given directive
+	 * @param id
+	 * @return
+	 */
+	public Object onGetPropertyValue( IJp2pDirectives id, String value ){
+		if( !( id instanceof Directives ))
+			return null;
+		Directives directive = (Directives) id;
+		switch( directive ){
+		case AUTO_START:
+		case CREATE:
+		case ENABLED:
+			return Boolean.valueOf( value );
+		default:
+			return value;
+		}
+	}
+
 	@Override
 	public final Object getPropertyValue(Object id) {
 		Object value = null;
 		if( id instanceof IJp2pProperties ){
-			if( id instanceof ObjectProperty ){
-				SimpleUIPropertySource ss = new SimpleUIPropertySource( this.module, this.addModuleData );
-				value = ss.getPropertyValue(id);
-				return value;
-			}
-			value = this.onGetPropertyValue((IJp2pProperties) id);
-			if( value != null )
-				return value;
-			else
-				value = source.getProperty(( IJp2pProperties)id );
+			value = source.getProperty(( IJp2pProperties)id );
+		}else if( id instanceof IJp2pDirectives ){
+			value = this.onGetPropertyValue((IJp2pDirectives)id, source.getDirective( (IJp2pDirectives) id ));
 		}
-		if( id instanceof IJp2pDirectives ){
-			return source.getDirective((IJp2pDirectives) id);
-		}
-		return null;
+		return value;
 	}
 
 	@Override
@@ -151,24 +190,5 @@ public abstract class AbstractUIPropertySource<T extends Object> implements IJp2
 			retval[1] = retval[1].replace(retval[2] + ".", "");
 		}
 		return retval;
-	}
-
-	/**
-	 * Get the (text) property descriptors from the given values
-	 * @param properties
-	 * @return
-	 */
-	protected static Collection<IPropertyDescriptor> getPropertyDescriptors( Object[] properties ) {
-		if( properties == null )
-			return null;
-		Collection<IPropertyDescriptor> descriptors = 
-				new ArrayList<IPropertyDescriptor>();
-		for( int i=0; i<properties.length; i++ ){
-			String[] parsed = parseProperty( S_JP2P_PROPERTY_TEXT, properties[i]);
-			TextBoxPropertyDescriptor textDescriptor = new TextBoxPropertyDescriptor( properties[i], parsed[1]);
-			textDescriptor.setCategory(S_JP2P_PROPERTY_TEXT);
-			descriptors.add( textDescriptor );
-		}
-		return descriptors;
 	}
 }

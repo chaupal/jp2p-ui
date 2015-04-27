@@ -21,7 +21,7 @@ import net.jxta.socket.JxtaServerSocket;
 import net.jxta.socket.JxtaSocket;
 
 import org.chaupal.jp2p.ui.property.IJp2pPropertySourceProvider;
-import org.chaupal.jp2p.ui.jxta.network.NetworkManagerPropertySource;
+import org.chaupal.jp2p.ui.jxta.network.NetworkManagerComponentUIPropertySource;
 import org.chaupal.jp2p.ui.jxta.network.configurator.NetworkConfiguratorPropertySource;
 import org.chaupal.jp2p.ui.jxta.peergroup.PeerGroupUIPropertySource;
 import org.chaupal.jp2p.ui.jxta.socket.JxtaSocketPropertySource;
@@ -49,6 +49,7 @@ public class JxtaPropertySourceProvider implements
 		return component.getPropertySource().getComponentName();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public IPropertySource getPropertySource() {
 		if( component.getModule() == null )
@@ -84,7 +85,7 @@ public class JxtaPropertySourceProvider implements
 			if( jxtaccomps != null ){
 				switch( jxtaccomps ){
 				case NETWORK_MANAGER:
-					return new NetworkManagerPropertySource( (NetworkManager) component.getModule() );
+					return new NetworkManagerComponentUIPropertySource( (IJp2pComponent<NetworkManager>) component );
 				case NETWORK_CONFIGURATOR:
 					return new NetworkConfiguratorPropertySource( (NetworkConfigurator) component.getModule() );
 				default:

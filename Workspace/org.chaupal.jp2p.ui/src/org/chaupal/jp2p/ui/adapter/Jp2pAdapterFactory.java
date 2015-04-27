@@ -28,16 +28,6 @@ public class Jp2pAdapterFactory implements IAdapterFactory {
 	 * @return
 	 */
 	protected IPropertySource getPropertySource( IJp2pComponent<Object> adaptableObject ){
-		PropertySourcePetitioner petitioner = PropertySourcePetitioner.getInstance();
-		petitioner.petition(adaptableObject );
-		String bundle_id = AbstractJp2pPropertySource.getBundleId( adaptableObject.getPropertySource());
-		String component_name = adaptableObject.getPropertySource().getComponentName();
-		IJp2pPropertySourceProvider<?> psp = petitioner.getPropertyDescriptorProvider(bundle_id, component_name);
-		if( psp != null ){
-			IPropertySource ps = psp.getPropertySource();
-			if( ps != null )
-				return ps;
-		}
 		return new Jp2pComponentUIPropertySource<Object>( adaptableObject, Jp2pComponentUIPropertySource.S_PROPERTY_JP2P_TEXT );			
 	}
 

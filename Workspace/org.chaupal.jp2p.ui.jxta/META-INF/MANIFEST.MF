@@ -11,13 +11,8 @@ Require-Bundle: org.eclipse.ui;bundle-version="[3.0.0,4.0.0)",
  net.jp2p.chaupal.jxta.platform
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Service-Component: OSGI-INF/attendees.xml, OSGI-INF/message.xml
-Export-Package: org.chaupal.jp2p.ui.jxta.message,
- org.chaupal.jp2p.ui.jxta.network.configurator,
- org.chaupal.jp2p.ui.jxta.property
 Import-Package: net.jp2p.chaupal.container,
  net.jp2p.chaupal.dispatcher,
- net.jp2p.chaupal.jxta.network,
  net.jp2p.chaupal.jxta.platform,
  net.jp2p.chaupal.jxta.platform.configurator,
  net.jp2p.chaupal.utils,
@@ -68,7 +63,6 @@ Import-Package: net.jp2p.chaupal.container,
  org.eclipselabs.osgi.ds.broker.service,
  org.eclipselabs.osgi.ds.broker.util,
  org.osgi.framework;version="1.7.0"
-Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/attendees.xml
 Export-Package: org.chaupal.jp2p.ui.jxta.network.configurator,
  org.chaupal.jp2p.ui.jxta.property
