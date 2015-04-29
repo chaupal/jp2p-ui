@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.jp2p.container.activator.IActivator.Status;
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.component.IJp2pComponent.ModuleProperties;
 import net.jp2p.container.properties.IJp2pDirectives;
@@ -19,6 +20,7 @@ import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.properties.IJp2pPropertySource;
 import net.jp2p.container.properties.IJp2pWritePropertySource;
 
+import org.chaupal.jp2p.ui.enm.EnumPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.descriptors.CheckBoxPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.descriptors.TextBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
@@ -87,7 +89,16 @@ public abstract class AbstractUIJp2pPropertySource<T extends Object> implements 
 		PropertyDescriptor desc = null;
 		for( ModuleProperties property: ModuleProperties.values()){
 			if( source.getProperty( property ) != null ){
-				desc = new TextBoxPropertyDescriptor( property, property.toString() );
+				switch( property ){
+				case STATUS:
+					EnumPropertyDescriptor edesc = new EnumPropertyDescriptor( property, property.toString(), Status.values());
+					edesc.setEnabled(false);
+					desc=  edesc;
+					break;
+				default:
+					desc = new TextBoxPropertyDescriptor( property, property.toString() );
+					break;
+				}
 				desc.setCategory(S_JP2P_MISCELLANEOUS);
 				descriptors.add(  desc );
 			}

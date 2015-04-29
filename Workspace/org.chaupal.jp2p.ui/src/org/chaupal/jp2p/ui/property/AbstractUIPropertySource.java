@@ -23,6 +23,8 @@ import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
 public abstract class AbstractUIPropertySource<T extends Object> implements IJp2pUIPropertySource<T> {
 
+	protected static final String S_NO_READ_VALUE = "<Not a readable property>";
+	
 	public static final String S_JP2P_DIRECTIVES_TEXT = "Directives";
 	public static final String S_JP2P_PROPERTY_TEXT = "Properties";
 	public static final String S_MODULE_CATEGORY = "Module";

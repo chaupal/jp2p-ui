@@ -9,9 +9,8 @@ package org.chaupal.jp2p.ui.property.descriptors;
 
 import java.lang.reflect.Type;
 
-import org.chaupal.jp2p.ui.celleditors.AbstractControlCellEditor;
 import org.chaupal.jp2p.ui.celleditors.CheckBoxCellEditor;
-import org.chaupal.jp2p.ui.celleditors.EnumSpinnerCellEditor;
+import org.chaupal.jp2p.ui.celleditors.IControlCellEditor;
 import org.chaupal.jp2p.ui.celleditors.SpinnerCellEditor;
 import org.chaupal.jp2p.ui.celleditors.TextBoxCellEditor;
 import org.chaupal.jp2p.ui.property.ObjectProperty;
@@ -29,14 +28,19 @@ public class CompositePropertyDescriptor extends AbstractControlPropertyDescript
 	
 	public CompositePropertyDescriptor(Object id, String displayName, Type type )
 	{
+		this(id, displayName, ObjectProperty.getSupportedTypes( type ));
+	}
+
+	public CompositePropertyDescriptor(Object id, String displayName, SupportedTypes type )
+	{
 		super(id, displayName );
-		this.type = ObjectProperty.getSupportedTypes( type );
+		this.type = type;
 	}
 
 	
 	@Override
-	protected AbstractControlCellEditor onCreatePropertyEditor(Composite parent) {
-		AbstractControlCellEditor editor = getCellEditor( this.type, parent, SWT.NONE );
+	protected IControlCellEditor onCreatePropertyEditor(Composite parent) {
+		IControlCellEditor editor = getCellEditor( this.type, parent, SWT.NONE );
 		editor.setEnabled( super.isEnabled());
 		return editor;
 	}
@@ -70,8 +74,8 @@ public class CompositePropertyDescriptor extends AbstractControlPropertyDescript
 	 * @param type
 	 * @return
 	 */
-	static final AbstractControlCellEditor getCellEditor( SupportedTypes type, Composite parent, int style ){
-		AbstractControlCellEditor editor;
+	static final IControlCellEditor getCellEditor( SupportedTypes type, Composite parent, int style ){
+		IControlCellEditor editor;
 		switch( type ){
 		case BOOLEAN:
 			editor = new CheckBoxCellEditor( parent, style);
@@ -80,7 +84,7 @@ public class CompositePropertyDescriptor extends AbstractControlPropertyDescript
 			editor = new SpinnerCellEditor( parent, style );
 			break;
 		case ENUM:
-			editor = new EnumSpinnerCellEditor( parent, style );
+			editor = null;// new EnumComboCellEditor( parent, style );
 			break;
 		default:
 			editor = new TextBoxCellEditor( parent, style );

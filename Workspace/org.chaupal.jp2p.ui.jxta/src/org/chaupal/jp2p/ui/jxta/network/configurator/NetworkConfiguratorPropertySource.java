@@ -33,8 +33,6 @@ import net.jxta.platform.NetworkConfigurator;
 
 public class NetworkConfiguratorPropertySource extends AbstractUIPropertySource<NetworkConfigurator> {
 
-	public static final String S_NO_READ_VALUE = "<Not a readable property>";
-	
 	private Collection<AbstractUIPropertySource<?>> sources;
 	
 	public NetworkConfiguratorPropertySource(NetworkConfigurator configurator) {

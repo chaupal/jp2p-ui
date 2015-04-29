@@ -10,8 +10,10 @@ package org.chaupal.jp2p.ui.jxta.rendezvous;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.chaupal.jp2p.ui.enm.EnumPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.AbstractUIPropertySource;
 import org.chaupal.jp2p.ui.property.CollectionPropertySource;
+import org.chaupal.jp2p.ui.property.descriptors.CheckBoxPropertyDescriptor;
 import org.chaupal.jp2p.ui.util.CategoryStringProperty;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
@@ -23,6 +25,7 @@ import net.jp2p.container.properties.IJp2pDirectives.Directives;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jxta.peer.PeerID;
 import net.jxta.rendezvous.RendezVousService;
+import net.jxta.rendezvous.RendezVousStatus;
 
 public class RendezVousUIPropertySource extends AbstractUIPropertySource<RendezVousService> {
 
@@ -41,7 +44,18 @@ public class RendezVousUIPropertySource extends AbstractUIPropertySource<RendezV
 		CategoryStringProperty id = null;
 		for( RendezVousProperties property: RendezVousProperties.values() ){
 			id = new CategoryStringProperty( property.name(), category );
-			descriptor = new TextPropertyDescriptor( id, property.toString());	
+			switch( property ){
+			case IS_CONNECTED_TO_RDV:
+			case IS_RDV:
+				descriptor = new CheckBoxPropertyDescriptor(id, property.toString());
+				break;
+			case RDV_STATUS:
+				descriptor = new EnumPropertyDescriptor( id, property.toString(), RendezVousStatus.values() );
+				break;
+			default:
+				descriptor = new TextPropertyDescriptor( id, property.toString());	
+				break;			
+			}
 			descriptor.setCategory( category );
 			descriptors.add(descriptor);
 		}

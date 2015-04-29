@@ -11,7 +11,7 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
-public abstract class AbstractControlCellEditor extends CellEditor {
+public abstract class AbstractControlCellEditor extends CellEditor implements IControlCellEditor {
 
 	private boolean enabled;
 
@@ -53,12 +53,20 @@ public abstract class AbstractControlCellEditor extends CellEditor {
 		this.enabled = true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.chaupal.jp2p.ui.celleditors.IControlCellEditor#isEnabled()
+	 */
+	@Override
 	public boolean isEnabled() {
 		if( super.getControl() != null )
 			return super.getControl().isEnabled();
 		return enabled;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.chaupal.jp2p.ui.celleditors.IControlCellEditor#setEnabled(boolean)
+	 */
+	@Override
 	public void setEnabled(boolean enabled) {
 		if( super.getControl() != null )
 			super.getControl().setEnabled(enabled);

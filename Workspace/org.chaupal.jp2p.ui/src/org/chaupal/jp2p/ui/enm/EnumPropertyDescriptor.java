@@ -5,41 +5,29 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.property.descriptors;
+package org.chaupal.jp2p.ui.enm;
 
 import org.chaupal.jp2p.ui.celleditors.IControlCellEditor;
-import org.chaupal.jp2p.ui.celleditors.SpinnerCellEditor;
-import org.chaupal.jp2p.ui.provider.ControlLabelProvider;
+import org.chaupal.jp2p.ui.property.descriptors.AbstractControlPropertyDescriptor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
-public class SpinnerPropertyDescriptor extends AbstractControlPropertyDescriptor<Integer> {
+public class EnumPropertyDescriptor extends AbstractControlPropertyDescriptor<Enum<?>> {
 
-	private int minValue, maxValue;
+	private Enum<?>[] base;
 	
-	private SpinnerCellEditor editor;
+	private EnumComboCellEditor editor;
 	
-	public SpinnerPropertyDescriptor(Object id, String displayName, int minValue, int maxValue)
+	public EnumPropertyDescriptor(Object id, String displayName, Enum<?>[] base )
 	{
 		super(id, displayName );
-		this.maxValue = minValue;
-		this.maxValue = maxValue;
+		this.base = base;
 	}
 
-	public SpinnerPropertyDescriptor(Object id, String displayName, int maxValue)
-	{
-		this( id, displayName, 0, maxValue );
-	}
-
-	public SpinnerPropertyDescriptor(Object id, String displayName )
-	{
-		this( id, displayName, 0, 9999 );
-	}
-	
 	@Override
 	protected IControlCellEditor onCreatePropertyEditor(Composite parent) {
-		this.editor = new SpinnerCellEditor(parent, minValue, maxValue, SWT.NONE );
+		this.editor = new EnumComboCellEditor(parent, base, SWT.NONE );
 		editor.setEnabled( super.isEnabled());
 		return editor;
 	}
@@ -47,6 +35,6 @@ public class SpinnerPropertyDescriptor extends AbstractControlPropertyDescriptor
 	@Override
 	public ILabelProvider getLabelProvider()
 	{
-		return new ControlLabelProvider( this );
+		return new EnumLabelProvider<Enum<?>>( base);
 	}
 }

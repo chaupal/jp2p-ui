@@ -10,14 +10,13 @@ package org.chaupal.jp2p.ui.jxta.network;
 import net.jp2p.chaupal.jxta.platform.NetworkManagerPropertySource.NetworkManagerProperties;
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.properties.IJp2pProperties;
-import net.jp2p.container.utils.EnumUtils;
 import net.jxta.platform.NetworkManager;
 import net.jxta.platform.NetworkManager.ConfigMode;
 
+import org.chaupal.jp2p.ui.enm.EnumPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.AbstractUIJp2pPropertySource;
 import org.chaupal.jp2p.ui.property.descriptors.CheckBoxPropertyDescriptor;
 import org.chaupal.jp2p.ui.property.descriptors.TextBoxPropertyDescriptor;
-import org.eclipse.ui.views.properties.ComboBoxPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 
@@ -48,7 +47,7 @@ public class NetworkManagerComponentUIPropertySource extends AbstractUIJp2pPrope
 			descriptor = new CheckBoxPropertyDescriptor( property, parsed[1] );
 			break;
 		case CONFIG_MODE:
-			descriptor = new ComboBoxPropertyDescriptor( property, parsed[1], EnumUtils.toString( ConfigMode.values() ));
+			descriptor = new EnumPropertyDescriptor( property, parsed[1], ConfigMode.values() );
 			break;
 		case INSTANCE_NAME:
 			descriptor = new TextBoxPropertyDescriptor( property, parsed[1] );

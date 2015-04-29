@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.property.descriptors;
 
-import org.chaupal.jp2p.ui.celleditors.AbstractControlCellEditor;
+import org.chaupal.jp2p.ui.celleditors.IControlCellEditor;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
@@ -16,7 +16,7 @@ public abstract class AbstractControlPropertyDescriptor<T extends Object> extend
 implements IControlPropertyDescriptor<T> {
 
 	private boolean enabled;
-	private AbstractControlCellEditor editor;
+	private IControlCellEditor editor;
 	
 	private T value;
 
@@ -36,7 +36,7 @@ implements IControlPropertyDescriptor<T> {
 	 * @param parent
 	 * @return
 	 */
-	protected abstract AbstractControlCellEditor onCreatePropertyEditor( Composite parent );
+	protected abstract IControlCellEditor onCreatePropertyEditor( Composite parent );
 	
 	/* (non-Javadoc)
 	 * @see org.chaupal.jp2p.ui.property.descriptors.IControlPropertyDescriptor#createPropertyEditor(org.eclipse.swt.widgets.Composite)
@@ -46,7 +46,7 @@ implements IControlPropertyDescriptor<T> {
 	{
 		this.editor = this.onCreatePropertyEditor(parent);
 		editor.setEnabled(enabled);
-		return editor;
+		return (CellEditor) editor;
 	}
 
 	

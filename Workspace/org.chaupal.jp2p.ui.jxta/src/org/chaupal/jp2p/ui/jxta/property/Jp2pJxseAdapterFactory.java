@@ -55,6 +55,8 @@ public class Jp2pJxseAdapterFactory extends Jp2pAdapterFactory implements IAdapt
 			  return new PeerGroupUIPropertySource(( PeerGroup )adaptableObject);
 		  if( adaptableObject instanceof RendezVousService )
 			  return new RendezVousUIPropertySource( (RendezVousService) adaptableObject);
+		  if( adaptableObject instanceof RendezVousService )
+			  return new RendezVousUIPropertySource( (RendezVousService) adaptableObject);
 		  return new SimpleUIPropertySource( adaptableObject );			
 	}
 

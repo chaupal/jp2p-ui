@@ -1,5 +1,6 @@
 package org.chaupal.jp2p.ui.jxta.view;
 
+import org.chaupal.jp2p.ui.container.Jp2pContainerNavigator;
 import org.chaupal.jp2p.ui.jxta.container.JxseContainerNavigator;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
@@ -12,10 +13,12 @@ public class JxseModulePropertySheet extends PropertySheet{
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection sel) {
 		ISelection selection = sel;
-		if(!( part instanceof JxseContainerNavigator ))
-			selection = null;
-
-		super.selectionChanged(part, selection);
+		if( part instanceof JxseContainerNavigator )
+			super.selectionChanged(part, selection);			
+		if( part instanceof Jp2pContainerNavigator )
+			super.selectionChanged(part, selection);
+		else
+			super.selectionChanged(part, null);
 	}
 
 	/**
