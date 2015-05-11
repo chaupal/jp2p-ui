@@ -64,6 +64,6 @@ Import-Package: net.jp2p.chaupal.container,
  org.eclipselabs.osgi.ds.broker.service,
  org.eclipselabs.osgi.ds.broker.util,
  org.osgi.framework;version="1.7.0"
-Service-Component: OSGI-INF/attendees.xml
+Service-Component: OSGI-INF/attendees.xml, OSGI-INF/refreshcomponent.xml 
 Export-Package: org.chaupal.jp2p.ui.jxta.network.configurator,
  org.chaupal.jp2p.ui.jxta.property

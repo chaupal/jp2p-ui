@@ -12,6 +12,7 @@ import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.chaupal.utils.Utils;
 import net.jp2p.container.IJp2pContainer;
+import net.jp2p.container.Jp2pContainer.ServiceChange;
 import net.jp2p.container.utils.SimpleNode;
 import net.jp2p.jxta.peergroup.PeerGroupFactory;
 import net.jxta.peergroup.PeerGroup;

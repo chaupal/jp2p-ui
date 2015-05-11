@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" name="org.chaupal..jp2p.ui.jxta.refresh">
+   <implementation class="org.chaupal.jp2p.ui.jxta.osgi.service.RefreshComponent"/>
+   <property name="jp2p.ui.refresh" type="String" value="chaupal-ui-jxta"/>
+   <service servicefactory="true">
+      <provide interface="net.jp2p.chaupal.dispatcher.IServiceChangedListener"/>
+   </service>>
+</scr:component>

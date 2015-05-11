@@ -20,10 +20,10 @@ import java.util.logging.Logger;
 
 import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener.ServiceChange;
 import net.jp2p.container.Jp2pContainer;
 import net.jp2p.container.IJp2pContainer;
 import net.jp2p.container.IJp2pDSComponent;
+import net.jp2p.container.Jp2pContainer.ServiceChange;
 import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;
 import net.jp2p.container.component.IJp2pComponent;
