@@ -69,7 +69,7 @@ public class RefreshDeclarativeService extends AbstractDeclarativeService<IServi
 	}
 
 	public RefreshDeclarativeService(long time_out) {
-		super(filter);
+		super(filter, IServiceChangedListener.class);
 		this.time_out = time_out;
 		this.started = false;
 		listeners = new ArrayList<IServiceChangedListener>();
@@ -77,8 +77,8 @@ public class RefreshDeclarativeService extends AbstractDeclarativeService<IServi
 	}
 
 	@Override
-	public void start(BundleContext bc, Class<?> clss ){
-		super.start(bc, clss);
+	public void start(BundleContext bc ){
+		super.start(bc);
 		this.started = true;
 		service.execute( runnable );
 	}

@@ -47,7 +47,7 @@ public class Activator implements BundleActivator {
 		
 		//Provides a refresh every second
 		refreshService = new RefreshDeclarativeService( RefreshDeclarativeService.TIME_OUT );
-		refreshService.start(context, Activator.class);
+		refreshService.start(context);
 	}
 
 	@Override
