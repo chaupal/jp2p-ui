@@ -24,6 +24,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
+import org.eclipse.osgi.framework.console.CommandInterpreter;
+import org.eclipse.osgi.framework.console.CommandProvider;
 import org.osgi.framework.BundleContext;
 
 import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
@@ -31,7 +33,7 @@ import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.utils.AbstractDeclarativeService;
 import net.jp2p.container.Jp2pContainer.ServiceChange;
 
-public class RefreshDeclarativeService extends AbstractDeclarativeService<IServiceChangedListener> {
+public class RefreshService extends AbstractDeclarativeService<IServiceChangedListener> implements CommandProvider{
 
 	//in the component.xml file you will use target="(jp2p.context=contextName)"
 	private static String filter = "(jp2p.ui.refresh=*)"; 
@@ -64,15 +66,18 @@ public class RefreshDeclarativeService extends AbstractDeclarativeService<IServi
 
 	private ExecutorService service;
 
-	public RefreshDeclarativeService() {
+	public RefreshService() {
 		this( TIME_OUT );
 	}
 
-	public RefreshDeclarativeService(long time_out) {
+	private RefreshDispatcher dispatcher = RefreshDispatcher.getInstance();
+	
+	public RefreshService(long time_out) {
 		super(filter, IServiceChangedListener.class);
 		this.time_out = time_out;
 		this.started = false;
 		listeners = new ArrayList<IServiceChangedListener>();
+		this.listeners.add( dispatcher );
 		service = Executors.newCachedThreadPool();
 	}
 
@@ -98,5 +103,19 @@ public class RefreshDeclarativeService extends AbstractDeclarativeService<IServi
 	@Override
 	protected void onDataUnRegistered( IServiceChangedListener data) {
 		listeners.remove( data );
+	}
+	
+	public Object _refreshui( CommandInterpreter ci ){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("The bundles refreshed by the JP2P UI Refresher");
+		for( IServiceChangedListener listener: listeners ){
+			buffer.append( "\t" + listener.getName() + "\n" );		
+		}
+		return buffer.toString();
+	}
+	
+	@Override
+	public String getHelp() {
+		return "\trefreshui - The bundles who use the refresh service.";
 	}
 }

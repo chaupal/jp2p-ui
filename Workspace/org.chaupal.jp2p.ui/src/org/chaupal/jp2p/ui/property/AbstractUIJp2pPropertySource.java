@@ -87,40 +87,41 @@ public abstract class AbstractUIJp2pPropertySource<T extends Object> implements 
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		Collection<IPropertyDescriptor> descriptors = new ArrayList<IPropertyDescriptor>();
 		PropertyDescriptor desc = null;
-		for( ModuleProperties property: ModuleProperties.values()){
-			if( source.getProperty( property ) != null ){
-				switch( property ){
-				case STATUS:
-					EnumPropertyDescriptor edesc = new EnumPropertyDescriptor( property, property.toString(), Status.values());
-					edesc.setEnabled(false);
-					desc=  edesc;
-					break;
-				default:
-					desc = new TextBoxPropertyDescriptor( property, property.toString() );
-					break;
-				}
-				desc.setCategory(S_JP2P_MISCELLANEOUS);
-				descriptors.add(  desc );
-			}
-		}
 
+		//First get the directives
 		Iterator<IJp2pDirectives> diriterator = source.directiveIterator();
 		while( diriterator.hasNext() ){
 			IJp2pDirectives directive = diriterator.next();
 			desc = this.onGetPropertyDescriptor( directive ); 
-			if( desc != null ){
-				desc.setCategory(S_JP2P_DIRECTIVES_TEXT);
-				descriptors.add( desc);
-			}
+			if( desc == null )
+			    desc = new TextBoxPropertyDescriptor( directive, directive.toString() );
+				
+			desc.setCategory(S_JP2P_DIRECTIVES_TEXT);
+			descriptors.add( desc);
 		}
 
+		//Then the properties
 		Iterator<IJp2pProperties> iterator = source.propertyIterator();
 		while( iterator.hasNext() ){
-			desc = (PropertyDescriptor) this.onGetPropertyDescriptor(iterator.next() ); 
-			if( desc != null ){
-				desc.setCategory(S_JP2P_PROPERTY_TEXT );
-				descriptors.add( desc);
+			IJp2pProperties property = iterator.next();
+			desc = (PropertyDescriptor) this.onGetPropertyDescriptor(property ); 
+			if( desc == null ){
+				if( ModuleProperties.isValid( property )){
+					switch( ModuleProperties.valueOf( property.name() )){
+					case STATUS:
+						EnumPropertyDescriptor edesc = new EnumPropertyDescriptor( property, property.toString(), Status.values());
+						edesc.setEnabled(false);
+						desc=  edesc;
+						break;
+					default:
+						desc = new TextBoxPropertyDescriptor( property, property.toString() );
+						break;
+					}
+				}else
+					desc = new TextBoxPropertyDescriptor( property, property.toString() );
 			}
+			desc.setCategory(S_JP2P_PROPERTY_TEXT );
+			descriptors.add( desc);
 		}
 		return descriptors.toArray( new IPropertyDescriptor[ descriptors.size()]);
 	}

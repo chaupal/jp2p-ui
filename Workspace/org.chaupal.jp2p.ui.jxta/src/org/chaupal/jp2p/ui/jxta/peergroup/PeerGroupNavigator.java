@@ -18,6 +18,7 @@ import net.jp2p.jxta.peergroup.PeerGroupFactory;
 import net.jxta.peergroup.PeerGroup;
 
 import org.chaupal.jp2p.ui.container.Jp2pContainerNavigator;
+import org.chaupal.jp2p.ui.jxta.Activator;
 import org.chaupal.jp2p.ui.jxta.osgi.service.PeerGroupPetitioner;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -54,6 +55,11 @@ public class PeerGroupNavigator extends CommonNavigator{
 		navigator = this;
 		dispatcher = ServiceEventDispatcher.getInstance();
 		dispatcher.addServiceChangeListener( new IServiceChangedListener(){
+
+			@Override
+			public String getName() {
+				return Activator.BUNDLE_ID;
+			}
 
 			@Override
 			public void notifyServiceChanged(ServiceChangedEvent event) {

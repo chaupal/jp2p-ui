@@ -8,7 +8,8 @@
 package org.chaupal.jp2p.ui;
 
 import org.chaupal.jp2p.ui.osgi.Jp2pContainerService;
-import org.chaupal.jp2p.ui.refresh.RefreshDeclarativeService;
+import org.chaupal.jp2p.ui.refresh.RefreshService;
+import org.eclipse.osgi.framework.console.CommandProvider;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.log.LogService;
@@ -24,7 +25,7 @@ public class Activator implements BundleActivator {
 	private static LogService logService;
 	private static Jp2pContainerService<Object> containerService;
 	
-	private static RefreshDeclarativeService refreshService;
+	private static RefreshService refreshService;
 	
 	
 	@Override
@@ -46,8 +47,9 @@ public class Activator implements BundleActivator {
 		containerService.start( context);
 		
 		//Provides a refresh every second
-		refreshService = new RefreshDeclarativeService( RefreshDeclarativeService.TIME_OUT );
+		refreshService = new RefreshService( RefreshService.TIME_OUT );
 		refreshService.start(context);
+		context.registerService( CommandProvider.class, refreshService, null);
 	}
 
 	@Override

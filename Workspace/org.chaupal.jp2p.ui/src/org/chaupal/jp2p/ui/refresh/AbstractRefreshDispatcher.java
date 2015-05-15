@@ -16,35 +16,22 @@
  * Contributors:
  *     Kees Pieters - initial API and implementation
  *******************************************************************************/
-package org.chaupal.jp2p.ui.jxta.osgi.service;
+package org.chaupal.jp2p.ui.refresh;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.chaupal.jp2p.ui.jxta.Activator;
-
 import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
 import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 
-public class RefreshDispatcher implements IServiceChangedListener{
+public abstract class AbstractRefreshDispatcher implements IServiceChangedListener{
 
 	private Collection<IServiceChangedListener> listeners; 
 	
-	private static RefreshDispatcher dispatcher = new RefreshDispatcher();
-	
-	private RefreshDispatcher() {
+	protected AbstractRefreshDispatcher() {
 		listeners = new ArrayList<IServiceChangedListener>();
 	}
 
-	public static RefreshDispatcher getInstance(){
-		return dispatcher;
-	}
-
-	@Override
-	public String getName() {
-		return Activator.BUNDLE_ID;
-	}
-	
 	public void addServiceChangeListener( IServiceChangedListener listener ){
 		this.listeners.add( listener );
 	}
