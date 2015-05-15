@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.container;
 
+import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
+import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.utils.Utils;
 import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;
@@ -14,6 +16,7 @@ import net.jp2p.container.component.IJp2pComponent;
 
 import org.chaupal.jp2p.ui.Activator;
 import org.chaupal.jp2p.ui.osgi.Jp2pContainerService;
+import org.chaupal.jp2p.ui.refresh.RefreshDispatcher;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -35,6 +38,21 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	private CommonViewer viewer;
 	
 	private Jp2pContainerNavigator navigator;
+	
+	private RefreshDispatcher dispatcher = RefreshDispatcher.getInstance();
+	private IServiceChangedListener refreshlistener = new IServiceChangedListener(){
+
+		@Override
+		public String getName() {
+			return this.getClass().getName();
+		}
+
+		@Override
+		public void notifyServiceChanged(ServiceChangedEvent event) {
+			refresh();
+		}
+		
+	};
 	
 	private Jp2pContainerService<Object> containerService = Activator.getJp2pContainerService();
 	private IComponentChangedListener<IJp2pComponent<Object>> componentListener = new IComponentChangedListener<IJp2pComponent<Object>>() {
@@ -62,6 +80,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 		super();
 		navigator = this;
 		containerService.addServiceChangeListener( componentListener);
+		dispatcher.addServiceChangeListener(refreshlistener);
 	}
 
 	/**
@@ -117,6 +136,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 	
 	@Override
 	public void dispose() {
+		dispatcher.removeServiceChangeListener(refreshlistener);
 		containerService.removeServiceChangeListener( componentListener);
 		super.dispose();
 	}

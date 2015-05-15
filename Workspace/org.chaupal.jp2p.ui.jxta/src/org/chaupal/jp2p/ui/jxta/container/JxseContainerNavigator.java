@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.container;
 
+import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
+import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.utils.Utils;
 import net.jp2p.container.component.IJp2pComponent;
 
 import org.chaupal.jp2p.ui.container.Jp2pContainerNavigator;
+import org.chaupal.jp2p.ui.jxta.osgi.service.RefreshDispatcher;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -28,6 +31,21 @@ public class JxseContainerNavigator extends CommonNavigator{
 	
 	private CommonViewer viewer;
 	
+	private RefreshDispatcher dispatcher = RefreshDispatcher.getInstance();
+	private IServiceChangedListener refreshlistener = new IServiceChangedListener(){
+
+		@Override
+		public String getName() {
+			return this.getClass().getName();
+		}
+
+		@Override
+		public void notifyServiceChanged(ServiceChangedEvent event) {
+			refresh();
+		}
+		
+	};
+	
 	//private JxseContainerNavigator navigator;
 	
 	private ISelectionListener listener = new ISelectionListener() {
@@ -42,7 +60,7 @@ public class JxseContainerNavigator extends CommonNavigator{
 
 	public JxseContainerNavigator() {
 		super();
-		//navigator = this;
+		dispatcher.addServiceChangeListener( refreshlistener);
 	}
 
 	/**
@@ -98,4 +116,12 @@ public class JxseContainerNavigator extends CommonNavigator{
 			}
 		});			
 	}
+
+	@Override
+	public void dispose() {
+		dispatcher.removeServiceChangeListener(refreshlistener);
+		super.dispose();
+	}
+
+
 }
