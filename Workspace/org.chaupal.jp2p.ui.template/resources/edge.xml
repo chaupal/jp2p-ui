@@ -16,28 +16,26 @@
     </properties>
     <network-configurator id="$bundle-id$.networkmanager" name="$name$">
       <properties>
+         <security>
+           <password>admin</password>
+         </security>
          <peer-id create="true" persist="true"/>
          <tcp>
-           <enabled>true</enabled>
            <port>9712</port>
            <incoming-status>true</incoming-status>
            <outgoing-status>true</outgoing-status>
         </tcp>
         <http2>
-          <enabled>true</enabled>
           <start-port>7999</start-port>
           <port>8005</port>
           <end-port>8010</end-port>
           <incoming-status>true</incoming-status>
           <outgoing-status>true</outgoing-status>
         </http2>
-        <multicast>
-          <enabled>true</enabled>
-        </multicast>
         <use-only_relay_seeds>false</use-only_relay_seeds>
         <use-only_rendezvous_seeds>false</use-only_rendezvous_seeds>
       </properties>
-      <seed-list>
+      <seed-list type="rdv">
          <properties>
            <condast1>RDV, http://localhost:8081</condast1>
            <condast2>RDV, tcp://localhost:9715</condast2>

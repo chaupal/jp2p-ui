@@ -41,7 +41,7 @@ public class JxseContainerNavigator extends CommonNavigator{
 
 		@Override
 		public void notifyServiceChanged(ServiceChangedEvent event) {
-			//refresh();
+			refresh();
 		}
 		
 	};
