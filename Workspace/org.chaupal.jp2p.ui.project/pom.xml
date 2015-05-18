@@ -6,15 +6,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.chaupal.jp2p.ui</groupId>
+    <groupId>org.chaupal.jp2p.ui.group</groupId>
     <artifactId>org.chaupal.jp2p.ui.parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <tycho.version>0.22.0</tycho.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
         <luna-repo.url>http://download.eclipse.org/releases/luna</luna-repo.url>
+        <luna-updates-repo.url>http://download.eclipse.org/eclipse/updates/4.4</luna-updates-repo.url>
+        <jp2p-repo.url>https://chaupal.github.io/releases/jp2p/1.1.0/20150516</jp2p-repo.url>        
         <jxse-repo.url>https://chaupal.github.io/releases/2.8.0/milestone/20150303/alpha/jxse-osgi</jxse-repo.url>        
         <osgi-broker-repo.url>http://89.31.96.252/download.condast.org/updatesite/Broker/release</osgi-broker-repo.url>        
     </properties>
@@ -26,12 +28,17 @@
             <layout>p2</layout>
         </repository>
         <repository>
+            <id>jp2p</id>
+            <url>${jp2p-repo.url}</url>
+            <layout>p2</layout>
+        </repository>
+        <repository>
             <id>jxse</id>
             <url>${jxse-repo.url}</url>
             <layout>p2</layout>
         </repository>
         <repository>
-            <id>osgi-borker</id>
+            <id>osgi-broker</id>
             <url>${osgi-broker-repo.url}</url>
             <layout>p2</layout>
         </repository>
@@ -60,7 +67,7 @@
                 <artifactId>target-platform-configuration</artifactId>
                 <version>${tycho.version}</version>
                 <configuration>
-                      <environments>
+                    <environments>
                         <environment>
                             <os>linux</os>
                             <ws>gtk</ws>
