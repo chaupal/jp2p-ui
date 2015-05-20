@@ -112,6 +112,8 @@ public class JxseContainerNavigator extends CommonNavigator{
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
+				if( Display.getDefault().isDisposed() )
+					return;
 				viewer.refresh();
 			}
 		});			

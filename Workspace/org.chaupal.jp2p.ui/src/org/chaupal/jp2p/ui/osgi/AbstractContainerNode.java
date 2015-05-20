@@ -72,7 +72,7 @@ public class AbstractContainerNode<T extends Object> extends Jp2pComponentNode<T
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean addChild(IJp2pComponent<?> child) {
+	public synchronized boolean addChild(IJp2pComponent<?> child) {
 		if( containers.contains( child ))
 			return false;
 		containers.add( (IJp2pContainer<T>) child );
