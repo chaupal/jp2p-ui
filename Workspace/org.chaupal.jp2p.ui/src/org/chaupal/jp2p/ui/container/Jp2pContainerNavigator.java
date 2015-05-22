@@ -31,9 +31,9 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 
 public class Jp2pContainerNavigator extends CommonNavigator{
 
-	static final String S_JP2P_NAVIGATOR_ID = "org.chaupal.jp2p.ui.container.view";
+	public static final String S_JP2P_NAVIGATOR_ID = "org.chaupal.jp2p.ui.container.view";
 
-	public static final String S_NAVIGATOR_TEXT = "User Service: ";
+	public static final String S_NAVIGATOR_ID = "User Service: ";
 	
 	private CommonViewer viewer;
 	
@@ -130,7 +130,7 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 		if(!( element instanceof IJp2pComponent<?>))
 			return;
 		IJp2pComponent<?> component = (IJp2pComponent<Object>)element;
-		setContentDescription( S_NAVIGATOR_TEXT + Utils.getLabel(component));
+		setContentDescription( S_NAVIGATOR_ID + Utils.getLabel(component));
 	}
 
 	

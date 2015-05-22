@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.apache.org/licenses/LICENSE-2.0.html
  *******************************************************************************/
-package org.chaupal.jp2p.ui.container;
+package org.chaupal.jp2p.ui.template.container;
 
 import java.net.URI;
 

@@ -12,7 +12,7 @@ import java.util.Collection;
 
 import net.jp2p.container.Jp2pContainerPropertySource;
 
-import org.chaupal.jp2p.ui.container.ContainerComposite;
+import org.chaupal.jp2p.ui.template.container.ContainerComposite;
 import org.chaupal.jp2p.ui.template.project.ContextWizardOption.TemplateOptions;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
