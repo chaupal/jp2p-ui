@@ -1,14 +1,21 @@
 package org.chaupal.jp2p.ui.jxta.view;
 
+<<<<<<< HEAD
 import java.util.Iterator;
 
 import net.jp2p.container.component.IJp2pComponent;
 import net.jxta.peergroup.core.Module;
+=======
+import net.jp2p.container.component.IJp2pComponent;
+>>>>>>> branch 'master' of https://github.com/chaupal/jp2p-ui.git
 
 import org.chaupal.jp2p.ui.container.Jp2pContainerNavigator;
 import org.chaupal.jp2p.ui.jxta.container.JxseContainerNavigator;
 import org.eclipse.jface.viewers.ISelection;
+<<<<<<< HEAD
 import org.eclipse.jface.viewers.StructuredSelection;
+=======
+>>>>>>> branch 'master' of https://github.com/chaupal/jp2p-ui.git
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.IWorkbenchPart;
@@ -21,6 +28,7 @@ public class JxseModulePropertySheet extends PropertySheet{
 		ISelection selection = sel;
 		if( part instanceof JxseContainerNavigator )
 			super.selectionChanged(part, selection);			
+<<<<<<< HEAD
 		else if( part instanceof Jp2pContainerNavigator ){
 			Iterator<?> iterator = ((StructuredSelection) sel).iterator();
 			boolean visible = false;
@@ -39,6 +47,10 @@ public class JxseModulePropertySheet extends PropertySheet{
 			}
 			super.selectionChanged(part, /* new Selection( (TreeSelection) */ selection );
 		}
+=======
+		if( part instanceof Jp2pContainerNavigator )
+			super.selectionChanged(part, /* new Selection( (TreeSelection) */ selection );
+>>>>>>> branch 'master' of https://github.com/chaupal/jp2p-ui.git
 		else
 			super.selectionChanged(part, null);
 	}
