@@ -26,7 +26,7 @@ import org.eclipse.ui.navigator.CommonViewer;
 
 public class JxseContainerNavigator extends CommonNavigator{
 
-	public static final String PATH_ID = "org.chaupal.jp2p.ui.jxta.container";
+	public static final String S_JXSE_NAVIGATOR_ID = "org.chaupal.jp2p.ui.jxse.module.view";
 	public static final String S_NAVIGATOR_TEXT = "JXTA Module: ";
 	
 	private CommonViewer viewer;
@@ -43,7 +43,6 @@ public class JxseContainerNavigator extends CommonNavigator{
 		public void notifyServiceChanged(ServiceChangedEvent event) {
 			refresh();
 		}
-		
 	};
 	
 	//private JxseContainerNavigator navigator;
@@ -112,8 +111,6 @@ public class JxseContainerNavigator extends CommonNavigator{
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				if( Display.getDefault().isDisposed() )
-					return;
 				viewer.refresh();
 			}
 		});			

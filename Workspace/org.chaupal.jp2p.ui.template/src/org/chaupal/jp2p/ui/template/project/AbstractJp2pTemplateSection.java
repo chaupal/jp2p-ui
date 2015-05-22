@@ -133,6 +133,7 @@ public abstract class AbstractJp2pTemplateSection extends AbstractBundleTemplate
 	 * @param monitor
 	 * @return
 	 */
+	@Override
 	protected int createOSGIInf( IProject project, int worked, IProgressMonitor monitor ){
 		Logger logger = Logger.getLogger( AbstractJp2pTemplateSection.class.getName() );
 		InputStream source = null;
