@@ -1,10 +1,14 @@
 package org.chaupal.jp2p.ui.jxta.view;
 
+import java.util.Iterator;
+
 import net.jp2p.container.component.IJp2pComponent;
+import net.jxta.peergroup.core.Module;
 
 import org.chaupal.jp2p.ui.container.Jp2pContainerNavigator;
 import org.chaupal.jp2p.ui.jxta.container.JxseContainerNavigator;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.IWorkbenchPart;
@@ -17,8 +21,24 @@ public class JxseModulePropertySheet extends PropertySheet{
 		ISelection selection = sel;
 		if( part instanceof JxseContainerNavigator )
 			super.selectionChanged(part, selection);			
-		if( part instanceof Jp2pContainerNavigator )
+		else if( part instanceof Jp2pContainerNavigator ){
+			Iterator<?> iterator = ((StructuredSelection) sel).iterator();
+			boolean visible = false;
+			while( iterator.hasNext() ){
+				Object component = iterator.next();
+				if( component instanceof IJp2pComponent ){
+					IJp2pComponent<?> comp = (IJp2pComponent<?>) component;
+					if( comp.getModule() instanceof Module ){
+						visible = true;
+						break;
+					}
+				}
+			}
+			if( !visible ){
+				selection = new TreeSelection();
+			}
 			super.selectionChanged(part, /* new Selection( (TreeSelection) */ selection );
+		}
 		else
 			super.selectionChanged(part, null);
 	}

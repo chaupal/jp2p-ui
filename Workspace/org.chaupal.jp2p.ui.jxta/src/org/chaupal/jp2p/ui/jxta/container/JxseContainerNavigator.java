@@ -30,6 +30,7 @@ public class JxseContainerNavigator extends CommonNavigator{
 	public static final String S_NAVIGATOR_TEXT = "JXTA Module: ";
 	
 	private CommonViewer viewer;
+	public boolean dispose = false;
 	
 	private RefreshDispatcher dispatcher = RefreshDispatcher.getInstance();
 	private IServiceChangedListener refreshlistener = new IServiceChangedListener(){
@@ -110,14 +111,18 @@ public class JxseContainerNavigator extends CommonNavigator{
 
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
-			public void run() {
-				viewer.refresh();
+			public synchronized void run() {
+				if( Display.getDefault().isDisposed() )
+					return;
+				if(!dispose )
+					viewer.refresh();
 			}
 		});			
 	}
 
 	@Override
 	public void dispose() {
+		dispose = true;
 		dispatcher.removeServiceChangeListener(refreshlistener);
 		super.dispose();
 	}
