@@ -26,15 +26,15 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.pde.internal.core.ibundle.IBundle;
-import org.eclipse.pde.internal.core.ibundle.IBundlePluginModelBase;
+//import org.eclipse.pde.internal.core.ibundle.IBundle;
+//import org.eclipse.pde.internal.core.ibundle.IBundlePluginModelBase;
 import org.eclipse.pde.ui.IFieldData;
 
 /**
  * @author Marine
  *
  */
-@SuppressWarnings("restriction")
+//@SuppressWarnings("restriction")
 public abstract class AbstractJp2pTemplateSection extends AbstractBundleTemplateSection implements IJP2PBundleDefinitions{
 	
 	protected AbstractJp2pTemplateSection( String templateRoot ) {
@@ -63,15 +63,15 @@ public abstract class AbstractJp2pTemplateSection extends AbstractBundleTemplate
 	 */
 	@Override
 	public String[] getNewFiles() {
-		return new String[]{FOLDER_OSGI, FILE_OSGI_XML, FILE_JP2P_XML};
+		return new String[]{ /* FOLDER_OSGI,*/ FILE_OSGI_XML, FILE_JP2P_XML};
 	}
 
 	
 	@Override
 	protected void updateModel(IProgressMonitor monitor) throws CoreException {
-		IBundlePluginModelBase mb = (IBundlePluginModelBase) model;
-		IBundle bundle = mb.getBundleModel().getBundle();
-		bundle.setHeader( DS_MANIFEST_KEY, FILE_OSGI_XML );
+		//IBundlePluginModelBase mb = (IBundlePluginModelBase) model;
+		//IBundle bundle = mb.getBundleModel().getBundle();
+		//bundle.setHeader( DS_MANIFEST_KEY, FILE_OSGI_XML );
 		createOSGIInf( this.project, 0, monitor);
 		createJP2PFolder(project, 1, monitor);
 	}

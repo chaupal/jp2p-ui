@@ -2,31 +2,30 @@
 <jp2p-container id="$bundle-id$" name="$name$" auto-start="true">
   <properties>
     <bundle-id>$bundle-id$</bundle-id>
-    <home-folder>file:/C:/Users/HP/.jxse/$bundle-id$</home-folder>
+    <home-folder>${user.home}/.jxta/${bundle-id}$</home-folder>
   </properties>
-  <persistence-service context="chaupal"/>
-  <network-manager id="$bundle-id$.manager" clear-config="true">
+  <persistence-service context="Chaupal"/>
+  <network-manager id="$bundle-id$.manager">
     <properties>
       <config-mode>RENDEZVOUS</config-mode>
       <peer-id create="true" persist="true"/>
     </properties>
-    <network-configurator id="org.condast.rdv.networkmanager">
+    <network-configurator clear-config="true">
        <properties>
+         <security>
+           <password>admin</password>
+         </security>
          <tcp>
-            <enabled>true</enabled>
             <port>9715</port>
             <incoming-status>true</incoming-status>
             <outgoing-status>true</outgoing-status>
           </tcp>
          <http>
-            <enabled>true</enabled>
             <port>8081</port>
             <incoming-status>true</incoming-status>
             <outgoing-status>true</outgoing-status>
           </http>
-          <multicast>
-            <enabled>true</enabled>
-          </multicast>
+          <multicast enabled="true"/>
         </properties>
     </network-configurator>
   </network-manager>

@@ -82,8 +82,11 @@ END OF TERMS AND CONDITIONS
          id="net.jxse.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipselabs.osgi.ds.broker.feature"
+         version="0.0.0"/>
+
    <requires>
-      <import plugin="org.eclipse.ui" version="3.105.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.views" version="3.0.0" match="compatible"/>
       <import plugin="net.jp2p.chaupal"/>
       <import plugin="net.jp2p.container"/>
@@ -101,9 +104,15 @@ END OF TERMS AND CONDITIONS
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.ui.navigator"/>
       <import plugin="org.eclipselabs.osgi.ds.broker"/>
-      <import plugin="org.eclipse.ui" version="3.0.0" match="compatible"/>
+      <import plugin="org.eclipse.core.runtime" version="3.0.0" match="compatible"/>
       <import plugin="net.jp2p.chaupal.jxta.platform"/>
       <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.eclipse.ui" version="3.0.0" match="compatible"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.pde.core"/>
+      <import plugin="org.eclipse.pde.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.workbench"/>
    </requires>
 
    <plugin
@@ -119,5 +128,18 @@ END OF TERMS AND CONDITIONS
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="org.chaupal.jp2p.ui.template"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.chaupal.jp2p.ui.config"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>

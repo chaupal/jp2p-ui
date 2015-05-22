@@ -38,6 +38,7 @@ public interface IJP2PBundleDefinitions {
 
 	static final String JP2P_NET_JP2P_CHAUPAL = "net.jp2p.chaupal";
 	static final String JP2P_NET_JP2P_CHAUPAL_ACTIVATOR = JP2P_NET_JP2P_CHAUPAL + ".activator";
+	static final String JP2P_NET_JP2P_CHAUPAL_BUILDER = JP2P_NET_JP2P_CHAUPAL + ".builder";
 	static final String JP2P_NET_JP2P_CHAUPAL_CONTAINER = JP2P_NET_JP2P_CHAUPAL + ".container";
 	static final String JP2P_NET_JP2P_CHAUPAL_SERVICE = JP2P_NET_JP2P_CHAUPAL + ".service";
 	static final String JP2P_NET_JP2P_CHAUPAL_UTILS = JP2P_NET_JP2P_CHAUPAL + ".utils";
