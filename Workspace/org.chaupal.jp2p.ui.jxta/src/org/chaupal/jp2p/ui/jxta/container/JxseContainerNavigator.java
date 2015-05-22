@@ -110,15 +110,11 @@ public class JxseContainerNavigator extends CommonNavigator{
 			return;
 
 		Display.getDefault().asyncExec(new Runnable() {
+			
 			@Override
-<<<<<<< HEAD
 			public synchronized void run() {
 				if(!dispose )
 					viewer.refresh();
-=======
-			public void run() {
-				viewer.refresh();
->>>>>>> branch 'master' of https://github.com/chaupal/jp2p-ui.git
 			}
 		});			
 	}

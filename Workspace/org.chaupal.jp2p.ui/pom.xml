@@ -11,7 +11,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <relativePath>../org.chaupal.jp2p.ui.project</relativePath>
   </parent>
 
-  <artifactId>org.chaupal.jp2p.ui.template</artifactId>
+  <artifactId>org.chaupal.jp2p.ui</artifactId>
   <packaging>eclipse-plugin</packaging>
-
 </project>

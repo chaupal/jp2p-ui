@@ -9,6 +9,7 @@ package org.chaupal.jp2p.ui.template.config;
 
 import net.jp2p.container.Jp2pContainerPropertySource;
 
+import org.chaupal.jp2p.ui.jxta.network.configurator.Jp2pNetworkConfiguratorComposite;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;

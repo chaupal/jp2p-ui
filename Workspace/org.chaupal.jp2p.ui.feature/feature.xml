@@ -83,7 +83,6 @@ END OF TERMS AND CONDITIONS
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.eclipse.ui" version="3.105.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.views" version="3.0.0" match="compatible"/>
       <import plugin="net.jp2p.chaupal"/>
       <import plugin="net.jp2p.container"/>
@@ -104,6 +103,15 @@ END OF TERMS AND CONDITIONS
       <import plugin="org.eclipse.ui" version="3.0.0" match="compatible"/>
       <import plugin="net.jp2p.chaupal.jxta.platform"/>
       <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.eclipse.ui" version="3.106.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.0.0" match="compatible"/>
+      <import plugin="org.eclipse.equinox.console"/>
+      <import plugin="org.apache.felix.gogo.command"/>
+      <import plugin="org.apache.felix.gogo.command.source"/>
+      <import plugin="org.apache.felix.gogo.runtime"/>
+      <import plugin="org.apache.felix.gogo.runtime.source"/>
+      <import plugin="org.apache.felix.gogo.shell"/>
+      <import plugin="org.apache.felix.gogo.shell.source"/>
    </requires>
 
    <plugin
