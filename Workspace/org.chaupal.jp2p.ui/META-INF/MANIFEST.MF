@@ -30,6 +30,7 @@ Import-Package: net.jp2p.chaupal.container,
  org.eclipse.jface.resource,
  org.eclipse.jface.viewers,
  org.eclipse.jface.window,
+ org.eclipse.osgi.framework.console;version="1.1.0",
  org.eclipse.swt,
  org.eclipse.swt.events,
  org.eclipse.swt.graphics,
@@ -64,5 +65,4 @@ Export-Package: org.chaupal.jp2p.ui.adapter,
 Service-Component: OSGI-INF/attendees.xml, OSGI-INF/message.xml
 Bundle-Activator: org.chaupal.jp2p.ui.Activator
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.osgi;bundle-version="3.9.1",
- org.eclipse.ui;bundle-version="3.105.0"
+Require-Bundle: org.eclipse.ui;bundle-version="3.105.0"

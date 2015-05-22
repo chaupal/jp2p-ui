@@ -252,13 +252,13 @@
                id="org.chaupal.jp2p.ui.jxse.module.view"
                minimized="false"
                relationship="bottom"
-               relative="org.chaupal.jp2p.ui.property.sheet">
+               relative="org.chaupal.jp2p.ui.container.view">
          </view>
          <view
                id="org.chaupal.jp2p.ui.jxse.module.property.sheet"
                minimized="false"
-               relationship="right"
-               relative="org.chaupal.jp2p.ui.jxse.module.view">
+               relationship="bottom"
+               relative="org.chaupal.jp2p.ui.property.sheet">
          </view>
          <view
                id="org.eclipse.jxse.ui.monitor.ConnectivityViewPart"
