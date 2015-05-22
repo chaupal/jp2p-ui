@@ -20,8 +20,6 @@ public class Jp2pPropertySheet extends PropertySheet{
 	@Override
 	protected boolean isImportant(IWorkbenchPart part) {
 		String id = part.getSite().getId();
-		if ( !id.equals( Jp2pContainerNavigator.S_JP2P_NAVIGATOR_ID))
-			return false;
-		return true;
+		return Jp2pContainerNavigator.S_JP2P_NAVIGATOR_ID.equals( id );
 	}
 }
