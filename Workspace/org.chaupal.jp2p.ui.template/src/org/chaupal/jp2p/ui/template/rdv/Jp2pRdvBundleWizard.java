@@ -39,7 +39,7 @@ public class Jp2pRdvBundleWizard extends NewPluginTemplateWizard implements IJP2
 		if( super.getImportPackages() != null )
 			results = new ArrayList<String>( Arrays.asList( super.getImportPackages()));
         results.add( JP2P_NET_JP2P_CHAUPAL_ACTIVATOR );
-        results.add( JP2P_NET_JP2P_CHAUPAL_JXTA_ACTIVATOR );
+        results.add( JP2P_NET_JP2P_CHAUPAL_BUILDER );
         results.add( JP2P_NET_JP2P_CHAUPAL_SERVICE );
 		results.add( JP2P_NET_JP2P_CONTAINER );
 		results.add( JP2P_NET_JP2P_CONTAINER_ACTIVATOR );

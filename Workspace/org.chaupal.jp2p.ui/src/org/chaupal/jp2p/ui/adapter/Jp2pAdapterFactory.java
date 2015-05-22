@@ -1,10 +1,6 @@
 package org.chaupal.jp2p.ui.adapter;
 
 import net.jp2p.container.component.IJp2pComponent;
-import net.jp2p.container.properties.AbstractJp2pPropertySource;
-
-import org.chaupal.jp2p.ui.osgi.PropertySourcePetitioner;
-import org.chaupal.jp2p.ui.property.IJp2pPropertySourceProvider;
 import org.chaupal.jp2p.ui.property.Jp2pComponentUIPropertySource;
 import org.chaupal.jp2p.ui.property.SimpleUIPropertySource;
 import org.eclipse.core.runtime.IAdapterFactory;

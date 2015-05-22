@@ -2,19 +2,24 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JXSE GUI Tools
 Bundle-SymbolicName: org.chaupal.jp2p.ui.jxta;singleton:=true
-Bundle-Version: 1.0.0.v20140602
+Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: org.chaupal.jp2p.ui.jxta.Activator
 Bundle-Vendor: Chaupal.org
 Require-Bundle: org.eclipse.ui;bundle-version="[3.0.0,4.0.0)",
  org.eclipse.ui.views;bundle-version="[3.0.0,4.0.0)",
- org.eclipse.core.runtime;bundle-version="[3.0.0,4.0.0)",
- net.jp2p.chaupal.jxta.platform
+ org.eclipse.core.runtime;bundle-version="[3.0.0,4.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: net.jp2p.chaupal.container,
  net.jp2p.chaupal.dispatcher,
  net.jp2p.chaupal.jxta.platform,
  net.jp2p.chaupal.jxta.platform.configurator,
+ net.jp2p.chaupal.jxta.platform.http,
+ net.jp2p.chaupal.jxta.platform.infra,
+ net.jp2p.chaupal.jxta.platform.multicast,
+ net.jp2p.chaupal.jxta.platform.security,
+ net.jp2p.chaupal.jxta.platform.seeds,
+ net.jp2p.chaupal.jxta.platform.tcp,
  net.jp2p.chaupal.utils,
  net.jp2p.container,
  net.jp2p.container.activator,
@@ -29,23 +34,18 @@ Import-Package: net.jp2p.chaupal.container,
  net.jp2p.jxta.rendezvous,
  net.jp2p.jxta.socket,
  net.jp2p.jxta.transport,
- net.jxse.osgi.message,
- net.jxta.configuration,
  net.jxta.document,
  net.jxta.endpoint,
  net.jxta.id,
  net.jxta.peer,
  net.jxta.peergroup,
  net.jxta.peergroup.core,
- net.jxta.pipe,
  net.jxta.platform,
  net.jxta.protocol,
  net.jxta.rendezvous,
  net.jxta.service,
  net.jxta.socket,
  org.chaupal.jp2p.ui.adapter,
- org.chaupal.jp2p.ui.celleditors,
- org.chaupal.jp2p.ui.comparator,
  org.chaupal.jp2p.ui.container,
  org.chaupal.jp2p.ui.enm,
  org.chaupal.jp2p.ui.image,
@@ -60,8 +60,6 @@ Import-Package: net.jp2p.chaupal.container,
  org.eclipse.ui.forms.editor,
  org.eclipse.ui.forms.widgets,
  org.eclipse.ui.navigator,
- org.eclipse.ui.part,
- org.eclipse.ui.views.properties,
  org.eclipselabs.osgi.ds.broker.service,
  org.eclipselabs.osgi.ds.broker.util,
  org.osgi.framework;version="1.7.0"
