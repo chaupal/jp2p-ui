@@ -24,11 +24,12 @@ public class RefreshDispatcher extends AbstractRefreshDispatcher{
 
 	private static RefreshDispatcher dispatcher = new RefreshDispatcher();
 	
-	private RefreshDispatcher() {
-		super(Activator.BUNDLE_ID);
-	}
-
 	public static RefreshDispatcher getInstance(){
 		return dispatcher;
+	}
+
+	@Override
+	public String getName() {
+		return Activator.BUNDLE_ID;
 	}
 }

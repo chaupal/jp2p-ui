@@ -84,7 +84,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="org.chaupal.jp2p.ui.perspective.Perspective"
-            icon="resources/chaupal.png"
+            icon="resources/chaupal-16.png"
             id="org.chaupal.jp2p.ui.perspective"
             name="Chaupal  JP2P Container Perspective">
       </perspective>

@@ -4,7 +4,7 @@ Bundle-Name: Chaupal Tooling for Eclipse
 Bundle-SymbolicName: org.chaupal.jp2p.ui.template;singleton:=true
 Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: org.chaupal.jp2p.ui.template.Activator
-Bundle-Vendor: Condast
+Bundle-Vendor: Chaupal.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: net.jp2p.container,

@@ -89,9 +89,8 @@ public class RefreshService extends AbstractDeclarativeService<IServiceChangedLi
 	}
 	
 	@Override
-	public synchronized void stop( BundleContext bc){
+	public void stop( BundleContext bc){
 		this.started = false;
-		dispatcher.stop();
 		Thread.currentThread().interrupt();
 		super.stop(bc);
 	}

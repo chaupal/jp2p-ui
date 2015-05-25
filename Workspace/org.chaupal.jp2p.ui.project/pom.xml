@@ -50,6 +50,7 @@
     <module>../org.chaupal.jp2p.ui.template</module>
     <module>../org.chaupal.jp2p.ui.feature</module>
     <module>../org.chaupal.jp2p.ui.update</module>
+    <module>../org.chaupal.jp2p.ui.config</module>
   </modules>
   
     <build>

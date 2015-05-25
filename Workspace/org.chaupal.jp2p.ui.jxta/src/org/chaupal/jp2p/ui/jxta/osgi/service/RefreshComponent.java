@@ -35,13 +35,9 @@ public class RefreshComponent implements IServiceChangedListener {
 		return Activator.BUNDLE_ID;
 	}
 
-	public void activate(){
-		dispatcher.start();
-	};
+	public void activate(){};
 	
-	public void deactivate(){
-		dispatcher.stop();
-	};
+	public void deactivate(){};
 	
 	@Override
 	public void notifyServiceChanged(ServiceChangedEvent event) {

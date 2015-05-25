@@ -17,14 +17,14 @@
       <product
             application="org.chaupal.rcp.application"
             description="Reference Chaupal Application"
-            name="Reference Chaupal Product">
+            name="Chaupal JP2P Product">
          <property
                name="Reference Chaupal RCP"
                value="Reference Chaupal Product">
          </property>
          <property
                name="appName"
-               value="Reference Chaupal Product">
+               value="Chaupal JP2P Product">
          </property>
       </product>
    </extension>

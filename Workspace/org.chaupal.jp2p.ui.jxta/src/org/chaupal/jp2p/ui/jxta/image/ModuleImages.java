@@ -18,16 +18,12 @@ public class ModuleImages extends AbstractImages{
 
 	public static final String S_ICON_PATH = "/resources/";
 
-	public static final String S_MODULE_ICON  = "module-16.png";
-	public static final String S_MANAGER_ICON  = "manager-16.png";
-	public static final String S_CONFIGURATOR_ICON  = "configuration-16.png";
+	public static final String S_MODULE_ICON  = "module.png";
 	public static final String S_COMPONENT_ICON = "component.png";
 	public static final String S_WORLD_ICON = "world.png";
 
 	public enum Images{
 		MODULE,
-		MANAGER,
-		CONFIGURATOR,
 		COMPONENT,
 		WORLD;
 
@@ -54,8 +50,6 @@ public class ModuleImages extends AbstractImages{
 	@Override
 	public void initialise(){
 		setImage( S_MODULE_ICON );
-		setImage( S_MANAGER_ICON );
-		setImage( S_CONFIGURATOR_ICON );
 		setImage( S_COMPONENT_ICON );
 		setImage( S_WORLD_ICON );
 	}
@@ -83,10 +77,6 @@ public class ModuleImages extends AbstractImages{
 			return getImageFromName( S_COMPONENT_ICON );
 		case WORLD:
 			return getImageFromName( S_WORLD_ICON );
-		case MANAGER:
-			return getImageFromName( S_MANAGER_ICON );
-		case CONFIGURATOR:	
-			return getImageFromName( S_CONFIGURATOR_ICON );
 		default:
 			return getImageFromName( S_MODULE_ICON );				
 		}
