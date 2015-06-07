@@ -20,8 +20,8 @@ package org.chaupal.jp2p.ui.jxta.osgi.service;
 
 import org.chaupal.jp2p.ui.jxta.Activator;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
+import net.jp2p.container.dispatcher.IServiceChangedListener;
+import net.jp2p.container.dispatcher.ServiceChangedEvent;
 
 public class RefreshComponent implements IServiceChangedListener {
 

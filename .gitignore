@@ -4,7 +4,9 @@ bin/
 *~
 *.class
 *.jar
+.log
 # Ignore the target directory
 # Matches "target" in any subfolder
 target/ 
 .settings/
+.metadata/

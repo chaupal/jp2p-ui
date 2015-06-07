@@ -6,11 +6,11 @@ Bundle-Version: 1.1.0.qualifier
 Bundle-Vendor: Chaupal.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: net.jp2p.chaupal.container,
- net.jp2p.chaupal.dispatcher,
  net.jp2p.chaupal.utils,
  net.jp2p.container,
  net.jp2p.container.activator,
  net.jp2p.container.component,
+ net.jp2p.container.dispatcher,
  net.jp2p.container.log,
  net.jp2p.container.properties,
  net.jp2p.container.utils,

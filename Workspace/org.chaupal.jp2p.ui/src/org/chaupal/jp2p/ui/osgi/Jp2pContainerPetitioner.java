@@ -18,8 +18,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
-import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.container.Jp2pContainer;
 import net.jp2p.container.IJp2pContainer;
 import net.jp2p.container.IJp2pDSComponent;
@@ -28,6 +26,8 @@ import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;
 import net.jp2p.container.component.IJp2pComponent;
 import net.jp2p.container.component.IJp2pComponentNode;
+import net.jp2p.container.dispatcher.ServiceChangedEvent;
+import net.jp2p.container.dispatcher.ServiceEventDispatcher;
 import net.jp2p.container.properties.IJp2pProperties;
 import net.jp2p.container.properties.IJp2pPropertySource;
 import net.jp2p.container.utils.Utils;

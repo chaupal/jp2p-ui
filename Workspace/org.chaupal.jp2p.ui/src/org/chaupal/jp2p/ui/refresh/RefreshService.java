@@ -28,10 +28,10 @@ import org.eclipse.osgi.framework.console.CommandInterpreter;
 import org.eclipse.osgi.framework.console.CommandProvider;
 import org.osgi.framework.BundleContext;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.utils.AbstractDeclarativeService;
 import net.jp2p.container.Jp2pContainer.ServiceChange;
+import net.jp2p.container.dispatcher.IServiceChangedListener;
+import net.jp2p.container.dispatcher.ServiceChangedEvent;
 
 public class RefreshService extends AbstractDeclarativeService<IServiceChangedListener> implements CommandProvider{
 

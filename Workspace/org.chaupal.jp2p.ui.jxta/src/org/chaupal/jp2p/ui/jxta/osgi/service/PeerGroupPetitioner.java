@@ -16,15 +16,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
-import net.jp2p.chaupal.container.ChaupalContainer;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
-import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.container.Jp2pContainer;
 import net.jp2p.container.IJp2pDSComponent;
 import net.jp2p.container.Jp2pContainer.ServiceChange;
 import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;
 import net.jp2p.container.component.IJp2pComponent;
+import net.jp2p.container.dispatcher.ServiceChangedEvent;
+import net.jp2p.container.dispatcher.ServiceEventDispatcher;
+import net.jp2p.container.factory.ChaupalContainer;
 import net.jp2p.container.utils.ILeaf;
 import net.jp2p.container.utils.Utils;
 import net.jp2p.jxta.peergroup.PeerGroupFactory;

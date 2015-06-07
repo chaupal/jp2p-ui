@@ -21,8 +21,8 @@ package org.chaupal.jp2p.ui.refresh;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
+import net.jp2p.container.dispatcher.IServiceChangedListener;
+import net.jp2p.container.dispatcher.ServiceChangedEvent;
 
 public abstract class AbstractRefreshDispatcher implements IServiceChangedListener{
 

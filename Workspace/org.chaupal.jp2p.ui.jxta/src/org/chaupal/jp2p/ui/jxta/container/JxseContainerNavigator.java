@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.container;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.utils.Utils;
 import net.jp2p.container.component.IJp2pComponent;
+import net.jp2p.container.dispatcher.IServiceChangedListener;
+import net.jp2p.container.dispatcher.ServiceChangedEvent;
 
 import org.chaupal.jp2p.ui.container.Jp2pContainerNavigator;
 import org.chaupal.jp2p.ui.jxta.osgi.service.RefreshDispatcher;
