@@ -71,7 +71,7 @@ END OF TERMS AND CONDITIONS
    </license>
 
    <url>
-      <update label="JP2P UI Bundles" url="https://chaupal.github.io/releases/chaupal/1.1.0/20150525/site.xml"/>
+      <update label="JP2P UI Bundles" url="https://chaupal.github.io/releases/jp2p-alpha.html"/>
    </url>
 
    <includes
@@ -87,6 +87,7 @@ END OF TERMS AND CONDITIONS
          version="0.0.0"/>
 
    <requires>
+      <import plugin="org.eclipse.ui" version="3.0.0" match="compatible"/>
       <import plugin="org.eclipse.ui.views" version="3.0.0" match="compatible"/>
       <import plugin="net.jp2p.chaupal"/>
       <import plugin="net.jp2p.container"/>
@@ -107,7 +108,6 @@ END OF TERMS AND CONDITIONS
       <import plugin="org.eclipse.core.runtime" version="3.0.0" match="compatible"/>
       <import plugin="net.jp2p.chaupal.jxta.platform"/>
       <import plugin="org.eclipse.ui.forms"/>
-      <import plugin="org.eclipse.ui" version="3.0.0" match="compatible"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.pde.core"/>
       <import plugin="org.eclipse.pde.ui"/>
@@ -135,11 +135,5 @@ END OF TERMS AND CONDITIONS
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.chaupal.jp2p.ui.config"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
 </feature>

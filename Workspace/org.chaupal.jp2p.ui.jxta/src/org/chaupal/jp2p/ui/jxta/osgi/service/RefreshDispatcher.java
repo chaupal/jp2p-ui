@@ -18,45 +18,18 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.osgi.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.chaupal.jp2p.ui.jxta.Activator;
+import org.chaupal.jp2p.ui.refresh.AbstractRefreshDispatcher;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
+public class RefreshDispatcher extends AbstractRefreshDispatcher{
 
-public class RefreshDispatcher implements IServiceChangedListener{
-
-	private Collection<IServiceChangedListener> listeners; 
-	
 	private static RefreshDispatcher dispatcher = new RefreshDispatcher();
 	
 	private RefreshDispatcher() {
-		listeners = new ArrayList<IServiceChangedListener>();
-	}
-
-	public static RefreshDispatcher getInstance(){
-		return dispatcher;
-	}
-
-	@Override
-	public String getName() {
-		return Activator.BUNDLE_ID;
+		super( Activator.BUNDLE_ID );
 	}
 	
-	public void addServiceChangeListener( IServiceChangedListener listener ){
-		this.listeners.add( listener );
-	}
-
-	public void removeServiceChangeListener( IServiceChangedListener listener ){
-		this.listeners.remove( listener );
-	}
-
-	@Override
-	public void notifyServiceChanged(ServiceChangedEvent event) {
-		for( IServiceChangedListener listener: listeners ){
-			listener.notifyServiceChanged(event);
-		}		
+	public static RefreshDispatcher getInstance(){
+		return dispatcher;
 	}
 }

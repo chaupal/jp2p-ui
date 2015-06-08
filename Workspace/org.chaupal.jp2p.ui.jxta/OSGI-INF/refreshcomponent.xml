@@ -3,6 +3,6 @@
    <implementation class="org.chaupal.jp2p.ui.jxta.osgi.service.RefreshComponent"/>
    <property name="jp2p.ui.refresh" type="String" value="chaupal-ui-jxta"/>
    <service servicefactory="true">
-      <provide interface="net.jp2p.chaupal.dispatcher.IServiceChangedListener"/>
+      <provide interface="net.jp2p.container.dispatcher.IServiceChangedListener"/>
    </service>>
 </scr:component>

@@ -9,23 +9,28 @@
   </properties>
   <startup-service auto-start="true"></startup-service>
   <persistence-service context="chaupal"/>
-  <network-manager clear-config="true">
+  <sequencer-service name="$bundle-id$.rdv">
+    <properties>
+      <watch-id>$bundle-id$.rdv.netpeergroupservice</watch-id>
+      <status>active</status>
+      <time-out>2500</time-out>
+    </properties>
+  </sequencer-service>
+  <network-manager wait-for="$bundle-id$.rdv">
     <properties>
         <config-mode>EDGE</config-mode>
         <peer-id create="true" persist="true"/>
     </properties>
-    <network-configurator id="$bundle-id$.networkmanager" name="$name$">
+    <network-configurator id="$bundle-id$.networkmanager" name="$name$" clear-config="true">
       <properties>
          <peer-id create="true" persist="true"/>
       </properties>
       <tcp>
-           <enabled>true</enabled>
            <port>9712</port>
            <incoming-status>true</incoming-status>
            <outgoing-status>true</outgoing-status>
       </tcp>
       <http2>
-          <enabled>true</enabled>
           <start-port>7999</start-port>
           <port>8005</port>
           <end-port>8010</end-port>
@@ -35,8 +40,8 @@
       <multicast enabled="true"/>
       <seed-list type="rdv" use-only="false">
          <properties>
-           <condast1>http://localhost:8081</condast1>
-           <condast2>tcp://localhost:9715</condast2>
+           <my-url1>http://localhost:8081</my-url1>
+           <my-url2>tcp://localhost:9715</my-url2>
          </properties>
        </seed-list>
     </network-configurator>

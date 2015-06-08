@@ -16,11 +16,11 @@
  *******************************************************************************/
 package $packageName$;
 
-import net.jp2p.container.IJp2pContainer;
-import net.jp2p.jxse.compatibility.activator.AbstractJp2pBundleActivator;
-
-import $packageName$.examples.ServiceContextProvider;
-import $packageName$.examples.ServiceContextProvider.Examples;
+import net.jp2p.chaupal.jxta.platform.activator.Jp2pCompatBundleActivator;
+import net.jp2p.container.builder.IJp2pContainerBuilder;
+import net.jp2p.container.properties.IJp2pDirectives.DeveloperModes;
+import net.jxse.practical.jxta.PJ2Examples;
+import net.jxse.practical.jxta.PJ2Examples.Examples;
 
 import org.osgi.framework.BundleContext;
 
@@ -29,38 +29,12 @@ public class Activator extends AbstractJp2pBundleActivator<IJp2pContainer> {
 	public static final String S_PLUGIN_ID = "$packageName$";
 	
 	public Activator() {
-		super( S_PLUGIN_ID);
-	}
-
-	private static Activator activator;
-
-	public static Activator getDefault() {
-		return activator;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-	 */
-	@Override
-	public void start(BundleContext bundleContext) throws Exception {
+		super( S_BUNDLE_ID, PJ2Examples.getJxseCompatible( Examples.A_100_Starting_And_Stopping_JXTA ));
 		activator = this;
-		super.start(bundleContext);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	@Override
-	public void stop(BundleContext bundleContext) throws Exception {
-		activator = null;
-		super.stop(bundleContext);
 	}
 	
-	@Override
-	protected IJp2pContainer onCreateContainer() {
-		 IJp2pContainer container = ServiceContextProvider.getExample( Examples.EXAMPLE_100 );
-		 return container;
+	@SuppressWarnings("unchecked")
+	public static IJp2pContainerBuilder<Object> getDefault(){
+		return (IJp2pContainerBuilder<Object>) activator;
 	}
 }

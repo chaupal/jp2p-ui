@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Chaupal Configuration
-Bundle-SymbolicName: org.chaupal.jp2p.ui.config;singleton:=true
-Bundle-Version: 1.1.0.qualifier
+Bundle-Name: Config
+Bundle-SymbolicName: org.chaupal.jp2p.ui.config
+Bundle-Version: 1.0.0.v20130117
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.eclipse.pde.core
+Bundle-ActivationPolicy: lazy

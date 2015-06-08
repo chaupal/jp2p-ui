@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.container;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
 import net.jp2p.chaupal.utils.Utils;
 import net.jp2p.container.component.ComponentChangedEvent;
 import net.jp2p.container.component.IComponentChangedListener;
 import net.jp2p.container.component.IJp2pComponent;
+import net.jp2p.container.dispatcher.IServiceChangedListener;
+import net.jp2p.container.dispatcher.ServiceChangedEvent;
 
 import org.chaupal.jp2p.ui.Activator;
 import org.chaupal.jp2p.ui.osgi.Jp2pContainerService;
@@ -151,6 +151,9 @@ public class Jp2pContainerNavigator extends CommonNavigator{
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
+				if( Display.getDefault().isDisposed() )
+					return;
+
 				if(( propertyPage == null ) || ( propertyPage.getSite() == null ) ||
 						( propertyPage.getSite().getShell() == null ) || 
 						( propertyPage.getSite().getShell().isDisposed() ))

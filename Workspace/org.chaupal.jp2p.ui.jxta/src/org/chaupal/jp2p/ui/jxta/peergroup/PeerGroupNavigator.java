@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.chaupal.jp2p.ui.jxta.peergroup;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
-import net.jp2p.chaupal.dispatcher.ServiceEventDispatcher;
 import net.jp2p.chaupal.utils.Utils;
 import net.jp2p.container.IJp2pContainer;
 import net.jp2p.container.Jp2pContainer.ServiceChange;
+import net.jp2p.container.dispatcher.IServiceChangedListener;
+import net.jp2p.container.dispatcher.ServiceChangedEvent;
+import net.jp2p.container.dispatcher.ServiceEventDispatcher;
 import net.jp2p.container.utils.SimpleNode;
 import net.jp2p.jxta.peergroup.PeerGroupFactory;
 import net.jxta.peergroup.PeerGroup;

@@ -21,15 +21,31 @@ package org.chaupal.jp2p.ui.refresh;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.jp2p.chaupal.dispatcher.IServiceChangedListener;
-import net.jp2p.chaupal.dispatcher.ServiceChangedEvent;
+import net.jp2p.container.dispatcher.IServiceChangedListener;
+import net.jp2p.container.dispatcher.ServiceChangedEvent;
 
 public abstract class AbstractRefreshDispatcher implements IServiceChangedListener{
 
 	private Collection<IServiceChangedListener> listeners; 
-	
-	protected AbstractRefreshDispatcher() {
+
+	private boolean started;
+	private String name;
+
+	protected AbstractRefreshDispatcher( String name ) {
 		listeners = new ArrayList<IServiceChangedListener>();
+	}
+
+	public void start(){
+		this.started = true;
+	}
+	
+	public void stop(){
+		this.started = false;
+		this.listeners.clear();
+	}
+
+	public final String getName() {
+		return name;
 	}
 
 	public void addServiceChangeListener( IServiceChangedListener listener ){
@@ -42,6 +58,8 @@ public abstract class AbstractRefreshDispatcher implements IServiceChangedListen
 
 	@Override
 	public void notifyServiceChanged(ServiceChangedEvent event) {
+		if( !this.started )
+			return;
 		for( IServiceChangedListener listener: listeners ){
 			listener.notifyServiceChanged(event);
 		}		
