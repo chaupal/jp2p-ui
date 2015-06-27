@@ -16,12 +16,12 @@
            <password>admin</password>
          </security>
          <tcp>
-            <port>9715</port>
+            <port>9710</port>
             <incoming-status>true</incoming-status>
             <outgoing-status>true</outgoing-status>
           </tcp>
          <http>
-            <port>8081</port>
+            <port>8085</port>
             <incoming-status>true</incoming-status>
             <outgoing-status>true</outgoing-status>
           </http>
